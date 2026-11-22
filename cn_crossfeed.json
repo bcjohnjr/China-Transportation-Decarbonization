@@ -1,0 +1,180 @@
+{
+ "least_cost": {
+  "inputs": {
+   "fish_t": 3000000.0,
+   "shrimp_t": 2000000.0,
+   "vegetables_t": 30000000.0,
+   "hemp_meal_t": 1260000.0
+  },
+  "feed_t": {
+   "fish": 4200000.0,
+   "shrimp": 2600000.0
+  },
+  "fishmeal_requirement_t": 940000.0,
+  "produced_t": {
+   "fishmeal": 283500.0,
+   "fish_oil": 67500.0,
+   "shrimp_meal": 200000.0,
+   "chitin": 40000.0,
+   "insect_meal": 135000.0,
+   "ulva_dry": 2238719.999999999
+  },
+  "flows_t": {
+   "fishmeal_to_shrimp": 283500.0,
+   "fishmeal_to_fish": 0.0,
+   "shrimpmeal_to_fish": 200000.0,
+   "insect_to_fish": 135000.0,
+   "hemp_meal_to_fish": 504000.0,
+   "ulva_to_abalone": 216000.0,
+   "ulva_to_fish": 210000.0,
+   "kelp_to_abalone_and_sea_cucumber": 300000.0
+  },
+  "marine_protein_need_met_internally": 0.5143617021276595,
+  "feed_protein_met_internally": 0.22506003430531732,
+  "herbivore_algae_need_t": 1170000.0,
+  "herbivore_algae_met": 0.441025641025641,
+  "nitrogen_recovered_t": 78355.19999999998,
+  "external_fishmeal_displaced_t": 483500.0,
+  "external_protein_displaced_t": 524840.0,
+  "coefficients": {
+   "fish": {
+    "fcr": 1.4,
+    "protein": 0.32,
+    "fishmeal_incl": 0.1,
+    "oil_incl": 0.03,
+    "max_shrimpmeal": 0.08,
+    "max_insect": 0.1,
+    "max_hemp": 0.12,
+    "max_ulva": 0.05,
+    "byproduct": 0.45,
+    "meal_yield": 0.21,
+    "oil_yield": 0.05
+   },
+   "shrimp": {
+    "fcr": 1.3,
+    "protein": 0.38,
+    "fishmeal_incl": 0.2,
+    "oil_incl": 0.02,
+    "byproduct": 0.4,
+    "meal_yield": 0.25,
+    "chitin_yield": 0.05
+   },
+   "abalone": {
+    "production_t": 300000.0,
+    "algae_dry_per_kg": 2.4,
+    "max_ulva_share": 0.3
+   },
+   "sea_cucumber": {
+    "production_t": 300000.0,
+    "algae_dry_per_kg": 1.5
+   },
+   "protein": {
+    "fishmeal": 0.62,
+    "shrimpmeal": 0.4,
+    "insect": 0.45,
+    "hemp": 0.33,
+    "ulva": 0.2
+   },
+   "ras_n": {
+    "retention": 0.3,
+    "dissolved": 0.5,
+    "recovery": 0.6,
+    "ulva_n": 0.035
+   },
+   "bsf": {
+    "veg_waste_frac": 0.15,
+    "meal_per_t_wet": 0.03
+   },
+   "kelp_feed_t": 300000.0
+  }
+ },
+ "post_gas": {
+  "inputs": {
+   "fish_t": 3000000.0,
+   "shrimp_t": 2000000.0,
+   "vegetables_t": 30000000.0,
+   "hemp_meal_t": 1260000.0
+  },
+  "feed_t": {
+   "fish": 4200000.0,
+   "shrimp": 2600000.0
+  },
+  "fishmeal_requirement_t": 940000.0,
+  "produced_t": {
+   "fishmeal": 283500.0,
+   "fish_oil": 67500.0,
+   "shrimp_meal": 200000.0,
+   "chitin": 40000.0,
+   "insect_meal": 135000.0,
+   "ulva_dry": 2238719.999999999
+  },
+  "flows_t": {
+   "fishmeal_to_shrimp": 283500.0,
+   "fishmeal_to_fish": 0.0,
+   "shrimpmeal_to_fish": 200000.0,
+   "insect_to_fish": 135000.0,
+   "hemp_meal_to_fish": 504000.0,
+   "ulva_to_abalone": 216000.0,
+   "ulva_to_fish": 210000.0,
+   "kelp_to_abalone_and_sea_cucumber": 300000.0
+  },
+  "marine_protein_need_met_internally": 0.5143617021276595,
+  "feed_protein_met_internally": 0.22506003430531732,
+  "herbivore_algae_need_t": 1170000.0,
+  "herbivore_algae_met": 0.441025641025641,
+  "nitrogen_recovered_t": 78355.19999999998,
+  "external_fishmeal_displaced_t": 483500.0,
+  "external_protein_displaced_t": 524840.0,
+  "coefficients": {
+   "fish": {
+    "fcr": 1.4,
+    "protein": 0.32,
+    "fishmeal_incl": 0.1,
+    "oil_incl": 0.03,
+    "max_shrimpmeal": 0.08,
+    "max_insect": 0.1,
+    "max_hemp": 0.12,
+    "max_ulva": 0.05,
+    "byproduct": 0.45,
+    "meal_yield": 0.21,
+    "oil_yield": 0.05
+   },
+   "shrimp": {
+    "fcr": 1.3,
+    "protein": 0.38,
+    "fishmeal_incl": 0.2,
+    "oil_incl": 0.02,
+    "byproduct": 0.4,
+    "meal_yield": 0.25,
+    "chitin_yield": 0.05
+   },
+   "abalone": {
+    "production_t": 300000.0,
+    "algae_dry_per_kg": 2.4,
+    "max_ulva_share": 0.3
+   },
+   "sea_cucumber": {
+    "production_t": 300000.0,
+    "algae_dry_per_kg": 1.5
+   },
+   "protein": {
+    "fishmeal": 0.62,
+    "shrimpmeal": 0.4,
+    "insect": 0.45,
+    "hemp": 0.33,
+    "ulva": 0.2
+   },
+   "ras_n": {
+    "retention": 0.3,
+    "dissolved": 0.5,
+    "recovery": 0.6,
+    "ulva_n": 0.035
+   },
+   "bsf": {
+    "veg_waste_frac": 0.15,
+    "meal_per_t_wet": 0.03
+   },
+   "kelp_feed_t": 300000.0
+  }
+ }
+}

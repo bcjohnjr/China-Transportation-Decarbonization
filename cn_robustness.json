@@ -1,0 +1,568 @@
+{
+ "ldv_tco": {
+  "low": {
+   "net_usd_yr": -389.5633885766782,
+   "parts": {
+    "purchase": -282.06352505203836,
+    "battery_replacement": 10.000136475360124,
+    "maintenance": -157.5,
+    "insurance": 40.0
+   },
+   "inputs": {
+    "purchase_diff_usd": -2500.0,
+    "life_yr": 12,
+    "repl_prob": 0.05,
+    "pack_kwh": 55.0,
+    "pack_usd_kwh": 50.0,
+    "repl_year": 9,
+    "maint_ice_usd_yr": 350.0,
+    "maint_saving": 0.45,
+    "insurance_extra_usd_yr": 40.0
+   }
+  },
+  "central": {
+   "net_usd_yr": -93.3248368243028,
+   "parts": {
+    "purchase": -112.82541002081534,
+    "battery_replacement": 42.00057319651252,
+    "maintenance": -122.49999999999999,
+    "insurance": 100.0
+   },
+   "inputs": {
+    "purchase_diff_usd": -1000.0,
+    "life_yr": 12,
+    "repl_prob": 0.15,
+    "pack_kwh": 55.0,
+    "pack_usd_kwh": 70.0,
+    "repl_year": 9,
+    "maint_ice_usd_yr": 350.0,
+    "maint_saving": 0.35,
+    "insurance_extra_usd_yr": 100.0
+   }
+  },
+  "high": {
+   "net_usd_yr": 503.91543451761015,
+   "parts": {
+    "purchase": 56.41270501040767,
+    "battery_replacement": 200.00272950720247,
+    "maintenance": -52.5,
+    "insurance": 300.0
+   },
+   "inputs": {
+    "purchase_diff_usd": 500.0,
+    "life_yr": 12,
+    "repl_prob": 0.5,
+    "pack_kwh": 55.0,
+    "pack_usd_kwh": 100.0,
+    "repl_year": 9,
+    "maint_ice_usd_yr": 350.0,
+    "maint_saving": 0.15,
+    "insurance_extra_usd_yr": 300.0
+   }
+  }
+ },
+ "cases": {
+  "least_cost_bev_net_zero": {
+   "label": "BEV net cost 0 USD/yr (no advantage)",
+   "transport_cost_bn": 340.6440863848135,
+   "saving_pct": 14.697211385872588,
+   "breakeven": 0.8530278861412741,
+   "hubs": 239.0,
+   "emissions_mt": 108.72639809148671,
+   "petroleum_2025_bn": 399.3352291514626,
+   "petroleum_2026_bn": 545.9515190853617,
+   "h2_pyro_mt": 5.766666666666667,
+   "solar_gw": 0.0,
+   "wind_gw": 322.0462703300773
+  },
+  "least_cost_bev_plus100": {
+   "label": "BEV net cost +100 USD/yr",
+   "transport_cost_bn": 380.54408638481345,
+   "saving_pct": 4.705606066005741,
+   "breakeven": 0.9529439393399426,
+   "hubs": 239.0,
+   "emissions_mt": 108.72639809148671,
+   "petroleum_2025_bn": 399.3352291514626,
+   "petroleum_2026_bn": 545.9515190853617,
+   "h2_pyro_mt": 5.766666666666667,
+   "solar_gw": 0.0,
+   "wind_gw": 322.0462703300773
+  },
+  "least_cost_bev_tco_high": {
+   "label": "BEV net cost, high derivation",
+   "transport_cost_bn": 541.7063447573399,
+   "saving_pct": -35.65202997701908,
+   "breakeven": 1.3565202997701908,
+   "hubs": 239.0,
+   "emissions_mt": 108.72639809148671,
+   "petroleum_2025_bn": 399.3352291514626,
+   "petroleum_2026_bn": 545.9515190853617,
+   "h2_pyro_mt": 5.766666666666667,
+   "solar_gw": 0.0,
+   "wind_gw": 322.0462703300773
+  },
+  "least_cost_bev_tco_low": {
+   "label": "BEV net cost, low derivation",
+   "transport_cost_bn": 185.20829434271883,
+   "saving_pct": 53.62084764315354,
+   "breakeven": 0.4637915235684647,
+   "hubs": 239.0,
+   "emissions_mt": 108.72639809148671,
+   "petroleum_2025_bn": 399.3352291514626,
+   "petroleum_2026_bn": 545.9515190853617,
+   "h2_pyro_mt": 5.766666666666667,
+   "solar_gw": 0.0,
+   "wind_gw": 322.0462703300773
+  },
+  "least_cost_fleet_350": {
+   "label": "Car stock 350 million",
+   "transport_cost_bn": 308.8168363848135,
+   "saving_pct": 22.6672695416804,
+   "breakeven": 0.773327304583196,
+   "hubs": 239.0,
+   "emissions_mt": 108.72639809148671,
+   "petroleum_2025_bn": 399.3352291514626,
+   "petroleum_2026_bn": 545.9515190853617,
+   "h2_pyro_mt": 5.766666666666667,
+   "solar_gw": 0.0,
+   "wind_gw": 322.0462703300773
+  },
+  "least_cost_fleet_500": {
+   "label": "Car stock 500 million",
+   "transport_cost_bn": 297.2465863848135,
+   "saving_pct": 25.564647272311714,
+   "breakeven": 0.7443535272768829,
+   "hubs": 239.0,
+   "emissions_mt": 108.72639809148671,
+   "petroleum_2025_bn": 399.3352291514626,
+   "petroleum_2026_bn": 545.9515190853617,
+   "h2_pyro_mt": 5.766666666666667,
+   "solar_gw": 0.0,
+   "wind_gw": 322.0462703300773
+  },
+  "least_cost_no_carbon_revenue": {
+   "label": "No carbon-product revenue",
+   "transport_cost_bn": 329.88778236177893,
+   "saving_pct": 17.390763879573267,
+   "breakeven": 0.8260923612042673,
+   "hubs": 283.0,
+   "emissions_mt": 95.649500025208,
+   "petroleum_2025_bn": 399.3352291514626,
+   "petroleum_2026_bn": 545.9515190853617,
+   "h2_pyro_mt": -0.0,
+   "solar_gw": 0.0,
+   "wind_gw": 325.54318023622955
+  },
+  "least_cost_carbon_commodity": {
+   "label": "Commodity carbon markets only",
+   "transport_cost_bn": 324.9346532007595,
+   "saving_pct": 18.631107530581513,
+   "breakeven": 0.8136889246941849,
+   "hubs": 265.0,
+   "emissions_mt": 101.24646137295014,
+   "petroleum_2025_bn": 399.3352291514626,
+   "petroleum_2026_bn": 545.9515190853617,
+   "h2_pyro_mt": 2.3780281728067414,
+   "solar_gw": 0.0,
+   "wind_gw": 330.5640083661344
+  },
+  "least_cost_residues_75": {
+   "label": "Collectable residues -25%",
+   "transport_cost_bn": 333.9472317014365,
+   "saving_pct": 16.37421210970227,
+   "breakeven": 0.8362578789029773,
+   "hubs": 288.0,
+   "emissions_mt": 116.50811267780828,
+   "petroleum_2025_bn": 399.3352291514626,
+   "petroleum_2026_bn": 545.9515190853617,
+   "h2_pyro_mt": 5.766666666666667,
+   "solar_gw": 0.0,
+   "wind_gw": 415.0569685614901
+  },
+  "least_cost_residues_50": {
+   "label": "Collectable residues -50%",
+   "transport_cost_bn": 375.99770709343784,
+   "saving_pct": 5.844092971114545,
+   "breakeven": 0.9415590702888545,
+   "hubs": 239.0,
+   "emissions_mt": 123.68325242723935,
+   "petroleum_2025_bn": 399.3352291514626,
+   "petroleum_2026_bn": 545.9515190853617,
+   "h2_pyro_mt": 5.80066600632514,
+   "solar_gw": 0.0,
+   "wind_gw": 400.79866789651834
+  },
+  "least_cost_hub_cap_60": {
+   "label": "At most 60 hubs (360 modules)",
+   "transport_cost_bn": 310.8687947295807,
+   "saving_pct": 22.153425984945528,
+   "breakeven": 0.7784657401505447,
+   "hubs": 60.0,
+   "emissions_mt": 133.93354469777324,
+   "petroleum_2025_bn": 399.3352291514626,
+   "petroleum_2026_bn": 545.9515190853617,
+   "h2_pyro_mt": 16.476639643342807,
+   "solar_gw": 183.94019873060546,
+   "wind_gw": 415.11000415110004
+  },
+  "least_cost_hub_cap_30": {
+   "label": "At most 30 hubs (180 modules)",
+   "transport_cost_bn": 313.63568720056384,
+   "saving_pct": 21.46055136006898,
+   "breakeven": 0.7853944863993102,
+   "hubs": 30.0,
+   "emissions_mt": 133.93354469777324,
+   "petroleum_2025_bn": 399.3352291514626,
+   "petroleum_2026_bn": 545.9515190853617,
+   "h2_pyro_mt": 16.476639643342807,
+   "solar_gw": 218.60739431976316,
+   "wind_gw": 415.11000415110004
+  },
+  "least_cost_grid_tight": {
+   "label": "Grid and firming costs +60-75%",
+   "transport_cost_bn": 323.8757450926192,
+   "saving_pct": 18.896275247036275,
+   "breakeven": 0.8110372475296372,
+   "hubs": 449.0,
+   "emissions_mt": 108.78720819909444,
+   "petroleum_2025_bn": 399.3352291514626,
+   "petroleum_2026_bn": 545.9515190853617,
+   "h2_pyro_mt": 5.792503569960792,
+   "solar_gw": 0.0,
+   "wind_gw": 0.0
+  },
+  "least_cost_bev_plus100_no_carbon": {
+   "label": "BEV +100 USD/yr and no carbon revenue",
+   "transport_cost_bn": 407.01448236177896,
+   "saving_pct": -1.9230092037293645,
+   "breakeven": 1.0192300920372936,
+   "hubs": 283.0,
+   "emissions_mt": 95.649500025208,
+   "petroleum_2025_bn": 399.3352291514626,
+   "petroleum_2026_bn": 545.9515190853617,
+   "h2_pyro_mt": -0.0,
+   "solar_gw": 0.0,
+   "wind_gw": 325.54318023622955
+  },
+  "least_cost_stress_moderate": {
+   "label": "Combined: no BEV advantage, commodity carbon only, residues -25%, high reactor cost, tight grid",
+   "transport_cost_bn": 448.9258861779658,
+   "saving_pct": -12.41830257046872,
+   "breakeven": 1.1241830257046872,
+   "hubs": 20.0,
+   "emissions_mt": 170.06396149889704,
+   "petroleum_2025_bn": 399.3352291514626,
+   "petroleum_2026_bn": 545.9515190853617,
+   "h2_pyro_mt": 28.31081715323665,
+   "solar_gw": 0.0,
+   "wind_gw": 415.11000415110004
+  },
+  "post_gas_stress_moderate": {
+   "label": "Combined (moderate) after gas",
+   "transport_cost_bn": 468.71770164425646,
+   "saving_pct": -17.37449326477478,
+   "breakeven": 1.1737449326477478,
+   "hubs": 0.0,
+   "emissions_mt": 99.75693789937066,
+   "petroleum_2025_bn": 399.3352291514626,
+   "petroleum_2026_bn": 545.9515190853617,
+   "h2_pyro_mt": -0.0,
+   "solar_gw": 0.0,
+   "wind_gw": 156.72124214425028
+  },
+  "least_cost_stress_severe": {
+   "label": "Combined: BEV high derivation, no carbon revenue, residues -25%, high reactor cost, tight grid",
+   "transport_cost_bn": 657.3821445504923,
+   "saving_pct": -64.61912111970362,
+   "breakeven": 1.6461912111970363,
+   "hubs": 20.0,
+   "emissions_mt": 170.06396149889704,
+   "petroleum_2025_bn": 399.3352291514626,
+   "petroleum_2026_bn": 545.9515190853617,
+   "h2_pyro_mt": 28.31081715323665,
+   "solar_gw": 0.0,
+   "wind_gw": 415.11000415110004
+  },
+  "least_cost_us_v84_htse_rule": {
+   "label": "Steam electrolysis only after gas (U.S. v8.4 rule)",
+   "transport_cost_bn": 304.44671096492067,
+   "saving_pct": 23.761619626740217,
+   "breakeven": 0.7623838037325978,
+   "hubs": 159.0,
+   "emissions_mt": 133.93354469777324,
+   "petroleum_2025_bn": 399.3352291514626,
+   "petroleum_2026_bn": 545.9515190853617,
+   "h2_pyro_mt": 16.476639643342807,
+   "solar_gw": 0.0,
+   "wind_gw": 343.02368006463286
+  },
+  "least_cost_no_nuclear_alkaline": {
+   "label": "No nuclear, alkaline electrolysis only",
+   "transport_cost_bn": 361.33956586362723,
+   "saving_pct": 9.514728607483846,
+   "breakeven": 0.9048527139251615,
+   "hubs": 0.0,
+   "emissions_mt": 97.54039956662427,
+   "petroleum_2025_bn": 399.3352291514626,
+   "petroleum_2026_bn": 545.9515190853617,
+   "h2_pyro_mt": -0.0,
+   "solar_gw": 578.7042326573013,
+   "wind_gw": 451.21436525606543
+  },
+  "least_cost_food_credit": {
+   "label": "Food-heat credit inside the transport boundary (v1.1 accounting)",
+   "transport_cost_bn": 301.8719783848135,
+   "saving_pct": 24.406374307056844,
+   "breakeven": 0.7559362569294316,
+   "hubs": 239.0,
+   "emissions_mt": 108.72639809148671,
+   "petroleum_2025_bn": 399.3352291514626,
+   "petroleum_2026_bn": 545.9515190853617,
+   "h2_pyro_mt": 5.766666666666667,
+   "solar_gw": 0.0,
+   "wind_gw": 322.0462703300773
+  },
+  "least_cost_htse_topping_3": {
+   "label": "Steam electrolysis: 3 kWh/kg electric topping",
+   "transport_cost_bn": 304.432984292623,
+   "saving_pct": 23.76505700749092,
+   "breakeven": 0.7623494299250908,
+   "hubs": 188.0,
+   "emissions_mt": 124.75719692194086,
+   "petroleum_2025_bn": 399.3352291514626,
+   "petroleum_2026_bn": 545.9515190853617,
+   "h2_pyro_mt": 12.536929016999908,
+   "solar_gw": 0.0,
+   "wind_gw": 339.2916573274509
+  },
+  "least_cost_htse_no_lowT_recovery": {
+   "label": "Steam electrolysis: no low-temperature heat recovery",
+   "transport_cost_bn": 303.5933956128836,
+   "saving_pct": 23.97530359192661,
+   "breakeven": 0.7602469640807339,
+   "hubs": 255.0,
+   "emissions_mt": 108.74163011163286,
+   "petroleum_2025_bn": 399.3352291514626,
+   "petroleum_2026_bn": 545.9515190853617,
+   "h2_pyro_mt": 5.773138423533609,
+   "solar_gw": 0.0,
+   "wind_gw": 297.46668612893285
+  }
+ },
+ "emissions_boundary": {
+  "central": {
+   "total_mt": 108.72639809148671,
+   "reduction_pct": 94.75852599951564,
+   "by_source_mt": {
+    "electricity_lifecycle": 14.430949089410234,
+    "h2_direct": 8.878457461612573,
+    "liquid_fuels": 79.67895154046391,
+    "pipeline_gas_residual": 5.73804,
+    "hub_construction_fuel_cycle": 0.0
+   }
+  },
+  "elec_ci_25g": {
+   "total_mt": 137.18500058947365,
+   "reduction_pct": 93.3865958362649,
+   "by_source_mt": {
+    "electricity_lifecycle": 36.077372723525585,
+    "h2_direct": 11.443800743938578,
+    "liquid_fuels": 83.9257871220095,
+    "pipeline_gas_residual": 5.73804,
+    "hub_construction_fuel_cycle": 0.0
+   }
+  },
+  "methane_leak_3pct": {
+   "total_mt": 119.73819827966602,
+   "reduction_pct": 94.22766996640853,
+   "by_source_mt": {
+    "electricity_lifecycle": 14.430949089410234,
+    "h2_direct": 13.025302135477636,
+    "liquid_fuels": 86.54390705477815,
+    "pipeline_gas_residual": 5.73804,
+    "hub_construction_fuel_cycle": 0.0
+   }
+  },
+  "residue_soil_carbon_20g": {
+   "total_mt": 184.7447076108374,
+   "reduction_pct": 91.09384106650444,
+   "by_source_mt": {
+    "electricity_lifecycle": 14.430949089410234,
+    "h2_direct": 8.878457461612573,
+    "liquid_fuels": 155.6972610598146,
+    "pipeline_gas_residual": 5.73804,
+    "hub_construction_fuel_cycle": 0.0
+   }
+  },
+  "residue_soil_carbon_40g": {
+   "total_mt": 260.763017130188,
+   "reduction_pct": 87.42915613349325,
+   "by_source_mt": {
+    "electricity_lifecycle": 14.430949089410234,
+    "h2_direct": 8.878457461612573,
+    "liquid_fuels": 231.7155705791652,
+    "pipeline_gas_residual": 5.73804,
+    "hub_construction_fuel_cycle": 0.0
+   }
+  },
+  "hub_construction_fuel_3g": {
+   "total_mt": 117.48828149148672,
+   "reduction_pct": 94.33613378527406,
+   "by_source_mt": {
+    "electricity_lifecycle": 14.430949089410234,
+    "h2_direct": 8.878457461612573,
+    "liquid_fuels": 79.67895154046391,
+    "pipeline_gas_residual": 5.73804,
+    "hub_construction_fuel_cycle": 8.7618834
+   }
+  },
+  "all_high": {
+   "total_mt": 308.9953032163542,
+   "reduction_pct": 85.10397772289382,
+   "by_source_mt": {
+    "electricity_lifecycle": 36.077372723525585,
+    "h2_direct": 15.590645417803644,
+    "liquid_fuels": 242.82736167502497,
+    "pipeline_gas_residual": 5.73804,
+    "hub_construction_fuel_cycle": 8.7618834
+   }
+  }
+ },
+ "lull_screen": {
+  "least_cost": {
+   "inflexible_gw": 189.4473910139471,
+   "hub_firm_gw": 133.362,
+   "lwr_gw": 0.0,
+   "variable_in_lull_gw": 25.76370162640618,
+   "shortfall_gw": 30.321689387540935,
+   "shortfall_twh": 5.0940438171068765,
+   "backup_capacity_bn": 1.6135487786325011,
+   "backup_h2_mt": 0.7648714440100416,
+   "backup_fuel_bn": 1.5297428880200832,
+   "indicative_cost_bn": 3.1432916666525843,
+   "indicative_cost_pct": 1.0359629367666028,
+   "h2_production_lost_mt": 0.20539674201844646
+  },
+  "post_gas_least_cost": {
+   "inflexible_gw": 196.07111374949736,
+   "hub_firm_gw": 157.914,
+   "lwr_gw": 0.0,
+   "variable_in_lull_gw": 26.264002364103842,
+   "shortfall_gw": 11.893111385393528,
+   "shortfall_twh": 1.9980427127461131,
+   "backup_capacity_bn": 0.6328841082953368,
+   "backup_h2_mt": 0.30000641332524225,
+   "backup_fuel_bn": 0.6000128266504845,
+   "indicative_cost_bn": 1.2328969349458214,
+   "indicative_cost_pct": 0.3739546702216417,
+   "h2_production_lost_mt": 0.31822515996677786
+  },
+  "least_cost_no_nuclear": {
+   "inflexible_gw": 189.4473910139471,
+   "hub_firm_gw": 0.0,
+   "lwr_gw": 0.0,
+   "variable_in_lull_gw": 92.92460759873343,
+   "shortfall_gw": 96.52278341521368,
+   "shortfall_twh": 16.2158276137559,
+   "backup_capacity_bn": 5.136396501503051,
+   "backup_h2_mt": 2.434808951014399,
+   "backup_fuel_bn": 4.869617902028798,
+   "indicative_cost_bn": 10.00601440353185,
+   "indicative_cost_pct": 2.823864942212377,
+   "h2_production_lost_mt": 0.3159903493243825
+  },
+  "least_cost_hub_cap_30": {
+   "inflexible_gw": 189.4473910139471,
+   "hub_firm_gw": 16.74,
+   "lwr_gw": 11.439992004617439,
+   "variable_in_lull_gw": 50.697391877669055,
+   "shortfall_gw": 110.57000713166062,
+   "shortfall_twh": 18.575761198118983,
+   "backup_capacity_bn": 5.883910282188496,
+   "backup_h2_mt": 2.7891533330508986,
+   "backup_fuel_bn": 5.578306666101797,
+   "indicative_cost_bn": 11.462216948290294,
+   "indicative_cost_pct": 3.654627778681459,
+   "h2_production_lost_mt": 0.0
+  },
+  "least_cost_reactor_high": {
+   "inflexible_gw": 189.4473910139471,
+   "hub_firm_gw": 6.696,
+   "lwr_gw": 20.54236700461744,
+   "variable_in_lull_gw": 51.46606534705681,
+   "shortfall_gw": 110.74295866227287,
+   "shortfall_twh": 18.60481705526184,
+   "backup_capacity_bn": 5.893113784256449,
+   "backup_h2_mt": 2.7935160743636396,
+   "backup_fuel_bn": 5.587032148727279,
+   "indicative_cost_bn": 11.480145932983728,
+   "indicative_cost_pct": 3.6170063639789927,
+   "h2_production_lost_mt": 0.0
+  }
+ },
+ "feasibility": {
+  "least_cost": {
+   "modules": 1434.0,
+   "modules_per_yr": 75.47368421052632,
+   "gwt_per_yr": 18.86842105263158,
+   "hub_gwt": 358.5,
+   "build_years": 19,
+   "wind_gw": 322.0462703300773,
+   "wind_gw_per_yr": 12.88185081320309,
+   "solar_gw": 0.0,
+   "firm_share": 0.5307304658287202,
+   "vre_share": 0.46926953417127976,
+   "electricity_twh": 1983.8734255661057,
+   "ers_km_per_yr": 2400.0
+  },
+  "post_gas_least_cost": {
+   "modules": 1698.0,
+   "modules_per_yr": 89.36842105263158,
+   "gwt_per_yr": 22.342105263157894,
+   "hub_gwt": 424.5,
+   "build_years": 19,
+   "wind_gw": 328.300029551298,
+   "wind_gw_per_yr": 13.13200118205192,
+   "solar_gw": 0.0,
+   "firm_share": 0.5691404855407863,
+   "vre_share": 0.4308595144592136,
+   "electricity_twh": 2202.6894929268924,
+   "ers_km_per_yr": 2400.0
+  },
+  "least_cost_hub_cap_60": {
+   "modules": 360.0,
+   "modules_per_yr": 18.94736842105263,
+   "gwt_per_yr": 4.7368421052631575,
+   "hub_gwt": 90.0,
+   "build_years": 19,
+   "wind_gw": 415.11000415110004,
+   "wind_gw_per_yr": 16.604400166044,
+   "solar_gw": 183.94019873060546,
+   "firm_share": 0.14064778310029596,
+   "vre_share": 0.8593522168997039,
+   "electricity_twh": 1771.4078095567256,
+   "ers_km_per_yr": 2400.0
+  },
+  "least_cost_stress_moderate": {
+   "modules": 120.0,
+   "modules_per_yr": 6.315789473684211,
+   "gwt_per_yr": 1.5789473684210527,
+   "hub_gwt": 30.0,
+   "build_years": 19,
+   "wind_gw": 415.11000415110004,
+   "wind_gw_per_yr": 16.604400166044,
+   "solar_gw": 0.0,
+   "firm_share": 0.37593726697127594,
+   "vre_share": 0.6240627330287242,
+   "electricity_twh": 1922.8836084733277,
+   "ers_km_per_yr": 2400.0
+  }
+ },
+ "carbon_by_durability_mt": {
+  "product_life": 6.3,
+  "short": 7.0,
+  "oxidised": 4.0,
+  "long_term": 0.0,
+  "uncertain": 0.0
+ }
+}

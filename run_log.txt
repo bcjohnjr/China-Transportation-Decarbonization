@@ -1,0 +1,533 @@
+{
+"least_cost": {
+"cost": 303.4,
+"petro": 399.3,
+"save": 24.0,
+"hubs": 239.0,
+"h2pyro": 5.8,
+"osw": 0,
+"red": 94.8
+},
+"least_cost_blend20": {
+"cost": 303.0,
+"petro": 399.3,
+"save": 24.1,
+"hubs": 256.0,
+"h2pyro": 5.8,
+"osw": 0,
+"red": 94.8
+},
+"least_cost_flex_heat": {
+"cost": 303.4,
+"petro": 399.3,
+"save": 24.0,
+"hubs": 239.0,
+"h2pyro": 5.8,
+"osw": 0,
+"red": 94.8
+},
+"design_half_offshore": {
+"cost": 327.5,
+"petro": 399.3,
+"save": 18.0,
+"hubs": 239.0,
+"h2pyro": 5.8,
+"osw": 230,
+"red": 94.8
+},
+"design": {
+"cost": 357.7,
+"petro": 399.3,
+"save": 10.4,
+"hubs": 52.0,
+"h2pyro": 11.8,
+"osw": 460,
+"red": 94.2
+},
+"least_cost_reactor_low": {
+"cost": 282.6,
+"petro": 399.3,
+"save": 29.2,
+"hubs": 449.0,
+"h2pyro": 5.8,
+"osw": 0,
+"red": 94.8
+},
+"least_cost_reactor_high": {
+"cost": 317.4,
+"petro": 399.3,
+"save": 20.5,
+"hubs": 12.0,
+"h2pyro": 16.5,
+"osw": 0,
+"red": 93.5
+},
+"least_cost_no_nuclear": {
+"cost": 354.3,
+"petro": 399.3,
+"save": 11.3,
+"hubs": 0.0,
+"h2pyro": -0.0,
+"osw": 0,
+"red": 95.4
+},
+"least_cost_no_vehicle_carbon": {
+"cost": 312.9,
+"petro": 399.3,
+"save": 21.6,
+"hubs": 243.0,
+"h2pyro": 5.3,
+"osw": 0,
+"red": 94.8
+},
+"least_cost_demonstrated_yields": {
+"cost": 308.5,
+"petro": 399.3,
+"save": 22.8,
+"hubs": 239.0,
+"h2pyro": 5.8,
+"osw": 0,
+"red": 94.7
+},
+"least_cost_us_truck_ratios": {
+"cost": 246.2,
+"petro": 399.3,
+"save": 38.3,
+"hubs": 218.0,
+"h2pyro": 5.8,
+"osw": 0,
+"red": 95.1
+},
+"post_gas_least_cost": {
+"cost": 329.7,
+"petro": 399.3,
+"save": 17.4,
+"hubs": 283.0,
+"h2pyro": 0.0,
+"osw": 0,
+"red": 95.7
+},
+"post_gas_half_offshore": {
+"cost": 353.8,
+"petro": 399.3,
+"save": 11.4,
+"hubs": 284.0,
+"h2pyro": 0.0,
+"osw": 230,
+"red": 95.7
+},
+"post_gas_reactor_low": {
+"cost": 306.5,
+"petro": 399.3,
+"save": 23.3,
+"hubs": 497.0,
+"h2pyro": 0.0,
+"osw": 0,
+"red": 95.7
+},
+"post_gas_reactor_high": {
+"cost": 352.8,
+"petro": 399.3,
+"save": 11.6,
+"hubs": 0.0,
+"h2pyro": -0.0,
+"osw": 0,
+"red": 95.6
+},
+"post_gas_no_nuclear": {
+"cost": 359.5,
+"petro": 399.3,
+"save": 10.0,
+"hubs": 0.0,
+"h2pyro": -0.0,
+"osw": 0,
+"red": 95.6
+},
+"post_gas_htse_48kwh": {
+"cost": 339.0,
+"petro": 399.3,
+"save": 15.1,
+"hubs": 283.0,
+"h2pyro": 0.0,
+"osw": 0,
+"red": 95.6
+},
+"post_gas_vhtr_si": {
+"cost": 326.1,
+"petro": 399.3,
+"save": 18.3,
+"hubs": 435.0,
+"h2pyro": 0.0,
+"osw": 0,
+"red": 95.7
+},
+"least_cost_bev_net_zero": {
+"cost": 340.6,
+"petro": 399.3,
+"save": 14.7,
+"hubs": 239.0,
+"h2pyro": 5.8,
+"osw": 0,
+"red": 94.8
+},
+"least_cost_bev_plus100": {
+"cost": 380.5,
+"petro": 399.3,
+"save": 4.7,
+"hubs": 239.0,
+"h2pyro": 5.8,
+"osw": 0,
+"red": 94.8
+},
+"least_cost_bev_tco_high": {
+"cost": 541.7,
+"petro": 399.3,
+"save": -35.7,
+"hubs": 239.0,
+"h2pyro": 5.8,
+"osw": 0,
+"red": 94.8
+},
+"least_cost_bev_tco_low": {
+"cost": 185.2,
+"petro": 399.3,
+"save": 53.6,
+"hubs": 239.0,
+"h2pyro": 5.8,
+"osw": 0,
+"red": 94.8
+},
+"least_cost_fleet_350": {
+"cost": 308.8,
+"petro": 399.3,
+"save": 22.7,
+"hubs": 239.0,
+"h2pyro": 5.8,
+"osw": 0,
+"red": 94.8
+},
+"least_cost_fleet_500": {
+"cost": 297.2,
+"petro": 399.3,
+"save": 25.6,
+"hubs": 239.0,
+"h2pyro": 5.8,
+"osw": 0,
+"red": 94.8
+},
+"least_cost_no_carbon_revenue": {
+"cost": 329.9,
+"petro": 399.3,
+"save": 17.4,
+"hubs": 283.0,
+"h2pyro": -0.0,
+"osw": 0,
+"red": 95.4
+},
+"least_cost_carbon_commodity": {
+"cost": 324.9,
+"petro": 399.3,
+"save": 18.6,
+"hubs": 265.0,
+"h2pyro": 2.4,
+"osw": 0,
+"red": 95.1
+},
+"least_cost_residues_75": {
+"cost": 333.9,
+"petro": 399.3,
+"save": 16.4,
+"hubs": 288.0,
+"h2pyro": 5.8,
+"osw": 0,
+"red": 94.4
+},
+"least_cost_residues_50": {
+"cost": 376.0,
+"petro": 399.3,
+"save": 5.8,
+"hubs": 239.0,
+"h2pyro": 5.8,
+"osw": 192,
+"red": 94.0
+},
+"least_cost_hub_cap_60": {
+"cost": 310.9,
+"petro": 399.3,
+"save": 22.2,
+"hubs": 60.0,
+"h2pyro": 16.5,
+"osw": 0,
+"red": 93.5
+},
+"least_cost_hub_cap_30": {
+"cost": 313.6,
+"petro": 399.3,
+"save": 21.5,
+"hubs": 30.0,
+"h2pyro": 16.5,
+"osw": 0,
+"red": 93.5
+},
+"least_cost_grid_tight": {
+"cost": 323.9,
+"petro": 399.3,
+"save": 18.9,
+"hubs": 449.0,
+"h2pyro": 5.8,
+"osw": 0,
+"red": 94.8
+},
+"least_cost_bev_plus100_no_carbon": {
+"cost": 407.0,
+"petro": 399.3,
+"save": -1.9,
+"hubs": 283.0,
+"h2pyro": -0.0,
+"osw": 0,
+"red": 95.4
+},
+"least_cost_stress_moderate": {
+"cost": 448.9,
+"petro": 399.3,
+"save": -12.4,
+"hubs": 20.0,
+"h2pyro": 28.3,
+"osw": 0,
+"red": 91.8
+},
+"post_gas_stress_moderate": {
+"cost": 468.7,
+"petro": 399.3,
+"save": -17.4,
+"hubs": 0.0,
+"h2pyro": -0.0,
+"osw": 0,
+"red": 95.2
+},
+"least_cost_stress_severe": {
+"cost": 657.4,
+"petro": 399.3,
+"save": -64.6,
+"hubs": 20.0,
+"h2pyro": 28.3,
+"osw": 0,
+"red": 91.8
+},
+"least_cost_us_v84_htse_rule": {
+"cost": 304.4,
+"petro": 399.3,
+"save": 23.8,
+"hubs": 159.0,
+"h2pyro": 16.5,
+"osw": 0,
+"red": 93.5
+},
+"least_cost_no_nuclear_alkaline": {
+"cost": 361.3,
+"petro": 399.3,
+"save": 9.5,
+"hubs": 0.0,
+"h2pyro": -0.0,
+"osw": 0,
+"red": 95.3
+},
+"least_cost_food_credit": {
+"cost": 301.9,
+"petro": 399.3,
+"save": 24.4,
+"hubs": 239.0,
+"h2pyro": 5.8,
+"osw": 0,
+"red": 94.8
+},
+"least_cost_htse_topping_3": {
+"cost": 304.4,
+"petro": 399.3,
+"save": 23.8,
+"hubs": 188.0,
+"h2pyro": 12.5,
+"osw": 0,
+"red": 94.0
+},
+"least_cost_htse_no_lowT_recovery": {
+"cost": 303.6,
+"petro": 399.3,
+"save": 24.0,
+"hubs": 255.0,
+"h2pyro": 5.8,
+"osw": 0,
+"red": 94.8
+},
+"type_htr_pm": {
+"cost": 303.4,
+"petro": 399.3,
+"save": 24.0,
+"hubs": 239.0,
+"h2pyro": 5.8,
+"osw": 0,
+"red": 94.8
+},
+"post_gas_type_htr_pm": {
+"cost": 329.7,
+"petro": 399.3,
+"save": 17.4,
+"hubs": 283.0,
+"h2pyro": 0.0,
+"osw": 0,
+"red": 95.7
+},
+"type_vhtr": {
+"cost": 299.5,
+"petro": 399.3,
+"save": 25.0,
+"hubs": 390.0,
+"h2pyro": 5.8,
+"osw": 0,
+"red": 94.8
+},
+"post_gas_type_vhtr": {
+"cost": 326.1,
+"petro": 399.3,
+"save": 18.3,
+"hubs": 435.0,
+"h2pyro": 0.0,
+"osw": 0,
+"red": 95.7
+},
+"type_tmsr": {
+"cost": 286.9,
+"petro": 399.3,
+"save": 28.2,
+"hubs": 405.0,
+"h2pyro": 5.8,
+"osw": 0,
+"red": 94.8
+},
+"post_gas_type_tmsr": {
+"cost": 310.9,
+"petro": 399.3,
+"save": 22.1,
+"hubs": 448.0,
+"h2pyro": 0.0,
+"osw": 0,
+"red": 95.7
+},
+"type_cfr": {
+"cost": 313.4,
+"petro": 399.3,
+"save": 21.5,
+"hubs": 122.0,
+"h2pyro": 16.5,
+"osw": 0,
+"red": 93.5
+},
+"post_gas_type_cfr": {
+"cost": 345.4,
+"petro": 399.3,
+"save": 13.5,
+"hubs": 236.0,
+"h2pyro": 0.0,
+"osw": 0,
+"red": 95.7
+},
+"type_acp100": {
+"cost": 304.9,
+"petro": 399.3,
+"save": 23.6,
+"hubs": 239.0,
+"h2pyro": 5.8,
+"osw": 0,
+"red": 94.8
+},
+"post_gas_type_acp100": {
+"cost": 331.2,
+"petro": 399.3,
+"save": 17.1,
+"hubs": 283.0,
+"h2pyro": 0.0,
+"osw": 0,
+"red": 95.7
+},
+"tw_least_cost": {
+"cost": 17.7,
+"petro": 15.6,
+"save": -13.2,
+"hubs": 7.0,
+"h2pyro": 0.3,
+"osw": 0,
+"red": 89.7
+},
+"tw_no_nuclear": {
+"cost": 20.3,
+"petro": 15.6,
+"save": -29.9,
+"hubs": 0.0,
+"h2pyro": -0.0,
+"osw": 6,
+"red": 90.4
+},
+"tw_post_gas": {
+"cost": 18.9,
+"petro": 15.6,
+"save": -21.2,
+"hubs": 9.0,
+"h2pyro": 0.0,
+"osw": 0,
+"red": 90.6
+},
+"tw_post_gas_no_nuclear": {
+"cost": 20.6,
+"petro": 15.6,
+"save": -31.6,
+"hubs": 0.0,
+"h2pyro": -0.0,
+"osw": 6,
+"red": 90.5
+},
+"tw_offshore_25gw": {
+"cost": 22.4,
+"petro": 15.6,
+"save": -43.4,
+"hubs": 1.0,
+"h2pyro": 0.2,
+"osw": 25,
+"red": 90.5
+},
+"sustainable_fission_tmsr": {
+"cost": 306.0,
+"petro": 399.3,
+"save": 23.4,
+"hubs": 424.0,
+"h2pyro": 0.0,
+"osw": 0,
+"red": 95.7
+},
+"sustainable_fission_cfr": {
+"cost": 343.1,
+"petro": 399.3,
+"save": 14.1,
+"hubs": 229.0,
+"h2pyro": 0.0,
+"osw": 0,
+"red": 95.7
+},
+"sustainable_fission_tmsr_nuclear_only": {
+"cost": 306.1,
+"petro": 399.3,
+"save": 23.4,
+"hubs": 425.0,
+"h2pyro": 0.0,
+"osw": 0,
+"red": 95.7
+},
+"sustainable_fission_tmsr_premium": {
+"cost": 332.1,
+"petro": 399.3,
+"save": 16.8,
+"hubs": 424.0,
+"h2pyro": 0.0,
+"osw": 0,
+"red": 95.7
+}
+}

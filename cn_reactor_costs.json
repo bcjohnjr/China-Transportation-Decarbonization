@@ -1,0 +1,100 @@
+{
+ "low": {
+  "case": "low",
+  "n_units": 1434,
+  "foak_kwe": 3250.0,
+  "unit10_kwe": 2125.4886482493503,
+  "unit100_kwe": 1390.0621519498002,
+  "last_kwe": 850.6249900557877,
+  "fleet_avg_kwe": 1042.9752539775457,
+  "fleet_avg_kwe_with_idc": 1126.4132742957495,
+  "fleet_avg_kwt_with_idc": 450.56530971829983,
+  "learning": 0.12,
+  "fleet_capex_bn": 161.52766353401046
+ },
+ "central": {
+  "case": "central",
+  "n_units": 1434,
+  "foak_kwe": 5250.0,
+  "unit10_kwe": 3979.835024362363,
+  "unit100_kwe": 3016.9689183126416,
+  "last_kwe": 2190.002658563723,
+  "fleet_avg_kwe": 2489.4717557881445,
+  "fleet_avg_kwe_with_idc": 2788.208366482722,
+  "fleet_avg_kwt_with_idc": 1115.2833465930887,
+  "learning": 0.08,
+  "fleet_capex_bn": 399.8290797536223
+ },
+ "high": {
+  "case": "high",
+  "n_units": 1434,
+  "foak_kwe": 10000.0,
+  "unit10_kwe": 8731.850892070866,
+  "unit100_kwe": 7624.5220001358775,
+  "last_kwe": 6517.772173800067,
+  "fleet_avg_kwe": 6925.6492045467385,
+  "fleet_avg_kwe_with_idc": 8172.266061365151,
+  "fleet_avg_kwt_with_idc": 3268.9064245460604,
+  "learning": 0.04,
+  "fleet_capex_bn": 1171.9029531997628
+ },
+ "anchors": {
+  "Hualong One (HPR1000), Changjiang phase II, 2 x 1,200 MWe, CNY 40 bn (USD 5.9 bn)": {
+   "total_bn_usd": 5.9,
+   "mwe": 2400
+  },
+  "HTR-PM chief designer target, USD 2,000-3,000/kWe at series build": {
+   "target_kwe": [
+    2000,
+    3000
+   ]
+  }
+ },
+ "types": {
+  "htr_pm": {
+   "label": "HTR-PM pebble-bed HTGR (Shidaowan, operating)",
+   "outlet_c": 750,
+   "eta": 0.4,
+   "cost_mult": 1.0,
+   "fuel_mwhth": 9.0,
+   "fissile": "LEU 8.5%",
+   "f_pyro": 0.3
+  },
+  "vhtr": {
+   "label": "Very-high-temperature gas reactor, 950 C (future)",
+   "outlet_c": 950,
+   "eta": 0.45,
+   "cost_mult": 1.1,
+   "fuel_mwhth": 10.0,
+   "fissile": "LEU/HALEU",
+   "f_pyro": 0.3
+  },
+  "tmsr": {
+   "label": "Thorium molten-salt reactor (TMSR-LF1 lineage, 700 C)",
+   "outlet_c": 700,
+   "eta": 0.44,
+   "cost_mult": 1.2,
+   "fuel_mwhth": 6.0,
+   "fissile": "HALEU start, U-233 bred from Th",
+   "f_pyro": 0.28
+  },
+  "cfr": {
+   "label": "Sodium fast reactor (CFR-600 lineage, 550 C)",
+   "outlet_c": 550,
+   "eta": 0.4,
+   "cost_mult": 1.25,
+   "fuel_mwhth": 12.0,
+   "fissile": "Pu (MOX/metal)",
+   "f_pyro": 0.22
+  },
+  "acp100": {
+   "label": "Light-water SMR (ACP100 Linglong One, ~320 C)",
+   "outlet_c": 320,
+   "eta": 0.33,
+   "cost_mult": 0.85,
+   "fuel_mwhth": 7.0,
+   "fissile": "LEU <5%",
+   "f_pyro": 0.08
+  }
+ }
+}

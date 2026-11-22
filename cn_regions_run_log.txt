@@ -1,0 +1,10 @@
+Guangxi Zhuang AR                            demand     196 TWh  el     47  liq     36  local liquids   168%  WTW base     65 Mt
+Inner Mongolia AR                            demand     174 TWh  el     46  liq     25  local liquids   402%  WTW base     57 Mt
+Ningxia Hui AR                               demand      36 TWh  el      9  liq      5  local liquids   220%  WTW base     12 Mt
+Xizang (Tibet) AR                            demand      18 TWh  el      4  liq      3  local liquids   119%  WTW base      6 Mt
+Xinjiang Uyghur AR                           demand     148 TWh  el     38  liq     22  local liquids   381%  WTW base     49 Mt
+Hong Kong SAR                                demand     189 TWh  el     16  liq    128  local liquids     0%  WTW base     62 Mt
+Macau SAR                                    demand       7 TWh  el      1  liq      2  local liquids     0%  WTW base      2 Mt
+Rest of mainland (27 provinces and municipal demand    5522 TWh  el   1281  liq   1166  local liquids    93%  WTW base   1821 Mt
+Taiwan (island system, nuclear hubs allowed) demand     239 TWh  el     45  liq     69  local liquids    14%  WTW base     80 Mt
+Taiwan (island system, no nuclear)           demand     239 TWh  el     45  liq     69  local liquids    13%  WTW base     80 Mt

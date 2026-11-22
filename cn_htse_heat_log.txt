@@ -1,0 +1,27 @@
+{
+ "feed_steam_kg": 11.17,
+ "water_split_kg": 8.936,
+ "unconverted_steam_kg": 2.234,
+ "o2_kg": 7.936,
+ "duties_kwh_kg": {
+  "feed_water_preheat": 1.7257672991071429,
+  "evaporation": 6.538802600033069,
+  "superheat_total": 4.261908283571187,
+  "superheat_by_recuperator": 4.080933466448827,
+  "preheat_recovered_sensible": 0.6879697491681135,
+  "preheat_recovered_condensing": 0.7085178292927413,
+  "electric_trim": 0.18097481712236005,
+  "stack_heat_loss": 0.49949999999999994
+ },
+ "hot_outlet_after_recuperator_c": 273.756,
+ "recuperator_min_approach_c": 25.0,
+ "cathode_dew_point_c": 99.629,
+ "external_heat_kwh_kg": 6.868,
+ "external_heat_max_temp_c": 151.8,
+ "topping_kwh_kg": 0.68,
+ "recuperator_m2_per_kg_h": 1.112,
+ "recuperator_lmtd_c": 61.179,
+ "recuperator_usd_kg": 0.034,
+ "topping_heater_usd_kg": 0.001,
+ "no_lowT_recovery_external_heat_kwh_kg": 8.265
+}

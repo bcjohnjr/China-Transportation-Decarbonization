@@ -1,0 +1,182 @@
+{
+ "design": [
+  {
+   "zone": "shandong",
+   "region": "Shandong peninsula (Rongcheng, Weihai)",
+   "species": "Saccharina japonica (China's kelp centre)",
+   "yield_t_ha": 13.0,
+   "net_biomass_t": 171.14445005525565,
+   "htl_usd_mwh": 195.33918423960827,
+   "pbtl_usd_mwh": 180.1841285872159,
+   "best_usd_mwh": 180.1841285872159,
+   "gw": 60.0
+  },
+  {
+   "zone": "liaoning",
+   "region": "Liaodong peninsula (Dalian, Yellow Sea)",
+   "species": "Saccharina japonica + Undaria pinnatifida",
+   "yield_t_ha": 12.0,
+   "net_biomass_t": 181.6459212932139,
+   "htl_usd_mwh": 200.8662743648494,
+   "pbtl_usd_mwh": 183.18454894091823,
+   "best_usd_mwh": 183.18454894091823,
+   "gw": 40.0
+  },
+  {
+   "zone": "fujian",
+   "region": "Fujian, Taiwan Strait (Xiapu, Pingtan)",
+   "species": "Winter Saccharina + summer Gracilaria lemaneiformis + Pyropia",
+   "yield_t_ha": 12.0,
+   "net_biomass_t": 184.06231161201305,
+   "htl_usd_mwh": 202.13805874316478,
+   "pbtl_usd_mwh": 183.87494617486087,
+   "best_usd_mwh": 183.87494617486087,
+   "gw": 80.0
+  },
+  {
+   "zone": "zhejiang",
+   "region": "Zhejiang (Zhoushan, Wenzhou)",
+   "species": "Sargassum fusiforme + Pyropia haitanensis + winter Saccharina",
+   "yield_t_ha": 8.0,
+   "net_biomass_t": 252.88976826540414,
+   "htl_usd_mwh": 238.36303592916008,
+   "pbtl_usd_mwh": 203.5399337901155,
+   "best_usd_mwh": 203.5399337901155,
+   "gw": 50.0
+  },
+  {
+   "zone": "hainan",
+   "region": "Hainan (Wanning, Lingshui, Danzhou)",
+   "species": "Kappaphycus alvarezii / Eucheuma + Gracilaria (tropical reds)",
+   "yield_t_ha": 8.0,
+   "net_biomass_t": 255.18946671266698,
+   "htl_usd_mwh": 239.57340353298264,
+   "pbtl_usd_mwh": 204.19699048933344,
+   "best_usd_mwh": 204.19699048933344,
+   "gw": 40.0
+  },
+  {
+   "zone": "guangxi",
+   "region": "Beibu Gulf (Guangxi: Beihai, Qinzhou, Fangchenggang)",
+   "species": "Gracilaria + Ulva; Kappaphycus trials",
+   "yield_t_ha": 6.0,
+   "net_biomass_t": 322.77752647153244,
+   "htl_usd_mwh": 275.14606656396444,
+   "pbtl_usd_mwh": 223.5078647061521,
+   "best_usd_mwh": 223.5078647061521,
+   "gw": 30.0
+  },
+  {
+   "zone": "guangdong",
+   "region": "Guangdong (Yangjiang, Shanwei, Zhanjiang)",
+   "species": "Gracilaria lemaneiformis + Ulva + Sargassum",
+   "yield_t_ha": 6.0,
+   "net_biomass_t": 323.3766218133209,
+   "htl_usd_mwh": 275.4613799017479,
+   "pbtl_usd_mwh": 223.679034803806,
+   "best_usd_mwh": 223.679034803806,
+   "gw": 90.0
+  },
+  {
+   "zone": "jiangsu",
+   "region": "Jiangsu radial sand ridges (Rudong, Yancheng)",
+   "species": "Pyropia yezoensis (nori) winter + Gracilaria summer",
+   "yield_t_ha": 4.0,
+   "net_biomass_t": 452.2527413310518,
+   "htl_usd_mwh": 343.29091649002726,
+   "pbtl_usd_mwh": 260.5007832374434,
+   "best_usd_mwh": 260.5007832374434,
+   "gw": 70.0
+  }
+ ],
+ "learning": [
+  {
+   "zone": "shandong",
+   "region": "Shandong peninsula (Rongcheng, Weihai)",
+   "species": "Saccharina japonica (China's kelp centre)",
+   "yield_t_ha": 19.0,
+   "net_biomass_t": 131.34940115351904,
+   "htl_usd_mwh": 174.39442165974685,
+   "pbtl_usd_mwh": 168.81411461529115,
+   "best_usd_mwh": 168.81411461529115,
+   "gw": 60.0
+  },
+  {
+   "zone": "liaoning",
+   "region": "Liaodong peninsula (Dalian, Yellow Sea)",
+   "species": "Saccharina japonica + Undaria pinnatifida",
+   "yield_t_ha": 18.0,
+   "net_biomass_t": 136.1395459287281,
+   "htl_usd_mwh": 176.91555048880429,
+   "pbtl_usd_mwh": 170.18272740820802,
+   "best_usd_mwh": 170.18272740820802,
+   "gw": 40.0
+  },
+  {
+   "zone": "fujian",
+   "region": "Fujian, Taiwan Strait (Xiapu, Pingtan)",
+   "species": "Winter Saccharina + summer Gracilaria lemaneiformis + Pyropia",
+   "yield_t_ha": 18.0,
+   "net_biomass_t": 137.47047280792754,
+   "htl_usd_mwh": 177.61603831996186,
+   "pbtl_usd_mwh": 170.56299223083644,
+   "best_usd_mwh": 170.56299223083644,
+   "gw": 80.0
+  },
+  {
+   "zone": "zhejiang",
+   "region": "Zhejiang (Zhoushan, Wenzhou)",
+   "species": "Sargassum fusiforme + Pyropia haitanensis + winter Saccharina",
+   "yield_t_ha": 12.0,
+   "net_biomass_t": 183.0020100592759,
+   "htl_usd_mwh": 201.58000529435574,
+   "pbtl_usd_mwh": 183.57200287407883,
+   "best_usd_mwh": 183.57200287407883,
+   "gw": 50.0
+  },
+  {
+   "zone": "hainan",
+   "region": "Hainan (Wanning, Lingshui, Danzhou)",
+   "species": "Kappaphycus alvarezii / Eucheuma + Gracilaria (tropical reds)",
+   "yield_t_ha": 12.0,
+   "net_biomass_t": 185.30170850653872,
+   "htl_usd_mwh": 202.79037289817828,
+   "pbtl_usd_mwh": 184.22905957329678,
+   "best_usd_mwh": 184.22905957329678,
+   "gw": 40.0
+  },
+  {
+   "zone": "guangxi",
+   "region": "Beibu Gulf (Guangxi: Beihai, Qinzhou, Fangchenggang)",
+   "species": "Gracilaria + Ulva; Kappaphycus trials",
+   "yield_t_ha": 9.0,
+   "net_biomass_t": 229.59384886336142,
+   "htl_usd_mwh": 226.10202571755866,
+   "pbtl_usd_mwh": 196.8839568181033,
+   "best_usd_mwh": 196.8839568181033,
+   "gw": 30.0
+  },
+  {
+   "zone": "guangdong",
+   "region": "Guangdong (Yangjiang, Shanwei, Zhanjiang)",
+   "species": "Gracilaria lemaneiformis + Ulva + Sargassum",
+   "yield_t_ha": 9.0,
+   "net_biomass_t": 230.1929442051499,
+   "htl_usd_mwh": 226.41733905534207,
+   "pbtl_usd_mwh": 197.05512691575709,
+   "best_usd_mwh": 197.05512691575709,
+   "gw": 90.0
+  },
+  {
+   "zone": "jiangsu",
+   "region": "Jiangsu radial sand ridges (Rudong, Yancheng)",
+   "species": "Pyropia yezoensis (nori) winter + Gracilaria summer",
+   "yield_t_ha": 6.0,
+   "net_biomass_t": 312.4772249187953,
+   "htl_usd_mwh": 269.7248552204186,
+   "pbtl_usd_mwh": 220.5649214053701,
+   "best_usd_mwh": 220.5649214053701,
+   "gw": 70.0
+  }
+ ]
+}

@@ -1,0 +1,17 @@
+cff-version: 1.2.0
+message: "If you use this model, please cite it as below."
+title: "China transport decarbonisation model (petroleum-free transport with reactor heat, electrification and regional biofuels)"
+version: "CN v1.3"
+date-released: 2026-11-22
+authors:
+  - family-names: Bily
+    given-names: Jonathan Karl
+    affiliation: Cloud Wash Laundry Corporation
+    orcid: "https://orcid.org/0009-0004-3526-7271"
+  - family-names: Pahl
+    given-names: Christoph
+    affiliation: Technical University of Munich
+  - family-names: Valdes Bacallao
+    given-names: Patricia
+    affiliation: University of Málaga
+repository-code: "https://github.com/bcjohnjr/China-Nuclear-Renewable-Transportation-Decarbonization"

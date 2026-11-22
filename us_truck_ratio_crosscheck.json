@@ -1,0 +1,32 @@
+{
+ "us_source": {
+  "version": "8.4 (as submitted)",
+  "sha256": {
+   "us2_model.py": "66f59eef3d8c4db8e2c86a7a539d54c668c3b7f7de86b4021ac914ae18ddbdec",
+   "us2_inputs.py": "5abaebf83c4b019ff0660a423dc26dfdba45a3bdf5c794de30ca8c0b62abda20",
+   "grid_harvester.py": "fcf78c3803f1bef4c32c88437589ccd41f450d9318019fc26fdc9e6b702ead29"
+  }
+ },
+ "as_submitted": {
+  "r_hdv_elec": 0.11374407582938388,
+  "r_hdv_fcev": 0.2104265402843602,
+  "electricity_twh": 1377.0688102890365,
+  "least_cost_bn": 455.18432822691005,
+  "petroleum_late_2025_bn": 592.77029536,
+  "saving_pct": 23.210671690208684,
+  "post_gas_bn": 495.6489556798851,
+  "post_gas_saving_pct": 16.384312851090378,
+  "emissions_reduction_pct": 93.79734972136522
+ },
+ "corrected_truck_ratios": {
+  "r_hdv_elec": 0.409478672985782,
+  "r_hdv_fcev": 0.7575355450236967,
+  "electricity_twh": 1836.7235486634781,
+  "least_cost_bn": 521.3718920023445,
+  "petroleum_late_2025_bn": 592.77029536,
+  "saving_pct": 12.044868630654648,
+  "post_gas_bn": 564.6229023763825,
+  "post_gas_saving_pct": 4.7484486324543385,
+  "emissions_reduction_pct": 93.4179655357113
+ }
+}
