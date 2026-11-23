@@ -147,7 +147,8 @@ def figure(b):
     fig.tight_layout()
     from cn_layout_check import check   # CN v1.6.3: no text on graphics or on other text
     problems = check(fig, "FigS7_htse_heat")
-    for ext in ("png", "tif"): fig.savefig(H / f"FigS7_htse_heat.{ext}", dpi=300)
+    from cn_layout_check import save_tiff   # CN v1.6.4: RGB, 300 dpi
+    fig.savefig(H / "FigS7_htse_heat.png", dpi=300); save_tiff(fig, H / "FigS7_htse_heat.tif")
     plt.close(fig)
     return problems
 

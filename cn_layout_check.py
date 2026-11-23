@@ -1,4 +1,4 @@
-"""Figure layout check (CN v1.6.3): no text may sit on top of bars, lines, markers, outlines or other text.
+"""Figure layout check (CN v1.6.4): no text may sit on top of bars, lines, markers, outlines or other text.
 
 For each figure, every drawn text (labels, tick labels, titles, annotations, legend entries) and every legend box is
 tested against
@@ -112,3 +112,17 @@ def check(fig, name=""):
         for j in range(i + 1, len(lpix)):
             if len(lpix[i][1] & lpix[j][1]) > MAX_SHARED_PX: problems.append(f"{name}: two legends overlap")
     return problems
+
+
+def save_tiff(fig, path, kw=None):
+    """CN v1.6.4: submission TIFFs are RGB (no alpha channel), 300 dpi, LZW-compressed (Clean Energy artwork rules)."""
+    import io
+    from PIL import Image
+    kw = dict(kw or {}); kw["dpi"] = 300
+    buf = io.BytesIO(); fig.savefig(buf, format="png", **kw); buf.seek(0)
+    im = Image.open(buf)
+    if im.mode in ("RGBA", "LA", "P"):
+        im = im.convert("RGBA"); bg = Image.new("RGB", im.size, (255, 255, 255)); bg.paste(im, mask=im.split()[3]); im = bg
+    else:
+        im = im.convert("RGB")
+    im.save(path, format="TIFF", compression="tiff_lzw", dpi=(300, 300))

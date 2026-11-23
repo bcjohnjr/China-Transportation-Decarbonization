@@ -1,4 +1,4 @@
-"""Figures for CN v1.6.3 (Clean Energy format: 177 mm wide, 300 dpi; PNG for the manuscript, TIFF for submission).
+"""Figures for CN v1.6.4 (Clean Energy format: 177 mm wide, 300 dpi; PNG for the manuscript, TIFF for submission).
 Reads the stored outputs in this folder.  Colours: validated categorical palette, fixed slot order."""
 import csv, json
 from pathlib import Path
@@ -24,10 +24,10 @@ LAYOUT = {}   # CN v1.6.3: every figure is checked for text on graphics and over
 
 
 def save(fig, name, tight=True):
-    from cn_layout_check import check
+    from cn_layout_check import check, save_tiff
     LAYOUT[name] = check(fig, name)
     kw = dict(bbox_inches="tight") if tight else {}
-    fig.savefig(H / f"{name}.png", **kw); fig.savefig(H / f"{name}.tif", pil_kwargs={"compression": "tiff_lzw"}, **kw)
+    fig.savefig(H / f"{name}.png", **kw); save_tiff(fig, H / f"{name}.tif", kw)
     plt.close(fig)
 
 
@@ -488,7 +488,13 @@ if __name__ == "__main__":
     import cn_htse_heat as HT
     LAYOUT["FigS7_htse_heat"] = HT.figure(json.load(open(H / "cn_htse_heat.json")))
     probs = [p for v in LAYOUT.values() for p in v]
-    json.dump(dict(figures=sorted(LAYOUT), problems=probs), open(H / "cn_figure_layout_check.json", "w"), indent=1)
+    from PIL import Image   # CN v1.6.4: every submission TIFF must be RGB at 300 dpi
+    tiffs = {}
+    for n in sorted(LAYOUT):
+        with Image.open(H / f"{n}.tif") as im:
+            dpi = tuple(round(float(v)) for v in im.info.get("dpi", (0, 0))); tiffs[n] = dict(mode=im.mode, dpi=list(dpi), px=list(im.size))
+            if im.mode != "RGB" or dpi != (300, 300): probs.append(f"{n}.tif: mode {im.mode}, dpi {dpi} (need RGB, 300 dpi)")
+    json.dump(dict(figures=sorted(LAYOUT), problems=probs, tiff=tiffs), open(H / "cn_figure_layout_check.json", "w"), indent=1)
     for p in probs: print("LAYOUT FAIL:", p)
     print(f"figures written; layout check: {len(LAYOUT)} figures, {len(probs)} problems")
     sys.exit(1 if probs else 0)

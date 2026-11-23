@@ -1,4 +1,4 @@
-"""Release check for CN v1.6.3: does this copy of the code reproduce the submitted numbers?
+"""Release check for CN v1.6.4: does this copy of the code reproduce the submitted numbers?
 
     python3 cn_release_check.py            # check (run after run_all.sh, or alone for the code-hash and re-solve checks)
     python3 cn_release_check.py --write    # write cn_release_manifest.json (done once, by the authors, at release)
@@ -44,7 +44,7 @@ def saved_numbers():
 
 
 def write():
-    man = dict(release="CN v1.6.3", files={n: sha(n) for n in CODE if (H / n).exists()}, numbers=saved_numbers())
+    man = dict(release="CN v1.6.4", files={n: sha(n) for n in CODE if (H / n).exists()}, numbers=saved_numbers())
     json.dump(man, open(MAN, "w"), indent=1); print(f"wrote {MAN.name}: {len(man['files'])} files")
 
 

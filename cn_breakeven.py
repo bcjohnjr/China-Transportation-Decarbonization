@@ -1,4 +1,4 @@
-"""Petroleum-price break-even analysis (same method as us8_petroleum_breakeven.py in the U.S. model v8.4).
+"""Petroleum-price break-even analysis.
 
 For a system cost C and the petroleum comparator P (late-2025 pre-tax fuel, road gas and pipeline gas for the same 2050
 services), the break-even multiple is m* = C / P: petroleum is cheaper only if its prices fall below m* times their

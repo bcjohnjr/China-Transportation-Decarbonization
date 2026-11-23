@@ -1,4 +1,4 @@
-"""Grid Harvester turning and hydrodynamic screening calculations used in Figure 3.
+"""Grid Harvester turning and hydrodynamic screening calculations used in fig. S6 (panels C and D).
 
 The module makes the previously external engineering numbers reviewable inside the submission
 software. It is a screening model, not sea-trial validation. Energy terms are calibrated to the

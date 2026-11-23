@@ -1,3 +1,32 @@
+# CN v1.6.4 — 23 November 2026 (referee round 8: U.S. model removed; both cost bases and their payers; assumptions labelled; RGB TIFFs; clean rebuild)
+
+**United States model removed.** The U.S. cross-check (`cn_us_crosscheck.py`, its log and `us_truck_ratio_crosscheck.json`),
+the unmodified U.S. v8.4 source files (`us2_model.py`, `us2_inputs.py`) and the case `least_cost_us_truck_ratios` are no
+longer part of the release; the manuscript loses section 3.9 and reference [11] (later references renumbered), and the
+supplement's S15 now reports the steam-electrolysis-era result alone. The case `least_cost_us_v84_htse_rule` is renamed
+`least_cost_htse_after_gas_only` (same inputs and result: energy system USD 293.9 bn, 94 bcm of gas for 16.5 Mt of
+pyrolysis hydrogen). Input tag [U] becomes [G] (generic engineering value). No model input or equation changed, so every
+reported number is unchanged.
+
+**Referee points adopted.** Both cost bases are reported with who pays each; the manuscript states that the share of
+Monte Carlo draws cheaper than petroleum (99.8% for the energy system) is not a probability and that the saving including
+owners' costs (21.5%; median 3.3%) is the measure for China's total transport cost. The abstract gives the no-carbon-revenue
+saving (20.1%), and a new discussion paragraph compares the carbon-fibre (1.5 Mt/yr) and anode-graphite (4 Mt/yr) caps with
+2025 markets (world carbon-fibre demand about 149-225 kt; China's anode shipments about 2.9 Mt; three new references).
+Reactor learning (8%), steam-electrolysis heat recovery and switching hub heat to power during lulls are labelled as
+assumptions; the nutrient and soil-carbon result is described as a modelled annual replacement and the 184 kt/yr nearshore
+nitrogen removal as a modelled potential. The data-availability statement no longer says the repository link is withheld
+(the link stays, by the authors' choice). Table 1 caption: shares of draws are not probabilities.
+
+**Figures.** Submission TIFFs are written as RGB (no alpha channel), 300 dpi, LZW (`cn_layout_check.save_tiff`), and
+`cn_figures.py` fails the build if any TIFF is not RGB at 300 dpi (`cn_figure_layout_check.json` records mode, dpi and
+pixel size). The PNGs are byte-identical to v1.6.3.
+
+**Release.** Rebuilt from an empty folder holding only the code, `requirements.txt`, `CITATION.cff` and the two Grid
+Harvester drawings (`bash run_all.sh 1000`, 29 min; `cn_clean_rebuild_log.txt`). Every output file matched v1.6.3 except
+the removed and renamed cases; tests 2,727/2,727 (fewer because the U.S.-ratio case is gone), audit 137/137, layout check
+16 figures, 0 problems; manifest written from this run and `cn_release_check.py` PASS.
+
 # CN v1.6.3 — 23 November 2026 (project and owner costs separated; figures rebuilt from code with a layout check)
 
 **Cost boundary.** Vehicles and machines are bought and run by households, fleets, farms and contractors, not by the

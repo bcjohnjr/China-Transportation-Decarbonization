@@ -99,16 +99,6 @@
 "osw": 0,
 "red": 93.6
 },
-"least_cost_us_truck_ratios": {
-"project": 230.5,
-"cost": 251.4,
-"petro": 400.2,
-"save": 37.2,
-"hubs": 198.0,
-"h2pyro": 8.5,
-"osw": 0,
-"red": 94.1
-},
 "post_gas_least_cost": {
 "project": 305.0,
 "cost": 325.8,
@@ -349,7 +339,7 @@
 "osw": 0,
 "red": 91.1
 },
-"least_cost_us_v84_htse_rule": {
+"least_cost_htse_after_gas_only": {
 "project": 293.9,
 "cost": 314.7,
 "petro": 400.2,

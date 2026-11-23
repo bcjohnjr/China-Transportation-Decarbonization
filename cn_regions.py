@@ -1,6 +1,6 @@
 """Regional screen: the five autonomous regions, Hong Kong, Macau, the rest of the mainland and Taiwan.
 
-The mainland LP is national (one annual balance, like the U.S. model).  This script splits its 2050 demand, baseline
+The mainland LP is national (one annual balance).  This script splits its 2050 demand, baseline
 emissions and petroleum comparator by region with fixed shares (cn_inputs.REGIONS, from GDP, sown area, mining and
 airport shares), reports the feedstocks each region supplies in the least-cost solution, and compares each region's
 2050 transport demand with its renewable technical potential.  Taiwan comes from its own island LP.  Shares are

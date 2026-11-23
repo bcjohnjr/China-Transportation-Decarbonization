@@ -1,9 +1,8 @@
-"""CN v1.6.3 independent number audit.
+"""CN v1.6.4 independent number audit.
 
 Recomputes the headline quantities of the China transport model from first principles, with physical constants and
-reference values typed in here (not imported from cn_inputs), and compares them with the saved model outputs.  It exists
-because the U.S. model divided kWh per mile by MJ per mile for heavy trucks (a factor of 3.6); every unit conversion that
-carries a headline number is redone here by hand.
+reference values typed in here (not imported from cn_inputs), and compares them with the saved model outputs.  Every unit
+conversion that carries a headline number (kWh against MJ, lower against higher heating value) is redone here by hand.
 
     python3 cn_number_audit.py          # prints a table, writes cn_number_audit.json, exits 1 on any failure
 """
@@ -70,14 +69,13 @@ check("baseline", "2050 demand = 2025 x service growth", sum(LC["enduse"]["deman
 taiwan_gas = 188e3 * 0.158987 * 365 * 0.737 / 1e6   # kb/d -> Mt (158.987 L/bbl, 0.737 kg/L)
 check("baseline", "Taiwan gasoline Mt from 188 kb/d", I.BASE_TAIWAN["gasoline_mt"], taiwan_gas, 1e-6)
 
-# --------------------------------------------------------------------------------- 3. vehicle intensity ratios (the U.S. error)
+# --------------------------------------------------------------------------------- 3. vehicle intensity ratios (kWh against MJ)
 diesel_lhv_mj_gal = 3.78541 * 0.835 * lhv["diesel"] * 3.6     # model's own diesel LHV per gallon
 check("vehicles", "diesel LHV/HHV per gallon: model LHV vs 0.935 x EIA 144.9 MJ/gal", diesel_lhv_mj_gal, 144.94 * 128450 / 137381, 5e-3)
 mj_mi_lhv = 21.1 * 128450 / 137381                  # 144.9 MJ/gal (HHV) / 6.87 mpg -> LHV basis
 r_hdv = 2.40 / (mj_mi_lhv / MJ_PER_KWH)             # kWh/mi over kWh(LHV)/mi
 check("vehicles", "heavy-truck BEV ratio = (kWh/mi) / (MJ_LHV/mi / 3.6)", I.ENDUSE["r_hdv_elec"], r_hdv, 1e-9)
 check("vehicles", "heavy-truck FCEV ratio (H2 LHV / diesel LHV)", I.ENDUSE["r_hdv_fcev"], 4.44 / (mj_mi_lhv / MJ_PER_KWH), 1e-9)
-check("vehicles", "U.S. v8.4 error factor (ratio without /3.6, same HHV basis)", (2.40 * 3.6 / 21.1) / (2.40 / 21.1), MJ_PER_KWH, 1e-9)
 diesel_kwh_km = 32.0 * 0.835 * lhv["diesel"] / 100     # 32 L/100 km Chinese 49-t tractor
 within("vehicles", "implied BEV heavy truck kWh/km (Chinese 49-t BEV tractors 1.1-1.6)", diesel_kwh_km * I.ENDUSE["r_hdv_elec"], 1.1, 1.6)
 within("vehicles", "implied FCEV heavy truck kg H2/100 km (6-12)", diesel_kwh_km * I.ENDUSE["r_hdv_fcev"] / (H2_LHV_MJ_KG / 3.6) * 100, 6.0, 12.0)
@@ -240,11 +238,11 @@ check("text", "gas price USD 9.3/MMBtu = 8.5 + 0.8", I.GAS["price_mmbtu"] + I.GA
 check("text", "onshore wind tiers 30 and 45 USD/MWh", E["onshore_wind"] + E["onw2_adder"], 45.0, 1e-9)
 
 fails = [r for r in rows if not r["ok"]]
-json.dump(dict(release="CN v1.6.3", checks=len(rows), failures=len(fails), rows=rows), open(HERE / "cn_number_audit.json", "w"), indent=1, default=str)
+json.dump(dict(release="CN v1.6.4", checks=len(rows), failures=len(fails), rows=rows), open(HERE / "cn_number_audit.json", "w"), indent=1, default=str)
 w = max(len(r["check"]) for r in rows)
 for r in rows:
     m = r["model"]; ref = r["independent"]
     ms = f"{m:,.4g}" if isinstance(m, (int, float)) else str(m); rs = f"{ref:,.4g}" if isinstance(ref, (int, float)) else str(ref)
     print(f"{'ok  ' if r['ok'] else 'FAIL'} {r['group']:<12} {r['check']:<{w}}  model {ms:>12}  independent {rs:>16}")
-print(f"\nCN v1.6.3 number audit: {len(rows) - len(fails)}/{len(rows)} checks passed")
+print(f"\nCN v1.6.4 number audit: {len(rows) - len(fails)}/{len(rows)} checks passed")
 sys.exit(1 if fails else 0)

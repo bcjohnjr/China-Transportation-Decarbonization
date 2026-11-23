@@ -1,4 +1,4 @@
-# China transport decarbonisation model — CN v1.6.3
+# China transport decarbonisation model — CN v1.6.4
 
 Repository: https://github.com/bcjohnjr/China-Transportation-Decarbonization
 
@@ -6,7 +6,7 @@ Code and data for J. K. Bily, C. Pahl and P. Valdes Bacallao, *Electrification, 
 
 Contact: Jonathan Karl Bily, jonathan@cloudwashlaundry.com
 
-The model asks whether all transport energy in mainland China (including the Guangxi, Inner Mongolia, Ningxia, Xizang/Tibet and Xinjiang autonomous regions), Hong Kong and Macau could be supplied without petroleum in 2050, at what annual cost, and what happens once natural gas is no longer used for hydrogen. Taiwan is modelled as a separate island system. It is the China counterpart of the United States model v8.4 and keeps its structure:
+The model asks whether all transport energy in mainland China (including the Guangxi, Inner Mongolia, Ningxia, Xizang/Tibet and Xinjiang autonomous regions), Hong Kong and Macau could be supplied without petroleum in 2050, at what annual cost, and what happens once natural gas is no longer used for hydrogen. Taiwan is modelled as a separate island system. Its components:
 
 - **Reactor hubs.** Six-module HTR-PM-class hubs run a heat cascade: steam electrolysis in both eras, plus methane pyrolysis while gas lasts, electricity, biocrude upgrading, drying, then greenhouses and fish farms. Thorium molten-salt, sodium fast, 950°C and light-water SMR alternatives are tested.
 - **Electricity.** Onshore wind (two cost tiers), solar, concentrated solar with storage, light-water reactors, offshore wind.
@@ -39,8 +39,9 @@ Energy system = the project cost (supply, conversion, grids, charging, electric 
 | Taiwan island system, no nuclear | 19.5 | 20.5 | −25.1% | — | — | 1.25 | 0 | 8 |
 
 - The least-cost energy system costs **USD 293.2 bn**, **26.7%** less than late-2025 pre-tax petroleum (break-even at 0.73 × late-2025 prices; 46.4% less at November 2026 prices, 1.37 × late-2025). **Vehicles are a cost to their owners, not to the project:** the net extra cost of electric and fuel-cell vehicles and machines is USD 20.8 bn/yr (cars save owners 32.4 bn; trucks, tractors and construction machines cost 53.2 bn more); including it the total is USD 314.1 bn, a 21.5% saving. Car-cost assumptions change only the owners' share (with no ownership advantage for battery-electric cars the saving including owners' costs is 12.2%; at +100 USD/car/yr 2.3%). On the energy-system basis, no carbon-product revenue gives 20.1%, residues −50% 8.0%, and a moderate combination of adverse assumptions (commodity carbon only, residues −25%, high reactor cost, tight grid) brings the system level with late-2025 petroleum (−0.4%) (Table 2 of the manuscript; `cn_robustness.json`).
-- **U.S. cross-check:** v8.4's heavy-truck ratios (`r_hdv_elec = 2.40/21.1`, `r_hdv_fcev = 4.44/21.1`) divide kWh/mi by MJ/mi. Corrected (× 3.6), the U.S. least-cost saving falls from 23.2% to **12.0%** and the post-gas saving from 16.4% to 4.7% (`cn_us_crosscheck.py`, `us_truck_ratio_crosscheck.json`). All CN versions use the corrected ratios; with the uncorrected ratios the China saving including vehicle costs would be 37.2%. The comparison with the U.S. model is made including vehicle costs, as the U.S. model does.
-- **Nutrients and soil carbon:** harvesting removes 2.93 Mt N, 0.62 Mt P and 4.98 Mt K a year; process streams return 53%, 94% and 91% and mineral fertiliser the rest. 27.4 Mt C/yr of stable soil carbon is replaced by hydrochar (14.8), digestate (5.5) and pyrolysis carbon (7.1). The balance costs USD 5.1 bn/yr. Nearshore farms on 3,600 km² would remove 184 kt N and 25 kt P a year for USD 0.1 bn/yr more.
+- **Who pays, and which saving to quote.** The energy-system saving is the project comparison. For China's total transport cost, the saving including owners' vehicle costs is the relevant measure (21.5% central; Monte Carlo median 3.3%, 54% of draws cheaper).
+- **Carbon co-products are assumed markets.** The central case fills the 1.5 Mt/yr carbon-fibre and hydrogen-tank cap and the 4 Mt/yr anode-graphite cap; world carbon-fibre demand in 2025 was about 149–225 kt and China's anode shipments about 2.9 Mt. Without any carbon revenue the energy-system saving is 20.1%; with commodity markets only, 21.3%.
+- **Nutrients and soil carbon:** harvesting removes 2.93 Mt N, 0.62 Mt P and 4.98 Mt K a year; process streams return 53%, 94% and 91% and mineral fertiliser the rest. 27.4 Mt C/yr of stable soil carbon is replaced by hydrochar (14.8), digestate (5.5) and pyrolysis carbon (7.1). The modelled annual replacement costs USD 5.1 bn/yr; it is not a demonstration of long-term soil health. Nearshore farms on 3,600 km² have a modelled potential to remove 184 kt N and 25 kt P a year for USD 0.1 bn/yr more.
 - Emissions fall from 2,074 to 130 Mt CO2e/yr (93.7%) in the gas era and to 99 Mt after gas. China emitted about 32% of world fossil CO2 in 2025.
 - Pyrolysis needs 48 bcm/yr of gas (11% of 2025 consumption); first gas shortfall 2141 (range 2100–2175); import share peaks at 37%.
 - A closed thorium molten-salt fleet (423 hubs) has an energy-system cost of USD 281.4 bn but needs ~380 t of start-up fissile material; China's military plutonium (IPFM 2.9 ± 0.6 t) would start ~0.3 GWe of fast reactors.
@@ -48,18 +49,20 @@ Energy system = the project cost (supply, conversion, grids, charging, electric 
 - Conditional Monte Carlo (1,000 independent draws from assumed ranges): the least-cost energy system is cheaper than late-2025 petroleum in 99.8% of draws, median saving 19.7% (5–95%: 9.1 to 29.7). Including owners' vehicle costs, whose ranges are wide, the median is 3.3% and 54% of draws are cheaper. This is a sensitivity result, not a probability.
 - Build-rate screen: 1,326 modules of 250 MWt, about 70 a year from 2032; with at most 30 hubs the energy-system saving is still 24.1%. Wider life-cycle boundaries raise residual emissions from 130 to as much as 334 Mt.
 
-## Updating the GitHub repository to v1.6.3
+## Updating the GitHub repository to v1.6.4
 
 The public repository must hold exactly this release before the manuscript is submitted; reviewers and editors will follow the link on the title page.
 
 1. Upload every file in this flat folder to the repository root, replacing files with the same names. No folders are needed.
-2. Delete every older versioned document still in the repository: `MANUSCRIPT_CN_V1.*.md`, `SUPPLEMENTARY_MATERIALS_CN_V1.*.md` and `*_CN_V1.*.docx` for V1.3, V1.4, V1.4.1, V1.5, V1.6, V1.6.1 and V1.6.2. Only the V1.6.3 files should remain.
-3. Check that `README.md`, `CHANGELOG.md` and `CITATION.cff` on GitHub show CN v1.6.3, and that `cn_release_manifest.json` is present.
-4. Create a release with tag `CN-v1.6.3`.
+2. Delete every older versioned document still in the repository: `MANUSCRIPT_CN_V1.*.md`, `SUPPLEMENTARY_MATERIALS_CN_V1.*.md` and `*_CN_V1.*.docx` for V1.3 to V1.6.3. Only the V1.6.4 files should remain. Also delete `cn_us_crosscheck.py`, `cn_us_crosscheck_log.txt`, `us2_model.py`, `us2_inputs.py` and `us_truck_ratio_crosscheck.json`, which are no longer part of the release.
+3. Check that `README.md`, `CHANGELOG.md` and `CITATION.cff` on GitHub show CN v1.6.4, and that `cn_release_manifest.json` is present.
+4. Create a release with tag `CN-v1.6.4` (the cover letter and title page cite this tag).
 5. Archive the release with a DOI: connect the repository to Zenodo (zenodo.org, sign in with GitHub, switch the repository on), then publish the GitHub release; Zenodo mints the DOI. Add the DOI to `CITATION.cff` and the title page.
 6. After submission, do not overwrite the release; record any later change as a new tagged version.
 
-New in v1.6.3: the net cost of electric and fuel-cell vehicles and machines is reported as a cost to their owners, separate from the energy-system (project) cost, which is now the headline (`energy_system_cost_bn`, `consumer_vehicle_cost_bn`, `saving_energy_system_pct` in every solution and Monte Carlo draw; the optimal system is unchanged because vehicle costs are fixed by the end-use mix). Farm charging infrastructure moves from the vehicle line to the project. Every figure is generated by the scripts and checked by `cn_layout_check.py`, which fails the build if any text lies on bars, lines, markers, outlines or other text (`cn_figure_layout_check.json`); the map labels sit in clear space or are joined to their place by leaders. Figs. 3 and 4 no longer show the uncorrected U.S. 23% reference line. Supplementary table S11 states the correct comparator (USD 400.2 bn).
+New in v1.6.4: the United States cross-check and the U.S. model files are removed; submission TIFFs are RGB at 300 dpi and checked by `cn_figures.py`; the manuscript discusses carbon-product commercialisation and labels the reactor-learning, heat-recovery and nutrient assumptions; the release was rebuilt from an empty folder (see CHANGELOG.md).
+
+In v1.6.3: the net cost of electric and fuel-cell vehicles and machines is reported as a cost to their owners, separate from the energy-system (project) cost, which is now the headline (`energy_system_cost_bn`, `consumer_vehicle_cost_bn`, `saving_energy_system_pct` in every solution and Monte Carlo draw; the optimal system is unchanged because vehicle costs are fixed by the end-use mix). Farm charging infrastructure moves from the vehicle line to the project. Every figure is generated by the scripts and checked by `cn_layout_check.py`, which fails the build if any text lies on bars, lines, markers, outlines or other text (`cn_figure_layout_check.json`); the map labels sit in clear space or are joined to their place by leaders. Supplementary table S11 states the correct comparator (USD 400.2 bn).
 
 Also in v1.6.2: an independent number audit (`cn_number_audit.py`, run by `run_all.sh`) that recomputes every unit conversion behind the headline numbers from typed-in reference values. It found three input errors, all corrected: the heavy-truck electric and fuel-cell ratios divided by a diesel energy per mile on a higher-heating-value basis while the model's diesel demand is on a lower-heating-value basis (now 0.44 and 0.81 instead of 0.41 and 0.76; this lowers the central saving by about 1.4 points); mineral phosphorus and potassium had been priced per tonne of P~2~O~5~ and of KCl product while the model's nutrient flows are elemental (now USD 2,600 per t P and 1,000 per t K), and the volumetric heating value used to price road and pipeline gas was 4% below the energy basis of the gas balance (now consistent at 37.5 million MMBtu per bcm). The LHV source label was also corrected. All results were re-run
 
@@ -69,28 +72,26 @@ Every file sits in the folder root; there are no sub-folders. Scripts read and w
 
 ```
 pip install -r requirements.txt
-bash run_all.sh                     # full model, tests and figures (1,000 Monte Carlo draws per case, ~25 min)
+bash run_all.sh                     # full model, tests and figures (1,000 Monte Carlo draws per case, ~30 min on one core)
 bash run_all.sh 100 --no-figures    # quick check
 python3 cn_release_check.py         # compare with the submitted release (hashes, fresh re-solves, saved numbers)
 python3 cn_number_audit.py          # independent recomputation of unit conversions and headline arithmetic
 ```
 
-`cn_release_manifest.json` holds the SHA-256 of every code and input file and the headline numbers of the submitted release. After the full run, `run_all.sh` calls `cn_release_check.py`, which must print PASS. The release was rebuilt this way from an empty folder before submission.
+`cn_release_manifest.json` holds the SHA-256 of every code and input file and the headline numbers of the submitted release. After the full run, `run_all.sh` calls `cn_release_check.py`, which must print PASS. Release CN v1.6.4 was rebuilt this way from an empty folder holding only the code, `requirements.txt`, `CITATION.cff` and the two Grid Harvester drawings (29 min; console output in `cn_clean_rebuild_log.txt`), and every output matched v1.6.3 apart from the removed and renamed cases.
 
-Seeds: 11 (least cost), 13 (230 GW offshore), 17 (after gas). `cn_us_crosscheck.py` runs the unmodified U.S. v8.4 files included here (`us2_model.py`, `us2_inputs.py`, `grid_harvester.py`) after checking their SHA-256 hashes.
+Seeds: 11 (least cost), 13 (230 GW offshore), 17 (after gas).
 
 ## Files
 
 | File | Contents |
 | --- | --- |
-| `cn_inputs.py` | All assumptions, tagged [S] sourced / [A] assumption / [U] from the U.S. model |
+| `cn_inputs.py` | All assumptions, tagged [S] sourced / [A] assumption / [G] generic engineering value |
 | `cn_model.py` | Transport LP, reactor learning and bounded hub search, reactor types, post-gas and closed-cycle cases, fuel and fissile accounting, regional supply, Monte Carlo, transition |
 | `cn_gas.py` | China gas balance: domestic, pipeline and LNG supply, pyrolysis programme, heat pumps, biogas |
 | `cn_regions.py` | Regional screen: five autonomous regions, Hong Kong, Macau, rest of mainland, Taiwan |
 | `cn_crossfeed.py` | Seafood cross-feeding balance (fishmeal, shrimp meal, insect meal, Ulva, kelp, hemp meal) |
 | `cn_breakeven.py` | Petroleum break-even multiples and shares of draws cheaper at each price |
-| `cn_us_crosscheck.py`, `us_truck_ratio_crosscheck.json` | U.S. v8.4 heavy-truck ratio cross-check (checks SHA-256 of the U.S. files) |
-| `us2_model.py`, `us2_inputs.py` | Unmodified U.S. model v8.4 source, used only by the cross-check |
 | `cn_test.py` | Consistency and regression tests (including nutrient, soil-carbon, biomethane and bioextraction checks) |
 | `cn_lull.py` | Wind-lull adequacy screen and sensitivities (tables S17–S18) |
 | `cn_htse_heat.py`, `cn_htse_heat.json` | Steam-electrolysis temperature–enthalpy balance that sets the electrolyser heat inputs (table S16, fig. S7) |
@@ -103,11 +104,12 @@ Seeds: 11 (least cost), 13 (230 GW offshore), 17 (after gas). `cn_us_crosscheck.
 | `cn_release_check.py`, `cn_release_manifest.json` | Release check: file hashes, fresh re-solves and saved numbers against the submitted release |
 | `run_all.sh`, `requirements.txt` | Runner and Python packages |
 | `cn_*.json`, `cn_*.csv`, `*run_log*.txt` | Results of the reported run; `cn_manuscript_numbers.json` holds every number quoted in the manuscript |
-| `Fig*.png/.tif`, `FigS*.png/.tif` | Figures (PNG for the manuscript, 300-dpi TIFF for submission) |
-| `MANUSCRIPT_CN_V1.6.3.md` | Manuscript master with author details |
-| `Manuscript_Anonymised_CleanEnergy_CN_V1.6.3.docx`, `Title_Page_CleanEnergy_CN_V1.6.3.docx`, `Supplementary_Materials_Anonymised_CN_V1.6.3.docx`, `Cover_Letter_CleanEnergy_CN_V1.6.3.docx` | Submission files for *Clean Energy* (double-anonymised manuscript and supplement, separate title page, cover letter) |
-| `SUPPLEMENTARY_MATERIALS_CN_V1.6.3.md` | Supplementary materials |
-| `CHANGELOG.md` | Differences from the U.S. model and version history |
+| `cn_clean_rebuild_log.txt` | Console output of the v1.6.4 rebuild from an empty folder |
+| `Fig*.png/.tif`, `FigS*.png/.tif` | Figures (PNG for the manuscript; RGB, 300-dpi LZW TIFF for submission) |
+| `MANUSCRIPT_CN_V1.6.4.md` | Manuscript master with author details |
+| `Manuscript_Anonymised_CleanEnergy_CN_V1.6.4.docx`, `Title_Page_CleanEnergy_CN_V1.6.4.docx`, `Supplementary_Materials_Anonymised_CN_V1.6.4.docx`, `Cover_Letter_CleanEnergy_CN_V1.6.4.docx` | Submission files for *Clean Energy* (double-anonymised manuscript and supplement, separate title page, cover letter) |
+| `SUPPLEMENTARY_MATERIALS_CN_V1.6.4.md` | Supplementary materials |
+| `CHANGELOG.md` | Version history |
 
 ## Limits
 

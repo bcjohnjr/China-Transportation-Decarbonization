@@ -1,4 +1,4 @@
-"""Regression and consistency tests for CN v1.6.3.  Run after cn_model.py, cn_gas.py, cn_regions.py, cn_crossfeed.py and
+"""Regression and consistency tests for CN v1.6.4.  Run after cn_model.py, cn_gas.py, cn_regions.py, cn_crossfeed.py and
 cn_breakeven.py.  Exits non-zero on failure."""
 import csv, json, math
 from pathlib import Path
@@ -53,7 +53,6 @@ for k, r in S.items():
 p = M.default_params()
 check("heavy-truck electric ratio is kWh/kWh on the LHV basis (0.44)", abs(p["ENDUSE"]["r_hdv_elec"] - 2.40 * 3.6 / (21.1 * 128450 / 137381)) < 1e-12)
 check("heavy-truck fuel-cell ratio on the LHV basis (0.81)", abs(p["ENDUSE"]["r_hdv_fcev"] - 4.44 * 3.6 / (21.1 * 128450 / 137381)) < 1e-12)
-check("U.S.-ratio sensitivity is cheaper (understated truck electricity)", S["least_cost_us_truck_ratios"]["transport_cost_bn"] < S["least_cost"]["transport_cost_bn"])
 # demand baseline reproduces the 2025 inputs
 d = M.enduse_2050(p)["base"]
 check("2025 gasoline energy = 155.72 Mt x 12.06 kWh/kg", abs(d["ldv"] - 155.72 * 12.06) < 1e-6)
@@ -116,11 +115,9 @@ import inspect
 src = inspect.getsource(M.solve)
 check("solve(): h_htse appears in mid_heat row and not in dry_heat row", '"h_htse": NH["htse"]["kwh_th_kg"]}' in src and '"h_htse": NH["htse"]["kwh_th_kg"], "d2e"' not in src)
 check("superheat electricity charged below 850 C outlet", M.htse_superheat_elec(pc) > 0 and M.htse_superheat_elec(M.apply_reactor_type(pc, "vhtr")) == 0.0)
-check("U.S. v8.4 steam-electrolysis rule costs at least the central case", S["least_cost_us_v84_htse_rule"]["transport_cost_bn"] >= S["least_cost"]["transport_cost_bn"] - 1e-6)
+check("steam electrolysis restricted to after gas costs at least the central case", S["least_cost_htse_after_gas_only"]["transport_cost_bn"] >= S["least_cost"]["transport_cost_bn"] - 1e-6)
 check("alkaline-only no-nuclear case costs at least the no-nuclear case", S["least_cost_no_nuclear_alkaline"]["transport_cost_bn"] >= S["least_cost_no_nuclear"]["transport_cost_bn"] - 1e-6)
 check("after gas: no fossil gas for pyrolysis or pipeline compression", all(S[k]["costs_bn"]["residual_pipeline_gas"] == 0 and abs(S[k]["costs_bn"]["natural_gas"]) < 1e-9 for k in S if k.startswith("post_gas")))
-US = json.load(open(H / "us_truck_ratio_crosscheck.json"))
-check("U.S. cross-check pinned to v8.4 source hashes", US["us_source"]["sha256"]["us2_model.py"].startswith("66f59eef"))
 # CN v1.3 steam-electrolysis heat balance and lull screen
 import cn_htse_heat as HB
 hb = HB.balance(); d = hb["duties_kwh_kg"]

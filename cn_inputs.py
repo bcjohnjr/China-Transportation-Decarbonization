@@ -1,15 +1,15 @@
-"""Inputs, China transport-energy model CN v1.6.3 (USD 2026).  Tags: [S] sourced, [A] modeller assumption (varied in the
-Monte Carlo where it matters), [U] carried over unchanged from the U.S. model v8.4 (bcjohnjr/United-States-...).
+"""Inputs, China transport-energy model CN v1.6.4 (USD 2026).  Tags: [S] sourced, [A] modeller assumption (varied in the
+Monte Carlo where it matters), [G] generic engineering value, not specific to China (table S1).
 Not forecasts.
 
 Study area: mainland China including the five autonomous regions (Guangxi, Inner Mongolia, Ningxia, Xizang/Tibet,
 Xinjiang), the Hong Kong and Macau Special Administrative Regions (supplied through the Guangdong grid and refineries,
 so modelled inside the mainland system) and Taiwan (a separate island grid, modelled as its own system).
 
-Scope (same as the U.S. model): all aviation and on-road transport, rail, domestic and bunkered marine fuel, farm
+Scope: all aviation and on-road transport, rail, domestic and bunkered marine fuel, farm
 machinery, construction and mining machinery, industrial trucks and pipeline compression.  2026 U.S. dollars.
 
-Sources used for the 2025 baseline (see SUPPLEMENTARY_MATERIALS_CN_V1.6.3.md, table S1):
+Sources used for the 2025 baseline (see SUPPLEMENTARY_MATERIALS_CN_V1.6.4.md, table S1):
   CAPE/SunSirs 2025 review: gasoline 155 Mt, diesel 203 Mt, kerosene/jet 40.21 Mt; gas 426.6 bcm, import share 41.3%.
   ICIS: transport gas 44.14 bcm in 2026, +3.5% y/y -> 42.6 bcm in 2025.  Zhoushan/customs: ~20 Mt bonded bunkers.
   EIA Taiwan brief (2026): gasoline 188 kb/d, diesel 116 kb/d, jet 68.8 kb/d (2024).
@@ -21,7 +21,7 @@ GAS_HHV_LHV = 1.109                    # methane 55.5/50.0 MJ/kg; prices are per
 DIESEL_LHV_HHV = 128450.0 / 137381.0     # 0.935: diesel LHV/HHV per gallon [S: GREET; EIA]
 KWH_PER_KG = dict(gasoline=12.06, diesel=11.89, jet=12.00, resid=11.22)   # LHV, 43.4/42.8/43.2/40.4 GJ/t [A: between
 # GB/T 2589-2020 (43.07/42.65/43.07/41.82) and IPCC 2006 defaults (44.3/43.0/44.1/40.4); residual oil = IPCC]
-WACC = 0.05                            # [A] state-owned infrastructure finance in China (U.S. model: 7%); MC 4-8%
+WACC = 0.05                            # [A] state-owned infrastructure finance in China; MC 4-8%
 FX = dict(late_2025=7.08, nov_2026=6.71)   # CNY per USD [S: PBoC central parity 25 Nov 2025; 18 Nov 2026]
 
 # ------------------------------------------------------------------------------------------------ 1. demand base (2025)
@@ -79,12 +79,11 @@ ENDUSE = dict(
     marine=dict(liquid=0.80, elec=0.10, h2=0.10),          # electric inland vessels on the Yangtze/Pearl [A]
     pipeline=dict(elec=0.60, gas=0.40),
     re_fuel_share=0.25,
-    # Energy at the meter (or H2 LHV) per unit of displaced liquid-fuel energy.  CN v1.0 corrects the U.S. v8.4 heavy-truck
-    # ratios, which divided kWh/mi by MJ/mi: 2.40 kWh/mi / (21.1 MJ/mi / 3.6) = 0.41, and 4.44 kWh_H2/mi -> 0.76.
+    # Energy at the meter (or H2 LHV) per unit of displaced liquid-fuel energy.  Heavy trucks: kWh/mi is divided by kWh/mi,
+    # not MJ/mi: 2.40 kWh/mi / (21.1 MJ/mi / 3.6) = 0.41, and 4.44 kWh_H2/mi -> 0.76 on an HHV basis.
     # CN v1.6.2: 21.1 MJ/mi is 144.9 MJ/gal (EIA heat content, a higher heating value) / 6.87 mpg, but the model's diesel
     # demand is on a lower-heating-value basis (Mt x 42.8 GJ/t).  On the LHV basis (128,450 / 137,381 Btu/gal [S: GREET;
-    # EIA]) the diesel truck uses 19.7 MJ/mi, so the ratios are 0.44 and 0.81.  The U.S. cross-check keeps 0.41/0.76
-    # because U.S. demand is in EIA (HHV) quads.
+    # EIA]) the diesel truck uses 19.7 MJ/mi, so the ratios are 0.44 and 0.81.
     r_ldv_bev=0.33 / 1.41, r_ldv_fcev=0.55 / 1.41,
     r_hdv_elec=2.40 * 3.6 / (21.1 * DIESEL_LHV_HHV), r_hdv_fcev=4.44 * 3.6 / (21.1 * DIESEL_LHV_HHV),
     r_offroad_elec=0.36, r_rail_elec=0.33, r_pipe_elec=0.35, r_fork_elec=0.30,
@@ -393,7 +392,7 @@ PRICES_USD_T = {
                      jet=7900 / 1.13 / FX["nov_2026"], resid=700.0, road_gas_mmbtu=14.0),
 }
 RETAIL_CNY_L = {"late_2025": dict(gasoline=6.85, diesel=6.55), "nov_2026": dict(gasoline=8.41, diesel=7.95)}
-PETRO_CI = dict(gasoline=93.0, diesel=95.0, jet=89.0, resid=96.0, ng=70.0)     # g CO2e/MJ WTW [U]
+PETRO_CI = dict(gasoline=93.0, diesel=95.0, jet=89.0, resid=96.0, ng=70.0)     # g CO2e/MJ WTW [G]
 ETHANOL_CI = dict(today=55.0, ccs=30.0)
 # ------------------------------------------------------------------------------------------------ 9. gas resource (China)
 NG = dict(

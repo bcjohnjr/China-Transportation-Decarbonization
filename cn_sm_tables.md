@@ -246,7 +246,6 @@
 | least_cost_no_nuclear | 346.7 | 13.4 | 0 | 431 | 560 | 51 | 0 | 0.0 | 16.2 | 106 |
 | least_cost_no_vehicle_carbon | 302.9 | 24.3 | 226 | 358 | 0 | 0 | 0 | 7.9 | 8.8 | 129 |
 | least_cost_demonstrated_yields | 298.4 | 25.4 | 218 | 373 | 0 | 0 | 0 | 8.8 | 9.8 | 132 |
-| least_cost_us_truck_ratios | 230.5 | 42.4 | 198 | 138 | 0 | 0 | 0 | 8.5 | 5.1 | 122 |
 | post_gas_least_cost | 305.0 | 23.8 | 268 | 344 | 0 | 0 | 0 | 2.3 | 14.1 | 99 |
 | post_gas_half_offshore | 328.2 | 18.0 | 267 | 41 | 0 | 0 | 230 | 2.5 | 11.8 | 99 |
 | post_gas_reactor_low | 282.0 | 29.5 | 496 | 0 | 0 | 0 | 0 | 2.3 | 14.4 | 100 |
@@ -271,7 +270,7 @@
 | least_cost_stress_moderate | 401.8 | -0.4 | 20 | 415 | 0 | 0 | 0 | 28.3 | 0.0 | 184 |
 | post_gas_stress_moderate | 428.4 | -7.0 | 1 | 415 | 0 | 0 | 139 | 1.2 | 24.9 | 105 |
 | least_cost_stress_severe | 408.6 | -2.1 | 20 | 415 | 0 | 0 | 0 | 28.3 | 0.0 | 184 |
-| least_cost_us_v84_htse_rule | 293.9 | 26.6 | 160 | 359 | 0 | 0 | 0 | 16.5 | 0.0 | 150 |
+| least_cost_htse_after_gas_only | 293.9 | 26.6 | 160 | 359 | 0 | 0 | 0 | 16.5 | 0.0 | 150 |
 | least_cost_no_nuclear_alkaline | 353.5 | 11.7 | 0 | 456 | 587 | 51 | 0 | 0.0 | 16.2 | 107 |
 | least_cost_food_credit | 291.7 | 27.1 | 221 | 344 | 0 | 0 | 0 | 8.4 | 8.2 | 130 |
 | least_cost_htse_topping_3 | 293.9 | 26.6 | 161 | 358 | 0 | 0 | 0 | 16.4 | 0.0 | 149 |
@@ -364,7 +363,7 @@
 | Combined: no electric-car advantage, commodity carbon only, residues -25%, high reactor cost, tight grid | 401.8 | -0.4 | 459.9 | -14.9 | 20 | 28.3 | 184 |
 | Combined (moderate) after gas | 428.4 | -7.0 | 486.5 | -21.6 | 1 | 1.2 | 105 |
 | Combined: electric-car high derivation, no carbon revenue, residues -25%, high reactor cost, tight grid | 408.6 | -2.1 | 667.7 | -66.8 | 20 | 28.3 | 184 |
-| Steam electrolysis only after gas (U.S. v8.4 rule) | 293.9 | 26.6 | 314.7 | 21.4 | 160 | 16.5 | 150 |
+| Steam electrolysis only after gas | 293.9 | 26.6 | 314.7 | 21.4 | 160 | 16.5 | 150 |
 | No nuclear, alkaline electrolysis only | 353.5 | 11.7 | 374.4 | 6.5 | 0 | 0.0 | 107 |
 | Food-heat credit inside the transport boundary (USD 8/MWh) | 291.7 | 27.1 | 312.5 | 21.9 | 221 | 8.4 | 130 |
 | Steam electrolysis: 3 kWh/kg electric topping | 293.9 | 26.6 | 314.7 | 21.4 | 161 | 16.4 | 149 |

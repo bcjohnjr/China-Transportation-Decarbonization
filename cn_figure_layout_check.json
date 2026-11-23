@@ -17,5 +17,183 @@
   "FigS7_htse_heat",
   "graphical_abstract"
  ],
- "problems": []
+ "problems": [],
+ "tiff": {
+  "Fig1_energy_and_emissions": {
+   "mode": "RGB",
+   "dpi": [
+    300,
+    300
+   ],
+   "px": [
+    2078,
+    855
+   ]
+  },
+  "Fig2_system_map": {
+   "mode": "RGB",
+   "dpi": [
+    300,
+    300
+   ],
+   "px": [
+    1842,
+    1332
+   ]
+  },
+  "Fig3_cost_vs_petroleum": {
+   "mode": "RGB",
+   "dpi": [
+    300,
+    300
+   ],
+   "px": [
+    2205,
+    1081
+   ]
+  },
+  "Fig4_uncertainty_breakeven": {
+   "mode": "RGB",
+   "dpi": [
+    300,
+    300
+   ],
+   "px": [
+    2067,
+    953
+   ]
+  },
+  "Fig5_reactor_types_fissile": {
+   "mode": "RGB",
+   "dpi": [
+    300,
+    300
+   ],
+   "px": [
+    2078,
+    825
+   ]
+  },
+  "Fig6_gas_supply": {
+   "mode": "RGB",
+   "dpi": [
+    300,
+    300
+   ],
+   "px": [
+    2079,
+    871
+   ]
+  },
+  "Fig7_regions": {
+   "mode": "RGB",
+   "dpi": [
+    300,
+    300
+   ],
+   "px": [
+    2078,
+    938
+   ]
+  },
+  "Fig8_food_crossfeed": {
+   "mode": "RGB",
+   "dpi": [
+    300,
+    300
+   ],
+   "px": [
+    2143,
+    791
+   ]
+  },
+  "Fig9_nutrient_soil_carbon": {
+   "mode": "RGB",
+   "dpi": [
+    300,
+    300
+   ],
+   "px": [
+    2144,
+    872
+   ]
+  },
+  "FigS1_offshore_merit": {
+   "mode": "RGB",
+   "dpi": [
+    300,
+    300
+   ],
+   "px": [
+    1284,
+    768
+   ]
+  },
+  "FigS2_transition": {
+   "mode": "RGB",
+   "dpi": [
+    300,
+    300
+   ],
+   "px": [
+    1284,
+    708
+   ]
+  },
+  "FigS3_sensitivity": {
+   "mode": "RGB",
+   "dpi": [
+    300,
+    300
+   ],
+   "px": [
+    1284,
+    828
+   ]
+  },
+  "FigS4_reactor_learning": {
+   "mode": "RGB",
+   "dpi": [
+    300,
+    300
+   ],
+   "px": [
+    1284,
+    719
+   ]
+  },
+  "FigS5_robustness": {
+   "mode": "RGB",
+   "dpi": [
+    300,
+    300
+   ],
+   "px": [
+    1794,
+    1459
+   ]
+  },
+  "FigS7_htse_heat": {
+   "mode": "RGB",
+   "dpi": [
+    300,
+    300
+   ],
+   "px": [
+    1005,
+    1020
+   ]
+  },
+  "graphical_abstract": {
+   "mode": "RGB",
+   "dpi": [
+    300,
+    300
+   ],
+   "px": [
+    3000,
+    1200
+   ]
+  }
+ }
 }

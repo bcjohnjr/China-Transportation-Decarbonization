@@ -1,6 +1,6 @@
 {
- "release": "CN v1.6.3",
- "checks": 138,
+ "release": "CN v1.6.4",
+ "checks": 137,
  "failures": 0,
  "rows": [
   {
@@ -218,16 +218,6 @@
    "check": "heavy-truck FCEV ratio (H2 LHV / diesel LHV)",
    "model": 0.8102062336387738,
    "independent": 0.8102062336387738,
-   "rel_diff": 0.0,
-   "tolerance": 1e-09,
-   "ok": true,
-   "note": ""
-  },
-  {
-   "group": "vehicles",
-   "check": "U.S. v8.4 error factor (ratio without /3.6, same HHV basis)",
-   "model": 3.6,
-   "independent": 3.6,
    "rel_diff": 0.0,
    "tolerance": 1e-09,
    "ok": true,

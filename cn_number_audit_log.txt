@@ -20,7 +20,6 @@ ok   baseline     Taiwan gasoline Mt from 188 kb/d                              
 ok   vehicles     diesel LHV/HHV per gallon: model LHV vs 0.935 x EIA 144.9 MJ/gal                                 model        135.3  independent            135.5
 ok   vehicles     heavy-truck BEV ratio = (kWh/mi) / (MJ_LHV/mi / 3.6)                                             model       0.4379  independent           0.4379
 ok   vehicles     heavy-truck FCEV ratio (H2 LHV / diesel LHV)                                                     model       0.8102  independent           0.8102
-ok   vehicles     U.S. v8.4 error factor (ratio without /3.6, same HHV basis)                                      model          3.6  independent              3.6
 ok   vehicles     implied BEV heavy truck kWh/km (Chinese 49-t BEV tractors 1.1-1.6)                               model        1.391  independent       [1.1, 1.6]
 ok   vehicles     implied FCEV heavy truck kg H2/100 km (6-12)                                                     model        7.722  independent      [6.0, 12.0]
 ok   vehicles     implied BEV car kWh/100 km at the meter (12-18)                                                  model        14.56  independent     [12.0, 18.0]
@@ -137,4 +136,4 @@ ok   text         12 GWe of large LWRs approved a year in GWt at 36-38% efficien
 ok   text         gas price USD 9.3/MMBtu = 8.5 + 0.8                                                              model          9.3  independent              9.3
 ok   text         onshore wind tiers 30 and 45 USD/MWh                                                             model           45  independent               45
 
-CN v1.6.3 number audit: 138/138 checks passed
+CN v1.6.4 number audit: 137/137 checks passed

@@ -1,1 +1,1 @@
-cn_test: 2765/2765 checks passed
+cn_test: 2727/2727 checks passed

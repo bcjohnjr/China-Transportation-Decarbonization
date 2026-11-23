@@ -334,8 +334,8 @@
    "solar_gw": 0.0,
    "wind_gw": 415.11000415110004
   },
-  "least_cost_us_v84_htse_rule": {
-   "label": "Steam electrolysis only after gas (U.S. v8.4 rule)",
+  "least_cost_htse_after_gas_only": {
+   "label": "Steam electrolysis only after gas",
    "transport_cost_bn": 314.70193967305664,
    "saving_pct": 21.364108414011028,
    "energy_system_cost_bn": 293.85863967305664,

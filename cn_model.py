@@ -1,4 +1,4 @@
-"""China transport-energy system, CN v1.6.3: reactor heat cascade (HTR-PM-class hubs, with thorium molten-salt, sodium-fast,
+"""China transport-energy system, CN v1.6.4: reactor heat cascade (HTR-PM-class hubs, with thorium molten-salt, sodium-fast,
 very-high-temperature and light-water SMR alternatives) + methane pyrolysis while gas lasts, steam electrolysis after it
 + electric expressways and battery-electric vehicles + wind, solar, concentrated solar and offshore wind with region-
 specific seaweeds harvested by Grid Harvesters + crop residues, bamboo, hemp and the autonomous regions' energy crops
@@ -6,7 +6,7 @@ specific seaweeds harvested by Grid Harvesters + crop residues, bamboo, hemp and
 cascade + (CN v1.5) a closed nitrogen-phosphorus-potassium and soil-carbon balance on the land that supplies biomass:
 HTL wastewater digested to biomethane and nutrient-rich digestate, HTL hydrochar and gasifier ash returned to fields,
 pyrolysis carbon as a soil amendment, seaweed from nutrient-polluted bays (bioextraction, harvested by Grid Harvesters) to
-HTL or to soil, winter green manure and manure compost (CN v1.6), and mineral fertiliser bought for any remaining deficit.  USD 2026.  Structure follows the U.S. model v8.4 (us2_model.py); differences are listed in CHANGELOG.md.
+HTL or to soil, winter green manure and manure compost (CN v1.6), and mineral fertiliser bought for any remaining deficit.  USD 2026.  Version history in CHANGELOG.md.
 
     python3 cn_model.py [n_monte_carlo]      -> *.json, *.csv in this folder
 
@@ -457,8 +457,8 @@ def solve(p, scenario="design", blend_vol=0.0, capex_kwt=1300.0, osw_scale=None,
     if not allow_ely: bounds[ix["h_ely"]] = (0, 0)
     if not flex_heat:
         for k in ("t2mid", "t2dry", "m2dry"): bounds[ix[k]] = (0, 0)
-    # Steam electrolysis is available in both eras (CN v1.0 fix: the U.S. v8.4 code allowed it only after gas, which
-    # excluded a cheaper option from gas-era cases); pyrolysis is removed after gas.
+    # Steam electrolysis is available in both eras (CN v1.0: restricting it to the after-gas era
+    # excluded a cheaper option from gas-era cases; case least_cost_htse_after_gas_only); pyrolysis is removed after gas.
     if post_gas and not p.get("biogenic_pyrolysis", True): bounds[ix["h_pyro"]] = (0, 0)
     if not p.get("nutrient_balance", True):
         for k in ("fN", "fP", "fK", "sN", "sP", "sK"): bounds[ix[k]] = (0, 0)
@@ -882,7 +882,7 @@ MAX_HUBS = 1500
 def solve_bounded_learning(p, max_hubs=MAX_HUBS, coarse=1, refine=1, **kw):
     """Fleet cost with module learning is not convex in hub count, so the hub count is chosen by search: every
     `coarse`-th integer from 0 to max_hubs, then every `refine`-th integer within one coarse step of the best.  With
-    coarse=1 this is the exhaustive bounded search of the U.S. model v5+."""
+    coarse=1 this is an exhaustive bounded search."""
     mult = p.get("capex_mult", 1.0); mods = p["HTGR"]["modules"]; seen = {}; landscape = []
     def run(n):
         if n in seen: return seen[n]
@@ -950,7 +950,7 @@ def logistic(t, mid, w): return 1 / (1 + math.exp(-(t - mid) / w))
 
 def transition(p, design):
     """Year-by-year emissions with logistic adoption by segment; China's NEV share of new cars was ~49% in 2025, so
-    light-duty adoption is earlier than in the U.S. model."""
+    light-duty adoption starts early."""
     eu = design["enduse"]; d = eu["base"]; g = p["ENDUSE"]["service_growth_2050"]; tot_2050 = design["emissions"]["total_mt"]
     B = p["BASE"]; hdv_gas = B["road_gas_bcm"] * I.BCM_TWH / max(d["hdv"], 1e-9)
     ci = dict(ldv=I.PETRO_CI["gasoline"], hdv=(1 - hdv_gas) * I.PETRO_CI["diesel"] + hdv_gas * I.PETRO_CI["ng"], rail=I.PETRO_CI["diesel"],
@@ -1036,7 +1036,7 @@ CASES = dict(
     least_cost_reactor_low=dict(scenario="least_cost"), least_cost_reactor_high=dict(scenario="least_cost"),
     least_cost_no_nuclear=dict(scenario="least_cost", fixed_hubs=0),
     least_cost_no_vehicle_carbon=dict(scenario="least_cost"),
-    least_cost_demonstrated_yields=dict(scenario="least_cost"), least_cost_us_truck_ratios=dict(scenario="least_cost"),
+    least_cost_demonstrated_yields=dict(scenario="least_cost"),
     post_gas_least_cost=dict(scenario="least_cost", post_gas=True),
     post_gas_half_offshore=dict(scenario="design", post_gas=True),
     post_gas_reactor_low=dict(scenario="least_cost", post_gas=True), post_gas_reactor_high=dict(scenario="least_cost", post_gas=True),
@@ -1056,7 +1056,7 @@ ROBUST = dict(
     least_cost_stress_moderate="Combined: no BEV advantage, commodity carbon only, residues -25%, high reactor cost, tight grid",
     post_gas_stress_moderate="Combined (moderate) after gas",
     least_cost_stress_severe="Combined: BEV high derivation, no carbon revenue, residues -25%, high reactor cost, tight grid",
-    least_cost_us_v84_htse_rule="Steam electrolysis only after gas (U.S. v8.4 rule)",
+    least_cost_htse_after_gas_only="Steam electrolysis only after gas",
     least_cost_no_nuclear_alkaline="No nuclear, alkaline electrolysis only",
     least_cost_food_credit="Food-heat credit inside the transport boundary (v1.1 accounting)",
     least_cost_htse_topping_3="Steam electrolysis: 3 kWh/kg electric topping",
@@ -1105,12 +1105,11 @@ def case_params(name):
     if name.endswith("no_nuclear"): p["ELEC"]["cap_lwr_twh"] = 0.0
     if name == "least_cost_no_vehicle_carbon": p["lightweight"] = False; p["CARBON"] = p["CARBON"][1:]
     if name == "least_cost_demonstrated_yields": p["yield_level"] = 0
-    if name == "least_cost_us_truck_ratios": p["ENDUSE"]["r_hdv_elec"] = 2.40 / 21.1; p["ENDUSE"]["r_hdv_fcev"] = 4.44 / 21.1
     if name == "post_gas_htse_48kwh": p["NUCLEAR_H2"]["htse"]["kwh_e_kg"] = 48.0
     if name == "post_gas_vhtr_si": p = vhtr_params(p)
     if "type_" in name: p = apply_reactor_type(p, name.split("type_")[1])
     stress = "_stress_" in name; severe = name.endswith("stress_severe")
-    if name.endswith("us_v84_htse_rule"): p["htse_gas_era"] = False
+    if name.endswith("htse_after_gas_only"): p["htse_gas_era"] = False
     if name.endswith("no_nuclear_alkaline"): p["ELEC"]["cap_lwr_twh"] = 0.0; p["allow_htse"] = False
     if name.endswith("food_credit"): p["food_credit_in_transport"] = True
     if name.endswith("htse_topping_3"): p["NUCLEAR_H2"]["htse"]["superheat_kwh_kg"] = 3.0; p["NUCLEAR_H2"]["htse"]["superheat_noreactor_kwh_kg"] = 3.0
