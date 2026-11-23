@@ -58,11 +58,12 @@
   "pacific_passes_per_year": 3.0,
   "other_passes_per_year": 2.0,
   "throughput_t_wet_h": 266.688,
-  "biomass_throughput_units": 170.29887608991282,
-  "area_pass_km2_per_year": 51000.0,
+  "biomass_throughput_units": 218.4200263978882,
+  "area_pass_km2_per_year": 58200.0,
   "coverage_km2_per_unit_year": 133.33333332,
-  "area_duty_units": 382.50000003825,
-  "engineering_units": 382.50000003825
+  "area_duty_units": 436.50000004364995,
+  "engineering_units": 436.50000004364995,
+  "nearshore_units": 54.0000000054
  },
  "fleet": {
   "vessels": 39.6998740100792,

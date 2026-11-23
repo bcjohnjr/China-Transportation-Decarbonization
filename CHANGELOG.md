@@ -1,3 +1,151 @@
+# CN v1.6.2 — 23 November 2026 (referee round 7: independent number audit; three input corrections, all results re-run)
+
+**Number audit.** New `cn_number_audit.py` (120 checks, run by `run_all.sh`) recomputes, from reference values typed into
+the script rather than read from `cn_inputs.py`, every unit conversion behind the headline numbers: fuel LHVs against
+GB/T 2589-2020 and IPCC 2006, gas volume/energy/price bases, vehicle intensity ratios and their implied kWh/km and
+kg H2/100 km, pre-tax fuel prices, the petroleum comparator, well-to-wheel emissions, the cost reconciliation, reactor
+learning, pyrolysis gas and carbon, nutrient removals, fertiliser prices on an elemental basis, and the Monte Carlo
+percentiles from the raw draws. It found three errors, all corrected:
+
+1. **Heavy-truck ratios mixed heating-value bases.** 21.1 MJ/mi is 144.9 MJ/gal (EIA heat content, HHV) / 6.87 mpg, but
+   the model's diesel demand is LHV (42.8 GJ/t). On the LHV basis (x 128,450/137,381 = 0.935) the ratios are 0.438
+   (electric) and 0.810 (fuel cell), not 0.410 and 0.758: heavy-truck electricity and hydrogen were 6.5% too low.
+   Effect alone: saving 22.8% -> 21.4%. The U.S. cross-check keeps 0.41/0.76, since U.S. demand is in EIA (HHV) quads.
+2. **Phosphorus and potassium fertiliser were priced per t of P2O5 and per t of KCl product** (USD 1,100 and 500) while
+   every nutrient flow is elemental. Now USD 2,600 per t P and 1,000 per t K (N unchanged at 700). Effect alone: -0.1 pp.
+3. **Road and pipeline gas were priced on 36.0 million MMBtu per bcm (~38 MJ/m3 HHV)**, 4% below the HHV matching the
+   9.9 TWh/bcm (LHV) used for gas energy. Now 37.5 million MMBtu/bcm (HHV/LHV 1.109). Effect alone: +0.15 pp (petroleum
+   comparator USD 399.3 -> 400.2 bn).
+
+Also: LHV source label corrected (values lie between GB/T 2589 and IPCC 2006; only fuel oil is the IPCC value); reactor
+approvals restated as about 32 GWt (12 GWe at ~37% efficiency), not 30.
+
+**Headline changes (v1.6.1 -> v1.6.2).** Least cost USD 308.2 -> 314.1 bn, saving 22.8% -> 21.5%; hubs 201 -> 221;
+pyrolysis H2 10.8 -> 8.4 Mt and gas 61 -> 48 bcm; emissions 136 -> 130 Mt (93.7%). After gas 19.8% -> 18.6%. 230 GW
+offshore 16.7% -> 15.4%. Biological soil carbon 22.3% -> 21.1%. Monte Carlo median saving 4.5% -> 3.3% (least cost),
+0.8% -> -0.5% (after gas). Plausible backup saving 20.9% -> 19.8%. Nutrient and soil-carbon balance now costs USD 5.1 bn.
+
+**Documents.** Reference 11 (the related U.S. manuscript) now reads "unpublished manuscript, withdrawn; supplied
+confidentially to the editor" in both versions; cover letter, title page and data-availability statements say the code
+will be deposited as release tag CN-v1.6.2 at submission rather than that it is already public; the U.S. manuscript is an
+editor-only confidential file. Pinned regression test for the no-nutrient case updated (303.4 -> 309.0). Manifest
+regenerated.
+
+# CN v1.6.1 — 23 November 2026 (referee round 6: pre-submission corrections; model and results unchanged)
+
+- The United States correction notice for *Science* is removed from the package: the United States manuscript has been
+  withdrawn by the authors. The cover letter and title page now describe it as withdrawn; it is still disclosed to the
+  editors as a confidential, editor-only file because the present paper reuses its model structure. The manuscript no
+  longer calls it "under review".
+- Supplementary tables S22-S24 laid out to fit a portrait page: S22 has nutrient sources as rows and cases x elements as
+  columns (and now includes green manure and compost); S23 has shorter headings and moves gas use to table S15; S24 has
+  short zone names and cost headings. Negative zeros removed from all tables.
+- Main text shortened by about 160 words (7,792 words) for a safer margin under the 8,000-word limit.
+- README: step-by-step instructions to replace the public repository with this exact release, tag `CN-v1.6.1` and
+  archive it with a Zenodo DOI.
+- Release manifest regenerated; the model code and all numerical results are identical to CN v1.6.
+
+# CN v1.6 — 23 November 2026 (referee round 5: reproducibility, biological soil carbon, backup bracket, Grid Harvester)
+
+**Model**
+- Biological soil-carbon options available in every case: winter legume green manure on up to 6.7 Mha of winter-fallow
+  fields (0.29 t stable C and 60 kg fixed N per ha, USD 200/ha) and compost from up to 50 Mt DM a year of livestock
+  manure not now returned to fields (0.105 t stable C per t; N, P, K returned; USD 60/t; 0.1 t CO2e/t). Table S25.
+- New strict case `least_cost_biological_soc` (and after-gas, cost x2 and no-compost variants): pyrolysis carbon not
+  counted, the whole requirement biogenic, priced gap not allowed (`soc_gap_allowed`). Without compost the liquids the
+  domestic system cannot then supply are reported as a shortfall priced at USD 400/MWh.
+- With these options no reported case uses the priced soil-carbon gap; a test enforces this for the headline cases.
+  This also removes the inconsistency in which the nuclear-only thorium fleet looked cheaper than the unrestricted one
+  (it had used the priced gap); the two are now identical (USD 297.7 bn, no wind or solar built).
+- Grid Harvester restored for the nearshore bioextraction farms: harvest, haul and drone costs are now computed with the
+  same Grid Harvester, vessel and drone logistics as the offshore zones (`bioextract_economics`), replacing the generic
+  USD 25/t; vessel electricity is in the electricity balance and the Grid Harvester fleet is sized for offshore and
+  nearshore areas together (`grid_harvester["nearshore_units"]`).
+- Wind-lull backup bracket (`lull_bracket`, table S26): lower bound vs plausible (15% reserve margin, H2 storage at
+  USD 25/kg, make-up H2 production, USD 150/kW transmission) vs high (14-day windless lull, 20% reserve, USD 100/kg,
+  USD 300/kW). Central saving: 21.5% / 20.9% / 14.5%.
+- Monte Carlo adds the green manure and compost cost scale (0.7-1-2).
+- Case renamed without version labels: `post_gas_fossil_rule_v14` -> `post_gas_no_biomethane_pyrolysis`.
+
+**Reproducibility**
+- `cn_release_check.py` and `cn_release_manifest.json`: SHA-256 of every code and input file, fresh re-solves of the
+  central, after-gas, 230 GW offshore and biological soil-carbon cases, and comparison of saved scenario, Monte Carlo and
+  backup numbers with the release. `run_all.sh` runs it after a full run. The release was rebuilt from an empty folder.
+
+**Results**
+- Central least cost unchanged: USD 308.2 bn, 22.8% (compost and green manure are not needed
+  when pyrolysis carbon counts). Biological soil carbon only: USD 310.5 bn, 22.2%.
+- After gas: USD 320.5 bn, 19.7% (v1.5: 337.0 bn, 15.6%), because green manure and compost
+  close the soil-carbon balance more cheaply than additional biomethane pyrolysis.
+- Nearshore seaweed is cheaper with Grid Harvesters (USD 182-242/t) and is now farmed in the least-cost solution.
+
+**Documents and figures**
+- Fig. 3 legend lists every cost group (the offshore-seaweed group was missing). Fig. 9B shows the biological cases.
+  Graphical abstract added (`graphical_abstract.tif`, 5:2, 300 dpi). Supplementary figures S6 (Grid Harvester) and S7
+  (steam-electrolysis heat) now appear in order; supplementary sections renumbered S17-S19.
+- Manuscript: carbon split stated as total / sold / to soil; thorium nuclear-only result explained; Monte Carlo median
+  saving explained in the Table 1 note; median saving and backup bracket stated in the abstract, discussion and
+  conclusions; version labels replaced by physical descriptions; vehicle ownership-cost table S2b reconciled to the
+  fleet and system cost.
+
+# CN v1.5 — 22 November 2026 (nutrient and soil-carbon balance; nearshore bioextraction)
+
+**Model**
+- Nitrogen, phosphorus and potassium balance (`nutrient_n/p/k` LP rows): nutrients removed with residues, bamboo, hemp
+  stalk and bagasse must be returned by digested HTL wastewater, HTL hydrochar, gasifier ash, ethanol stillage,
+  offshore or nearshore seaweed, or bought as mineral fertiliser (production emissions counted). Surplus recovered
+  nutrients may be sold at 70% of fertiliser prices. Inputs in `NUTRIENTS` (tables S20-S21).
+- HTL product streams made explicit: the aqueous phase (process wastewater, not biochar) is digested to biomethane
+  (0.35 MWh CH4/t feed, 1% slip) and a nutrient-rich digestate; the solids are hydrochar. Biomethane can be sold or fed
+  to pyrolysis, displacing fossil gas. Methane is valued on the same HHV basis as `pyro_cost_per_kg`.
+- Stable soil-carbon balance (`soil_carbon` and `soil_carbon_biogenic` rows): residue carbon times humification
+  coefficients must be replaced by stable hydrochar, digestate and seaweed carbon (at least half) and optionally
+  pyrolysis carbon spread as a soil amendment (90% stable; the soil-amendment market is now unpaid and counts toward
+  the balance). If no feasible solution closes it, the LP is re-solved with a gap priced at USD 500/t C and counted as
+  an emission; the hub search prefers hub counts that close the balance.
+- After gas, pyrolysis may run on biomethane only (`biogenic_pyrolysis`); `gas_for_pyrolysis_bcm` now reports fossil
+  gas only. Pyrolysis hydrogen carbon intensity scales the fossil-methane terms by the fossil share.
+- Nearshore bioextraction (`BIOEXTRACT`, table S19): six eutrophic coastal zones (Liaodong Bay, Haizhou Bay, Yangtze
+  plume at Zhoushan-Xiangshan, Fujian bays, Pearl River estuary, Qinzhou Bay) with species chosen for each water
+  (Saccharina japonica, Gracilariopsis lemaneiformis, Gracilaria bailinae, G. tenuistipitata); Pyropia expansion on
+  the Subei shoal, Ulva and Sargassum-for-soil excluded. Seaweed goes to HTL or, washed, to soil. Optional payment for
+  N and P removed. In design scenarios every zone is farmed to its cap.
+- The seaweed fertiliser credit is removed (nutrients now enter the balance, so they are not counted twice).
+- Monte Carlo adds humification, hydrochar stability and fertiliser price ranges.
+- New cases: no nutrient/soil-carbon balance (v1.4 accounting), nutrient balance only, pyrolysis carbon not counted,
+  humification x1.5, hydrochar stability 0.3, fertiliser x1.5, bays farmed in full, N payment USD 10 and 30/kg,
+  after gas without biomethane pyrolysis (v1.4 rule), soil-carbon gap priced at USD 1000/t C.
+
+**Results (central least cost)**
+- USD 308.2 bn/yr, 22.8% saving (v1.4: 303.4 bn, 24.0%); the v1.4 number is reproduced exactly when the
+  balance is switched off. Pyrolysis rises to 10.8 Mt H2 because its carbon replaces soil carbon; hubs 201.
+
+**Outputs, tests and documents**
+- `nutrients`, `bioextraction`, `hydrochar_mt`, `biomethane_to_pyrolysis_bcm`, `pyrolysis_biogenic_share`,
+  `soc_fallback` in every solution; `cn_robustness.json["nutrients"]`; regional nearshore seaweed.
+- Fig. 9 (nutrient and soil-carbon balance, nearshore N removal); nearshore zones on Fig. 2; tables S19-S24;
+  supplementary section S19; manuscript sections 2.6, 3.4.
+- New tests: N, P, K balances close; returns non-negative; SOC requirement met (or priced gap); biogenic share;
+  biomethane use <= production; HTL returns <= HTL feed; nearshore areas within caps; no fossil gas after gas;
+  v1.4 reproduced with the balance off; design farms every zone; emissions of fertiliser and gaps counted.
+
+# CN v1.4.1 — 22 November 2026
+
+- Repository address updated to https://github.com/bcjohnjr/China-Transportation-Decarbonization (title page, README, CITATION.cff); release tag CN-v1.4.1.
+- Model code, inputs and results are unchanged from CN v1.4.
+
+# CN v1.4 — 22 November 2026 (response to fourth referee report)
+
+- Wind-lull screen: sensitivities with no wind, reactor availability 80%, turbines sized for 60% of reactor heat and a
+  14-day lull (`LULL_VARIANTS`, `lull_sensitivity()`, new `cn_lull.py`, table S18); backup costs labelled lower bounds
+  (hydrogen storage, replacement electrolyser capacity and delivery not priced); turbine-sizing assumption stated.
+- Supplementary S10 gives the derived steam-electrolysis heat inputs instead of the superseded 6.4 kWh_th/kg; "published"
+  U.S. numbers now "submitted"; version-history remarks removed from the publication text.
+- README: steam electrolysis is available in both eras; U.S. cross-check files described as included and hash-checked.
+- Cover letter lists the editor-only enclosures; a separate submission package (not the public code repository) contains
+  the related U.S. manuscript and the correction notice.
+- New tests for the lull sensitivities.
+
 # CN v1.3 — 22 November 2026 (response to third referee report)
 
 **Model and code**

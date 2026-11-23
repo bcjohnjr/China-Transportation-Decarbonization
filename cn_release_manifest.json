@@ -1,0 +1,95 @@
+{
+ "release": "CN v1.6.2",
+ "files": {
+  "cn_basemap.py": "aaf733799925325e49908acb27f9f91929d53f9699ee1cb9be07927ebaf48177",
+  "cn_breakeven.py": "7a0386b73e6505f659ae178b36b123f07dd8d71536a73a501bc9ed5c24979272",
+  "cn_crossfeed.py": "bc294c6dfc35f78e165c6b295402858f83a5686ba7d1bbac5e3beb442335abac",
+  "cn_figures.py": "e1a71fb184b95a2ac2c8f9d0be060e60949801f5e98bc40fae64dca51a60aac7",
+  "cn_gas.py": "bd7d0fe1fedeaf741c12661698440e45b8d86748a39f00deb5e872ed64cf3015",
+  "cn_htse_heat.py": "ca59867818580fceec578e4a11d4115a872852b30ccb598c39f8d5d6ab4ddab3",
+  "cn_inputs.py": "840a24e5d335d1b04e5ed73c4347c3471669aec53c030bd01505864f46ed75e5",
+  "cn_lull.py": "27f02255873f36b2711f40620c59c4d268479569b4fdf7d155fa4951303d3c10",
+  "cn_model.py": "a31b70b0fe1fdaafe9ed4324ce0d30c6fdbf70341719f3a4ed128ffee5185a06",
+  "cn_number_audit.py": "b051b533bab64da92c7119907ad942287bc20973eefcdd2bf47bb86964dd3624",
+  "cn_regions.py": "91a72ed6931f346bd448be03295c9424991b70d477b5eb78d056edff75b0ec91",
+  "cn_release_check.py": "ca71a02134f85c28d4483ef9d55ade5c4856503902f94c336c331a76746fc5d1",
+  "cn_sm_tables.py": "06d0462df026cea5aac490d791171069e62c6b17909cf3f3db9f9a605f43986b",
+  "cn_test.py": "51b445e32e2c98804ae415033ed2898216c0ee46e9a9a7ef9e6bac5d7f582ba6",
+  "cn_us_crosscheck.py": "8fb0b7647c5e0076234520a29d84ce88a6d112bfc3776c7fab0efd30f389e529",
+  "grid_harvester.py": "fcf78c3803f1bef4c32c88437589ccd41f450d9318019fc26fdc9e6b702ead29",
+  "requirements.txt": "c4f5e5cb711895e38b3d55ab154b9cc5de7dca65b532cfdca995e694e8add76d",
+  "run_all.sh": "408cb4bb90a15483d47afccf81b81942870c58bc808bb2b6d1ddf949f9f2bfa7",
+  "us2_inputs.py": "5abaebf83c4b019ff0660a423dc26dfdba45a3bdf5c794de30ca8c0b62abda20",
+  "us2_model.py": "66f59eef3d8c4db8e2c86a7a539d54c668c3b7f7de86b4021ac914ae18ddbdec"
+ },
+ "numbers": {
+  "scenarios": {
+   "least_cost": {
+    "transport_cost_bn": 314.06145047182287,
+    "saving_pct": 21.524150132986573,
+    "hubs": 221.0,
+    "h2_pyrolysis_mt": 8.40357274780631,
+    "gas_for_pyrolysis_bcm": 47.639301291418995,
+    "emissions_mt": 129.68302966620956
+   },
+   "post_gas_least_cost": {
+    "transport_cost_bn": 325.8016931333657,
+    "saving_pct": 18.590566532944585,
+    "hubs": 268.0,
+    "h2_pyrolysis_mt": 2.3053719182664842,
+    "gas_for_pyrolysis_bcm": 0.0,
+    "emissions_mt": 99.23508929451417
+   },
+   "design_half_offshore": {
+    "transport_cost_bn": 338.37058827939836,
+    "saving_pct": 15.449924066343002,
+    "hubs": 227.0,
+    "h2_pyrolysis_mt": 7.691510412097973,
+    "gas_for_pyrolysis_bcm": 43.60266673524928,
+    "emissions_mt": 123.83847221489714
+   },
+   "least_cost_biological_soc": {
+    "transport_cost_bn": 315.6889693844206,
+    "saving_pct": 21.117475166514676,
+    "hubs": 241.0,
+    "h2_pyrolysis_mt": 5.766666666666667,
+    "gas_for_pyrolysis_bcm": 32.690854119425545,
+    "emissions_mt": 118.89100391371161
+   },
+   "least_cost_no_nutrient_balance": {
+    "transport_cost_bn": 308.95313633201584,
+    "saving_pct": 22.800585979878274,
+    "hubs": 241.0,
+    "h2_pyrolysis_mt": 5.766666666666667,
+    "gas_for_pyrolysis_bcm": 32.690854119425545,
+    "emissions_mt": 109.39666415359824
+   },
+   "least_cost_no_nuclear": {
+    "transport_cost_bn": 367.49378024305963,
+    "saving_pct": 8.172790127252505,
+    "hubs": 0.0,
+    "h2_pyrolysis_mt": -0.0,
+    "gas_for_pyrolysis_bcm": -0.0,
+    "emissions_mt": 106.05886047294703
+   },
+   "tw_least_cost": {
+    "transport_cost_bn": 17.87269622080322,
+    "saving_pct": -14.331002608488653,
+    "hubs": 7.0,
+    "h2_pyrolysis_mt": 0.26088738291103214,
+    "gas_for_pyrolysis_bcm": 1.4789534178629942,
+    "emissions_mt": 8.334172267082966
+   }
+  },
+  "monte_carlo_median_saving_pct": {
+   "least_cost": 3.2832246762716677,
+   "half_offshore": -3.2300368638286447,
+   "post_gas": -0.5297099239743419
+  },
+  "backup_saving_pct": {
+   "lower_bound": 20.350165591125467,
+   "plausible": 19.750843312482104,
+   "high": 13.660632447657672
+  }
+ }
+}

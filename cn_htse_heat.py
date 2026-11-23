@@ -1,4 +1,4 @@
-"""Heat and mass balance of high-temperature steam electrolysis (solid oxide), per kg of hydrogen, CN v1.3.
+"""Heat and mass balance of high-temperature steam electrolysis (solid oxide), per kg of hydrogen, CN v1.6.
 
 Derives the two heat inputs used by the system model from a temperature-enthalpy calculation instead of assuming them:
   external_heat_kwh_kg   heat needed to raise steam (feed-water preheat not covered by recovery, plus evaporation),

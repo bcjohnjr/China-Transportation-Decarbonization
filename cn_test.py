@@ -1,4 +1,4 @@
-"""Regression and consistency tests for CN v1.3.  Run after cn_model.py, cn_gas.py, cn_regions.py, cn_crossfeed.py and
+"""Regression and consistency tests for CN v1.6.2.  Run after cn_model.py, cn_gas.py, cn_regions.py, cn_crossfeed.py and
 cn_breakeven.py.  Exits non-zero on failure."""
 import csv, json, math
 from pathlib import Path
@@ -22,11 +22,33 @@ for k, r in S.items():
     el = sum(r["el_supply_twh"].values())
     check(f"{k}: electricity supplied >= transport demand", el >= eu["el_total"] - 1e-3)
     check(f"{k}: emissions fall", 0 < r["emissions"]["total_mt"] < r["emissions"]["baseline_wtw_mt"])
-    if r["post_gas"]: check(f"{k}: no pyrolysis after gas", r["h2_mt"]["pyrolysis"] < 1e-6)
+    if r["post_gas"]: check(f"{k}: no fossil gas to pyrolysis after gas", r["gas_for_pyrolysis_bcm"] < 1e-6)
+    if r["post_gas"] and r["h2_mt"]["pyrolysis"] > 1e-6: check(f"{k}: post-gas pyrolysis is fully biogenic", r["pyrolysis_biogenic_share"] > 1 - 1e-6)
+    nu = r.get("nutrients")
+    if nu:   # nutrient and soil-carbon balance (CN v1.5)
+        P_ = M.case_params(k) if k in M.CASES or k in M.TAIWAN_CASES or k in M.ROBUST else None
+        bal_on = P_["nutrient_balance"] if P_ else True; soc_on = P_["soc_balance"] if P_ else True
+        for el in "npk":
+            e = nu[el]; tot = sum(e["returned_mt"].values()) - e["sold_mt"] - e["removed_mt"]
+            check(f"{k}: {el.upper()} balance reported consistently", abs(tot - e["balance_mt"]) < 1e-9)
+            if bal_on: check(f"{k}: {el.upper()} returned >= removed", e["balance_mt"] >= -1e-6)
+            check(f"{k}: {el.upper()} returns non-negative", all(v >= -1e-9 for v in e["returned_mt"].values()))
+        sc = nu["soil_carbon"]; sup = sum(sc["stable_soc_supplied_mt"].values())
+        if soc_on and (P_ is None or P_.get("pyro_carbon_in_soc", True)):
+            check(f"{k}: stable SOC supplied + priced deficit >= required", sup + sc["deficit_mt"] >= sc["stable_soc_required_mt"] - 1e-6)
+            bio = sup - sc["stable_soc_supplied_mt"]["pyrolysis_carbon"]
+            check(f"{k}: biogenic SOC share >= minimum", bio >= I.NUTRIENTS["biogenic_min_share"] * (sc["stable_soc_required_mt"] - sc["deficit_mt"]) - 1e-6)
+        bm = nu["biomethane_twh"]
+        check(f"{k}: biomethane used <= made", bm["to_pyrolysis"] + bm["sold"] <= bm["made"] + 1e-6)
+        rt = nu["returns_mt_feed"]
+        check(f"{k}: digested and returned HTL streams <= HTL feed", rt["digested"] <= r["routes_mt"]["htl"] + 1e-6 and rt["hydrochar"] <= r["routes_mt"]["htl"] + 1e-6)
+        for b in r.get("bioextraction", []):
+            check(f"{k}: {b['zone']} farm area within screened cap", b["km2"] <= b["cap_km2"] * (1 + 1e-6))
     check(f"{k}: carbon allocated = carbon made", abs(sum(a["mt"] for a in r["carbon_alloc"]) - r["carbon_mt"]) < 1e-6)
 # corrected heavy-truck ratios
 p = M.default_params()
-check("heavy-truck electric ratio is kWh/kWh (0.41)", abs(p["ENDUSE"]["r_hdv_elec"] - 2.40 * 3.6 / 21.1) < 1e-12)
+check("heavy-truck electric ratio is kWh/kWh on the LHV basis (0.44)", abs(p["ENDUSE"]["r_hdv_elec"] - 2.40 * 3.6 / (21.1 * 128450 / 137381)) < 1e-12)
+check("heavy-truck fuel-cell ratio on the LHV basis (0.81)", abs(p["ENDUSE"]["r_hdv_fcev"] - 4.44 * 3.6 / (21.1 * 128450 / 137381)) < 1e-12)
 check("U.S.-ratio sensitivity is cheaper (understated truck electricity)", S["least_cost_us_truck_ratios"]["transport_cost_bn"] < S["least_cost"]["transport_cost_bn"])
 # demand baseline reproduces the 2025 inputs
 d = M.enduse_2050(p)["base"]
@@ -87,7 +109,7 @@ check("solve(): h_htse appears in mid_heat row and not in dry_heat row", '"h_hts
 check("superheat electricity charged below 850 C outlet", M.htse_superheat_elec(pc) > 0 and M.htse_superheat_elec(M.apply_reactor_type(pc, "vhtr")) == 0.0)
 check("U.S. v8.4 steam-electrolysis rule costs at least the central case", S["least_cost_us_v84_htse_rule"]["transport_cost_bn"] >= S["least_cost"]["transport_cost_bn"] - 1e-6)
 check("alkaline-only no-nuclear case costs at least the no-nuclear case", S["least_cost_no_nuclear_alkaline"]["transport_cost_bn"] >= S["least_cost_no_nuclear"]["transport_cost_bn"] - 1e-6)
-check("after gas: no fossil gas for pyrolysis or pipeline compression", all(S[k]["costs_bn"]["residual_pipeline_gas"] == 0 and S[k]["costs_bn"]["natural_gas"] == 0 for k in S if k.startswith("post_gas")))
+check("after gas: no fossil gas for pyrolysis or pipeline compression", all(S[k]["costs_bn"]["residual_pipeline_gas"] == 0 and abs(S[k]["costs_bn"]["natural_gas"]) < 1e-9 for k in S if k.startswith("post_gas")))
 US = json.load(open(H / "us_truck_ratio_crosscheck.json"))
 check("U.S. cross-check pinned to v8.4 source hashes", US["us_source"]["sha256"]["us2_model.py"].startswith("66f59eef"))
 # CN v1.3 steam-electrolysis heat balance and lull screen
@@ -105,6 +127,59 @@ check("lull screen: shortfalls are non-negative", all(v["shortfall_gw"] >= 0 for
 check("lull screen: no-nuclear shortfall exceeds central", LS["least_cost_no_nuclear"]["shortfall_gw"] >= LS["least_cost"]["shortfall_gw"])
 check("HTSE topping 3 kWh/kg costs at least the central case", S["least_cost_htse_topping_3"]["transport_cost_bn"] >= S["least_cost"]["transport_cost_bn"] - 1e-6)
 check("HTSE without low-temperature recovery costs at least the central case", S["least_cost_htse_no_lowT_recovery"]["transport_cost_bn"] >= S["least_cost"]["transport_cost_bn"] - 1e-6)
+# CN v1.4 lull sensitivities
+LV = RB["lull_sensitivity"]["least_cost"]
+check("lull: zero wind raises the shortfall", LV["zero_wind"]["shortfall_gw"] >= LV["submitted"]["shortfall_gw"])
+check("lull: lower availability raises it further", LV["zero_wind_availability_80"]["shortfall_gw"] >= LV["zero_wind"]["shortfall_gw"])
+check("lull: smaller turbines raise it further", LV["zero_wind_turbines_60pct"]["shortfall_gw"] >= LV["zero_wind"]["shortfall_gw"])
+check("lull: longer lull needs more energy", LV["zero_wind_14_days"]["shortfall_twh"] >= LV["zero_wind"]["shortfall_twh"])
+check("lull: submitted variant equals the headline screen", abs(LV["submitted"]["shortfall_gw"] - RB["lull_screen"]["least_cost"]["shortfall_gw"]) < 1e-9)
+# CN v1.5 nutrient cases
+NB = RB["nutrients"]
+check("without nutrient/SOC constraints the pre-nutrient central cost is reproduced (309.0 in v1.6.2: 303.4 before the elemental fertiliser, gas-HHV and LHV truck-ratio corrections)", abs(S["least_cost_no_nutrient_balance"]["transport_cost_bn"] - 309.0) < 0.2)
+check("nutrient balance alone costs more than none", S["least_cost_no_soc_balance"]["transport_cost_bn"] >= S["least_cost_no_nutrient_balance"]["transport_cost_bn"] - 1e-6)
+check("adding the SOC balance costs more again", lc >= S["least_cost_no_soc_balance"]["transport_cost_bn"] - 1e-6)
+check("design forces every eutrophic zone to its screened area", all(abs(b["km2"] - b["cap_km2"]) < 1e-3 for b in S["design_half_offshore"]["bioextraction"]))
+check("N payment lowers the cost of full bioextraction", S["least_cost_bioextraction_n_credit_30"]["transport_cost_bn"] < S["least_cost_bioextraction_full"]["transport_cost_bn"])
+check("full bioextraction costs at least the least-cost case", S["least_cost_bioextraction_full"]["transport_cost_bn"] >= lc - 1e-6)
+check("central case replaces all removed soil carbon", S["least_cost"]["nutrients"]["soil_carbon"]["deficit_mt"] < 1e-6 and S["post_gas_least_cost"]["nutrients"]["soil_carbon"]["deficit_mt"] < 1e-6)
+_bo = S["least_cost_soc_no_pyro_carbon"]["nutrients"]["biological_options"]
+check("without pyrolysis carbon counted, green manure or compost close the balance", (_bo["green_manure_mha"] + _bo["compost_mt"]) > 1e-3
+      and S["least_cost_soc_no_pyro_carbon"]["nutrients"]["soil_carbon"]["deficit_mt"] < 1e-9)
+check("unreplaced soil carbon counted as emissions", all(abs(r["emissions"]["by_source_mt"].get("soil_carbon_not_replaced", 0.0) - r["nutrients"]["soil_carbon"]["deficit_mt"] * 44 / 12) < 1e-9 for r in S.values() if r.get("nutrients")))
+check("a higher deficit price does not lower cost", S["least_cost_soc_deficit_price_1000"]["transport_cost_bn"] >= lc - 1e-6)
+check("after gas, forbidding biomethane pyrolysis costs at least as much", S["post_gas_no_biomethane_pyrolysis"]["transport_cost_bn"] >= S["post_gas_least_cost"]["transport_cost_bn"] - 1e-6)
+check("mineral fertiliser emissions counted", S["least_cost"]["emissions"]["by_source_mt"]["mineral_fertiliser"] >= 0)
+check("pyrolysis CI falls with biogenic share", M.h2_ci(p, 0.0, 1.0) < M.h2_ci(p, 0.0, 0.0))
+check("biomethane valued on the same basis as pyrolysis gas", abs(p["PYRO"]["kg_ch4_per_kg_h2"] * M.GPK * M.gas_usd_mwh(p) / 1e3 - M.pyro_cost_per_kg(p)[1]) < 1e-9)
+# CN v1.6: biological soil carbon, Grid Harvester nearshore logistics, backup bracket, thorium consistency
+for k in ("least_cost_biological_soc", "post_gas_biological_soc", "least_cost_biological_soc_compost_cost_high"):
+    sc = S[k]["nutrients"]["soil_carbon"]
+    check(f"{k}: no pyrolysis carbon counted", sc["stable_soc_supplied_mt"]["pyrolysis_carbon"] == 0.0)
+    check(f"{k}: no priced gap", sc["deficit_mt"] < 1e-9 and not S[k]["soc_fallback"])
+    check(f"{k}: biological sources meet the full requirement", sum(sc["stable_soc_supplied_mt"].values()) >= sc["stable_soc_required_mt"] - 1e-6)
+check("biological soil carbon costs at least the least-cost case", S["least_cost_biological_soc"]["transport_cost_bn"] >= lc - 1e-6)
+nc = S["least_cost_biological_soc_no_compost"]
+check("without compost the strict balance needs a priced liquid shortfall", nc["liq_import_twh"] > 1.0)
+for k, r in S.items():
+    nu = r.get("nutrients")
+    if not nu: continue
+    bo = nu["biological_options"]
+    check(f"{k}: green manure within its area cap", bo["green_manure_mha"] <= I.NUTRIENTS["green_manure"]["max_mha"] + 1e-6)
+    check(f"{k}: compost within its cap", bo["compost_mt"] <= I.NUTRIENTS["compost"]["max_mt"] + 1e-6)
+    for b in r.get("bioextraction", []):
+        check(f"{k}: {b['zone']} cost = farm + Grid Harvester + vessel + drones",
+              abs(b["cost_t"] - (b["farm_t"] + b["harvester_t"] + b["vessel_t"] + b["drones_t"])) < 1e-9)
+bxd = S["design_half_offshore"]
+check("Grid Harvester fleet includes nearshore farms in the design", bxd["grid_harvester"].get("nearshore_units", 0) > 0)
+check("thorium: nuclear-only costs at least the unrestricted fleet",
+      S["sustainable_fission_tmsr_nuclear_only"]["transport_cost_bn"] >= S["sustainable_fission_tmsr"]["transport_cost_bn"] - 1e-6)
+check("no headline case relies on the priced soil-carbon gap", not any(S[k]["soc_fallback"] for k in ("least_cost", "post_gas_least_cost", "design_half_offshore",
+      "least_cost_no_nuclear", "sustainable_fission_tmsr", "sustainable_fission_tmsr_nuclear_only")))
+BR = RB["lull_bracket"]
+for k, v in BR.items():
+    check(f"{k}: backup bracket ordered lower <= plausible <= high", v["lower_bound"]["cost_bn"] <= v["plausible"]["cost_bn"] + 1e-9 <= v["high"]["cost_bn"] + 2e-9)
+    check(f"{k}: lower bound equals the lull screen", abs(v["lower_bound"]["cost_bn"] - RB["lull_screen"][k]["indicative_cost_bn"]) < 1e-9 if k in RB["lull_screen"] else True)
 # Monte Carlo files
 for fn in ("cn_monte_carlo_least_cost.csv", "cn_monte_carlo_half_offshore.csv", "cn_monte_carlo_post_gas.csv"):
     rows = list(csv.DictReader(open(H / fn))); check(f"{fn} has draws", len(rows) > 0)

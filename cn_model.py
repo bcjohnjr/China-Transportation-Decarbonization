@@ -1,9 +1,12 @@
-"""China transport-energy system, CN v1.3: reactor heat cascade (HTR-PM-class hubs, with thorium molten-salt, sodium-fast,
+"""China transport-energy system, CN v1.6.2: reactor heat cascade (HTR-PM-class hubs, with thorium molten-salt, sodium-fast,
 very-high-temperature and light-water SMR alternatives) + methane pyrolysis while gas lasts, steam electrolysis after it
 + electric expressways and battery-electric vehicles + wind, solar, concentrated solar and offshore wind with region-
 specific seaweeds harvested by Grid Harvesters + crop residues, bamboo, hemp and the autonomous regions' energy crops
 (cassava, sugarcane, sweet sorghum, Jerusalem artichoke, sweet potato, jatropha, cotton stalks) + food from the heat
-cascade.  USD 2026.  Structure follows the U.S. model v8.4 (us2_model.py); differences are listed in CHANGELOG.md.
+cascade + (CN v1.5) a closed nitrogen-phosphorus-potassium and soil-carbon balance on the land that supplies biomass:
+HTL wastewater digested to biomethane and nutrient-rich digestate, HTL hydrochar and gasifier ash returned to fields,
+pyrolysis carbon as a soil amendment, seaweed from nutrient-polluted bays (bioextraction, harvested by Grid Harvesters) to
+HTL or to soil, winter green manure and manure compost (CN v1.6), and mineral fertiliser bought for any remaining deficit.  USD 2026.  Structure follows the U.S. model v8.4 (us2_model.py); differences are listed in CHANGELOG.md.
 
     python3 cn_model.py [n_monte_carlo]      -> *.json, *.csv in this folder
 
@@ -20,14 +23,15 @@ from grid_harvester import fleet_sizing, energy as gh_energy, turning as gh_turn
 
 OUT = Path(__file__).resolve().parent
 crf = lambda r, n: r / (1 - (1 + r) ** -n)
-MMBTU_PER_BCM = 36.0e6                       # HHV basis, ~38 MJ/m3 [A]
+MMBTU_PER_BCM = I.BCM_TWH * I.GAS_HHV_LHV * 3.41214e6   # CN v1.6.2: HHV consistent with BCM_TWH (LHV): 37.5e6 MMBtu/bcm, ~39.5 MJ/m3
+                                             # (v1.6.1 used 36.0e6, ~38 MJ/m3, 4% below the LHV basis used for gas energy)
 HX_EFF, HX_COST = 0.95, 2.0
 
 
 # ============================================================================================= parameters
 def default_params(system="mainland"):
     names = ["ENDUSE", "ELEC", "HTGR", "PYRO", "GAS", "ELECTROLYSIS", "H2_DELIVERY", "BIOMASS", "BAMBOO", "HEMP", "ROUTES",
-             "SEAWEED_PROCESS", "LOGISTICS", "VEH", "FOOD", "NUCLEAR_H2", "AG", "FERT_PRICE", "VEHICLE_CARBON", "EMIS"]
+             "SEAWEED_PROCESS", "LOGISTICS", "VEH", "FOOD", "NUCLEAR_H2", "AG", "FERT_PRICE", "VEHICLE_CARBON", "EMIS", "NUTRIENTS", "BIOEXTRACT_COST"]
     p = {n: copy.deepcopy(getattr(I, n)) for n in names}
     p["BASE"] = copy.deepcopy(I.BASE_MAINLAND)
     p["SEAWEED"] = copy.deepcopy(I.SEAWEED)
@@ -37,13 +41,15 @@ def default_params(system="mainland"):
     p["WACC"] = I.WACC; p["yield_level"] = 1; p["reactor_case"] = "central"; p["osw_scale"] = 0.0
     p["system"] = system; p["capex_mult"] = 1.0; p["reactor_type"] = "htr_pm"
     p["food_credit_in_transport"] = False   # CN v1.2: heat sold to food is outside the transport cost boundary
+    p["BIOEXTRACT"] = [list(z) for z in I.BIOEXTRACT]
+    p["nutrient_balance"] = True; p["soc_balance"] = True; p["biogenic_pyrolysis"] = True   # CN v1.5
     if system == "taiwan":
         T = I.TAIWAN
         p["BASE"] = copy.deepcopy(T["BASE"]); p["ELEC"].update(T["ELEC"]); p["BIOMASS"] = copy.deepcopy(T["BIOMASS"])
         p["ETHANOL_FEEDS"] = [list(r) for r in T["ETHANOL_FEEDS"]]; p["OIL_FEEDS"] = [list(r) for r in T["OIL_FEEDS"]]
         p["BAMBOO"]["regions"] = [("Taiwan hill land", T["BAMBOO_MHA"], "taiwan")]
         p["HEMP"]["max_mha"] = T["HEMP_MAX"]; p["HEMP"]["regions"] = [("none", 0.0, "taiwan")]
-        p["GAS"].update(T["GAS"]); p["VEH"].update(T["VEH"]); p["SEAWEED"] = copy.deepcopy(I.SEAWEED_TAIWAN)
+        p["GAS"].update(T["GAS"]); p["VEH"].update(T["VEH"]); p["SEAWEED"] = copy.deepcopy(I.SEAWEED_TAIWAN); p["BIOEXTRACT"] = []
         p["CARBON"] = [[m[0], m[1] * T["CARBON_SCALE"] if j < len(p["CARBON"]) - 1 else m[1], m[2]] for j, m in enumerate(p["CARBON"])]
         for k in ("greenhouse_market_mt", "ras_market_mt", "grain_near_hub_mt", "seaweed_food_dry_mt"):
             p["FOOD"][k] *= T["FOOD_SCALE"]
@@ -162,9 +168,12 @@ def pyro_cost_per_kg(p):
     return plant, gas
 
 
-def h2_ci(p, elec_ci=0.0):
+def h2_ci(p, elec_ci=0.0, bio_share=0.0):
+    """kg CO2e per kg H2 from pyrolysis.  CN v1.5: the fossil-methane terms (upstream leakage, upstream CO2, CO2 from the
+    methane not converted) scale with the fossil share of the feed; biomethane slip is counted at the digester."""
     P = p["PYRO"]; ch4 = P["kg_ch4_per_kg_h2"]; L = P["leak_upstream"]
-    return ch4 * L / (1 - L) * P["gwp_ch4"] + ch4 * P["upstream_co2_frac"] * 44 / 16 + (ch4 - 4.0) * 44 / 16 + P["h2_leak"] * P["gwp_h2"] + pyro_elec(p) * elec_ci
+    fossil = ch4 * L / (1 - L) * P["gwp_ch4"] + ch4 * P["upstream_co2_frac"] * 44 / 16 + (ch4 - 4.0) * 44 / 16
+    return (1 - bio_share) * fossil + P["h2_leak"] * P["gwp_h2"] + pyro_elec(p) * elec_ci
 
 
 # ============================================================================================= seaweed and bamboo costs
@@ -194,6 +203,56 @@ def bamboo_cost_t(p):
     return (B["establish_usd_ha"] * crf(p["WACC"], B["establish_life"]) + B["land_rent_usd_ha"]) / y + B["harvest_usd_t"] + B["haul_usd_t"], y
 
 
+# ============================================================================================= nutrients (CN v1.5)
+def tier_profile(name):
+    n = name.lower()
+    if "bamboo" in n: return "bamboo"
+    if "forestry" in n or "wood" in n: return "forest"
+    if "grassland" in n: return "grass"
+    return "straw"
+
+
+def pool_content(p):
+    """Cap-weighted nutrient and carbon content (kg/t) of the land-biomass pool, used for returns from conversion routes."""
+    C = p["NUTRIENTS"]["content"]; w = [(t[2], C[tier_profile(t[0])]) for t in p["BIOMASS"]["tiers"]]
+    w.append((sum(r[1] for r in p["BAMBOO"]["regions"]) * p["BAMBOO"]["yield_t_ha"][1], C["bamboo"]))
+    tot = sum(a for a, _ in w) or 1.0
+    return {k: sum(a * c[k] for a, c in w) / tot for k in ("n", "p", "k", "c")}
+
+
+def bioextract_economics(p, z):
+    """CN v1.6: nearshore farm cost plus Grid Harvester, vessel and drone logistics, computed as for the offshore zones."""
+    L = p["LOGISTICS"]; W = p["WACC"]; B = p["BIOEXTRACT_COST"]; y = z[5][p["yield_level"]]; km = z[9]
+    ha_per_t = 1 / y; passes = B["passes"]; unit_ha_yr = 3.333 * L["gh_hours"]
+    gh_cost_t = L["gh_unit_capex"] * (crf(W, L["gh_life"]) + 0.05) * ha_per_t * passes / unit_ha_yr
+    wet_t = 1 / L["press_to_dm"]
+    trip_h = 2 * km / (L["vessel_kn"] * 1.852) + L["load_hours"]; trips_yr = L["vessel_days"] * 24 / trip_h
+    t_dry_per_vessel_yr = trips_yr * L["vessel_t"] * L["press_to_dm"]
+    vessel_cost_t = L["vessel_capex"] * (crf(W, L["vessel_life"]) + L["vessel_om"]) / t_dry_per_vessel_yr
+    drone_cost_t = ha_per_t / 100 / L["drone_km2"] * (L["drone_capex"] * crf(W, L["drone_life"]) + L["drone_om_yr"])
+    farm_t = B["farm_usd_ha_yr"] / y
+    return dict(yield_t_ha=y, farm_t=farm_t, harvester_t=gh_cost_t, vessel_t=vessel_cost_t, drones_t=drone_cost_t,
+                cost_t=farm_t + gh_cost_t + vessel_cost_t + drone_cost_t, harvester_kwh_t=L["gh_kwh_per_ha_pass"] * passes * ha_per_t,
+                vessel_kwh_t=wet_t * 2 * km * L["vessel_kwh_tkm"] * (1 - L["vessel_sail_share"]) * 0.6,
+                t_dry_per_vessel_yr=t_dry_per_vessel_yr, passes=passes)
+
+
+def bioextract_cost_t(p, z):
+    e = bioextract_economics(p, z); return e["cost_t"], e["yield_t_ha"]
+
+
+def bioextract_credit_t(p, z):
+    """USD per t dry seaweed for nitrogen and phosphorus removed from the water, if a payment exists (central case: none)."""
+    return z[6] * 10 * p.get("bx_n_credit_usd_kg", 0.0) + z[7] * 10 * p.get("bx_p_credit_usd_kg", 0.0)
+
+
+def gas_usd_mwh(p):
+    return (p["GAS"]["price_mmbtu"] + p["GAS"]["delivery_mmbtu"]) * 3600.0 / 1055.06   # USD/MWh, same constants as pyro_cost_per_kg
+
+
+GPK = 55.5 / 3.6   # TWh of methane per Mt CH4, on the same (HHV) basis as gas prices and pyro_cost_per_kg
+
+
 # ============================================================================================= LP
 def solve(p, scenario="design", blend_vol=0.0, capex_kwt=1300.0, osw_scale=None, kelp_force=None, allow_ely=None,
           flex_heat=False, post_gas=False, allow_si=False, fixed_hubs=None):
@@ -208,6 +267,9 @@ def solve(p, scenario="design", blend_vol=0.0, capex_kwt=1300.0, osw_scale=None,
              "cel", "atj", "etoh_ldv", "hemp_oil_fuel", "e_heat", "e_dry", "heat_sold", "t2mid", "t2dry", "m2dry", "h_htse", "h_si", "m2e", "d2e"]
     names += [f"b{j}" for j in range(len(tiers))] + [f"eth_{f[0]}" for f in EF] + [f"oil_{f[0]}" for f in OF]
     names += [f"osw_{z[0]}" for z in Z] + [f"kh_{z[0]}" for z in Z] + [f"kp_{z[0]}" for z in Z] + [f"c{j}" for j in range(len(p["CARBON"]))]
+    NU = p["NUTRIENTS"]; BX = p["BIOEXTRACT"]; soilz = [z for z in Z if "sargassum" not in z[3].lower()]
+    names += ["ret_htl", "ad", "ret_pbtl", "ret_cel", "ch4_pyro", "ch4_sold", "fN", "fP", "fK", "sN", "sP", "sK", "soc_deficit", "gm", "cm"]
+    names += [f"ks_{z[0]}" for z in soilz] + [f"bh_{z[0]}" for z in BX] + [f"bs_{z[0]}" for z in BX if z[13]]
     ix = {n: i for i, n in enumerate(names)}; nv = len(names); c = np.zeros(nv); firm = E["vre_firming"]; onsite = p["H2_DELIVERY"]["onsite"]
     c[ix["onw"]] = (E["onshore_wind"] + firm) / 1e3; c[ix["onw2"]] = (E["onshore_wind"] + E["onw2_adder"] + firm) / 1e3; c[ix["pv"]] = (E["solar"] + 1.25 * firm) / 1e3
     c[ix["csp"]] = E["csp"] / 1e3; c[ix["lwr"]] = E["lwr"] / 1e3; c[ix["export"]] = -E["export_value"] / 1e3
@@ -228,8 +290,23 @@ def solve(p, scenario="design", blend_vol=0.0, capex_kwt=1300.0, osw_scale=None,
     for z in Z:
         lcoe = E["osw_fixed"] if z[1] == "fixed" else E["osw_floating"]; c[ix[f"osw_{z[0]}"]] = (lcoe + 0.5 * firm) / 1e3
         e = zec[z[0]]
-        c[ix[f"kh_{z[0]}"]] = (e["biomass_cost_t"] - e["fert_credit_t"] + S["htl_cost_t"] + onsite * S["htl_h2_kg_t"]) / 1e3
-        c[ix[f"kp_{z[0]}"]] = (e["biomass_cost_t"] - e["fert_credit_t"] + S["pbtl_cost_t"] + onsite * S["pbtl_h2_kg_t"]) / 1e3
+        c[ix[f"kh_{z[0]}"]] = (e["biomass_cost_t"] + S["htl_cost_t"] + onsite * S["htl_h2_kg_t"]) / 1e3   # CN v1.5: nutrients enter the
+        c[ix[f"kp_{z[0]}"]] = (e["biomass_cost_t"] + S["pbtl_cost_t"] + onsite * S["pbtl_h2_kg_t"]) / 1e3   # balance, not a sales credit
+        if f"ks_{z[0]}" in ix: c[ix[f"ks_{z[0]}"]] = (e["biomass_cost_t"] + NU["cost_seaweed_to_soil_t"]) / 1e3
+    gas_mwh = gas_usd_mwh(p); F = p["FERT_PRICE"]
+    c[ix["ret_htl"]] = NU["cost_hydrochar_return_t"] / 1e3; c[ix["ad"]] = NU["cost_ad_t"] / 1e3
+    c[ix["ret_pbtl"]] = NU["cost_ash_return_t"] / 1e3; c[ix["ret_cel"]] = NU["cost_stillage_return_t"] / 1e3
+    c[ix["ch4_pyro"]] = -gas_mwh / 1e3; c[ix["ch4_sold"]] = -gas_mwh / 1e3
+    c[ix["soc_deficit"]] = NU["soc_deficit_usd_t_c"] / 1e3      # soil carbon not replaced: priced, and counted as an emission
+    GM, CM = NU["green_manure"], NU["compost"]
+    c[ix["gm"]] = GM["cost_usd_ha"] * 1e6 / 1e9; c[ix["cm"]] = CM["cost_usd_t"] / 1e3    # Mha of green manure; Mt dry compost
+    for el_, k_ in (("n", "N"), ("p", "P"), ("k", "K")):
+        c[ix[f"f{k_}"]] = F[el_] / 1e3; c[ix[f"s{k_}"]] = -NU["fert_sale_share"] * F[el_] / 1e3
+    bxc = {z[0]: bioextract_cost_t(p, z) for z in BX}
+    for z in BX:
+        cr = bioextract_credit_t(p, z)      # optional payment for N and P removed from eutrophic water (0 in the central case)
+        c[ix[f"bh_{z[0]}"]] = (bxc[z[0]][0] - cr + S["htl_cost_t"] + onsite * S["htl_h2_kg_t"]) / 1e3
+        if z[13]: c[ix[f"bs_{z[0]}"]] = (bxc[z[0]][0] - cr + NU["cost_seaweed_to_soil_t"]) / 1e3
     for j, m in enumerate(p["CARBON"]): c[ix[f"c{j}"]] = -m[2] / 1e3
     A, b, Aeq, beq, labels = [], [], [], [], []
     def row(d):
@@ -248,6 +325,8 @@ def solve(p, scenario="design", blend_vol=0.0, capex_kwt=1300.0, osw_scale=None,
     for o in oils: load[o] = R["hefa"]["el_mwh_t"]
     for z in Z:
         load[f"kh_{z[0]}"] = S["htl_el_mwh_t"] + zec[z[0]]["vessel_kwh_t"] / 1000; load[f"kp_{z[0]}"] = S["pbtl_el_mwh_t"] + zec[z[0]]["vessel_kwh_t"] / 1000
+    bh = [f"bh_{z[0]}" for z in BX]
+    for z in BX: load[f"bh_{z[0]}"] = S["htl_el_mwh_t"] + bioextract_economics(p, z)["vessel_kwh_t"] / 1000
     r_ = dict(load)
     for s_ in ["onw", "onw2", "pv", "csp", "lwr"] + osw: r_[s_] = r_.get(s_, 0) - 1
     r_["hubs"] = -hb["el_twh"]; r_["hp2e"] = -HT["eta_cond"]; r_["m2e"] = -HT["z_mid"]; r_["d2e"] = -HT["z_dry"]
@@ -261,7 +340,7 @@ def solve(p, scenario="design", blend_vol=0.0, capex_kwt=1300.0, osw_scale=None,
     r_ = {"htl": R["htl"]["heat_mwh_t"], "hemp_oil_fuel": R["hefa"]["heat_mwh_t"], "hubs": -hb["mid_twh"], "e_heat": -0.98, "t2mid": -HX_EFF, "m2dry": 1.0, "m2e": 1.0,
           "h_htse": NH["htse"]["kwh_th_kg"]}   # CN v1.2: steam generation for electrolysis is process-steam (mid-tier) heat
     for o in oils: r_[o] = R["hefa"]["heat_mwh_t"]
-    for k in kh: r_[k] = S["htl_heat_mwh_t"]
+    for k in kh + bh: r_[k] = S["htl_heat_mwh_t"]
     le(r_, 0.0, "mid_heat")
     r_ = {k: S["pbtl_dry_mwh_t"] for k in kp}; r_.update({"hubs": -hb["dry_twh"], "e_dry": -2.5, "cel": 0.6, "t2dry": -HX_EFF, "m2dry": -HX_EFF,
                                                          "d2e": 1.0}); le(r_, 0.0, "dry_heat")
@@ -269,14 +348,14 @@ def solve(p, scenario="design", blend_vol=0.0, capex_kwt=1300.0, osw_scale=None,
     r_ = {"h_pyro": -1, "h_ely": -1, "h_htse": -1, "h_si": -1, "htl": R["htl"]["h2_kg_t"] / 1e3, "pbtl": R["pbtl"]["h2_kg_t"] / 1e3,
           "hemp_oil_fuel": R["hefa"]["h2_kg_t"] / 1e3}
     for o in oils: r_[o] = R["hefa"]["h2_kg_t"] / 1e3
-    for k in kh: r_[k] = S["htl_h2_kg_t"] / 1e3
+    for k in kh + bh: r_[k] = S["htl_h2_kg_t"] / 1e3
     for k in kp: r_[k] = S["pbtl_h2_kg_t"] / 1e3
     le(r_, -(eu["h2_mt_direct"] + bl["h2_mt"]), "hydrogen")
     # liquids and jet
     mw = {"htl": R["htl"]["mwh_t"], "pbtl": R["pbtl"]["mwh_t"], "hemp_oil_fuel": R["hefa"]["mwh_t"], "atj": R["atj"]["mwh_per_bgal"], "etoh_ldv": R["ethanol"]["mwh_per_bgal"]}
     jf = {"htl": R["htl"]["jet"], "pbtl": R["pbtl"]["jet"], "hemp_oil_fuel": R["hefa"]["jet"], "atj": R["atj"]["jet"], "etoh_ldv": 0.0}
     for o in oils: mw[o] = R["hefa"]["mwh_t"]; jf[o] = R["hefa"]["jet"]
-    for k in kh: mw[k] = S["htl_mwh_t"]; jf[k] = R["htl"]["jet"]
+    for k in kh + bh: mw[k] = S["htl_mwh_t"]; jf[k] = R["htl"]["jet"]
     for k in kp: mw[k] = S["pbtl_mwh_t"]; jf[k] = R["pbtl"]["jet"]
     r_ = {k: -v for k, v in mw.items()}; r_["liq_import"] = -1.0; le(r_, -eu["liq_total"], "liquids")
     r_ = {k: -mw[k] * jf[k] for k in mw}; r_["liq_import"] = -1.0; le(r_, -eu["jet"], "jet")
@@ -292,10 +371,73 @@ def solve(p, scenario="design", blend_vol=0.0, capex_kwt=1300.0, osw_scale=None,
     for z in Z:
         km2_per_twh = 1000 / S["mw_per_km2"] / (8.76 * cfz(z)) * z[4]; mt_per_twh = km2_per_twh * 100 * zec[z[0]]["yield_t_ha"] / 1e6
         d_ = {f"kh_{z[0]}": 1, f"kp_{z[0]}": 1, f"osw_{z[0]}": -mt_per_twh}
+        if f"ks_{z[0]}" in ix: d_[f"ks_{z[0]}"] = 1
         if kelp_force: eq(d_, 0.0)
         else: le(d_, 0.0, f"seaweed_{z[0]}")
     le({"heat_sold": 1, "hubs": -hb["low_twh"]}, 0.0, "heat_hubs"); le({"heat_sold": 1}, food_heat_market_twh(p), "heat_market")
     r_ = {f"c{j}": 1 for j in range(len(p["CARBON"]))}; r_["h_pyro"] = -p["PYRO"]["c_per_h2"]; eq(r_, 0.0)
+    # CN v1.5 nutrient and soil-carbon balance, biomethane from HTL wastewater, nearshore bioextraction
+    le({"ret_htl": 1, "htl": -1}, 0.0, "ret_htl"); le({"ad": 1, "htl": -1}, 0.0, "ad_cap")
+    le({"ret_pbtl": 1, "pbtl": -1}, 0.0, "ret_pbtl"); le({"ret_cel": 1, "cel": -1}, 0.0, "ret_cel")
+    le({"ch4_pyro": 1, "ch4_sold": 1, "ad": -NU["ad_mwh_ch4_per_t"]}, 0.0, "biomethane")
+    gpk = p["PYRO"]["kg_ch4_per_kg_h2"] * GPK                       # TWh CH4 per Mt H2
+    le({"ch4_pyro": 1, "h_pyro": -gpk}, 0.0, "biomethane_to_pyrolysis")
+    if post_gas: le({"h_pyro": gpk, "ch4_pyro": -1}, 0.0, "no_fossil_gas")   # after gas, pyrolysis only on biomethane
+    for z in BX:
+        r_ = {f"bh_{z[0]}": 1}
+        if z[13]: r_[f"bs_{z[0]}"] = 1
+        cap_ = z[4] * 100 * bxc[z[0]][1] / 1e6
+        bx_force = p.get("bioextract_force"); bx_force = scenario.startswith("design") if bx_force is None else bx_force
+        if bx_force: eq(r_, cap_)          # the design: every eutrophic zone farmed to its screened area
+        else: le(r_, cap_, f"bioextract_{z[0]}")
+    PC = pool_content(p); CT = NU["content"]; stalk_t = HM["stalk_t_ha"]
+    sw_nut = {z[0]: dict(n=z[7] * 1e3, p=S["p"] * 1e3, k=S["k"] * 1e3) for z in Z}
+    bx_nut = {z[0]: dict(n=z[6] * 10, p=z[7] * 10, k=z[8] * 10) for z in BX}
+    def removed(el_):
+        d = {f"b{j}": CT[tier_profile(t[0])][el_] / 1e3 for j, t in enumerate(tiers)}
+        d["bamboo"] = CT["bamboo"][el_] / 1e3; d["hemp_mha"] = stalk_t * CT["hemp"][el_] / 1e3
+        for f in EF:
+            if f[5] > 0: d[f"eth_{f[0]}"] = f[5] * CT["straw"][el_] / 1e3
+        return d
+    if p.get("nutrient_balance", True):
+        for el_, k_ in (("n", "N"), ("p", "P"), ("k", "K")):
+            r_ = removed(el_)
+            r_["ret_htl"] = -PC[el_] / 1e3 * NU["htl_to_solids"][el_] * NU["solids_recovery"][el_]
+            r_["ad"] = -PC[el_] / 1e3 * NU["htl_to_aqueous"][el_] * NU["aqueous_recovery"][el_]
+            r_["ret_pbtl"] = -PC[el_] / 1e3 * NU["pbtl_ash"][el_]; r_["ret_cel"] = -PC[el_] / 1e3 * NU["cel_stillage"][el_]
+            for z in Z:
+                r_[f"kh_{z[0]}"] = -sw_nut[z[0]][el_] / 1e3 * NU["seaweed_htl"][el_]; r_[f"kp_{z[0]}"] = -sw_nut[z[0]][el_] / 1e3 * NU["seaweed_pbtl"][el_]
+                if f"ks_{z[0]}" in ix: r_[f"ks_{z[0]}"] = -sw_nut[z[0]][el_] / 1e3 * NU["seaweed_soil"][el_]
+            for z in BX:
+                r_[f"bh_{z[0]}"] = -bx_nut[z[0]][el_] / 1e3 * NU["seaweed_htl"][el_]
+                if z[13]: r_[f"bs_{z[0]}"] = -bx_nut[z[0]][el_] / 1e3 * NU["seaweed_soil"][el_]
+            r_[f"f{k_}"] = -1.0; r_[f"s{k_}"] = 1.0
+            r_["cm"] = -CM[el_] / 1e3
+            if el_ == "n": r_["gm"] = -GM["n_fixed_kg_ha"] / 1e3          # Mt N per Mha
+            le(r_, 0.0, f"nutrient_{el_}")
+    soil_j = [j for j, m in enumerate(p["CARBON"]) if "soil" in m[0].lower()]
+    char_c = R["htl"]["char_t_t"] * NU["hydrochar_c"]                  # t C per t HTL feed in hydrochar
+    if p.get("soc_balance", True):
+        req = {f"b{j}": CT[tier_profile(t[0])]["c"] * CT[tier_profile(t[0])]["humif"] / 1e3 for j, t in enumerate(tiers)}
+        req["bamboo"] = CT["bamboo"]["c"] * CT["bamboo"]["humif"] / 1e3; req["hemp_mha"] = stalk_t * CT["hemp"]["c"] * CT["hemp"]["humif"] / 1e3
+        for f in EF:
+            if f[5] > 0: req[f"eth_{f[0]}"] = f[5] * CT["straw"]["c"] * CT["straw"]["humif"] / 1e3
+        bio = {"ret_htl": char_c * NU["stab_hydrochar"], "ad": PC["c"] / 1e3 * NU["htl_to_aqueous"]["c"] * NU["digestate_c_after_ad"] * NU["hum_digestate"]}
+        for z in soilz: bio[f"ks_{z[0]}"] = NU["seaweed_c"] / 1e3 * NU["hum_seaweed"]
+        for z in BX:
+            if z[13]: bio[f"bs_{z[0]}"] = NU["seaweed_c"] / 1e3 * NU["hum_seaweed"]
+        bio["gm"] = GM["dm_t_ha"] * GM["c"] / 1e3 * GM["humif"]          # Mt stable C per Mha
+        bio["cm"] = CM["c"] / 1e3 * CM["humif"]                          # Mt stable C per Mt compost
+        r_ = dict(req)
+        for k, v in bio.items(): r_[k] = r_.get(k, 0.0) - v
+        if p.get("pyro_carbon_in_soc", True):
+            for j in soil_j: r_[f"c{j}"] = -NU["stab_pyro_carbon"]
+        r_["soc_deficit"] = -1.0
+        le(r_, 0.0, "soil_carbon")
+        r_ = {k: NU["biogenic_min_share"] * v for k, v in req.items()}
+        for k, v in bio.items(): r_[k] = r_.get(k, 0.0) - v
+        r_["soc_deficit"] = -NU["biogenic_min_share"]   # an unreplaced gap lowers both requirements
+        le(r_, 0.0, "soil_carbon_biogenic")
     # bounds
     bounds = [(0, None)] * nv
     if fixed_hubs is not None: bounds[ix["hubs"]] = (float(fixed_hubs), float(fixed_hubs))
@@ -317,16 +459,27 @@ def solve(p, scenario="design", blend_vol=0.0, capex_kwt=1300.0, osw_scale=None,
         for k in ("t2mid", "t2dry", "m2dry"): bounds[ix[k]] = (0, 0)
     # Steam electrolysis is available in both eras (CN v1.0 fix: the U.S. v8.4 code allowed it only after gas, which
     # excluded a cheaper option from gas-era cases); pyrolysis is removed after gas.
-    if post_gas: bounds[ix["h_pyro"]] = (0, 0)
+    if post_gas and not p.get("biogenic_pyrolysis", True): bounds[ix["h_pyro"]] = (0, 0)
+    if not p.get("nutrient_balance", True):
+        for k in ("fN", "fP", "fK", "sN", "sP", "sK"): bounds[ix[k]] = (0, 0)
+    bounds[ix["soc_deficit"]] = (0, 0)   # soil carbon must be replaced; see the fallback after the solve
+    bounds[ix["gm"]] = (0, GM["max_mha"]); bounds[ix["cm"]] = (0, CM["max_mt"])
+    if not p.get("soc_balance", True) and not p.get("nutrient_balance", True): bounds[ix["gm"]] = (0, 0); bounds[ix["cm"]] = (0, 0)
     if (not post_gas and not p.get("htse_gas_era", True)) or not p.get("allow_htse", True): bounds[ix["h_htse"]] = (0, 0)
     if not HT.get("return_unused_steam", False):
         for k in ("m2e", "d2e"): bounds[ix[k]] = (0, 0)
     if not (post_gas and allow_si and HT.get("outlet_c", 750) >= 900): bounds[ix["h_si"]] = (0, 0)
     res = linprog(c, A_ub=np.array(A), b_ub=np.array(b), A_eq=np.array(Aeq), b_eq=np.array(beq), bounds=bounds, method="highs")
+    soc_fallback = False
+    if res.status == 2 and p.get("soc_balance", True) and p.get("soc_gap_allowed", True):
+        # CN v1.5: if no feasible system replaces all the soil carbon its residue use removes (e.g. no reactors, hence no
+        # pyrolysis carbon), the gap is allowed at a price and counted as an emission, rather than declaring the case infeasible.
+        bounds[ix["soc_deficit"]] = (0, None); soc_fallback = True
+        res = linprog(c, A_ub=np.array(A), b_ub=np.array(b), A_eq=np.array(Aeq), b_eq=np.array(beq), bounds=bounds, method="highs")
     if res.status != 0: raise RuntimeError(res.message)
     x = {n: float(res.x[i]) for n, i in ix.items()}
     out = post(p, x, float(res.fun), eu, bl, hb, zec, scenario, blend_vol, osw_scale, res, labels)
-    out["flex_heat"] = bool(flex_heat); out["post_gas"] = bool(post_gas)
+    out["flex_heat"] = bool(flex_heat); out["post_gas"] = bool(post_gas); out["soc_fallback"] = soc_fallback
     return out
 
 
@@ -342,12 +495,18 @@ def post(p, x, lp_cost, eu, bl, hb, zec, scenario, blend_vol, osw_scale, res, la
     out["el_supply_twh"] = dict(onshore_wind=x["onw"] + x["onw2"], solar=x["pv"], csp=x["csp"], lwr=x["lwr"], offshore_wind=sum(x[f"osw_{z[0]}"] for z in Z), reactor_hubs=hub_el)
     out["el_export_twh"] = x["export"]; out["liq_import_twh"] = x["liq_import"]
     out["hubs"] = x["hubs"]; out["reactors"] = HT["modules"] * x["hubs"]; out["hub_gwt"] = x["hubs"] * hb["mwt"] / 1e3
-    sw_h = sum(x[f"kh_{z[0]}"] for z in Z); sw_p = sum(x[f"kp_{z[0]}"] for z in Z); oil_tot = sum(x[f"oil_{f[0]}"] for f in OF)
+    BX = p["BIOEXTRACT"]; NU = p["NUTRIENTS"]
+    bx_h = sum(x[f"bh_{z[0]}"] for z in BX); bx_s = sum(x.get(f"bs_{z[0]}", 0.0) for z in BX)
+    sw_soil = sum(x.get(f"ks_{z[0]}", 0.0) for z in Z)
+    sw_h = sum(x[f"kh_{z[0]}"] for z in Z) + bx_h; sw_p = sum(x[f"kp_{z[0]}"] for z in Z); oil_tot = sum(x[f"oil_{f[0]}"] for f in OF)
     out["h2_mt"] = dict(pyrolysis=x["h_pyro"], electrolysis=x["h_ely"], steam_electrolysis=x["h_htse"], sulfur_iodine=x["h_si"],
                         direct_vehicles=eu["h2_mt_direct"], blending=bl["h2_mt"], htl=x["htl"] * R["htl"]["h2_kg_t"] / 1e3,
                         pbtl=x["pbtl"] * R["pbtl"]["h2_kg_t"] / 1e3, hefa=(oil_tot + x["hemp_oil_fuel"]) * R["hefa"]["h2_kg_t"] / 1e3,
                         seaweed=(sw_h * S["htl_h2_kg_t"] + sw_p * S["pbtl_h2_kg_t"]) / 1e3)
-    out["gas_for_pyrolysis_bcm"] = x["h_pyro"] * p["PYRO"]["kg_ch4_per_kg_h2"] / 0.72      # 0.72 kg CH4 per m3
+    gpk = p["PYRO"]["kg_ch4_per_kg_h2"] * GPK
+    out["gas_for_pyrolysis_bcm"] = max(x["h_pyro"] - x["ch4_pyro"] / gpk, 0.0) * p["PYRO"]["kg_ch4_per_kg_h2"] / 0.72   # fossil only; 0.72 kg CH4/m3
+    out["biomethane_to_pyrolysis_bcm"] = x["ch4_pyro"] / gpk * p["PYRO"]["kg_ch4_per_kg_h2"] / 0.72
+    out["pyrolysis_biogenic_share"] = x["ch4_pyro"] / (x["h_pyro"] * gpk) if x["h_pyro"] > 1e-9 else 0.0
     out["blend"] = bl
     carbon = x["h_pyro"] * p["PYRO"]["c_per_h2"]; out["carbon_mt"] = carbon
     out["carbon_alloc"] = [dict(market=m[0], mt=x[f"c{j}"], value_usd_t=m[2], cap_mt=m[1]) for j, m in enumerate(p["CARBON"])]
@@ -371,9 +530,10 @@ def post(p, x, lp_cost, eu, bl, hb, zec, scenario, blend_vol, osw_scale, res, la
              seaweed=sw_h * S["htl_mwh_t"] + sw_p * S["pbtl_mwh_t"], oils_hefa=oil_tot * R["hefa"]["mwh_t"],
              sugar_starch_ethanol=eth_liq * eth_share(sum(x[f"eth_{f[0]}"] for f in EF)), imported=x["liq_import"])
     out["liquids_twh"] = L
-    out["routes_mt"] = dict(htl=x["htl"], pbtl=x["pbtl"], cellulosic_ethanol_feed=x["cel"], seaweed_htl=sw_h, seaweed_pbtl=sw_p)
+    out["routes_mt"] = dict(htl=x["htl"], pbtl=x["pbtl"], cellulosic_ethanol_feed=x["cel"], seaweed_htl=sw_h, seaweed_pbtl=sw_p,
+                            seaweed_to_soil=sw_soil + bx_s, nearshore_seaweed_htl=bx_h)
     out["biomass_mt"] = dict(residues=sum(x[f"b{j}"] for j in range(len(tiers))), bamboo=x["bamboo"], hemp_stalk=stalk,
-                             hemp_seed=x["hemp_mha"] * HM["seed_t_ha"], sorghum_bagasse=sum(bag.values()), seaweed=sw_h + sw_p, oils=oil_tot,
+                             hemp_seed=x["hemp_mha"] * HM["seed_t_ha"], sorghum_bagasse=sum(bag.values()), seaweed=sw_h + sw_p + sw_soil + bx_s, oils=oil_tot,
                              ethanol_bgal=eth_total, atj_ethanol_bgal=x["atj"], cellulosic_ethanol_bgal=cel_bgal)
     out["tiers_mt"] = [dict(name=t[0], region=t[1], cap=t[2], used=x[f"b{j}"], usd_t=t[3]) for j, t in enumerate(tiers)]
     out["ethanol_feeds"] = [dict(key=f[0], name=f[1], region=f[2], cap_bgal=f[3], used_bgal=x[f"eth_{f[0]}"], usd_gal=f[4],
@@ -384,19 +544,33 @@ def post(p, x, lp_cost, eu, bl, hb, zec, scenario, blend_vol, osw_scale, res, la
     out["bamboo"] = dict(mt=x["bamboo"], mha=x["bamboo"] / by, yield_t_ha=by, cost_t=bc)
     out["hemp"] = dict(mha=x["hemp_mha"], seed_mt=x["hemp_mha"] * HM["seed_t_ha"], oil_mt=x["hemp_mha"] * HM["seed_t_ha"] * HM["oil_frac"],
                        meal_mt=x["hemp_mha"] * HM["seed_t_ha"] * (1 - HM["oil_frac"]), stalk_mt=stalk)
-    out["biochar_mt"] = x["htl"] * R["htl"]["char_t_t"]
+    out["biochar_mt"] = x["htl"] * R["htl"]["char_t_t"]   # HTL solids: hydrochar (kept under the old key for compatibility)
+    out["hydrochar_mt"] = out["biochar_mt"]
     sz = []
     for z in Z:
-        e = zec[z[0]]; gw = out["osw_gw"][z[0]]; km2 = gw * 1000 / S["mw_per_km2"]; mt = x[f"kh_{z[0]}"] + x[f"kp_{z[0]}"]
+        e = zec[z[0]]; gw = out["osw_gw"][z[0]]; km2 = gw * 1000 / S["mw_per_km2"]; mt = x[f"kh_{z[0]}"] + x[f"kp_{z[0]}"] + x.get(f"ks_{z[0]}", 0.0)
         sz.append(dict(zone=z[0], region=z[2], species=z[3], type=z[1], wind_gw=gw, wind_km2=km2, seaweed_km2=km2 * z[4] if mt > 1e-9 else 0.0,
-                       yield_t_ha=e["yield_t_ha"], dry_mt=mt, htl_mt=x[f"kh_{z[0]}"], pbtl_mt=x[f"kp_{z[0]}"], wet_mt=mt / z[6], n_kt=mt * z[7] * 1e3,
+                       yield_t_ha=e["yield_t_ha"], dry_mt=mt, htl_mt=x[f"kh_{z[0]}"], pbtl_mt=x[f"kp_{z[0]}"], soil_mt=x.get(f"ks_{z[0]}", 0.0), wet_mt=mt / z[6], n_kt=mt * z[7] * 1e3,
                        land_n_kt=mt * z[7] * 1e3 * z[8], fuel_twh=x[f"kh_{z[0]}"] * S["htl_mwh_t"] + x[f"kp_{z[0]}"] * S["pbtl_mwh_t"],
                        vessels=mt * 1e6 / e["t_dry_per_vessel_yr"], drones=(km2 * z[4] if mt > 1e-9 else 0) / p["LOGISTICS"]["drone_km2"],
                        harvester_mwh=mt * e["harvester_kwh_t"] * 1e3, vessel_mwh=mt * e["vessel_kwh_t"] * 1e3, port_km=z[10],
                        report_region=z[13], **{f"cost_{k}": v for k, v in e.items() if k.endswith("_t")}, color=z[12], box=z[11]))
     out["seaweed"] = sz
-    tot_sw = sum(s["dry_mt"] for s in sz)
-    out["grid_harvester"] = fleet_sizing({s["zone"]: s["seaweed_km2"] for s in sz}, tot_sw / 0.12, pacific_passes=3.0, other_passes=2.0) if tot_sw > 0 else {}
+    bxo = []
+    for z in BX:
+        be = bioextract_economics(p, z); cst, y = be["cost_t"], be["yield_t_ha"]; mt = x[f"bh_{z[0]}"] + x.get(f"bs_{z[0]}", 0.0)
+        bxo.append(dict(zone=z[0], region=z[1], species=z[2], water=z[3], cap_km2=z[4], yield_t_ha=y, dry_mt=mt, htl_mt=x[f"bh_{z[0]}"],
+                        soil_mt=x.get(f"bs_{z[0]}", 0.0), km2=mt * 1e6 / (y * 100), n_removed_kt=mt * z[6] * 10, p_removed_kt=mt * z[7] * 10,
+                        k_removed_kt=mt * z[8] * 10, fuel_twh=x[f"bh_{z[0]}"] * S["htl_mwh_t"], cost_t=cst, report_region=z[12], lon=z[10], lat=z[11],
+                        farm_t=be["farm_t"], harvester_t=be["harvester_t"], vessel_t=be["vessel_t"], drones_t=be["drones_t"],
+                        vessels=mt * 1e6 / be["t_dry_per_vessel_yr"], harvester_mwh=mt * be["harvester_kwh_t"] * 1e3, vessel_mwh=mt * be["vessel_kwh_t"] * 1e3))
+    out["bioextraction"] = bxo
+    tot_sw = sum(s["dry_mt"] for s in sz); tot_bx = sum(b["dry_mt"] for b in bxo)
+    # Grid Harvester fleet for offshore and (CN v1.6) nearshore farms; wet tonnage at 12% dry matter
+    areas = {s["zone"]: s["seaweed_km2"] for s in sz}; areas.update({"nearshore_" + b["zone"]: b["km2"] for b in bxo})
+    out["grid_harvester"] = fleet_sizing(areas, (tot_sw + tot_bx) / 0.12, pacific_passes=3.0, other_passes=2.0) if tot_sw + tot_bx > 0 else {}
+    if tot_bx > 0:
+        out["grid_harvester"]["nearshore_units"] = fleet_sizing({b["zone"]: b["km2"] for b in bxo}, tot_bx / 0.12, other_passes=2.0)["engineering_units"]
     out["fleet"] = dict(vessels=sum(s["vessels"] for s in sz), drones=sum(s["drones"] for s in sz),
                         vessel_energy_gwh=sum(s["vessel_mwh"] for s in sz) / 1e3, harvester_energy_gwh=sum(s["harvester_mwh"] for s in sz) / 1e3)
     # costs
@@ -415,12 +589,13 @@ def post(p, x, lp_cost, eu, bl, hb, zec, scenario, blend_vol, osw_scale, res, la
                + V["forklifts_m"] * 1e6 * V["forklift_net_usd_yr"]) / 1e9
     el = eu["el"]
     sw_bio = sum(s["dry_mt"] * (s["cost_farm_t"] + s["cost_harvester_t"] + s["cost_vessel_t"] + s["cost_drones_t"]) for s in sz) / 1e3
-    sw_ref = sum(s["htl_mt"] * S["htl_cost_t"] + s["pbtl_mt"] * S["pbtl_cost_t"] for s in sz) / 1e3
+    sw_ref = (sum(s["htl_mt"] * S["htl_cost_t"] + s["pbtl_mt"] * S["pbtl_cost_t"] for s in sz) + bx_h * S["htl_cost_t"]) / 1e3
+    F = p["FERT_PRICE"]; gas_mwh = gas_usd_mwh(p)
     costs = dict(
         electricity_generation=gen, transmission_distribution=eu["el_total"] * E["td_adder"] / 1e3,
         charging=(el["ldv"] * E["charge_ldv"] + (el["hdv_bev"] + el["hdv_ers_battery"] + el["hdv_re"] + el["farm"] + el["construction"] + el["industrial"]) * E["charge_hdv"]) / 1e3,
         electric_highways=ers, rail_electrification=V["rail_elec_capex_bn"] * crf(W, V["rail_life"]) * 1.02,
-        reactor_hubs=x["hubs"] * hb["cost_bn"], pyrolysis_plants=x["h_pyro"] * pl, natural_gas=x["h_pyro"] * pg,
+        reactor_hubs=x["hubs"] * hb["cost_bn"], pyrolysis_plants=x["h_pyro"] * pl, natural_gas=x["h_pyro"] * pg - x["ch4_pyro"] * gas_usd_mwh(p) / 1e3,
         electrolysis=x["h_ely"] * p["ELECTROLYSIS"]["capex_cost_kg"] + x["h_htse"] * p["NUCLEAR_H2"]["htse"]["capex_cost_kg"]
                     + x["h_si"] * p["NUCLEAR_H2"]["sulfur_iodine"]["capex_cost_kg"],
         h2_delivery=eu["h2_mt_direct"] * p["H2_DELIVERY"]["vehicle"] + bl["h2_mt"] * p["H2_DELIVERY"]["blend"]
@@ -430,6 +605,13 @@ def post(p, x, lp_cost, eu, bl, hb, zec, scenario, blend_vol, osw_scale, res, la
         biorefineries=(x["htl"] * R["htl"]["cost_t"] + x["pbtl"] * R["pbtl"]["cost_t"] + x["cel"] * R["ethanol"]["cellulosic_gal_per_t"] * R["ethanol"]["cellulosic_conv_per_gal"]
                        + x["hemp_oil_fuel"] * R["hefa_conv_only"]) / 1e3,
         seaweed_farms_harvest_haul=sw_bio, seaweed_refining=sw_ref,
+        nearshore_seaweed_farms=sum(b["dry_mt"] * b["cost_t"] for b in bxo) / 1e3,
+        seaweed_to_soil_handling=(sw_soil + bx_s) * NU["cost_seaweed_to_soil_t"] / 1e3,
+        nutrient_and_carbon_return=(x["ret_htl"] * NU["cost_hydrochar_return_t"] + x["ad"] * NU["cost_ad_t"] + x["ret_pbtl"] * NU["cost_ash_return_t"]
+                                    + x["ret_cel"] * NU["cost_stillage_return_t"]) / 1e3,
+        mineral_fertiliser=(x["fN"] * F["n"] + x["fP"] * F["p"] + x["fK"] * F["k"]) / 1e3,
+        soil_carbon_deficit=x["soc_deficit"] * NU["soc_deficit_usd_t_c"] / 1e3,
+        green_manure_and_compost=(x["gm"] * NU["green_manure"]["cost_usd_ha"] * 1e6 + x["cm"] * NU["compost"]["cost_usd_t"] * 1e6) / 1e9,
         hefa_oils=sum(x[f"oil_{f[0]}"] * (f[4] + R["hefa"]["conv_t"]) for f in OF) / 1e3,
         sugar_starch_ethanol=sum(x[f"eth_{f[0]}"] * f[4] for f in EF) + x["atj"] * R["atj"]["conv_per_bgal"] / 1e9,
         imported_renewable_fuel=x["liq_import"] * E["liq_import_usd_mwh"] / 1e3,
@@ -437,9 +619,13 @@ def post(p, x, lp_cost, eu, bl, hb, zec, scenario, blend_vol, osw_scale, res, la
         process_heat_equipment=(x["e_heat"] * 2.0 + x["e_dry"] * 8.0 + (x["t2mid"] + x["t2dry"] + x["m2dry"]) * HX_COST) / 1e3,
         residual_pipeline_gas=eu["gas_resid_twh"] / I.BCM_TWH * MMBTU_PER_BCM * (p["GAS"]["price_mmbtu"] + p["GAS"]["delivery_mmbtu"]) / 1e9)
     fd = food(p, out); heat_used = fd["low_grade_twh"] - fd["unused_low_grade_twh"]; out["low_grade_heat_used_twh"] = heat_used
-    credits = dict(carbon_products=-out["carbon_revenue_bn"], seaweed_fertiliser=-sum(s["dry_mt"] * s["cost_fert_credit_t"] for s in sz) / 1e3,
+    credits = dict(carbon_products=-out["carbon_revenue_bn"], seaweed_fertiliser=0.0,
+                   biomethane_sold=-x["ch4_sold"] * gas_mwh / 1e3,
+                   nearshore_nutrient_removal_payment=-sum(b["dry_mt"] * bioextract_credit_t(p, z) for b, z in zip(bxo, BX)) / 1e3,
+                   recovered_nutrients_sold=-NU["fert_sale_share"] * (x["sN"] * F["n"] + x["sP"] * F["p"] + x["sK"] * F["k"]) / 1e3,
                    surplus_electricity_sold=-x["export"] * E["export_value"] / 1e3, low_grade_heat_to_food=-heat_used * 8.0 / 1e3 if p.get("food_credit_in_transport", False) else 0.0)
     out["food_heat_value_outside_boundary_bn"] = heat_used * 8.0 / 1e3   # gross value at USD 8/MWh, before distribution costs
+    out["nutrients"] = nutrient_report(p, x, out)
     out["costs_bn"] = costs; out["credits_bn"] = credits; out["total_cost_bn"] = sum(costs.values()) + sum(credits.values())
     sb = bl["h2_mt"] / max(x["h_pyro"] + x["h_ely"] + x["h_htse"] + x["h_si"], 1e-9); out["blend_share_of_h2"] = sb
     hub_blend = sb * (costs["reactor_hubs"] + costs["pyrolysis_plants"] + costs["natural_gas"] + credits["carbon_products"]) + bl["h2_mt"] * p["H2_DELIVERY"]["blend"]
@@ -465,11 +651,52 @@ def post(p, x, lp_cost, eu, bl, hb, zec, scenario, blend_vol, osw_scale, res, la
     return out
 
 
+def nutrient_report(p, x, out):
+    """N, P, K and stable soil-carbon balance of the solution (Mt per year), by source."""
+    NU = p["NUTRIENTS"]; CT = NU["content"]; R = p["ROUTES"]; S = p["SEAWEED_PROCESS"]; Z = p["SEAWEED"]; BX = p["BIOEXTRACT"]
+    tiers = p["BIOMASS"]["tiers"]; EF = p["ETHANOL_FEEDS"]; PC = pool_content(p); stalk = x["hemp_mha"] * p["HEMP"]["stalk_t_ha"]
+    rep_ = {}
+    for el_, k_ in (("n", "N"), ("p", "P"), ("k", "K")):
+        removed = (sum(x[f"b{j}"] * CT[tier_profile(t[0])][el_] for j, t in enumerate(tiers)) + x["bamboo"] * CT["bamboo"][el_]
+                   + stalk * CT["hemp"][el_] + sum(x[f"eth_{f[0]}"] * f[5] * CT["straw"][el_] for f in EF if f[5] > 0)) / 1e3
+        src = dict(hydrochar=x["ret_htl"] * PC[el_] * NU["htl_to_solids"][el_] * NU["solids_recovery"][el_] / 1e3,
+                   digestate=x["ad"] * PC[el_] * NU["htl_to_aqueous"][el_] * NU["aqueous_recovery"][el_] / 1e3,
+                   gasifier_ash=x["ret_pbtl"] * PC[el_] * NU["pbtl_ash"][el_] / 1e3, ethanol_stillage=x["ret_cel"] * PC[el_] * NU["cel_stillage"][el_] / 1e3,
+                   offshore_seaweed=sum((x[f"kh_{z[0]}"] * NU["seaweed_htl"][el_] + x[f"kp_{z[0]}"] * NU["seaweed_pbtl"][el_]
+                                         + x.get(f"ks_{z[0]}", 0.0) * NU["seaweed_soil"][el_]) * dict(n=z[7], p=S["p"], k=S["k"])[el_] for z in Z),
+                   nearshore_seaweed=sum((x[f"bh_{z[0]}"] * NU["seaweed_htl"][el_] + x.get(f"bs_{z[0]}", 0.0) * NU["seaweed_soil"][el_])
+                                         * dict(n=z[6], p=z[7], k=z[8])[el_] / 100 for z in BX),
+                   green_manure=x["gm"] * NU["green_manure"]["n_fixed_kg_ha"] / 1e3 if el_ == "n" else 0.0,
+                   compost=x["cm"] * NU["compost"][el_] / 1e3,
+                   mineral_fertiliser=x[f"f{k_}"])
+        rep_[el_] = dict(removed_mt=removed, returned_mt=src, sold_mt=x[f"s{k_}"], balance_mt=sum(src.values()) - x[f"s{k_}"] - removed)
+    req = (sum(x[f"b{j}"] * CT[tier_profile(t[0])]["c"] * CT[tier_profile(t[0])]["humif"] for j, t in enumerate(tiers))
+           + x["bamboo"] * CT["bamboo"]["c"] * CT["bamboo"]["humif"] + stalk * CT["hemp"]["c"] * CT["hemp"]["humif"]
+           + sum(x[f"eth_{f[0]}"] * f[5] * CT["straw"]["c"] * CT["straw"]["humif"] for f in EF if f[5] > 0)) / 1e3
+    removed_c = (sum(x[f"b{j}"] * CT[tier_profile(t[0])]["c"] for j, t in enumerate(tiers)) + x["bamboo"] * CT["bamboo"]["c"] + stalk * CT["hemp"]["c"]) / 1e3
+    soil_j = [j for j, m in enumerate(p["CARBON"]) if "soil" in m[0].lower()]
+    sw_soil = sum(x.get(f"ks_{z[0]}", 0.0) for z in Z) + sum(x.get(f"bs_{z[0]}", 0.0) for z in BX)
+    soc = dict(hydrochar=x["ret_htl"] * R["htl"]["char_t_t"] * NU["hydrochar_c"] * NU["stab_hydrochar"],
+               digestate=x["ad"] * PC["c"] / 1e3 * NU["htl_to_aqueous"]["c"] * NU["digestate_c_after_ad"] * NU["hum_digestate"],
+               seaweed=sw_soil * NU["seaweed_c"] / 1e3 * NU["hum_seaweed"],
+               green_manure=x["gm"] * NU["green_manure"]["dm_t_ha"] * NU["green_manure"]["c"] / 1e3 * NU["green_manure"]["humif"],
+               compost=x["cm"] * NU["compost"]["c"] / 1e3 * NU["compost"]["humif"],
+               pyrolysis_carbon=sum(x[f"c{j}"] for j in soil_j) * NU["stab_pyro_carbon"] if p.get("pyro_carbon_in_soc", True) else 0.0)
+    rep_["soil_carbon"] = dict(residue_c_removed_mt=removed_c, stable_soc_required_mt=req, stable_soc_supplied_mt=soc,
+                               biogenic_share=(sum(soc.values()) - soc["pyrolysis_carbon"]) / max(sum(soc.values()), 1e-12),
+                               pyrolysis_carbon_to_soil_mt=sum(x[f"c{j}"] for j in soil_j), deficit_mt=x["soc_deficit"])
+    rep_["biomethane_twh"] = dict(made=x["ad"] * NU["ad_mwh_ch4_per_t"], to_pyrolysis=x["ch4_pyro"], sold=x["ch4_sold"])
+    rep_["returns_mt_feed"] = dict(hydrochar=x["ret_htl"], digested=x["ad"], ash=x["ret_pbtl"], stillage=x["ret_cel"], seaweed_to_soil=sw_soil)
+    rep_["biological_options"] = dict(green_manure_mha=x["gm"], compost_mt=x["cm"])
+    rep_["mineral_fertiliser_mt"] = dict(n=x["fN"], p=x["fP"], k=x["fK"])
+    return rep_
+
+
 def emissions_2050(p, out, eu, bl, elec_ci=None):
     R, S = p["ROUTES"], p["SEAWEED_PROCESS"]; L = out["liquids_twh"]; H = out["h2_mt"]; P = p["PYRO"]
     EM = p.get("EMIS", I.EMIS); elec_ci = EM["elec_ci"] if elec_ci is None else elec_ci
     made = H["pyrolysis"] + H["electrolysis"] + H["steam_electrolysis"] + H["sulfur_iodine"]; water_ci = P["h2_leak"] * P["gwp_h2"]
-    h2ci = ((H["pyrolysis"] * h2_ci(p, elec_ci) + H["electrolysis"] * (water_ci + p["ELECTROLYSIS"]["kwh_kg"] * elec_ci)
+    h2ci = ((H["pyrolysis"] * h2_ci(p, elec_ci, out.get("pyrolysis_biogenic_share", 0.0)) + H["electrolysis"] * (water_ci + p["ELECTROLYSIS"]["kwh_kg"] * elec_ci)
              + H["steam_electrolysis"] * (water_ci + (p["NUCLEAR_H2"]["htse"]["kwh_e_kg"] + htse_superheat_elec(p, out["hubs"] > 0) + p["NUCLEAR_H2"]["htse"]["kwh_th_kg"] * (out["hubs"] < 1e-9) / 0.98) * elec_ci)
              + H["sulfur_iodine"] * (water_ci + p["NUCLEAR_H2"]["sulfur_iodine"]["kwh_e_kg"] * elec_ci)) / made) if made > 1e-9 else water_ci
     ci = dict(residues=10.0 + EM.get("residue_soc_g_mj", 0.0), bamboo=12.0, hemp=20.0, sorghum_bagasse=12.0, seaweed=12.0, oils_hefa=R["hefa"]["ci_g_mj"],
@@ -478,10 +705,19 @@ def emissions_2050(p, out, eu, bl, elec_ci=None):
     mt = dict(electricity_lifecycle=eu["el_total"] * elec_ci, h2_direct=eu["h2_mt_direct"] * h2ci,
               liquid_fuels=sum(L[k] * 3.6 * ci[k] for k in L) / 1e3 + h2_liq, pipeline_gas_residual=eu["gas_resid_twh"] * 3.6 * I.PETRO_CI["ng"] / 1e3,
               hub_construction_fuel_cycle=out["hubs"] * p["HTGR"]["mwt"] * p["HTGR"]["cf"] * 8.76 / 1e3 * EM.get("hub_heat_ci", 0.0))
+    nu = out.get("nutrients")
+    if nu:   # CN v1.5: mineral fertiliser bought to close the balance, and methane slip from digesting HTL wastewater
+        FC = p["NUTRIENTS"]["fert_ci"]; mf = nu["mineral_fertiliser_mt"]
+        mt["mineral_fertiliser"] = mf["n"] * FC["n"] + mf["p"] * FC["p"] + mf["k"] * FC["k"]
+        mt["soil_carbon_not_replaced"] = nu["soil_carbon"]["deficit_mt"] * 44 / 12
+        mt["compost_making"] = nu["biological_options"]["compost_mt"] * p["NUTRIENTS"]["compost"]["ci_t"]
+        mt["digester_methane_slip"] = nu["biomethane_twh"]["made"] / GPK * p["NUTRIENTS"]["ad_ch4_slip"] * p["PYRO"]["gwp_ch4"]
     base = petroleum_baseline(p, eu); tot = sum(mt.values())
     return dict(by_source_mt=mt, total_mt=tot, baseline_wtw_mt=base["wtw_mt"], baseline_2025_wtw_mt=base["wtw_2025_mt"],
                 reduction_pct=100 * (1 - tot / base["wtw_mt"]), avoided_mt=base["wtw_mt"] - tot, h2_ci_kg_per_kg=h2ci,
-                biochar_removal_mt=out["biochar_mt"] * 0.6 * 44 / 12, solid_carbon_kept_out_mtco2=out["carbon_mt"] * 44 / 12)
+                biochar_removal_mt=(nu["soil_carbon"]["stable_soc_supplied_mt"]["hydrochar"] * 44 / 12) if nu else out["biochar_mt"] * 0.6 * 44 / 12,
+                hydrochar_stable_soil_carbon_mtco2=(nu["soil_carbon"]["stable_soc_supplied_mt"]["hydrochar"] * 44 / 12) if nu else 0.0,
+                solid_carbon_kept_out_mtco2=out["carbon_mt"] * 44 / 12)
 
 
 def petroleum_baseline(p, eu):
@@ -529,6 +765,8 @@ def regional_supply(p, out):
     for nm, mha, r in p["HEMP"]["regions"]:
         if hcap > 0: add(r, "hemp_mha", out["hemp"]["mha"] * mha / hcap)
     for s in out["seaweed"]: add(s["report_region"], "seaweed_mt", s["dry_mt"]); add(s["report_region"], "offshore_gw", s["wind_gw"])
+    for b in out.get("bioextraction", []):
+        add(b["report_region"], "nearshore_seaweed_mt", b["dry_mt"]); add(b["report_region"], "nearshore_n_removed_kt", b["n_removed_kt"])
     # residue-pool liquids allocated in proportion to each region's residue/bamboo/hemp-stalk tonnage
     pool_twh = out["liquids_twh"]["residues"] + out["liquids_twh"]["bamboo"]
     pool_mt = out["biomass_mt"]["residues"] + out["biomass_mt"]["bamboo"]
@@ -648,14 +886,17 @@ def solve_bounded_learning(p, max_hubs=MAX_HUBS, coarse=1, refine=1, **kw):
     for n in grid:
         r = run(n)
         if r is not None and n % 25 == 0: landscape.append(dict(hubs=n, transport_cost_bn=r["transport_cost_bn"]))
-    ok = {n: r for n, r in seen.items() if r is not None}
+    def feasible():   # CN v1.5: hub counts that close the soil-carbon balance are preferred to any that need the priced gap
+        ok_ = {n: r for n, r in seen.items() if r is not None}; closed = {n: r for n, r in ok_.items() if not r.get("soc_fallback")}
+        return closed or ok_
+    ok = feasible()
     nb = min(ok, key=lambda n: ok[n]["total_cost_bn"])
     if coarse > 1:
         for n in range(max(nb - coarse, 0), min(nb + coarse, max_hubs) + 1, refine): run(n)
-        ok = {n: r for n, r in seen.items() if r is not None}; nb = min(ok, key=lambda n: ok[n]["total_cost_bn"])
+        ok = feasible(); nb = min(ok, key=lambda n: ok[n]["total_cost_bn"])
     best = ok[nb]
     best["learning_search"] = dict(method="bounded_integer_hub_search", max_hubs=max_hubs, coarse_step=coarse, refine_step=refine,
-                                   solves=len(seen), feasible=len(ok), at_upper_bound=nb >= max_hubs - coarse, samples=landscape)
+                                   solves=len(seen), feasible=len(ok), soc_closed=not best.get("soc_fallback"), at_upper_bound=nb >= max_hubs - coarse, samples=landscape)
     return best
 
 
@@ -752,10 +993,16 @@ def monte_carlo(n=1000, seed=7, scenario="least_cost", osw_scale=None, post_gas=
         cm, cv = float(rng.triangular(0.5, 1.0, 1.5)), float(rng.triangular(0.5, 1.0, 1.3))
         p["CARBON"] = [[m[0], m[1] * (cm if j < len(p["CARBON"]) - 1 else 1), m[2] * (cv if m[2] > 0 else 1)] for j, m in enumerate(p["CARBON"])]
         dr["carbon_market_scale"] = cm; dr["carbon_value_scale"] = cv
+        hs = float(rng.triangular(0.7, 1.0, 1.4)); st = float(rng.triangular(0.3, 0.5, 0.7)); fp = float(rng.triangular(0.8, 1.0, 1.5))   # CN v1.5
+        for v_ in p["NUTRIENTS"]["content"].values(): v_["humif"] *= hs
+        p["NUTRIENTS"]["stab_hydrochar"] = st; p["FERT_PRICE"] = {k: v * fp for k, v in p["FERT_PRICE"].items()}
+        dr["humification_scale"] = hs; dr["hydrochar_stability"] = st; dr["fertiliser_price_scale"] = fp
+        bs = float(rng.triangular(0.7, 1.0, 2.0))   # CN v1.6 green manure and compost costs
+        p["NUTRIENTS"]["green_manure"]["cost_usd_ha"] *= bs; p["NUTRIENTS"]["compost"]["cost_usd_t"] *= bs; dr["biological_soil_cost_scale"] = bs
         if post_gas: p = post_gas_params(p)
         if osw_scale is not None: p["osw_scale"] = osw_scale
         try: r = solve_fleet(p, mc=True, scenario=scenario, post_gas=post_gas)
-        except RuntimeError: continue
+        except (RuntimeError, ValueError): continue
         pet = r["petroleum"]
         rows.append(dict(**dr, transport_cost_bn=r["transport_cost_bn"], hubs=r["hubs"], capex_kwt=r["capex_kwt_used"], h2_pyro_mt=r["h2_mt"]["pyrolysis"],
                          seaweed_mt=r["biomass_mt"]["seaweed"], bamboo_mt=r["biomass_mt"]["bamboo"], hemp_mha=r["hemp"]["mha"],
@@ -803,7 +1050,23 @@ ROBUST = dict(
     least_cost_no_nuclear_alkaline="No nuclear, alkaline electrolysis only",
     least_cost_food_credit="Food-heat credit inside the transport boundary (v1.1 accounting)",
     least_cost_htse_topping_3="Steam electrolysis: 3 kWh/kg electric topping",
-    least_cost_htse_no_lowT_recovery="Steam electrolysis: no low-temperature heat recovery")
+    least_cost_htse_no_lowT_recovery="Steam electrolysis: no low-temperature heat recovery",
+    least_cost_no_nutrient_balance="Without nutrient or soil-carbon constraints",
+    least_cost_no_soc_balance="Nutrient balance only, no soil-carbon balance",
+    least_cost_soc_no_pyro_carbon="Pyrolysis carbon not counted as soil carbon",
+    least_cost_humification_high="Residue humification coefficients x1.5",
+    least_cost_hydrochar_stability_low="Hydrochar carbon stability 0.3 (central 0.5)",
+    least_cost_fertiliser_price_high="Mineral fertiliser prices x1.5",
+    least_cost_bioextraction_full="Nearshore farms in eutrophic bays at full screened area",
+    least_cost_bioextraction_n_credit_10="Nearshore N removal paid USD 10/kg N (P USD 30/kg)",
+    least_cost_bioextraction_n_credit_30="Nearshore N removal paid USD 30/kg N (P USD 90/kg)",
+    post_gas_no_biomethane_pyrolysis="After gas, without biomethane pyrolysis",
+    least_cost_biological_soc="Soil carbon replaced by biological sources only (no pyrolysis carbon, no priced gap)",
+    post_gas_biological_soc="After gas, soil carbon replaced by biological sources only",
+    least_cost_no_green_manure_compost="Without green manure or compost options",
+    least_cost_biological_soc_no_compost="Biological soil carbon only, without compost (liquid shortfall priced at USD 400/MWh)",
+    least_cost_biological_soc_compost_cost_high="Biological soil carbon only, compost and green manure costs x2",
+    least_cost_soc_deficit_price_1000="Unreplaced soil carbon priced at USD 1000/t C (central 500)")
 for _n in ROBUST:
     CASES[_n] = dict(scenario="least_cost", post_gas=_n.startswith("post_gas"))
 CASES["least_cost_no_nuclear_alkaline"]["fixed_hubs"] = 0
@@ -861,6 +1124,27 @@ def case_params(name):
     if name.endswith("grid_tight") or stress:
         p["ELEC"]["td_adder"] = 35.0; p["ELEC"]["vre_firming"] = 35.0
     if stress: p["reactor_case"] = "high"
+    NU = p["NUTRIENTS"]                         # CN v1.5 nutrient and soil-carbon cases
+    if name.endswith("no_nutrient_balance"): p["nutrient_balance"] = False; p["soc_balance"] = False
+    if name.endswith("no_soc_balance"): p["soc_balance"] = False
+    if name.endswith("soc_no_pyro_carbon"): p["pyro_carbon_in_soc"] = False
+    if name.endswith("humification_high"):
+        for v in NU["content"].values(): v["humif"] *= 1.5
+    if name.endswith("hydrochar_stability_low"): NU["stab_hydrochar"] = 0.3
+    if name.endswith("fertiliser_price_high"): p["FERT_PRICE"] = {k: v * 1.5 for k, v in p["FERT_PRICE"].items()}
+    if name.endswith("bioextraction_full"): p["bioextract_force"] = True
+    for cr in (10, 30):
+        if name.endswith(f"bioextraction_n_credit_{cr}"): p["bx_n_credit_usd_kg"] = float(cr); p["bx_p_credit_usd_kg"] = 3.0 * cr
+    if name.endswith("no_biomethane_pyrolysis"): p["biogenic_pyrolysis"] = False
+    if "biological_soc" in name:   # CN v1.6: biological soil functions not delegated to inert carbon, gap not allowed
+        p["pyro_carbon_in_soc"] = False; NU["biogenic_min_share"] = 1.0; p["soc_gap_allowed"] = False
+    if name.endswith("no_green_manure_compost"): NU["green_manure"]["max_mha"] = 0.0; NU["compost"]["max_mt"] = 0.0
+    if name.endswith("soc_no_compost"):
+        # without compost the strict balance cannot be met at full liquid demand; liquids the domestic system cannot then
+        # supply are allowed as an explicit shortfall priced at USD 400/MWh, so the size of the infeasibility is reported
+        NU["compost"]["max_mt"] = 0.0; p["ELEC"]["liq_import_cap_twh"] = 1e4; p["ELEC"]["liq_import_usd_mwh"] = 400.0
+    if name.endswith("compost_cost_high"): NU["compost"]["cost_usd_t"] *= 2; NU["green_manure"]["cost_usd_ha"] *= 2
+    if name.endswith("soc_deficit_price_1000"): NU["soc_deficit_usd_t_c"] = 1000.0
     return p
 
 
@@ -880,13 +1164,16 @@ def emissions_boundary(r, p):
     return out
 
 
-def lull_screen(r, p):
-    """Stylised wind-lull adequacy screen (CN v1.3): can firm plant plus residual wind and sun carry the inflexible
-    transport load through a windless week once all flexible loads stop?  Returns the shortfall, the energy and backup
-    capacity needed to cover it and an indicative cost that the annual optimisation does not include."""
-    L = I.LULL; g = r["gw"]; eu = r["enduse"]; HT = p["HTGR"]
+def lull_screen(r, p, **override):
+    """Stylised wind-lull adequacy screen: can firm plant plus residual wind and sun carry the inflexible transport load
+    through a windless week once all flexible loads stop?  Returns the shortfall, the energy and backup capacity needed to
+    cover it and an indicative cost that the annual optimisation does not include.  The cost is a lower bound: hydrogen
+    storage, extra electrolyser capacity to replace lost output and hydrogen delivery to the backup plant are not priced.
+    turbine_share is the fraction of full reactor heat the hub turbine-generators can accept (1.0 = sized like the HTR-PM
+    demonstration plant, which converts all reactor heat to electricity)."""
+    L = {**I.LULL, **override}; g = r["gw"]; eu = r["enduse"]; HT = p["HTGR"]
     inflex = eu["el_total"] / 8.76 * L["load_factor"]                                   # GW
-    hub_gw = r["hubs"] * HT["mwt"] * HT.get("eta_cond", 0.40) * L["hub_availability"] / 1e3
+    hub_gw = r["hubs"] * HT["mwt"] * HT.get("eta_cond", 0.40) * L["hub_availability"] * L.get("turbine_share", 1.0) / 1e3
     lwr_gw = r["el_supply_twh"]["lwr"] / 8.76 / 0.90 * L["lwr_availability"] if r["el_supply_twh"]["lwr"] > 0 else 0.0
     var = g["onshore_wind"] * L["wind_cf"] + g.get("offshore_wind", 0.0) * L["offshore_cf"] + g["solar"] * L["solar_cf"] + g["csp"] * L["csp_cf"]
     short = max(0.0, inflex - hub_gw - lwr_gw - var); e_twh = short * 24 * L["days"] / 1e3
@@ -899,6 +1186,49 @@ def lull_screen(r, p):
                 shortfall_twh=e_twh, backup_capacity_bn=cap_bn, backup_h2_mt=h2_mt, backup_fuel_bn=fuel_bn,
                 indicative_cost_bn=cap_bn + fuel_bn, indicative_cost_pct=100 * (cap_bn + fuel_bn) / r["transport_cost_bn"],
                 h2_production_lost_mt=h2_lost)
+
+
+LULL_VARIANTS = dict(submitted={}, zero_wind=dict(wind_cf=0.0, offshore_cf=0.0),
+                     zero_wind_availability_80=dict(wind_cf=0.0, offshore_cf=0.0, hub_availability=0.80, lwr_availability=0.80),
+                     zero_wind_turbines_60pct=dict(wind_cf=0.0, offshore_cf=0.0, turbine_share=0.60),
+                     zero_wind_14_days=dict(wind_cf=0.0, offshore_cf=0.0, days=14.0))
+
+
+LULL_BRACKET = dict(   # CN v1.6: what the lower-bound screen leaves out, priced at assumed values [A]
+    plausible=dict(override={}, reserve_margin=0.15, storage_usd_kg=25.0, transmission_usd_kw=150.0),
+    high=dict(override=dict(wind_cf=0.0, offshore_cf=0.0, days=14.0), reserve_margin=0.20, storage_usd_kg=100.0, transmission_usd_kw=300.0))
+
+
+def lull_bracket(r, p):
+    """Lower-bound backup cost (lull_screen) against plausible and high estimates that add a reserve margin on the backup
+    plant, hydrogen storage for one lull's backup fuel plus the vehicles' hydrogen demand during the lull, extra
+    hydrogen-production capacity to make up output lost during lulls, and transmission to deliver backup power.
+    Still not an hourly dispatch or reliability study."""
+    out = {}; lo = lull_screen(r, p)
+    out["lower_bound"] = dict(shortfall_gw=lo["shortfall_gw"], cost_bn=lo["indicative_cost_bn"])
+    crf30 = 0.05 / (1 - 1.05 ** -30); crf40 = 0.05 / (1 - 1.05 ** -40)
+    for k, B in LULL_BRACKET.items():
+        L = {**I.LULL, **B["override"]}; s = lull_screen(r, p, **B["override"]); gw = s["shortfall_gw"] * (1 + B["reserve_margin"])
+        cap_bn = gw * L["backup_capex_usd_kw"] * (0.05 / (1 - 1.05 ** -L["backup_life_yr"])) / 1e3
+        fuel_bn = s["backup_fuel_bn"]
+        h2_event = s["shortfall_twh"] / L["h2_to_power_eff"] / 33.3                        # Mt H2 burned in one lull
+        h2_buffer = r["enduse"].get("h2_mt_direct", 0.0) * L["days"] / 365.0                     # vehicle hydrogen during the lull
+        storage_bn = (h2_event + h2_buffer) * B["storage_usd_kg"] * (crf30 + 0.02)
+        htse = r["h2_mt"]["steam_electrolysis"]; ely = r["h2_mt"]["electrolysis"]; f = L["days"] / (365.0 - L["days"])
+        makeup_bn = (htse * p["NUCLEAR_H2"]["htse"]["capex_cost_kg"] + ely * p["ELECTROLYSIS"]["capex_cost_kg"]) * f
+        trans_bn = gw * B["transmission_usd_kw"] * crf40 / 1e3
+        tot = cap_bn + fuel_bn + storage_bn + makeup_bn + trans_bn
+        out[k] = dict(shortfall_gw=s["shortfall_gw"], backup_gw=gw, capacity_bn=cap_bn, fuel_bn=fuel_bn, storage_bn=storage_bn,
+                      production_makeup_bn=makeup_bn, transmission_bn=trans_bn, cost_bn=tot, h2_storage_mt=h2_event + h2_buffer)
+    for k, v in out.items():
+        c = r["transport_cost_bn"] + v["cost_bn"]; v["system_cost_bn"] = c
+        v["saving_pct"] = 100 * (1 - c / r["petroleum"]["late_2025_bn"])
+    return out
+
+
+def lull_sensitivity(res, cases=("least_cost", "post_gas_least_cost", "least_cost_no_nuclear")):
+    """Wind-lull screen under harsher weather, availability, turbine-sizing and duration assumptions."""
+    return {c: {v: lull_screen(res[c], case_params(c), **o) for v, o in LULL_VARIANTS.items()} for c in cases}
 
 
 def feasibility(r, p, build_start=2032, end=2050, wind_start=2026):
@@ -935,8 +1265,20 @@ def main(n_mc=1000):
                emissions_boundary=emissions_boundary(res["least_cost"], lc_p),
                lull_screen={n: lull_screen(res[n], case_params(n)) for n in ("least_cost", "post_gas_least_cost", "least_cost_no_nuclear",
                                                                             "least_cost_hub_cap_30", "least_cost_reactor_high")},
+               lull_sensitivity=lull_sensitivity(res),
                feasibility={n: feasibility(res[n], case_params(n)) for n in ("least_cost", "post_gas_least_cost", "least_cost_hub_cap_60", "least_cost_stress_moderate")},
-               carbon_by_durability_mt=res["least_cost"]["carbon_by_durability_mt"])
+               carbon_by_durability_mt=res["least_cost"]["carbon_by_durability_mt"],
+               nutrients={n: dict(nutrients=res[n]["nutrients"], bioextraction=res[n]["bioextraction"], routes_mt=res[n]["routes_mt"],
+                                  gas_for_pyrolysis_bcm=res[n]["gas_for_pyrolysis_bcm"], biomethane_to_pyrolysis_bcm=res[n]["biomethane_to_pyrolysis_bcm"],
+                                  pyrolysis_biogenic_share=res[n]["pyrolysis_biogenic_share"], liq_import_twh=res[n]["liq_import_twh"],
+                                  residues_mt=res[n]["biomass_mt"]["residues"], cost_lines_bn={k: res[n]["costs_bn"][k] for k in
+                                  ("nutrient_and_carbon_return", "mineral_fertiliser", "nearshore_seaweed_farms", "seaweed_to_soil_handling", "green_manure_and_compost")},
+                                  biological_options=res[n]["nutrients"]["biological_options"], soc_fallback=res[n]["soc_fallback"],
+                                  credit_lines_bn={k: res[n]["credits_bn"][k] for k in ("biomethane_sold", "recovered_nutrients_sold", "nearshore_nutrient_removal_payment")},
+                                  emissions_lines_mt={k: res[n]["emissions"]["by_source_mt"].get(k, 0.0) for k in ("mineral_fertiliser", "digester_methane_slip", "compost_making", "soil_carbon_not_replaced")})
+                          for n in ("least_cost", "post_gas_least_cost", "design_half_offshore", "least_cost_bioextraction_full",
+                                    "least_cost_soc_no_pyro_carbon", "post_gas_no_biomethane_pyrolysis", "least_cost_no_nutrient_balance",
+                                    "least_cost_biological_soc", "post_gas_biological_soc") if n in res})
     json.dump(rob, open(OUT / "cn_robustness.json", "w"), indent=1, default=float)
     d = res["least_cost"]; p = default_params()
     json.dump({c: reactor_cost(c, max(int(round(d["reactors"])), 1)) for c in ("low", "central", "high")} | {"anchors": I.REACTOR_ANCHORS,
@@ -961,7 +1303,8 @@ def main(n_mc=1000):
         summ[nm]["p_cheaper_2026"] = float(np.mean([r["transport_cost_bn"] < r["petro_2026"] for r in rows]))
         summ[nm]["p_saving_ge_23pct"] = float(np.mean([r["saving_pct"] >= 23.0 for r in rows])); summ[nm]["n"] = len(rows)
     from scipy.stats import spearmanr
-    keys = [k for k in mcl[0] if "/" in k or k in ("WACC", "yield_level", "reactor_case", "carbon_market_scale", "carbon_value_scale", "biomass_price_scale", "ethanol_cost_scale")]
+    keys = [k for k in mcl[0] if "/" in k or k in ("WACC", "yield_level", "reactor_case", "carbon_market_scale", "carbon_value_scale", "biomass_price_scale", "ethanol_cost_scale",
+                                          "humification_scale", "hydrochar_stability", "fertiliser_price_scale", "biological_soil_cost_scale")]
     y = [r["transport_cost_bn"] for r in mcl]
     summ["sensitivity_least_cost"] = {k: float(spearmanr([r[k] for r in mcl], y)[0]) for k in keys}
     json.dump(summ, open(OUT / "cn_monte_carlo_summary.json", "w"), indent=1)

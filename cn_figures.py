@@ -1,4 +1,4 @@
-"""Figures for CN v1.3 (Clean Energy format: 177 mm wide, 300 dpi; PNG for the manuscript, TIFF for submission).
+"""Figures for CN v1.6 (Clean Energy format: 177 mm wide, 300 dpi; PNG for the manuscript, TIFF for submission).
 Reads the stored outputs in this folder.  Colours: validated categorical palette, fixed slot order."""
 import csv, json
 from pathlib import Path
@@ -82,6 +82,8 @@ def fig2():
     colmap = {"cold_kelp": C[2], "kelp_red_rotation": C[6], "red_green": C[5], "tropical_red": C[4]}
     for z in I.SEAWEED + I.SEAWEED_TAIWAN:
         x0, y0, w, h = z[11]; ax.add_patch(Rectangle((x0, y0), w, h, fc=colmap[z[12]], alpha=0.75, ec="white", lw=0.6, zorder=4))
+    for z in I.BIOEXTRACT:   # CN v1.5 nearshore farms in nutrient-polluted bays
+        ax.plot(z[10], z[11], "^", ms=6.5, mfc=C[5], mec=INK, mew=0.6, zorder=6)
     import matplotlib.patheffects as pe
     halo = [pe.withStroke(linewidth=2.2, foreground="white")]
     for x, y, t in BM.BIOMASS_LABELS: ax.text(x, y, t, fontsize=5.6, color=C[5], ha="center", va="center", zorder=7, path_effects=halo)
@@ -98,7 +100,8 @@ def fig2():
           Line2D([], [], ls="", marker="*", mfc=C[1], mec="white", ms=10, label="Desert wind, solar and CSP bases"),
           Patch(fc=C[3], alpha=0.3, label="Autonomous regions"), Patch(fc=C[2], label="Offshore wind + kelp (Saccharina)"),
           Patch(fc=C[6], label="Offshore wind + kelp/red rotation"), Patch(fc=C[5], label="Offshore wind + Gracilaria/Ulva"),
-          Patch(fc=C[4], label="Offshore wind + tropical reds")]
+          Patch(fc=C[4], label="Offshore wind + tropical reds"),
+          Line2D([], [], ls="", marker="^", mfc=C[5], mec=INK, mew=0.6, ms=6.5, label="Nearshore seaweed in eutrophic bays")]
     ax.legend(handles=hl, loc="upper center", bbox_to_anchor=(0.5, 0.0), fontsize=6.2, ncol=3, frameon=False, columnspacing=1.2, handlelength=1.6)
     ax.set_xlim(72, 136); ax.set_ylim(15.5, 54.5); ax.set_aspect(1.15); ax.set_xticks([]); ax.set_yticks([])
     for s in ax.spines.values(): s.set_visible(False)
@@ -112,12 +115,14 @@ GROUPS = [("Electricity, grids, charging, electric roads", ("electricity_generat
           ("Land biofuels", ("land_biomass", "hemp_net_of_meal", "biorefineries", "hefa_oils", "sugar_starch_ethanol")),
           ("Offshore seaweed", ("seaweed_farms_harvest_haul", "seaweed_refining")),
           ("Vehicles and machines (net)", ("vehicles_and_machines_net",)),
-          ("Other (heat equipment, residual gas, imports)", ("process_heat_equipment", "residual_pipeline_gas", "imported_renewable_fuel"))]
+          ("Other (heat equipment, residual gas, imports)", ("process_heat_equipment", "residual_pipeline_gas", "imported_renewable_fuel")),
+          ("Nutrient and soil-carbon return, fertiliser, nearshore farms", ("nutrient_and_carbon_return", "mineral_fertiliser", "nearshore_seaweed_farms", "seaweed_to_soil_handling", "soil_carbon_deficit",
+                                                                            "green_manure_and_compost"))]
 
 
 def fig3():
-    cases = [("least_cost", "Least cost"), ("design_half_offshore", "230 GW\noffshore"), ("post_gas_least_cost", "After gas"),
-             ("least_cost_no_nuclear", "No nuclear"), ("sustainable_fission_tmsr", "Thorium MSR\nfleet")]
+    cases = [("least_cost", "Least\ncost"), ("design_half_offshore", "230 GW\noffshore"), ("post_gas_least_cost", "After\ngas"),
+             ("least_cost_no_nuclear", "No\nnuclear"), ("sustainable_fission_tmsr", "Thorium\nMSR")]
     fig, (a, b) = plt.subplots(1, 2, figsize=(W, 3.7), gridspec_kw=dict(width_ratios=[1.45, 1]))
     pet = S["least_cost"]["petroleum"]
     a.bar(0, pet["late_2025_bn"], 0.62, color=GREY, edgecolor="white"); a.bar(1, pet["nov_2026_bn"], 0.62, color="#b5b4ae", edgecolor="white")
@@ -126,14 +131,16 @@ def fig3():
         r = S[k]; bot = 0; x = i + 2
         for j, (gn, keys) in enumerate(GROUPS):
             v = sum(r["costs_bn"].get(kk, 0.0) for kk in keys)
-            if v > 0: a.bar(x, v, 0.62, bottom=bot, color=C[j], edgecolor="white", linewidth=1.0, label=gn if i == 0 else None); bot += v
-        cr = sum(r["credits_bn"].values()); a.bar(x, cr, 0.62, color=C[7], edgecolor="white", label="Credits (carbon, heat, power)" if i == 0 else None)
+            if v > 0: a.bar(x, v, 0.62, bottom=bot, color=C[j], edgecolor="white", linewidth=1.0); bot += v
+        cr = sum(r["credits_bn"].values()); a.bar(x, cr, 0.62, color=C[7], edgecolor="white")
         a.plot([x - 0.31, x + 0.31], [r["transport_cost_bn"]] * 2, color=INK, lw=1.2)
         a.text(x, bot + 8, f"{r['transport_cost_bn']:.0f}", ha="center")
     a.axhline(0, color=INK2, lw=0.6)
-    a.set_xticks(range(len(cases) + 2), ["Petroleum\nlate 2025", "Petroleum\nNov 2026"] + [l for _, l in cases], fontsize=6.0, rotation=40, ha="right", rotation_mode="anchor")
+    a.set_xticks(range(len(cases) + 2), ["Petrol.\nlate\n2025", "Petrol.\nNov\n2026"] + [l for _, l in cases], fontsize=5.6)
     a.set_ylabel("2050 annual cost (US\\$ bn, 2026)"); a.grid(axis="x", visible=False)
-    a.legend(fontsize=5.8, loc="upper center", ncol=2, bbox_to_anchor=(0.5, -0.32))
+    from matplotlib.patches import Patch   # CN v1.6: every cost group in the legend, whether or not the first bar uses it
+    hd = [Patch(fc=C[j], label=gn) for j, (gn, _) in enumerate(GROUPS)] + [Patch(fc=C[7], label="Credits (carbon, biomethane, nutrients, power)")]
+    a.legend(handles=hd, fontsize=5.6, loc="upper center", ncol=2, bbox_to_anchor=(0.5, -0.24))
     a.set_ylim(-45, 600); panel(a, "A")
     sv = [("China, least cost", S["least_cost"]["saving_vs_late_2025_pct"], C[0]), ("China, 230 GW offshore", S["design_half_offshore"]["saving_vs_late_2025_pct"], C[0]),
           ("China, after gas", S["post_gas_least_cost"]["saving_vs_late_2025_pct"], C[2]), ("China, no nuclear", S["least_cost_no_nuclear"]["saving_vs_late_2025_pct"], C[2]),
@@ -289,7 +296,7 @@ def figS():
 
 
 def figS5():
-    """Robustness and stress cases against petroleum (CN v1.3)."""
+    """Robustness and stress cases against petroleum (CN v1.6)."""
     RB = json.load(open(H / "cn_robustness.json"))["cases"]
     short = dict(least_cost_bev_tco_low="Electric-car cost, low derivation", least_cost_fleet_500="Car stock 500 million",
                  least_cost_fleet_350="Car stock 350 million", least_cost_hub_cap_60="At most 60 hubs", least_cost_hub_cap_30="At most 30 hubs",
@@ -298,10 +305,15 @@ def figS5():
                  least_cost_bev_net_zero="No electric-car cost advantage", least_cost_bev_plus100="Electric cars +100 USD/yr",
                  least_cost_bev_plus100_no_carbon="Electric cars +100, no carbon revenue", least_cost_stress_moderate="Combined, moderate",
                  post_gas_stress_moderate="Combined, moderate, after gas", least_cost_bev_tco_high="Electric-car cost, high derivation",
-                 least_cost_stress_severe="Combined, severe")
+                 least_cost_stress_severe="Combined, severe",
+                 least_cost_no_nutrient_balance="Without nutrient or soil-carbon constraints", least_cost_humification_high="Humification ×1.5",
+                 least_cost_fertiliser_price_high="Fertiliser prices ×1.5", least_cost_bioextraction_full="Eutrophic bays farmed in full",
+                 least_cost_bioextraction_n_credit_30="Bays farmed, N paid 30 USD/kg",
+                 least_cost_soc_no_pyro_carbon="Pyrolysis carbon not soil carbon", post_gas_no_biomethane_pyrolysis="After gas, no biomethane pyrolysis",
+                 least_cost_biological_soc="Biological soil carbon only", least_cost_biological_soc_no_compost="Biological soil C, no compost")
     rows = [("Central case", S["least_cost"]["transport_cost_bn"])] + sorted(((short[k], v["transport_cost_bn"]) for k, v in RB.items() if k in short), key=lambda t: t[1])
     pet, pet26 = S["least_cost"]["petroleum"]["late_2025_bn"], S["least_cost"]["petroleum"]["nov_2026_bn"]
-    fig, a = plt.subplots(figsize=(W * 0.75, 3.6)); y = np.arange(len(rows))[::-1]
+    fig, a = plt.subplots(figsize=(W * 0.75, 4.4)); y = np.arange(len(rows))[::-1]
     a.barh(y, [v for _, v in rows], 0.62, color=[C[0] if v < pet else C[7] for _, v in rows], edgecolor="white")
     for yy, (_, v) in zip(y, rows): a.text(v + 6, yy, f"{v:.0f}", va="center", fontsize=6)
     a.axvline(pet, color=GREY, ls="--", lw=0.9); a.axvline(pet26, color=GREY, ls=":", lw=0.9)
@@ -310,6 +322,97 @@ def figS5():
     a.set_xlim(0, max(v for _, v in rows) * 1.12); fig.tight_layout(); save(fig, "FigS5_robustness")
 
 
+# ------------------------------------------------------------------ Fig 9: nutrient and soil-carbon balance (CN v1.5)
+SRC = [("hydrochar", "HTL hydrochar"), ("digestate", "Digested HTL wastewater"), ("gasifier_ash", "Gasifier ash"),
+       ("ethanol_stillage", "Ethanol stillage"), ("offshore_seaweed", "Offshore seaweed"), ("nearshore_seaweed", "Nearshore seaweed"),
+       ("green_manure", "Green manure"), ("compost", "Manure compost"), ("mineral_fertiliser", "Mineral fertiliser")]
+
+
+SRC_COL = dict(hydrochar=C[0], digestate=C[1], green_manure=C[2], compost=C[3], ethanol_stillage=C[4], nearshore_seaweed=C[5],
+               gasifier_ash=C[6], offshore_seaweed="#8fd19e", mineral_fertiliser=GREY, seaweed=C[5], pyrolysis_carbon=INK2)
+
+
+def fig9():
+    fig, (a, b, c) = plt.subplots(1, 3, figsize=(W, 2.9), gridspec_kw=dict(width_ratios=[1.15, 1.15, 1]))
+    lc = S["least_cost"]["nutrients"]; pg = S["post_gas_least_cost"]["nutrients"]
+    bars = [("N", lc["n"]), ("P", lc["p"]), ("K", lc["k"]), ("N", pg["n"]), ("P", pg["p"]), ("K", pg["k"])]
+    xs = [0, 1, 2, 3.6, 4.6, 5.6]
+    for x, (el, e) in zip(xs, bars):
+        bot = 0.0; rem = e["removed_mt"]
+        for j, (k, lab) in enumerate(SRC):
+            v = 100 * e["returned_mt"][k] / rem
+            if v > 0.05:
+                a.bar(x, v, 0.72, bottom=bot, color=SRC_COL[k], edgecolor="white", lw=1.0,
+                      label=lab if x == 0 or (lab not in [h.get_label() for h in a.patches]) else None); bot += v
+        a.text(x, bot + 2, f"{rem:.2f}", ha="center", fontsize=5.6, color=INK2)
+    hs, ls_ = a.get_legend_handles_labels(); seen = {}
+    for h, l in zip(hs, ls_): seen.setdefault(l, h)
+    a.axhline(100, color=INK, lw=0.7, ls="--")
+    top = max(100 * sum(e["returned_mt"].values()) / e["removed_mt"] for _, e in bars)
+    a.set_xticks(xs, [el for el, _ in bars]); a.set_ylabel("Returned, % of nutrient removed"); a.set_ylim(0, max(125, top + 18)); a.grid(axis="x", visible=False)
+    a.text(1, -0.17, "Least cost", ha="center", fontsize=6.5, transform=a.get_xaxis_transform()); a.text(4.6, -0.17, "After gas", ha="center", fontsize=6.5, transform=a.get_xaxis_transform())
+    a.legend(seen.values(), seen.keys(), fontsize=5.4, loc="upper center", bbox_to_anchor=(0.55, -0.26), ncol=2, handlelength=1.0, columnspacing=0.8)
+    panel(a, "A")
+    cases = [("least_cost", "Least\ncost"), ("post_gas_least_cost", "After\ngas"), ("least_cost_biological_soc", "Biol.\nonly"),
+             ("least_cost_biological_soc_no_compost", "Biol., no\ncompost")]
+    socs = [(k_, n_, SRC_COL[k_]) for k_, n_ in (("hydrochar", "HTL hydrochar"), ("digestate", "Digestate"), ("seaweed", "Seaweed"),
+                                                  ("green_manure", "Green manure"), ("compost", "Manure compost"), ("pyrolysis_carbon", "Pyrolysis carbon"))]
+    for i, (k, lab) in enumerate(cases):
+        sc = S[k]["nutrients"]["soil_carbon"]; bot = 0.0
+        for kk, nm, col in socs:
+            v = sc["stable_soc_supplied_mt"].get(kk, 0.0)
+            if v > 1e-6: b.bar(i, v, 0.66, bottom=bot, color=col, edgecolor="white", lw=1.0, label=nm if nm not in [t.get_text() for t in []] else None); bot += v
+        gap = sc.get("deficit_mt", 0.0)
+        if gap > 1e-6: b.bar(i, gap, 0.66, bottom=bot, color="white", edgecolor=GREY, hatch="////", lw=0.6, label="Not replaced (priced gap)"); bot += gap
+        b.plot([i - 0.38, i + 0.38], [sc["stable_soc_required_mt"]] * 2, color=C[7], lw=1.6)
+        extra = f"\n{S[k]['liq_import_twh']:.0f} TWh\nliquids short" if S[k]["liq_import_twh"] > 1 else ""
+        b.text(i, max(bot, sc["stable_soc_required_mt"]) + 0.8, f"{S[k]['biomass_mt']['residues']:.0f} Mt\nresidues{extra}", ha="center", va="bottom", fontsize=5.0, color=INK2)
+    hs, ls_ = b.get_legend_handles_labels(); seen = {}
+    for h, l in zip(hs, ls_): seen.setdefault(l, h)
+    from matplotlib.lines import Line2D
+    seen["Required (residue C that\nwould have become SOC)"] = Line2D([], [], color=C[7], lw=1.6)
+    b.set_xticks(range(len(cases)), [l for _, l in cases], fontsize=5.8); b.set_ylabel("Stable soil carbon (Mt C/yr)"); b.grid(axis="x", visible=False)
+    b.set_ylim(0, max(S[k]["nutrients"]["soil_carbon"]["stable_soc_required_mt"] for k, _ in cases) * 1.55)
+    b.legend(seen.values(), seen.keys(), fontsize=5.2, loc="upper center", bbox_to_anchor=(0.5, -0.2), ncol=2, handlelength=1.0, columnspacing=0.6)
+    panel(b, "B")
+    bx = S["design_half_offshore"]["bioextraction"]; nm = {"liaodong_bay": "Liaodong Bay", "haizhou_bay": "Haizhou Bay", "yangtze_plume": "Yangtze plume",
+                                                           "fujian_bays": "Fujian bays", "pearl_river": "Pearl River", "beibu_qinzhou": "Qinzhou Bay"}
+    y = np.arange(len(bx))[::-1]
+    c.barh(y, [z["n_removed_kt"] for z in bx], 0.62, color=C[5], edgecolor="white")
+    for yy, z in zip(y, bx): c.text(z["n_removed_kt"] + 1, yy, f"{z['n_removed_kt']:.0f} N, {z['p_removed_kt']:.1f} P", va="center", fontsize=5.6)
+    c.set_yticks(y, [nm[z["zone"]] for z in bx], fontsize=6); c.set_xlabel("Removed from the water (kt/yr)")
+    c.set_xlim(0, max(z["n_removed_kt"] for z in bx) * 1.75); c.grid(axis="y", visible=False)
+    tot = sum(z["n_removed_kt"] for z in bx)
+    c.set_title(f"Total {tot:.0f} kt N/yr; all Chinese\nseaweed farms now ~75 kt N/yr", fontsize=5.8, color=INK2, loc="right")
+    panel(c, "C")
+    fig.tight_layout(); fig.subplots_adjust(bottom=0.36); save(fig, "Fig9_nutrient_soil_carbon")
+
+
+# ------------------------------------------------------------------ Graphical abstract (CN v1.6): 5:2, 300 dpi
+def graphical_abstract():
+    MC = json.load(open(H / "cn_monte_carlo_summary.json")); RB_ = json.load(open(H / "cn_robustness.json"))
+    lc = S["least_cost"]; br = RB_["lull_bracket"]["least_cost"]
+    fig = plt.figure(figsize=(10, 4), dpi=300)
+    fig.text(0.03, 0.90, "A petroleum-free transport system for China in 2050: annual least-cost planning model", fontsize=13, fontweight="bold", color=INK)
+    fig.text(0.03, 0.82, "Electric vehicles and roads  ·  reactor heat hubs  ·  residue, bamboo, hemp and seaweed fuels  ·  nutrients and soil carbon returned to fields",
+             fontsize=8.5, color=INK2)
+    tiles = [(f"{lc['saving_vs_late_2025_pct']:.1f}%", "cheaper than petroleum\n(central case, late-2025 prices)", C[0]),
+             (f"{MC['least_cost']['saving_pct']['p50']:.1f}%", f"median saving across\n{MC['least_cost']['n']:,} uncertainty draws", C[1]),
+             (f"{br['plausible']['saving_pct']:.1f}%", "saving after plausible\nwind-lull backup costs", C[2]),
+             (f"{lc['emissions']['reduction_pct']:.0f}%", "lower well-to-wheel\nemissions", C[5])]
+    for i, (big, small, col) in enumerate(tiles):
+        x0 = 0.03 + i * 0.24
+        ax = fig.add_axes([x0, 0.22, 0.215, 0.5]); ax.set_xticks([]); ax.set_yticks([])
+        for s_ in ax.spines.values(): s_.set_visible(False)
+        ax.add_patch(plt.Rectangle((0, 0), 1, 1, transform=ax.transAxes, color=col, alpha=0.10, lw=0))
+        ax.add_patch(plt.Rectangle((0, 0), 0.025, 1, transform=ax.transAxes, color=col, lw=0))
+        ax.text(0.09, 0.62, big, fontsize=30, fontweight="bold", color=INK, transform=ax.transAxes, va="center")
+        ax.text(0.09, 0.22, small, fontsize=8.2, color=INK2, transform=ax.transAxes, va="center")
+    fig.text(0.03, 0.08, "Conditional on battery-electric cars costing no more to own than petrol cars; annual resource adequacy, not hourly operation.",
+             fontsize=8, color=INK2, style="italic")
+    fig.savefig(H / "graphical_abstract.png"); fig.savefig(H / "graphical_abstract.tif", pil_kwargs={"compression": "tiff_lzw"}); plt.close(fig)
+
+
 if __name__ == "__main__":
-    for f in (fig1, fig2, fig3, fig4, fig5, fig6, fig7, fig8, figS, figS5): f()
+    for f in (fig1, fig2, fig3, fig4, fig5, fig6, fig7, fig8, fig9, figS, figS5, graphical_abstract): f()
     print("figures written")

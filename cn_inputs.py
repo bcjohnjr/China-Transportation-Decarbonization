@@ -1,4 +1,4 @@
-"""Inputs, China transport-energy model CN v1.3 (USD 2026).  Tags: [S] sourced, [A] modeller assumption (varied in the
+"""Inputs, China transport-energy model CN v1.6.2 (USD 2026).  Tags: [S] sourced, [A] modeller assumption (varied in the
 Monte Carlo where it matters), [U] carried over unchanged from the U.S. model v8.4 (bcjohnjr/United-States-...).
 Not forecasts.
 
@@ -9,7 +9,7 @@ so modelled inside the mainland system) and Taiwan (a separate island grid, mode
 Scope (same as the U.S. model): all aviation and on-road transport, rail, domestic and bunkered marine fuel, farm
 machinery, construction and mining machinery, industrial trucks and pipeline compression.  2026 U.S. dollars.
 
-Sources used for the 2025 baseline (see SUPPLEMENTARY_MATERIALS_CN_V1.3.md, table S1):
+Sources used for the 2025 baseline (see SUPPLEMENTARY_MATERIALS_CN_V1.6.2.md, table S1):
   CAPE/SunSirs 2025 review: gasoline 155 Mt, diesel 203 Mt, kerosene/jet 40.21 Mt; gas 426.6 bcm, import share 41.3%.
   ICIS: transport gas 44.14 bcm in 2026, +3.5% y/y -> 42.6 bcm in 2025.  Zhoushan/customs: ~20 Mt bonded bunkers.
   EIA Taiwan brief (2026): gasoline 188 kb/d, diesel 116 kb/d, jet 68.8 kb/d (2024).
@@ -17,7 +17,10 @@ Sources used for the 2025 baseline (see SUPPLEMENTARY_MATERIALS_CN_V1.3.md, tabl
 QUAD_TWH = 293.07; TCF_TWH = 302.0; TCF_MT_CH4 = 19.3; H2_LHV_KWH_KG = 33.33
 BCM_TCF = 0.035315                     # 1 bcm = 0.0353 Tcf
 BCM_TWH = 9.9                          # LHV of Chinese pipeline gas, ~35.6 MJ/m3 [A]
-KWH_PER_KG = dict(gasoline=12.06, diesel=11.89, jet=12.00, resid=11.22)   # LHV [S: IPCC 2006 defaults]
+GAS_HHV_LHV = 1.109                    # methane 55.5/50.0 MJ/kg; prices are per MMBtu HHV
+DIESEL_LHV_HHV = 128450.0 / 137381.0     # 0.935: diesel LHV/HHV per gallon [S: GREET; EIA]
+KWH_PER_KG = dict(gasoline=12.06, diesel=11.89, jet=12.00, resid=11.22)   # LHV, 43.4/42.8/43.2/40.4 GJ/t [A: between
+# GB/T 2589-2020 (43.07/42.65/43.07/41.82) and IPCC 2006 defaults (44.3/43.0/44.1/40.4); residual oil = IPCC]
 WACC = 0.05                            # [A] state-owned infrastructure finance in China (U.S. model: 7%); MC 4-8%
 FX = dict(late_2025=7.08, nov_2026=6.71)   # CNY per USD [S: PBoC central parity 25 Nov 2025; 18 Nov 2026]
 
@@ -78,8 +81,12 @@ ENDUSE = dict(
     re_fuel_share=0.25,
     # Energy at the meter (or H2 LHV) per unit of displaced liquid-fuel energy.  CN v1.0 corrects the U.S. v8.4 heavy-truck
     # ratios, which divided kWh/mi by MJ/mi: 2.40 kWh/mi / (21.1 MJ/mi / 3.6) = 0.41, and 4.44 kWh_H2/mi -> 0.76.
+    # CN v1.6.2: 21.1 MJ/mi is 144.9 MJ/gal (EIA heat content, a higher heating value) / 6.87 mpg, but the model's diesel
+    # demand is on a lower-heating-value basis (Mt x 42.8 GJ/t).  On the LHV basis (128,450 / 137,381 Btu/gal [S: GREET;
+    # EIA]) the diesel truck uses 19.7 MJ/mi, so the ratios are 0.44 and 0.81.  The U.S. cross-check keeps 0.41/0.76
+    # because U.S. demand is in EIA (HHV) quads.
     r_ldv_bev=0.33 / 1.41, r_ldv_fcev=0.55 / 1.41,
-    r_hdv_elec=2.40 * 3.6 / 21.1, r_hdv_fcev=4.44 * 3.6 / 21.1,
+    r_hdv_elec=2.40 * 3.6 / (21.1 * DIESEL_LHV_HHV), r_hdv_fcev=4.44 * 3.6 / (21.1 * DIESEL_LHV_HHV),
     r_offroad_elec=0.36, r_rail_elec=0.33, r_pipe_elec=0.35, r_fork_elec=0.30,
     service_growth_2050=1.15,          # [A] more cars and flights, less freight intensity; MC 1.00-1.40
 )
@@ -229,7 +236,13 @@ SEAWEED_PROCESS = dict(
     pbtl_mwh_t=3.5, pbtl_h2_kg_t=90.0, pbtl_el_mwh_t=0.5, pbtl_dry_mwh_t=1.4, pbtl_cost_t=270.0, pbtl_ci=10.0,
     farm_cost_ref_t=260.0, ref_yield=15.0, shared_mooring_saving=0.15, mw_per_km2=4.0,   # Chinese longline costs [A]
     p=0.003, k=0.045, n_rec=0.60, p_rec=0.80, k_rec=0.80, meal_share=0.05)
-FERT_PRICE = dict(n=700.0, p=1100.0, k=500.0)      # China fertiliser prices, USD/t nutrient [A]
+# CN v1.6.2: mineral fertiliser priced per tonne of ELEMENTAL N, P and K, the basis of every nutrient flow in the model
+# (straw P and K are elemental: 1.8 kg P/t = 0.41% P2O5, 15.3 kg K/t = 1.84% K2O).  CN v1.6.1 used 1,100 and 500, which
+# are prices per t of P2O5 and per t of KCl product, understating P by 2.3x and K by about 2x.  Farm-gate, late 2025:
+# urea ~2,000 CNY/t (46% N) -> ~USD 620-700/t N; 11-44 MAP ~4,000 CNY/t less its N -> ~USD 1,130/t P2O5 = ~2,600/t P
+# (P = 0.4364 P2O5); KCl ~3,500 CNY/t (60% K2O) -> ~USD 820/t K2O = ~1,000/t K (K = 0.8301 K2O), at 7.08 CNY/USD [S: NBS
+# and SunSirs benchmark prices, Nov 2025-Nov 2026; A: distribution to farm gate]
+FERT_PRICE = dict(n=700.0, p=2600.0, k=1000.0)     # USD per t elemental nutrient
 LOGISTICS = dict(   # solar/wind-powered Grid Harvesters, battery-sail vessels, drones [U: geometry and energy]
     gh_kwh_per_ha_pass=6.5, gh_unit_capex=4.0e6, gh_life=20, gh_pv_kw=150.0, gh_hours=4000.0, press_to_dm=0.30,
     vessel_t=2500.0, vessel_kn=10.0, vessel_kwh_tkm=0.06, vessel_capex=18.0e6, vessel_life=25, vessel_days=300,
@@ -243,8 +256,79 @@ CARBON_MARKETS = [   # (market, cap Mt C/yr, net value USD/t) [A]; China makes m
     ("Specialty carbon (conductive additive, fibre precursors)", 0.8, 1500.0),
     ("Metallurgical: electrodes, recarburiser, Al anodes", 4.0, 400.0),
     ("Construction: asphalt and concrete additive", 20.0, 60.0),
-    ("Soil amendment (agronomic benefit unproven)", 20.0, 40.0),
+    ("Soil amendment (pyrolysis carbon; counts toward the soil-carbon balance)", 100.0, 0.0),   # CN v1.5: net of spreading [A]
     ("Permanent storage (mine voids, monofill)", 1e4, -20.0)]
+# ------------------------------------------------------------------------------------------------ 7b. nutrient and soil-carbon balance (CN v1.5)
+# Every tonne of biomass taken from fields or forests removes N, P, K and the carbon that would have built soil organic
+# carbon (SOC).  The LP must put back at least what it removes, from (in merit order chosen by the optimiser):
+# HTL hydrochar (P, stable C), digested HTL wastewater (N, K, some C; the digestion also yields biomethane), gasifier
+# and ethanol-plant ash and stillage (P, K), seaweed (fertiliser and organic matter), pyrolysis carbon (stable C only),
+# or purchased mineral fertiliser (N, P, K; with production emissions).
+# Straw contents: N 0.78/0.64/0.85%, P2O5 0.42/0.27/0.53%, K2O 2.31/1.53/1.59% for rice/wheat/maize straw [S: Scientia
+# Agricultura Sinica 2020]; weighted for China's straw mix and converted to elemental P and K.  C contents and SOC
+# humification coefficients (share of residue C that would have become stable SOC) are assumptions [A].
+NUTRIENTS = dict(
+    content=dict(   # kg per t dry matter: N, P, K, C
+        straw=dict(n=7.6, p=1.8, k=15.3, c=430.0, humif=0.15),
+        forest=dict(n=4.0, p=0.5, k=2.0, c=500.0, humif=0.10),
+        bamboo=dict(n=5.0, p=0.6, k=4.0, c=470.0, humif=0.12),
+        grass=dict(n=12.0, p=1.5, k=12.0, c=440.0, humif=0.15),
+        hemp=dict(n=5.0, p=1.0, k=8.0, c=450.0, humif=0.15)),
+    # where each element ends up, as shares of the feed (HTL: P mostly to solids, K to the aqueous phase; N split between
+    # biocrude and aqueous phase) [S: Conti et al. 2018, K > 88% to the aqueous phase; A for the other shares]
+    htl_to_aqueous=dict(n=0.55, p=0.15, k=0.88, c=0.25), htl_to_solids=dict(n=0.10, p=0.80, k=0.08),
+    hydrochar_c=0.60,   # t C per t hydrochar; hydrochar yield is ROUTES['htl']['char_t_t'] [A]
+    aqueous_recovery=dict(n=0.85, p=0.90, k=0.95),      # digestion, ammonia stripping, struvite; returned as digestate [A]
+    solids_recovery=dict(n=1.0, p=1.0, k=1.0),
+    pbtl_ash=dict(n=0.0, p=0.85, k=0.80),               # gasifier ash/slag; N leaves as N2/NH3 [A]
+    cel_stillage=dict(n=0.60, p=0.85, k=0.90),          # lignin and stillage from cellulosic ethanol [A]
+    seaweed_htl=dict(n=0.60, p=0.80, k=0.30),           # saline aqueous phase: N by stripping, P by struvite; little K [A]
+    seaweed_pbtl=dict(n=0.0, p=0.60, k=0.50),
+    seaweed_soil=dict(n=1.0, p=1.0, k=0.70),            # washed (salt removal leaches some K) [A]
+    # soil-carbon sources: fraction of applied C that becomes stable SOC [A]
+    stab_hydrochar=0.50, hum_digestate=0.30, digestate_c_after_ad=0.40, hum_seaweed=0.10, stab_pyro_carbon=0.90,
+    seaweed_c=300.0,                                     # kg C per t dry seaweed [A]
+    # CN v1.6 biological soil-carbon options, available in every case and chosen by the LP when they pay:
+    # winter legume green manure on fields that are now fallow in winter (Chinese milk vetch, hairy vetch), and compost
+    # from livestock manure that is not now returned to fields [A]
+    green_manure=dict(max_mha=6.7, cost_usd_ha=200.0, dm_t_ha=3.5, c=420.0, humif=0.20, n_fixed_kg_ha=60.0),
+    compost=dict(max_mt=50.0, cost_usd_t=60.0, c=300.0, humif=0.35, n=15.0, p=6.0, k=12.0, ci_t=0.10),
+    soc_deficit_usd_t_c=500.0,  # soil carbon that is not replaced is allowed only at this price (~USD 136/t CO2) and is counted
+                                # as an emission; it keeps cases without pyrolysis carbon feasible and shows the cost of the gap [A]
+    biogenic_min_share=0.50,   # at least half of the stable SOC replacement must come from biogenic organic matter, which also
+                               # feeds soil organisms; pyrolysis carbon is inert and can cover at most the other half [A]
+    # costs, USD per t of feed (or of dry seaweed) [A]
+    cost_hydrochar_return_t=6.0, cost_ad_t=12.0, cost_ash_return_t=1.0, cost_stillage_return_t=4.0, cost_seaweed_to_soil_t=70.0,
+    fert_sale_share=0.70,      # surplus recovered nutrients sold at 70% of mineral fertiliser prices
+    # biomethane from digesting HTL wastewater of rice straw: 217-314 mL CH4 per g COD [S: Chen et al. 2017]; about 0.35 MWh
+    # of methane per t of feed (roughly 7% of feed energy) [A]
+    ad_mwh_ch4_per_t=0.35, ad_ch4_slip=0.01,
+    # mineral fertiliser production emissions, t CO2e per t nutrient (coal-based ammonia in China) [A]
+    fert_ci=dict(n=8.0, p=2.0, k=0.5))
+# Nearshore seaweed farms in eutrophic waters (bioextraction).  Waters worse than Grade IV are mainly in Liaodong Bay, the
+# Yangtze River estuary, Hangzhou Bay and the Pearl River estuary [S: MEE 2023 bulletin].  Species are chosen for each
+# water's temperature range, for proven nutrient uptake and for low bloom and contaminant risk; Ulva and new Pyropia rafts
+# on the Subei shoal are excluded (source of Yellow Sea green tides), as is Sargassum for soil use (arsenic).  Tissue N and
+# P are higher in nutrient-rich water (Chinese farm mean 3.71% N, 0.52% P [S: Xiao et al. 2017]).
+# (key, region, species, water status, max km2, yield t DW/ha/yr (low, central, high), N%, P%, K%, port km, lon, lat,
+#  report region, soil use allowed)
+BIOEXTRACT = [
+    ("liaodong_bay", "Liaodong Bay, Bohai (Yingkou, Jinzhou, Huludao)", "Saccharina japonica (Nov-May) + Gracilariopsis lemaneiformis (Jun-Oct)",
+     "worse than Grade IV near estuaries", 600.0, (10.0, 16.0, 22.0), 2.8, 0.40, 3.5, 15.0, 121.2, 40.3, "rest", True),
+    ("haizhou_bay", "Haizhou Bay (Lianyungang, northern Jiangsu)", "Saccharina japonica (winter) + Gracilariopsis lemaneiformis (spring, autumn)",
+     "eutrophic; Subei shoal Pyropia expansion excluded", 300.0, (10.0, 15.0, 20.0), 2.8, 0.40, 3.0, 15.0, 119.6, 34.8, "rest", True),
+    ("yangtze_plume", "Yangtze plume: Zhoushan islands and Xiangshan Bay (turbid inner estuary and Hangzhou Bay excluded)",
+     "Gracilariopsis lemaneiformis (spring, autumn) + Saccharina japonica (winter)", "worse than Grade IV", 900.0, (10.0, 18.0, 26.0), 3.2, 0.40, 2.5, 15.0, 122.1, 29.8, "rest", True),
+    ("fujian_bays", "Fujian bays: Sansha, Luoyuan, Xiamen-Jiulong River estuary", "Gracilariopsis lemaneiformis (Nov-May) + Saccharina japonica (winter) + Gracilaria bailinae (summer)",
+     "eutrophic bays", 700.0, (12.0, 20.0, 28.0), 3.0, 0.42, 2.5, 10.0, 119.9, 26.6, "rest", True),
+    ("pearl_river", "Pearl River estuary outer waters and Daya Bay (Guangdong, Hong Kong boundary)", "Gracilaria bailinae + Gracilaria tenuistipitata (heat-tolerant, year-round)",
+     "worse than Grade IV", 800.0, (10.0, 16.0, 24.0), 3.0, 0.40, 2.0, 10.0, 114.2, 22.3, "rest", True),
+    ("beibu_qinzhou", "Qinzhou Bay and Fangchenggang, Beibu Gulf (Guangxi)", "Gracilaria bailinae (heat-tolerant)",
+     "eutrophic inner bay", 300.0, (10.0, 15.0, 22.0), 2.8, 0.38, 2.0, 10.0, 108.6, 21.7, "guangxi", True)]
+BIOEXTRACT_COST = dict(farm_usd_ha_yr=3500.0, passes=2.0)   # Chinese nearshore longline farms (lines, seeding, upkeep) [A];
+# CN v1.6: harvest by the same solar-powered Grid Harvesters, battery-sail vessels and drones as the offshore zones (LOGISTICS),
+# with the zone's port distance; 2 harvest passes a year for the kelp/Gracilaria rotations
+
 # How long carbon sold to each market stays out of the atmosphere [A]: tyre carbon black is lost as wear particles or
 # burned at end of life; electrodes and recarburiser are oxidised in use; anode graphite and fibres last one product
 # life (10-20 years) unless recycled to landfill; asphalt/concrete additives and mine-void storage are long-term.

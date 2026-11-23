@@ -1,0 +1,8 @@
+bracket least_cost {'lower_bound': (4.7, 20.4), 'plausible': (7.1, 19.8), 'high': (31.47, 13.7)}
+bracket post_gas_least_cost {'lower_bound': (2.68, 17.9), 'plausible': (4.29, 17.5), 'high': (23.89, 12.6)}
+bracket least_cost_hub_cap_30 {'lower_bound': (11.85, 15.9), 'plausible': (17.24, 14.6), 'high': (61.16, 3.6)}
+bracket least_cost_no_nuclear {'lower_bound': (10.53, 5.5), 'plausible': (15.54, 4.3), 'high': (56.97, -6.1)}
+bracket design_half_offshore {'lower_bound': (4.54, 14.3), 'plausible': (6.85, 13.7), 'high': (30.09, 7.9)}
+least_cost {'submitted': (45.3, 4.7), 'zero_wind': (72.8, 7.55), 'zero_wind_availability_80': (90.1, 9.34), 'zero_wind_turbines_60pct': (122.2, 12.66), 'zero_wind_14_days': (72.8, 11.22)}
+post_gas_least_cost {'submitted': (25.9, 2.68), 'zero_wind': (53.4, 5.54), 'zero_wind_availability_80': (74.3, 7.7), 'zero_wind_turbines_60pct': (113.2, 11.74), 'zero_wind_14_days': (53.4, 8.23)}
+least_cost_no_nuclear {'submitted': (101.5, 10.53), 'zero_wind': (136.0, 14.1), 'zero_wind_availability_80': (136.0, 14.1), 'zero_wind_turbines_60pct': (136.0, 14.1), 'zero_wind_14_days': (136.0, 20.96)}

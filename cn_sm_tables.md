@@ -1,7 +1,7 @@
 **Table S1. 2025 baseline fuel use (mainland China, Hong Kong and Macau) and its energy.**
 
 | Segment | Fuel | Quantity | TWh (LHV) | Basis |
-|:----------------------|------------------:|-----------:|-----------:|----------------------:|
+|:------------|:-----------|:----------|----------:|:---------------|
 | Light-duty road | Gasoline | 155.72 Mt | 1,878 | CAPE 2025 review [S]; HK, Macau [A] |
 | Heavy and medium road | Diesel | 121.18 Mt | 1,441 | 59% of 203 Mt diesel [A] |
 | Heavy and medium road | LNG/CNG | 42.6 bcm | 422 | ICIS transport gas [S] |
@@ -18,7 +18,7 @@
 **Table S2. 2050 technology shares by segment (share of 2025 service).**
 
 | Segment | Shares |
-|:----------------------|----------------------:|
+|:----------------|:--------------------|
 | ldv | bev 0.95, re 0.03, fcev 0.01, liquid 0.01 |
 | hdv | ers 0.35, bev 0.45, re 0.08, fcev 0.08, liquid 0.04 |
 | farm | bev 0.35, re 0.45, liquid 0.20 |
@@ -30,14 +30,14 @@
 | pipeline | elec 0.60, gas 0.40 |
 | Range-extender fuel share | 0.25 |
 | Service growth to 2050 | 1.15 |
-| Electric/diesel energy ratio, heavy trucks | 0.409 (= 2.40 kWh/mi x 3.6 / 21.1 MJ/mi) |
-| Fuel-cell/diesel energy ratio, heavy trucks | 0.758 |
+| Electric/diesel energy ratio, heavy trucks | 0.438 (= 2.40 kWh/mi x 3.6 / (21.1 MJ/mi HHV x 0.935 LHV/HHV)) |
+| Fuel-cell/diesel energy ratio, heavy trucks | 0.810 |
 | Electric/gasoline ratio, cars | 0.234 |
 
 **Table S2b. Net annual ownership cost of a battery-electric car relative to a petrol car in 2050, excluding energy (USD per car per year).**
 
 | Component | Low | Central | High |
-|:----------------------|-----------:|-----------:|-----------:|
+|:-------------------------|:----------|:----------|:----------|
 | Purchase-price difference, annualised (12 yr, 5%) | -282 | -113 | 56 |
 | Expected battery replacement | 10 | 42 | 200 |
 | Maintenance and repair | -158 | -122 | -52 |
@@ -46,11 +46,17 @@
 | Inputs: price difference (USD) | -2,500 | -1,000 | 500 |
 | Inputs: replacements per car; pack USD/kWh | 0.05; 50 | 0.15; 70 | 0.5; 100 |
 | Inputs: maintenance saving vs 350 USD/yr | 45% | 35% | 15% |
+| Inputs: extra insurance (USD/yr) | 40 | 100 | 300 |
+| Annualisation: capital recovery factor (12 yr, 5%); replacement in year 9, discounted | 0.1128 |  |  |
+| Cars in 2050 (million) x battery-electric share | 420 x 0.95 |  |  |
+| Fleet net ownership cost (USD bn/yr) | -155.4 | -37.2 | 201.1 |
+| System saving vs late-2025 petroleum (%) |  | 21.5 | -38.0 |
+| Each USD 100 per car per year changes system cost by (USD bn) | 39.9 |  |  |
 
 **Table S3. Electricity and hydrogen parameters (central values; Monte Carlo ranges in table S10).**
 
 | Parameter | Value |
-|:----------------------|----------------------:|
+|:------------------|:-----------------|
 | Onshore wind, best sites / remoter sites (USD/MWh) | 30 / 45, capped at 1,200 / 5,000 TWh |
 | Solar PV (USD/MWh) | 36 (+1.25 x firming) |
 | Firming adder (USD/MWh) | 20 |
@@ -69,7 +75,7 @@
 **Table S4a. Reactor cost cases (per 250-MWt module; Wright learning).**
 
 | Case | BOAK USD/kWe | FOAK multiplier | Learning rate | Interest during construction |
-|:-----------|-----------:|-------------:|-----------:|---------------:|
+|:----------|----------:|------------:|----------:|--------------:|
 | low | 2,500 | 1.3 | 12% | 8% |
 | central | 3,500 | 1.5 | 8% | 12% |
 | high | 5,000 | 2.0 | 4% | 18% |
@@ -77,17 +83,17 @@
 **Table S4b. Reactor technologies tested as hub designs, with 2050 transport cost (USD bn).**
 
 | Technology | Outlet °C | Turbine efficiency | Cost multiplier | Fuel USD/MWh_th | Top-tier heat share | Start-up fissile | Gas era | After gas |
-|:----------------------|-----------:|-------------:|-------------:|-------------:|-----------:|----------------------:|-----------:|-----------:|
-| HTR-PM pebble-bed HTGR (Shidaowan, operating) | 750 | 0.4 | 1.0 | 9.0 | 0.3 | LEU 8.5% | 303.4 | 329.7 |
-| Very-high-temperature gas reactor, 950 C (future) | 950 | 0.45 | 1.1 | 10.0 | 0.3 | LEU/HALEU | 299.5 | 326.1 |
-| Thorium molten-salt reactor (TMSR-LF1 lineage, 700 C) | 700 | 0.44 | 1.2 | 6.0 | 0.28 | HALEU start, U-233 bred from Th | 286.9 | 310.9 |
-| Sodium fast reactor (CFR-600 lineage, 550 C) | 550 | 0.4 | 1.25 | 12.0 | 0.22 | Pu (MOX/metal) | 313.4 | 345.4 |
-| Light-water SMR (ACP100 Linglong One, ~320 C) | 320 | 0.33 | 0.85 | 7.0 | 0.08 | LEU <5% | 304.9 | 331.2 |
+|:------------------------|----------:|------------:|------------:|------------:|----------:|:--------------|----------:|----------:|
+| HTR-PM pebble-bed HTGR (Shidaowan, operating) | 750 | 0.4 | 1.0 | 9.0 | 0.3 | LEU 8.5% | 314.1 | 325.8 |
+| Very-high-temperature gas reactor, 950 C (future) | 950 | 0.45 | 1.1 | 10.0 | 0.3 | LEU/HALEU | 310.0 | 322.0 |
+| Thorium molten-salt reactor (TMSR-LF1 lineage, 700 C) | 700 | 0.44 | 1.2 | 6.0 | 0.28 | HALEU start, U-233 bred from Th | 297.9 | 307.3 |
+| Sodium fast reactor (CFR-600 lineage, 550 C) | 550 | 0.4 | 1.25 | 12.0 | 0.22 | Pu (MOX/metal) | 324.0 | 340.8 |
+| Light-water SMR (ACP100 Linglong One, ~320 C) | 320 | 0.33 | 0.85 | 7.0 | 0.08 | LEU <5% | 315.6 | 327.4 |
 
 **Table S5. Residue tiers and use in the least-cost case.**
 
 | Resource | Region | Cap (Mt dry/yr) | USD/t | Used (Mt) |
-|:----------------------|--------------:|-----------:|-----------:|-----------:|
+|:-----------------------|:----------|----------:|----------:|----------:|
 | Crop straw, North China Plain and Northeast (maize, wheat) | rest | 110.0 | 40 | 110.0 |
 | Crop straw, Yangtze and South China (rice) | rest | 55.0 | 45 | 55.0 |
 | Inner Mongolia maize stover and crop stalks | inner_mongolia | 25.0 | 38 | 25.0 |
@@ -102,7 +108,7 @@
 **Table S6a. Sugar and starch ethanol feedstocks (autonomous-region crops) and use.**
 
 | Feedstock | Region | Cap (bn gal) | USD/gal | Used (bn gal) |
-|:----------------------|--------------:|-----------:|-----------:|-----------:|
+|:------------------|:----------|----------:|----------:|----------:|
 | Guangxi cassava (non-grain fuel ethanol) | guangxi | 0.35 | 2.40 | 0.35 |
 | Guangxi sugarcane molasses | guangxi | 0.21 | 1.60 | 0.21 |
 | Inner Mongolia sweet sorghum (saline-alkaline land) | inner_mongolia | 0.71 | 2.00 | 0.71 |
@@ -115,7 +121,7 @@
 **Table S6b. Oil feedstocks for hydroprocessing and use.**
 
 | Feedstock | Region | Cap (Mt) | USD/t | Used (Mt) |
-|:----------------------|-----------:|-----------:|-----------:|-----------:|
+|:--------------------|:----------|----------:|----------:|----------:|
 | Used cooking oil and trap grease (collected) | rest | 5.00 | 800 | 5.00 |
 | Jatropha curcas on marginal slopes (Guangxi, Yunnan, Sichuan) | guangxi | 0.50 | 900 | 0.50 |
 | Xinjiang cottonseed and non-edible oilseed residues | xinjiang | 0.40 | 700 | 0.40 |
@@ -124,7 +130,7 @@
 **Table S6c. New bamboo and hemp land (Mha).**
 
 | Crop | Region | Max Mha |
-|:-----------|----------------------:|-----------:|
+|:----------|:-----------------|----------:|
 | Bamboo | Guangxi hills (clumping Dendrocalamus, Bambusa) | 0.60 |
 | Bamboo | Guangdong | 0.40 |
 | Bamboo | Sichuan basin and Chongqing | 0.50 |
@@ -140,32 +146,32 @@
 **Table S7. Offshore wind and seaweed zones.**
 
 | Zone | Species | Yield t/ha (dem./design/learning) | GW (large build) | Port km | Seaweed fuel USD/MWh |
-|:----------------------|----------------------:|-------------------------:|-----------:|-----------:|-------------:|
-| Liaodong peninsula (Dalian, Yellow Sea) | Saccharina japonica + Undaria pinnatifida | 6.0/12.0/18.0 | 40 | 40 | 183 |
-| Shandong peninsula (Rongcheng, Weihai) | Saccharina japonica (China's kelp centre) | 7.0/13.0/19.0 | 60 | 40 | 180 |
-| Jiangsu radial sand ridges (Rudong, Yancheng) | Pyropia yezoensis (nori) winter + Gracilaria summer | 2.0/4.0/6.0 | 70 | 50 | 261 |
-| Zhejiang (Zhoushan, Wenzhou) | Sargassum fusiforme + Pyropia haitanensis + winter Saccharina | 4.0/8.0/12.0 | 50 | 45 | 204 |
-| Fujian, Taiwan Strait (Xiapu, Pingtan) | Winter Saccharina + summer Gracilaria lemaneiformis + Pyropia | 6.0/12.0/18.0 | 80 | 40 | 184 |
-| Guangdong (Yangjiang, Shanwei, Zhanjiang) | Gracilaria lemaneiformis + Ulva + Sargassum | 3.0/6.0/9.0 | 90 | 60 | 224 |
-| Beibu Gulf (Guangxi: Beihai, Qinzhou, Fangchenggang) | Gracilaria + Ulva; Kappaphycus trials | 3.0/6.0/9.0 | 30 | 45 | 224 |
-| Hainan (Wanning, Lingshui, Danzhou) | Kappaphycus alvarezii / Eucheuma + Gracilaria (tropical reds) | 4.0/8.0/12.0 | 40 | 50 | 204 |
+|:------------------|:--------------------|:------------------------|----------:|----------:|:----------|
+| Liaodong peninsula (Dalian, Yellow Sea) | Saccharina japonica + Undaria pinnatifida | 6.0/12.0/18.0 | 40 | 40 | 177 |
+| Shandong peninsula (Rongcheng, Weihai) | Saccharina japonica (China's kelp centre) | 7.0/13.0/19.0 | 60 | 40 | 174 |
+| Jiangsu radial sand ridges (Rudong, Yancheng) | Pyropia yezoensis (nori) winter + Gracilaria summer | 2.0/4.0/6.0 | 70 | 50 | 254 |
+| Zhejiang (Zhoushan, Wenzhou) | Sargassum fusiforme + Pyropia haitanensis + winter Saccharina | 4.0/8.0/12.0 | 50 | 45 | 197 |
+| Fujian, Taiwan Strait (Xiapu, Pingtan) | Winter Saccharina + summer Gracilaria lemaneiformis + Pyropia | 6.0/12.0/18.0 | 80 | 40 | 178 |
+| Guangdong (Yangjiang, Shanwei, Zhanjiang) | Gracilaria lemaneiformis + Ulva + Sargassum | 3.0/6.0/9.0 | 90 | 60 | 218 |
+| Beibu Gulf (Guangxi: Beihai, Qinzhou, Fangchenggang) | Gracilaria + Ulva; Kappaphycus trials | 3.0/6.0/9.0 | 30 | 45 | 217 |
+| Hainan (Wanning, Lingshui, Danzhou) | Kappaphycus alvarezii / Eucheuma + Gracilaria (tropical reds) | 4.0/8.0/12.0 | 40 | 50 | 198 |
 | Taiwan Strait (Changhua, Miaoli) | Gracilaria + Ulva (warm water) | 3.0/6.0/9.0 | 25 | 40 | Taiwan system |
 
 **Table S8. Pre-tax petroleum prices used for the comparator (USD per tonne; road gas USD/MMBtu).**
 
 | Fuel | Late 2025 | November 2026 |
-|:----------------------|-----------:|-----------:|
+|:----------------|----------:|----------:|
 | gasoline | 870 | 1,198 |
 | diesel | 778 | 1,042 |
 | jet | 700 | 1,042 |
 | resid | 480 | 700 |
 | road_gas_mmbtu | 11 | 14 |
-| Petroleum comparator, 2050 services (USD bn) | 399.3 | 546.0 |
+| Petroleum comparator, 2050 services (USD bn) | 400.2 | 547.0 |
 
 **Table S9. Natural-gas supply inputs.**
 
 | Input | Value |
-|:----------------------|-----------:|
+|:-------------|----------:|
 | prod_bcm_2025 | 261.9 |
 | consumption_bcm_2025 | 426.6 |
 | import_share_2025 | 0.413 |
@@ -189,7 +195,7 @@
 **Table S10. Monte Carlo parameters (triangular low/mode/high).**
 
 | Parameter | Low | Mode | High |
-|:----------------------|-----------:|-----------:|-----------:|
+|:---------------|:----------|:----------|:----------|
 | ELEC/onshore_wind | 22 | 30 | 48 |
 | ELEC/solar | 26 | 36 | 55 |
 | ELEC/osw_fixed | 48 | 60 | 95 |
@@ -220,133 +226,169 @@
 | Carbon value scale | 0.5 | 1.0 | 1.3 |
 | Yield level (0/1/2) | p=0.3 | p=0.5 | p=0.2 |
 | Reactor cost case (low/central/high) | p=0.25 | p=0.5 | p=0.25 |
+| Residue humification scale | 0.7 | 1.0 | 1.4 |
+| Hydrochar carbon stability | 0.3 | 0.5 | 0.7 |
+| Mineral fertiliser price scale | 0.8 | 1.0 | 1.5 |
+| Green manure and compost cost scale | 0.7 | 1.0 | 2.0 |
 
 **Table S11. All deterministic cases (2050). Cost in USD bn per year; saving against late-2025 petroleum (USD 399.3 bn for mainland cases); capacities in GW; hydrogen in Mt; CO2e in Mt per year.**
 
 | Case | Cost | Save % | Hubs | Wind | PV | CSP | Offsh. | Pyro H2 | Elec. H2 | CO2e |
-|:----------------------|-----------:|-----------:|-----------:|-----------:|-----------:|-----------:|-----------:|-----------:|-----------:|-----------:|
-| least_cost | 303.4 | 24.0 | 239 | 322 | 0 | 0 | 0 | 5.8 | 10.7 | 109 |
-| least_cost_blend20 | 303.0 | 24.1 | 256 | 326 | 0 | 0 | 0 | 5.8 | 13.0 | 107 |
-| least_cost_flex_heat | 303.4 | 24.0 | 239 | 322 | 0 | 0 | 0 | 5.8 | 10.7 | 109 |
-| design_half_offshore | 327.5 | 18.0 | 239 | 20 | 0 | 0 | 230 | 5.8 | 8.6 | 108 |
-| design | 357.7 | 10.4 | 52 | 0 | 0 | 0 | 460 | 11.8 | 1.0 | 120 |
-| least_cost_reactor_low | 282.6 | 29.2 | 449 | 0 | 0 | 0 | 0 | 5.8 | 10.7 | 109 |
-| least_cost_reactor_high | 317.4 | 20.5 | 12 | 415 | 228 | 0 | 0 | 16.5 | 0.0 | 134 |
-| least_cost_no_nuclear | 354.3 | 11.3 | 0 | 426 | 551 | 49 | 0 | 0.0 | 16.5 | 96 |
-| least_cost_no_vehicle_carbon | 312.9 | 21.6 | 243 | 336 | 0 | 0 | 0 | 5.3 | 11.3 | 108 |
-| least_cost_demonstrated_yields | 308.5 | 22.8 | 239 | 348 | 0 | 0 | 0 | 5.8 | 12.6 | 110 |
-| least_cost_us_truck_ratios | 246.2 | 38.3 | 218 | 135 | 0 | 0 | 0 | 5.8 | 7.9 | 102 |
-| post_gas_least_cost | 329.7 | 17.4 | 283 | 328 | 0 | 0 | 0 | 0.0 | 16.6 | 90 |
-| post_gas_half_offshore | 353.8 | 11.4 | 284 | 25 | 0 | 0 | 230 | 0.0 | 14.6 | 89 |
-| post_gas_reactor_low | 306.5 | 23.3 | 497 | 0 | 0 | 0 | 0 | 0.0 | 16.6 | 90 |
-| post_gas_reactor_high | 352.8 | 11.6 | 0 | 415 | 563 | 0 | 0 | 0.0 | 16.6 | 91 |
-| post_gas_no_nuclear | 359.5 | 10.0 | 0 | 435 | 563 | 51 | 0 | 0.0 | 16.6 | 91 |
-| post_gas_htse_48kwh | 339.0 | 15.1 | 283 | 393 | 0 | 0 | 0 | 0.0 | 16.6 | 92 |
-| post_gas_vhtr_si | 326.1 | 18.3 | 435 | 1 | 0 | 0 | 0 | 0.0 | 16.6 | 90 |
-| least_cost_bev_net_zero | 340.6 | 14.7 | 239 | 322 | 0 | 0 | 0 | 5.8 | 10.7 | 109 |
-| least_cost_bev_plus100 | 380.5 | 4.7 | 239 | 322 | 0 | 0 | 0 | 5.8 | 10.7 | 109 |
-| least_cost_bev_tco_high | 541.7 | -35.7 | 239 | 322 | 0 | 0 | 0 | 5.8 | 10.7 | 109 |
-| least_cost_bev_tco_low | 185.2 | 53.6 | 239 | 322 | 0 | 0 | 0 | 5.8 | 10.7 | 109 |
-| least_cost_fleet_350 | 308.8 | 22.7 | 239 | 322 | 0 | 0 | 0 | 5.8 | 10.7 | 109 |
-| least_cost_fleet_500 | 297.2 | 25.6 | 239 | 322 | 0 | 0 | 0 | 5.8 | 10.7 | 109 |
-| least_cost_no_carbon_revenue | 329.9 | 17.4 | 283 | 326 | 0 | 0 | 0 | 0.0 | 16.6 | 96 |
-| least_cost_carbon_commodity | 324.9 | 18.6 | 265 | 331 | 0 | 0 | 0 | 2.4 | 14.2 | 101 |
-| least_cost_residues_75 | 333.9 | 16.4 | 288 | 415 | 0 | 0 | 0 | 5.8 | 22.4 | 117 |
-| least_cost_residues_50 | 376.0 | 5.8 | 239 | 401 | 0 | 0 | 192 | 5.8 | 31.6 | 124 |
-| least_cost_hub_cap_60 | 310.9 | 22.2 | 60 | 415 | 184 | 0 | 0 | 16.5 | 0.0 | 134 |
-| least_cost_hub_cap_30 | 313.6 | 21.5 | 30 | 415 | 219 | 0 | 0 | 16.5 | 0.0 | 134 |
-| least_cost_grid_tight | 323.9 | 18.9 | 449 | 0 | 0 | 0 | 0 | 5.8 | 10.7 | 109 |
-| least_cost_bev_plus100_no_carbon | 407.0 | -1.9 | 283 | 326 | 0 | 0 | 0 | 0.0 | 16.6 | 96 |
-| least_cost_stress_moderate | 448.9 | -12.4 | 20 | 415 | 0 | 0 | 0 | 28.3 | 0.0 | 170 |
-| post_gas_stress_moderate | 468.7 | -17.4 | 0 | 157 | 0 | 0 | 0 | 0.0 | 28.3 | 100 |
-| least_cost_stress_severe | 657.4 | -64.6 | 20 | 415 | 0 | 0 | 0 | 28.3 | 0.0 | 170 |
-| least_cost_us_v84_htse_rule | 304.4 | 23.8 | 159 | 343 | 0 | 0 | 0 | 16.5 | 0.0 | 134 |
-| least_cost_no_nuclear_alkaline | 361.3 | 9.5 | 0 | 451 | 579 | 49 | 0 | 0.0 | 16.5 | 98 |
-| least_cost_food_credit | 301.9 | 24.4 | 239 | 322 | 0 | 0 | 0 | 5.8 | 10.7 | 109 |
-| least_cost_htse_topping_3 | 304.4 | 23.8 | 188 | 339 | 0 | 0 | 0 | 12.5 | 3.9 | 125 |
-| least_cost_htse_no_lowT_recovery | 303.6 | 24.0 | 255 | 297 | 0 | 0 | 0 | 5.8 | 10.7 | 109 |
-| type_htr_pm | 303.4 | 24.0 | 239 | 322 | 0 | 0 | 0 | 5.8 | 10.7 | 109 |
-| post_gas_type_htr_pm | 329.7 | 17.4 | 283 | 328 | 0 | 0 | 0 | 0.0 | 16.6 | 90 |
-| type_vhtr | 299.5 | 25.0 | 390 | 0 | 0 | 0 | 0 | 5.8 | 10.7 | 108 |
-| post_gas_type_vhtr | 326.1 | 18.3 | 435 | 1 | 0 | 0 | 0 | 0.0 | 16.6 | 90 |
-| type_tmsr | 286.9 | 28.2 | 405 | 0 | 0 | 0 | 0 | 5.8 | 10.7 | 109 |
-| post_gas_type_tmsr | 310.9 | 22.1 | 448 | 0 | 0 | 0 | 0 | 0.0 | 16.6 | 90 |
-| type_cfr | 313.4 | 21.5 | 122 | 414 | 0 | 0 | 0 | 16.5 | 0.0 | 134 |
-| post_gas_type_cfr | 345.4 | 13.5 | 236 | 415 | 1 | 0 | 0 | 0.0 | 16.6 | 90 |
-| type_acp100 | 304.9 | 23.6 | 239 | 395 | 0 | 0 | 0 | 5.8 | 10.7 | 109 |
-| post_gas_type_acp100 | 331.2 | 17.1 | 283 | 412 | 0 | 0 | 0 | 0.0 | 16.6 | 90 |
-| tw_least_cost | 17.7 | -13.2 | 7 | 5 | 1 | 0 | 0 | 0.3 | 0.0 | 8 |
-| tw_no_nuclear | 20.3 | -29.9 | 0 | 5 | 13 | 0 | 6 | 0.0 | 0.2 | 8 |
-| tw_post_gas | 18.9 | -21.2 | 9 | 5 | 1 | 0 | 0 | 0.0 | 0.3 | 8 |
-| tw_post_gas_no_nuclear | 20.6 | -31.6 | 0 | 5 | 13 | 0 | 6 | 0.0 | 0.2 | 8 |
-| tw_offshore_25gw | 22.4 | -43.4 | 1 | 0 | 0 | 0 | 25 | 0.2 | 0.5 | 8 |
-| sustainable_fission_tmsr | 306.0 | 23.4 | 424 | 0 | 0 | 0 | 0 | 0.0 | 16.6 | 90 |
-| sustainable_fission_cfr | 343.1 | 14.1 | 229 | 414 | 0 | 0 | 0 | 0.0 | 16.6 | 90 |
-| sustainable_fission_tmsr_nuclear_only | 306.1 | 23.4 | 425 | 0 | 0 | 0 | 0 | 0.0 | 16.6 | 90 |
-| sustainable_fission_tmsr_premium | 332.1 | 16.8 | 424 | 0 | 0 | 0 | 0 | 0.0 | 16.6 | 90 |
+|:------------------------|----------:|----------:|----------:|----------:|----------:|----------:|----------:|----------:|----------:|----------:|
+| least_cost | 314.1 | 21.5 | 221 | 344 | 0 | 0 | 0 | 8.4 | 8.2 | 130 |
+| least_cost_blend20 | 313.5 | 21.7 | 238 | 347 | 0 | 0 | 0 | 8.4 | 10.5 | 127 |
+| least_cost_flex_heat | 314.1 | 21.5 | 221 | 344 | 0 | 0 | 0 | 8.4 | 8.2 | 130 |
+| design_half_offshore | 338.4 | 15.4 | 227 | 33 | 0 | 0 | 230 | 7.7 | 6.4 | 124 |
+| design | 369.0 | 7.8 | 57 | 0 | 0 | 0 | 460 | 13.0 | 0.1 | 130 |
+| least_cost_reactor_low | 293.6 | 26.6 | 448 | 0 | 0 | 0 | 0 | 8.2 | 8.6 | 129 |
+| least_cost_reactor_high | 328.3 | 18.0 | 12 | 415 | 254 | 0 | 0 | 16.6 | 0.0 | 150 |
+| least_cost_no_nuclear | 367.5 | 8.2 | 0 | 431 | 560 | 51 | 0 | 0.0 | 16.2 | 106 |
+| least_cost_no_vehicle_carbon | 323.7 | 19.1 | 226 | 358 | 0 | 0 | 0 | 7.9 | 8.8 | 129 |
+| least_cost_demonstrated_yields | 319.2 | 20.2 | 218 | 373 | 0 | 0 | 0 | 8.8 | 9.8 | 132 |
+| least_cost_us_truck_ratios | 251.4 | 37.2 | 198 | 138 | 0 | 0 | 0 | 8.5 | 5.1 | 122 |
+| post_gas_least_cost | 325.8 | 18.6 | 268 | 344 | 0 | 0 | 0 | 2.3 | 14.1 | 99 |
+| post_gas_half_offshore | 349.0 | 12.8 | 267 | 41 | 0 | 0 | 230 | 2.5 | 11.8 | 99 |
+| post_gas_reactor_low | 302.8 | 24.3 | 496 | 0 | 0 | 0 | 0 | 2.3 | 14.4 | 100 |
+| post_gas_reactor_high | 348.1 | 13.0 | 2 | 415 | 553 | 0 | 6 | 2.3 | 13.9 | 99 |
+| post_gas_no_nuclear | 372.9 | 6.8 | 0 | 440 | 573 | 53 | 0 | 0.0 | 16.3 | 101 |
+| post_gas_htse_48kwh | 333.6 | 16.6 | 268 | 397 | 0 | 0 | 0 | 2.3 | 14.0 | 101 |
+| post_gas_vhtr_si | 322.0 | 19.5 | 432 | 0 | 0 | 0 | 0 | 2.3 | 14.3 | 99 |
+| least_cost_bev_net_zero | 351.3 | 12.2 | 221 | 344 | 0 | 0 | 0 | 8.4 | 8.2 | 130 |
+| least_cost_bev_plus100 | 391.2 | 2.3 | 221 | 344 | 0 | 0 | 0 | 8.4 | 8.2 | 130 |
+| least_cost_bev_tco_high | 552.4 | -38.0 | 221 | 344 | 0 | 0 | 0 | 8.4 | 8.2 | 130 |
+| least_cost_bev_tco_low | 195.9 | 51.1 | 221 | 344 | 0 | 0 | 0 | 8.4 | 8.2 | 130 |
+| least_cost_fleet_350 | 319.5 | 20.2 | 221 | 344 | 0 | 0 | 0 | 8.4 | 8.2 | 130 |
+| least_cost_fleet_500 | 307.9 | 23.1 | 221 | 344 | 0 | 0 | 0 | 8.4 | 8.2 | 130 |
+| least_cost_no_carbon_revenue | 340.7 | 14.9 | 265 | 348 | 0 | 0 | 0 | 2.7 | 14.1 | 117 |
+| least_cost_carbon_commodity | 335.8 | 16.1 | 248 | 352 | 0 | 0 | 0 | 5.0 | 11.8 | 122 |
+| least_cost_residues_75 | 344.4 | 13.9 | 274 | 415 | 0 | 0 | 0 | 9.8 | 18.4 | 140 |
+| least_cost_residues_50 | 389.0 | 2.8 | 220 | 379 | 0 | 0 | 219 | 8.7 | 28.1 | 138 |
+| least_cost_hub_cap_60 | 321.8 | 19.6 | 60 | 415 | 214 | 0 | 0 | 16.6 | 0.0 | 150 |
+| least_cost_hub_cap_30 | 324.5 | 18.9 | 30 | 415 | 244 | 0 | 0 | 16.6 | 0.0 | 150 |
+| least_cost_grid_tight | 335.4 | 16.2 | 444 | 0 | 0 | 0 | 0 | 8.4 | 8.1 | 129 |
+| least_cost_bev_plus100_no_carbon | 417.8 | -4.4 | 265 | 348 | 0 | 0 | 0 | 2.7 | 14.1 | 117 |
+| least_cost_stress_moderate | 459.9 | -14.9 | 20 | 415 | 0 | 0 | 0 | 28.3 | 0.0 | 184 |
+| post_gas_stress_moderate | 486.5 | -21.6 | 1 | 415 | 0 | 0 | 139 | 1.2 | 24.9 | 105 |
+| least_cost_stress_severe | 667.7 | -66.8 | 20 | 415 | 0 | 0 | 0 | 28.3 | 0.0 | 184 |
+| least_cost_us_v84_htse_rule | 314.7 | 21.4 | 160 | 359 | 0 | 0 | 0 | 16.5 | 0.0 | 150 |
+| least_cost_no_nuclear_alkaline | 374.4 | 6.5 | 0 | 456 | 587 | 51 | 0 | 0.0 | 16.2 | 107 |
+| least_cost_food_credit | 312.5 | 21.9 | 221 | 344 | 0 | 0 | 0 | 8.4 | 8.2 | 130 |
+| least_cost_htse_topping_3 | 314.7 | 21.4 | 161 | 358 | 0 | 0 | 0 | 16.4 | 0.0 | 149 |
+| least_cost_htse_no_lowT_recovery | 314.2 | 21.5 | 233 | 325 | 0 | 0 | 0 | 8.5 | 8.2 | 130 |
+| least_cost_no_nutrient_balance | 309.0 | 22.8 | 241 | 340 | 0 | 0 | 0 | 5.8 | 11.0 | 109 |
+| least_cost_no_soc_balance | 312.6 | 21.9 | 241 | 338 | 0 | 0 | 0 | 5.8 | 10.8 | 127 |
+| least_cost_soc_no_pyro_carbon | 315.7 | 21.1 | 241 | 336 | 0 | 0 | 0 | 5.8 | 10.7 | 119 |
+| least_cost_humification_high | 315.4 | 21.2 | 184 | 351 | 0 | 0 | 0 | 13.4 | 3.1 | 141 |
+| least_cost_hydrochar_stability_low | 314.6 | 21.4 | 204 | 348 | 0 | 0 | 0 | 10.7 | 5.9 | 135 |
+| least_cost_fertiliser_price_high | 314.7 | 21.4 | 232 | 339 | 0 | 0 | 0 | 6.9 | 9.5 | 125 |
+| least_cost_bioextraction_full | 314.2 | 21.5 | 222 | 337 | 0 | 0 | 0 | 8.3 | 7.9 | 128 |
+| least_cost_bioextraction_n_credit_10 | 311.6 | 22.1 | 222 | 337 | 0 | 0 | 0 | 8.3 | 7.9 | 128 |
+| least_cost_bioextraction_n_credit_30 | 306.4 | 23.4 | 222 | 337 | 0 | 0 | 0 | 8.3 | 7.9 | 128 |
+| post_gas_no_biomethane_pyrolysis | 342.1 | 14.5 | 285 | 343 | 0 | 0 | 0 | 0.0 | 16.6 | 100 |
+| least_cost_biological_soc | 315.7 | 21.1 | 241 | 336 | 0 | 0 | 0 | 5.8 | 10.7 | 119 |
+| post_gas_biological_soc | 325.8 | 18.6 | 268 | 344 | 0 | 0 | 0 | 2.3 | 14.1 | 99 |
+| least_cost_no_green_manure_compost | 314.1 | 21.5 | 221 | 344 | 0 | 0 | 0 | 8.4 | 8.2 | 130 |
+| least_cost_biological_soc_no_compost | 455.9 | -13.9 | 169 | 3 | 0 | 0 | 315 | 5.8 | 5.4 | 136 |
+| least_cost_biological_soc_compost_cost_high | 319.8 | 20.1 | 241 | 332 | 0 | 0 | 0 | 5.8 | 10.4 | 118 |
+| least_cost_soc_deficit_price_1000 | 314.1 | 21.5 | 221 | 344 | 0 | 0 | 0 | 8.4 | 8.2 | 130 |
+| type_htr_pm | 314.1 | 21.5 | 221 | 344 | 0 | 0 | 0 | 8.4 | 8.2 | 130 |
+| post_gas_type_htr_pm | 325.8 | 18.6 | 268 | 344 | 0 | 0 | 0 | 2.3 | 14.1 | 99 |
+| type_vhtr | 310.0 | 22.5 | 385 | 0 | 0 | 0 | 0 | 8.4 | 8.2 | 129 |
+| post_gas_type_vhtr | 322.0 | 19.5 | 432 | 0 | 0 | 0 | 0 | 2.3 | 14.3 | 99 |
+| type_tmsr | 297.9 | 25.6 | 404 | 0 | 0 | 0 | 0 | 8.1 | 8.6 | 129 |
+| post_gas_type_tmsr | 307.3 | 23.2 | 447 | 0 | 0 | 0 | 0 | 2.3 | 14.5 | 100 |
+| type_cfr | 324.0 | 19.0 | 131 | 415 | 1 | 0 | 0 | 16.6 | 0.0 | 150 |
+| post_gas_type_cfr | 340.8 | 14.8 | 230 | 415 | 0 | 0 | 0 | 2.3 | 14.1 | 99 |
+| type_acp100 | 315.6 | 21.1 | 221 | 412 | 0 | 0 | 0 | 8.4 | 8.2 | 130 |
+| post_gas_type_acp100 | 327.4 | 18.2 | 275 | 415 | 0 | 0 | 0 | 2.3 | 14.0 | 99 |
+| tw_least_cost | 17.9 | -14.3 | 7 | 5 | 2 | 0 | 0 | 0.3 | 0.0 | 8 |
+| tw_no_nuclear | 20.5 | -31.4 | 0 | 5 | 13 | 0 | 6 | 0.0 | 0.3 | 8 |
+| tw_post_gas | 19.0 | -21.2 | 9 | 5 | 1 | 0 | 0 | 0.0 | 0.2 | 8 |
+| tw_post_gas_no_nuclear | 20.8 | -33.1 | 0 | 5 | 14 | 0 | 6 | 0.0 | 0.3 | 8 |
+| tw_offshore_25gw | 22.6 | -44.7 | 1 | 0 | 0 | 0 | 25 | 0.2 | 0.5 | 8 |
+| sustainable_fission_tmsr | 302.3 | 24.5 | 423 | 0 | 0 | 0 | 0 | 2.3 | 14.5 | 100 |
+| sustainable_fission_cfr | 338.6 | 15.4 | 222 | 415 | 0 | 0 | 0 | 2.3 | 14.0 | 99 |
+| sustainable_fission_tmsr_nuclear_only | 302.3 | 24.5 | 423 | 0 | 0 | 0 | 0 | 2.3 | 14.5 | 100 |
+| sustainable_fission_tmsr_premium | 328.2 | 18.0 | 421 | 0 | 0 | 0 | 0 | 2.3 | 14.3 | 99 |
 
 **Table S12. Least-cost 2050 well-to-wheel emissions under wider life-cycle boundaries (Mt CO2e per year; no re-optimisation).**
 
 | Boundary | Emissions | Reduction % | Liquid fuels | Electricity | Hub construction/fuel |
-|:----------------------|------------:|------------:|-----------:|--------------:|--------------------:|
-| Central boundary | 109 | 94.8 | 80 | 14 | 0 |
-| Electricity 25 g CO2e/kWh (vs 10) | 137 | 93.4 | 84 | 36 | 0 |
-| Upstream methane leakage 3% (vs 1.5%) | 120 | 94.2 | 87 | 14 | 0 |
-| Residue soil-carbon loss 20 g CO2e/MJ | 185 | 91.1 | 156 | 14 | 0 |
-| Residue soil-carbon loss 40 g CO2e/MJ | 261 | 87.4 | 232 | 14 | 0 |
-| Reactor construction and fuel cycle 3 g CO2e/kWh of hub heat | 117 | 94.3 | 80 | 14 | 9 |
-| All of the above (40 g soil carbon) | 309 | 85.1 | 243 | 36 | 9 |
+|:--------------------|-----------:|-----------:|----------:|-------------:|-------------------:|
+| Central boundary | 130 | 93.7 | 83 | 15 | 0 |
+| Electricity 25 g CO2e/kWh (vs 10) | 158 | 92.4 | 87 | 37 | 0 |
+| Upstream methane leakage 3% (vs 1.5%) | 146 | 93.0 | 93 | 15 | 0 |
+| Residue soil-carbon loss 20 g CO2e/MJ | 206 | 90.1 | 159 | 15 | 0 |
+| Residue soil-carbon loss 40 g CO2e/MJ | 281 | 86.4 | 235 | 15 | 0 |
+| Reactor construction and fuel cycle 3 g CO2e/kWh of hub heat | 138 | 93.4 | 83 | 15 | 8 |
+| All of the above (40 g soil carbon) | 334 | 83.9 | 248 | 37 | 8 |
 
 **Table S13. Destination and durability of pyrolysis carbon, least-cost case (Mt C per year). None is counted as an emission reduction.**
 
 | Durability class | Mt C | Markets |
-|:----------------------|-----------:|----------------------:|
+|:----------------------|----------:|:------------------------------|
 | One product life (10-20 years) | 6.3 | Vehicle structures and H2 tanks (methane-derived carbon fibre/CNT); Battery anode graphite (after graphitisation); Specialty carbon (conductive additive, fibre precursors) |
 | Short-lived (tyre wear, end-of-life combustion) | 7.0 | Carbon black: tyres and rubber |
 | Oxidised in use (metallurgy) | 4.0 | Metallurgical: electrodes, recarburiser, Al anodes |
 | Long-term (asphalt, concrete, permanent storage) | 0.0 | Construction: asphalt and concrete additive; Permanent storage (mine voids, monofill) |
-| Uncertain (soil amendment) | 0.0 | Soil amendment (agronomic benefit unproven) |
+| Soil amendment (counted toward the soil-carbon balance at 90% stability) | 7.9 | Soil amendment (pyrolysis carbon; counts toward the soil-carbon balance) |
 
 **Table S14. Build-rate and system-structure screen (reactor modules built 2032-2050; wind 2026-2050).**
 
 | Case | Hubs | Modules | Per yr | GWt/yr | Wind GW | Wind/yr | Solar GW | Firm % | Variable % |
-|:------------------|-----------:|-----------:|-----------:|-----------:|-----------:|-----------:|-----------:|-----------:|-----------:|
-| Central least cost | 239 | 1,434 | 75 | 18.9 | 322 | 13 | 0 | 53 | 47 |
-| After gas | 283 | 1,698 | 89 | 22.3 | 328 | 13 | 0 | 57 | 43 |
-| At most 60 hubs | 60 | 360 | 19 | 4.7 | 415 | 17 | 184 | 14 | 86 |
-| Moderate stress | 20 | 120 | 6 | 1.6 | 415 | 17 | 0 | 38 | 62 |
+|:-----------------------|----------:|----------:|----------:|----------:|----------:|----------:|----------:|----------:|----------:|
+| Central least cost | 221 | 1,326 | 70 | 17.4 | 344 | 14 | 0 | 49 | 51 |
+| After gas | 268 | 1,608 | 85 | 21.2 | 344 | 14 | 0 | 54 | 46 |
+| At most 60 hubs | 60 | 360 | 19 | 4.7 | 415 | 17 | 214 | 14 | 86 |
+| Moderate stress | 20 | 120 | 6 | 1.6 | 415 | 17 | 0 | 39 | 61 |
 
 **Table S15. Stress-test cases (2050; USD bn per year; each re-optimised).**
 
 | Case | Cost | Saving % | Hubs | Pyrolysis H2 Mt | Emissions Mt |
-|:----------------------|-----------:|-----------:|-----------:|------------:|------------:|
-| Electric-car net cost 0 USD/yr (no advantage) | 340.6 | 14.7 | 239 | 5.8 | 109 |
-| Electric-car net cost +100 USD/yr | 380.5 | 4.7 | 239 | 5.8 | 109 |
-| Electric-car net cost, high derivation | 541.7 | -35.7 | 239 | 5.8 | 109 |
-| Electric-car net cost, low derivation | 185.2 | 53.6 | 239 | 5.8 | 109 |
-| Car stock 350 million | 308.8 | 22.7 | 239 | 5.8 | 109 |
-| Car stock 500 million | 297.2 | 25.6 | 239 | 5.8 | 109 |
-| No carbon-product revenue | 329.9 | 17.4 | 283 | 0.0 | 96 |
-| Commodity carbon markets only | 324.9 | 18.6 | 265 | 2.4 | 101 |
-| Collectable residues -25% | 333.9 | 16.4 | 288 | 5.8 | 117 |
-| Collectable residues -50% | 376.0 | 5.8 | 239 | 5.8 | 124 |
-| At most 60 hubs (360 modules) | 310.9 | 22.2 | 60 | 16.5 | 134 |
-| At most 30 hubs (180 modules) | 313.6 | 21.5 | 30 | 16.5 | 134 |
-| Grid and firming costs +60-75% | 323.9 | 18.9 | 449 | 5.8 | 109 |
-| electric-car +100 USD/yr and no carbon revenue | 407.0 | -1.9 | 283 | 0.0 | 96 |
-| Combined: no electric-car advantage, commodity carbon only, residues -25%, high reactor cost, tight grid | 448.9 | -12.4 | 20 | 28.3 | 170 |
-| Combined (moderate) after gas | 468.7 | -17.4 | 0 | 0.0 | 100 |
-| Combined: electric-car high derivation, no carbon revenue, residues -25%, high reactor cost, tight grid | 657.4 | -64.6 | 20 | 28.3 | 170 |
-| Steam electrolysis only after gas (U.S. v8.4 rule) | 304.4 | 23.8 | 159 | 16.5 | 134 |
-| No nuclear, alkaline electrolysis only | 361.3 | 9.5 | 0 | 0.0 | 98 |
-| Food-heat credit inside the transport boundary (v1.1 accounting) | 301.9 | 24.4 | 239 | 5.8 | 109 |
-| Steam electrolysis: 3 kWh/kg electric topping | 304.4 | 23.8 | 188 | 12.5 | 125 |
-| Steam electrolysis: no low-temperature heat recovery | 303.6 | 24.0 | 255 | 5.8 | 109 |
+|:----------------------------|----------:|----------:|----------:|-----------:|-----------:|
+| Electric-car net cost 0 USD/yr (no advantage) | 351.3 | 12.2 | 221 | 8.4 | 130 |
+| Electric-car net cost +100 USD/yr | 391.2 | 2.3 | 221 | 8.4 | 130 |
+| Electric-car net cost, high derivation | 552.4 | -38.0 | 221 | 8.4 | 130 |
+| Electric-car net cost, low derivation | 195.9 | 51.1 | 221 | 8.4 | 130 |
+| Car stock 350 million | 319.5 | 20.2 | 221 | 8.4 | 130 |
+| Car stock 500 million | 307.9 | 23.1 | 221 | 8.4 | 130 |
+| No carbon-product revenue | 340.7 | 14.9 | 265 | 2.7 | 117 |
+| Commodity carbon markets only | 335.8 | 16.1 | 248 | 5.0 | 122 |
+| Collectable residues -25% | 344.4 | 13.9 | 274 | 9.8 | 140 |
+| Collectable residues -50% | 389.0 | 2.8 | 220 | 8.7 | 138 |
+| At most 60 hubs (360 modules) | 321.8 | 19.6 | 60 | 16.6 | 150 |
+| At most 30 hubs (180 modules) | 324.5 | 18.9 | 30 | 16.6 | 150 |
+| Grid and firming costs +60-75% | 335.4 | 16.2 | 444 | 8.4 | 129 |
+| electric-car +100 USD/yr and no carbon revenue | 417.8 | -4.4 | 265 | 2.7 | 117 |
+| Combined: no electric-car advantage, commodity carbon only, residues -25%, high reactor cost, tight grid | 459.9 | -14.9 | 20 | 28.3 | 184 |
+| Combined (moderate) after gas | 486.5 | -21.6 | 1 | 1.2 | 105 |
+| Combined: electric-car high derivation, no carbon revenue, residues -25%, high reactor cost, tight grid | 667.7 | -66.8 | 20 | 28.3 | 184 |
+| Steam electrolysis only after gas (U.S. v8.4 rule) | 314.7 | 21.4 | 160 | 16.5 | 150 |
+| No nuclear, alkaline electrolysis only | 374.4 | 6.5 | 0 | 0.0 | 107 |
+| Food-heat credit inside the transport boundary (USD 8/MWh) | 312.5 | 21.9 | 221 | 8.4 | 130 |
+| Steam electrolysis: 3 kWh/kg electric topping | 314.7 | 21.4 | 161 | 16.4 | 149 |
+| Steam electrolysis: no low-temperature heat recovery | 314.2 | 21.5 | 233 | 8.5 | 130 |
+| Without nutrient or soil-carbon constraints | 309.0 | 22.8 | 241 | 5.8 | 109 |
+| Nutrient balance only, no soil-carbon balance | 312.6 | 21.9 | 241 | 5.8 | 127 |
+| Pyrolysis carbon not counted as soil carbon | 315.7 | 21.1 | 241 | 5.8 | 119 |
+| Residue humification coefficients x1.5 | 315.4 | 21.2 | 184 | 13.4 | 141 |
+| Hydrochar carbon stability 0.3 (central 0.5) | 314.6 | 21.4 | 204 | 10.7 | 135 |
+| Mineral fertiliser prices x1.5 | 314.7 | 21.4 | 232 | 6.9 | 125 |
+| Nearshore farms in eutrophic bays at full screened area | 314.2 | 21.5 | 222 | 8.3 | 128 |
+| Nearshore N removal paid USD 10/kg N (P USD 30/kg) | 311.6 | 22.1 | 222 | 8.3 | 128 |
+| Nearshore N removal paid USD 30/kg N (P USD 90/kg) | 306.4 | 23.4 | 222 | 8.3 | 128 |
+| After gas, without biomethane pyrolysis | 342.1 | 14.5 | 285 | 0.0 | 100 |
+| Soil carbon replaced by biological sources only (no pyrolysis carbon, no priced gap) | 315.7 | 21.1 | 241 | 5.8 | 119 |
+| After gas, soil carbon replaced by biological sources only | 325.8 | 18.6 | 268 | 2.3 | 99 |
+| Without green manure or compost options | 314.1 | 21.5 | 221 | 8.4 | 130 |
+| Biological soil carbon only, without compost (liquid shortfall priced at USD 400/MWh) | 455.9 | -13.9 | 169 | 5.8 | 136 |
+| Biological soil carbon only, compost and green manure costs x2 | 319.8 | 20.1 | 241 | 5.8 | 118 |
+| Unreplaced soil carbon priced at USD 1000/t C (central 500) | 314.1 | 21.5 | 221 | 8.4 | 130 |
 
 **Table S16. Steam-electrolysis heat balance per kg of hydrogen (800 C stack, 0.5 MPa, 80% steam utilisation, no sweep gas).**
 
 | Item | kWh/kg | Temperature range (C) | Supplied by |
-|:----------------------|-----------:|--------------:|----------------------:|
+|:-----------------|----------:|:-------------|:----------------|
 | Feed-water preheat (total) | 1.73 | 20 to 152 | recovered heat, then external |
 |   recovered from hot-stream sensible heat | 0.69 | 75 to 127 | hot streams 274 to 100 C |
 |   recovered by condensing unconverted steam | 0.71 | 20 to 75 | below the 100 C dew point |
@@ -363,9 +405,135 @@
 **Table S17. Stylised wind-lull adequacy screen: a windless, overcast 7-day winter period with all flexible loads stopped. Load = inflexible transport load (GW); Firm = hubs with all heat to turbines plus light-water reactors (GW); Lull VRE = wind, solar and CSP output in the lull (GW); Short = shortfall (GW, and TWh over the week); Backup = indicative annual cost of hydrogen-fired backup (USD bn and % of system cost); H2 lost = electrolytic hydrogen not produced during the week (Mt).**
 
 | Case | Load | Firm | Lull VRE | Short GW | Short TWh | Backup bn | % cost | H2 lost |
-|:------------------|-----------:|-----------:|-----------:|-----------:|-----------:|-----------:|-----------:|-----------:|
-| Central least cost | 189 | 133 | 26 | 30 | 5.1 | 3.1 | 1.0 | 0.21 |
-| After gas | 196 | 158 | 26 | 12 | 2.0 | 1.2 | 0.4 | 0.32 |
-| No nuclear | 189 | 0 | 93 | 97 | 16.2 | 10.0 | 2.8 | 0.32 |
-| At most 30 hubs | 189 | 28 | 51 | 111 | 18.6 | 11.5 | 3.7 | 0.00 |
-| High reactor cost | 189 | 27 | 51 | 111 | 18.6 | 11.5 | 3.6 | 0.00 |
+|:-----------------------|----------:|----------:|----------:|----------:|----------:|----------:|----------:|----------:|
+| Central least cost | 196 | 123 | 28 | 45 | 7.6 | 4.7 | 1.5 | 0.16 |
+| After gas | 203 | 150 | 28 | 26 | 4.3 | 2.7 | 0.8 | 0.27 |
+| No nuclear | 196 | 0 | 95 | 102 | 17.1 | 10.5 | 2.9 | 0.31 |
+| At most 30 hubs | 196 | 29 | 53 | 114 | 19.2 | 11.9 | 3.7 | 0.00 |
+| High reactor cost | 196 | 28 | 54 | 114 | 19.2 | 11.9 | 3.6 | 0.00 |
+
+**Table S18. Wind-lull screen sensitivities. Short = shortfall (GW, and TWh over the lull); Backup = indicative annual cost of hydrogen-fired backup (USD bn and % of system cost), a lower bound that excludes hydrogen storage, replacement electrolyser capacity and delivery.**
+
+| Case | Variant | Short GW | Short TWh | Backup bn | % cost |
+|:----------|:----------------|----------:|----------:|----------:|----------:|
+| Central | As in table S17 | 45 | 7.6 | 4.7 | 1.5 |
+| Central | No wind | 73 | 12.2 | 7.5 | 2.4 |
+| Central | No wind, reactor availability 80% | 90 | 15.1 | 9.3 | 3.0 |
+| Central | No wind, turbines for 60% of reactor heat | 122 | 20.5 | 12.7 | 4.0 |
+| Central | No wind, 14-day lull | 73 | 24.5 | 11.2 | 3.6 |
+| After gas | As in table S17 | 26 | 4.3 | 2.7 | 0.8 |
+| After gas | No wind | 53 | 9.0 | 5.5 | 1.7 |
+| After gas | No wind, reactor availability 80% | 74 | 12.5 | 7.7 | 2.4 |
+| After gas | No wind, turbines for 60% of reactor heat | 113 | 19.0 | 11.7 | 3.6 |
+| After gas | No wind, 14-day lull | 53 | 17.9 | 8.2 | 2.5 |
+| No nuclear | As in table S17 | 102 | 17.1 | 10.5 | 2.9 |
+| No nuclear | No wind | 136 | 22.9 | 14.1 | 3.8 |
+| No nuclear | No wind, reactor availability 80% | 136 | 22.9 | 14.1 | 3.8 |
+| No nuclear | No wind, turbines for 60% of reactor heat | 136 | 22.9 | 14.1 | 3.8 |
+| No nuclear | No wind, 14-day lull | 136 | 45.7 | 21.0 | 5.7 |
+
+**Table S19. Nearshore seaweed farms in nutrient-polluted coastal waters (bioextraction): species chosen and why. km2 = maximum farmed area; t/ha = dry-weight yield per ha per year (low / central / high); tissue N and P are % of dry weight.**
+
+| Zone | Water | Species | Why these species | km2 | t/ha | N % | P % |
+|:---------------------------|:-----------------|:----------------------------|:------------------------------|----------:|:----------|----------:|----------:|
+| Liaodong Bay, Bohai (Yingkou, Jinzhou, Huludao) | worse than Grade IV near estuaries | Saccharina japonica (Nov-May) + Gracilariopsis lemaneiformis (Jun-Oct) | Winter water 0-12 °C suits kelp; summer 22-26 °C suits G. lemaneiformis. Both are already farmed in the Bohai and Yellow Sea, so the rotation farms the bay year-round. | 600 | 10 / 16 / 22 | 2.8 | 0.40 |
+| Haizhou Bay (Lianyungang, northern Jiangsu) | eutrophic; Subei shoal Pyropia expansion excluded | Saccharina japonica (winter) + Gracilariopsis lemaneiformis (spring, autumn) | Same temperature range as Liaodong Bay. Pyropia is not expanded here, because Pyropia rafts on the nearby Subei shoal seed the Yellow Sea Ulva green tides. | 300 | 10 / 15 / 20 | 2.8 | 0.40 |
+| Yangtze plume: Zhoushan islands and Xiangshan Bay (turbid inner estuary and Hangzhou Bay excluded) | worse than Grade IV | Gracilariopsis lemaneiformis (spring, autumn) + Saccharina japonica (winter) | The highest nitrate and phosphate on the coast. Farms sit in the clearer island waters, because the turbid inner estuary and Hangzhou Bay cut light. G. lemaneiformis takes up N quickly; kelp is grown in winter. | 900 | 10 / 18 / 26 | 3.2 | 0.40 |
+| Fujian bays: Sansha, Luoyuan, Xiamen-Jiulong River estuary | eutrophic bays | Gracilariopsis lemaneiformis (Nov-May) + Saccharina japonica (winter) + Gracilaria bailinae (summer) | China's main G. lemaneiformis-kelp rotation is already practised here. G. bailinae covers the summer, when water above 26 °C stops G. lemaneiformis. | 700 | 12 / 20 / 28 | 3.0 | 0.42 |
+| Pearl River estuary outer waters and Daya Bay (Guangdong, Hong Kong boundary) | worse than Grade IV | Gracilaria bailinae + Gracilaria tenuistipitata (heat-tolerant, year-round) | Too warm for kelp. G. bailinae and G. tenuistipitata tolerate 15-33 °C and estuarine salinity and remove N and P year-round. Harvest goes to HTL; it goes to soil only if a metals screen is passed. | 800 | 10 / 16 / 24 | 3.0 | 0.40 |
+| Qinzhou Bay and Fangchenggang, Beibu Gulf (Guangxi) | eutrophic inner bay | Gracilaria bailinae (heat-tolerant) | Warm (16-32 °C) and eutrophic in the inner bay. G. bailinae is the established local farm species. | 300 | 10 / 15 / 22 | 2.8 | 0.38 |
+
+**Table S20. Nutrient, carbon and humification parameters (kg per t dry matter; humification = share of the carbon that would have become stable soil carbon if left on the field).**
+
+| Biomass | N | P | K | C | Humification |
+|:----------|----------:|----------:|----------:|----------:|--------------:|
+| straw | 7.6 | 1.8 | 15.3 | 430 | 0.15 |
+| forest | 4.0 | 0.5 | 2.0 | 500 | 0.10 |
+| bamboo | 5.0 | 0.6 | 4.0 | 470 | 0.12 |
+| grass | 12.0 | 1.5 | 12.0 | 440 | 0.15 |
+| hemp | 5.0 | 1.0 | 8.0 | 450 | 0.15 |
+
+**Table S21. Where nutrients go in each conversion route and how much is recovered (shares).**
+
+| Stream | N | P | K | Basis |
+|:---------------|----------:|----------:|----------:|:----------------|
+| HTL aqueous phase (share of feed) | 0.55 | 0.15 | 0.88 | Bao et al. 2025; Conti et al. 2018 [S/A] |
+| HTL solids, hydrochar (share of feed) | 0.10 | 0.80 | 0.08 | [S/A] |
+| Recovery from digested aqueous phase | 0.85 | 0.90 | 0.95 | digestion, stripping, struvite [A] |
+| Gasifier ash (share of feed) | 0.00 | 0.85 | 0.80 | N lost as N2/NH3 [A] |
+| Cellulosic-ethanol stillage | 0.60 | 0.85 | 0.90 | [A] |
+| Seaweed to HTL | 0.60 | 0.80 | 0.30 | saline aqueous phase [A] |
+| Seaweed to soil (washed) | 1.00 | 1.00 | 0.70 | [A] |
+
+**Table S22. Nitrogen (N), phosphorus (P) and potassium (K) balance of the land that supplies biomass (Mt of element per year). LC = least cost; AG = after gas; BIO = soil carbon from biological sources only. Removed = nutrients in harvested residues, bamboo, hemp stalk and bagasse; returns plus fertiliser bought, less nutrients sold, must be at least this amount.**
+
+| Mt per year | LC N | LC P | LC K | AG N | AG P | AG K | BIO N | BIO P | BIO K |
+|:------------------------|----------:|----------:|----------:|----------:|----------:|----------:|----------:|----------:|----------:|
+| Removed by harvest | 2.931 | 0.616 | 4.985 | 2.931 | 0.616 | 4.985 | 2.931 | 0.616 | 4.985 |
+| HTL hydrochar | 0.268 | 0.450 | 0.364 | 0.271 | 0.455 | 0.367 | 0.270 | 0.452 | 0.365 |
+| Digested HTL wastewater | 1.255 | 0.076 | 3.803 | 1.267 | 0.077 | 3.840 | 1.260 | 0.076 | 3.819 |
+| Gasifier ash | 0.000 | 0.046 | 0.350 | 0.000 | 0.041 | 0.315 | 0.000 | 0.044 | 0.336 |
+| Ethanol stillage | 0.000 | 0.000 | 0.000 | 0.000 | 0.000 | 0.000 | 0.000 | 0.000 | 0.000 |
+| Offshore seaweed | 0.000 | 0.000 | 0.000 | 0.000 | 0.000 | 0.000 | 0.000 | 0.000 | 0.000 |
+| Nearshore seaweed | 0.025 | 0.005 | 0.011 | 0.095 | 0.017 | 0.040 | 0.056 | 0.010 | 0.023 |
+| Green manure | 0.000 | 0.000 | 0.000 | 0.341 | 0.000 | 0.000 | 0.365 | 0.000 | 0.000 |
+| Manure compost | 0.000 | 0.000 | 0.000 | 0.750 | 0.300 | 0.600 | 0.750 | 0.300 | 0.600 |
+| Mineral fertiliser bought | 1.383 | 0.039 | 0.456 | 0.206 | 0.000 | 0.000 | 0.231 | 0.000 | 0.000 |
+| Recovered nutrients sold | 0.000 | 0.000 | 0.000 | 0.000 | 0.274 | 0.179 | 0.000 | 0.266 | 0.158 |
+
+**Table S23. Soil-carbon balance (Mt C per year) and system cost (USD bn per year). Req. = required: residue carbon that would have become stable soil carbon; the sources are the stable fractions of what is returned or added (hydrochar, digestate, green manure, compost, pyrolysis carbon); Bio. % = share from biological sources. Every case harvests 382 Mt of residues; seaweed sent to soil supplies at most 0.00 Mt C; and the priced gap (soil carbon not replaced, an accounting entry rather than material returned to soil) is 0.0 Mt in every case. In the unconstrained case the requirement is reported but not enforced. Gas use for pyrolysis is in table S15 and Fig. 6.**
+
+| Case | Req. | Hydro-char | Digest-ate | Green man. | Com-post | Pyro. C | Bio. % | Cost |
+|:------------------------|----------:|------------:|------------:|----------:|----------:|----------:|----------:|----------:|
+| Least cost | 27.4 | 14.8 | 5.5 | 0.0 | 0.0 | 7.1 | 74 | 314 |
+| After gas | 27.4 | 14.9 | 5.6 | 1.7 | 5.2 | 0.0 | 100 | 326 |
+| 230 GW offshore | 27.4 | 16.2 | 6.1 | 0.0 | 0.0 | 5.2 | 81 | 338 |
+| All bays farmed | 27.4 | 15.0 | 5.6 | 0.0 | 0.0 | 6.9 | 75 | 314 |
+| Pyrolysis C not counted | 27.4 | 14.8 | 5.5 | 1.8 | 5.2 | 0.0 | 100 | 316 |
+| After gas, no CH4 pyrolysis | 27.4 | 14.8 | 5.5 | 1.8 | 5.2 | 0.0 | 100 | 342 |
+| Biological only | 27.4 | 14.8 | 5.5 | 1.8 | 5.2 | 0.0 | 100 | 316 |
+| After gas, biological | 27.4 | 14.9 | 5.6 | 1.7 | 5.2 | 0.0 | 100 | 326 |
+| Unconstrained (not enforced) | 27.4 | 0.0 | 0.0 | 0.0 | 0.0 | 0.0 | 0 | 309 |
+
+**Table S24. Nearshore bioextraction farms in the 230 GW offshore design, in which every eutrophic zone is farmed to its screened area and all the harvest goes to liquefaction. Costs in USD per t of dry seaweed: farm (lines, seeding, upkeep), Grid Harvester, and haul (battery-sail vessels and drones). China's seaweed farms now remove about 75 kt N per year (Xiao et al. 2017).**
+
+| Zone | km2 | Dry Mt | N kt | P kt | Fuel TWh | Farm | Grid Harv. | Haul | Total |
+|:------------------|----------:|----------:|----------:|----------:|----------:|----------:|----------:|----------:|----------:|
+| Liaodong Bay | 600 | 0.96 | 27 | 3.8 | 1.8 | 219 | 4.9 | 2.9 | 227 |
+| Haizhou Bay | 300 | 0.45 | 13 | 1.8 | 0.9 | 233 | 5.2 | 3.0 | 242 |
+| Yangtze plume | 900 | 1.62 | 52 | 6.5 | 3.1 | 194 | 4.3 | 2.9 | 202 |
+| Fujian bays | 700 | 1.40 | 42 | 5.9 | 2.7 | 175 | 3.9 | 2.6 | 182 |
+| Pearl River | 800 | 1.28 | 38 | 5.1 | 2.4 | 219 | 4.9 | 2.7 | 226 |
+| Qinzhou Bay | 300 | 0.45 | 13 | 1.7 | 0.9 | 233 | 5.2 | 2.8 | 241 |
+| Total | 3,600 | 6.16 | 184 | 24.8 | 11.7 |  |  |  |  |
+
+
+Grid Harvester fleet in the 230 GW design: 437 units in all, of which 54 serve the nearshore farms.
+
+**Table S25. Biological soil-carbon options, available in every case and used by the LP when they are the cheapest way to close the balance [A].**
+
+| Option | Cap | Cost | Stable C added | Nutrients added | Basis |
+|:------------------------|:----------|:----------|:------------------|:------------|:--------------------------|
+| Winter legume green manure (Chinese milk vetch, hairy vetch) on winter-fallow fields | 6.7 Mha | USD 200/ha | 0.29 t C/ha (3.5 t DM/ha, 42% C, humification 0.2) | 60 kg N/ha fixed | About 9.3 Mha of winter fields underused, 72% readily available |
+| Compost from livestock manure not now returned to fields | 50 Mt DM | USD 60/t DM | 0.105 t C/t DM (30% C, humification 0.35) | N 15, P 6, K 12 kg/t DM | About 22% of 3.8-4 bn t/yr of manure is not utilised; composting emissions 0.1 t CO2e/t DM |
+
+**Table S26. Backup cost for the wind lull (USD bn per year) and the saving against late-2025 petroleum once it is included (%). Lower bound: backup plant and the hydrogen it burns. Plausible: adds a 15% reserve margin, hydrogen storage at USD 25/kg for one lull's backup fuel and the vehicles' hydrogen during the lull, extra hydrogen-production capacity to make up output lost in lulls, and USD 150/kW of transmission. High: a 14-day lull with no wind, 20% reserve, storage at USD 100/kg and USD 300/kW of transmission. Components in table S27. Not an hourly dispatch or reliability study.**
+
+| Case | Cost: lower | Cost: plausible | Cost: high | Saving: lower | Saving: plausible | Saving: high |
+|:-----------|----------:|-----------:|----------:|----------:|-----------:|----------:|
+| Least cost | 4.7 | 7.1 | 31.5 | 20.4 | 19.8 | 13.7 |
+| After gas | 2.7 | 4.3 | 23.9 | 17.9 | 17.5 | 12.6 |
+| At most 30 hubs | 11.9 | 17.2 | 61.2 | 15.9 | 14.6 | 3.6 |
+| No nuclear | 10.5 | 15.5 | 57.0 | 5.5 | 4.3 | -6.1 |
+| 230 GW offshore | 4.5 | 6.9 | 30.1 | 14.3 | 13.7 | 7.9 |
+
+**Table S27. Components of the plausible and high backup costs in table S26 (USD bn per year).**
+
+| Component | Least cost: plausible | Least cost: high | After gas: plausible | After gas: high | At most 30 hubs: plausible | At most 30 hubs: high |
+|:---------------|-----------:|----------:|-----------:|----------:|-----------:|----------:|
+| Backup plant (incl. reserve margin) | 2.77 | 4.65 | 1.58 | 3.41 | 7.00 | 9.42 |
+| Hydrogen burned | 2.29 | 7.35 | 1.31 | 5.39 | 5.77 | 14.89 |
+| Hydrogen storage | 1.48 | 17.74 | 0.96 | 13.61 | 3.33 | 33.76 |
+| Make-up hydrogen production | 0.10 | 0.21 | 0.17 | 0.36 | 0.00 | 0.00 |
+| Transmission | 0.46 | 1.53 | 0.26 | 1.12 | 1.15 | 3.10 |
+| Total | 7.10 | 31.47 | 4.29 | 23.89 | 17.24 | 61.16 |

@@ -1,0 +1,1207 @@
+{
+ "release": "CN v1.6.2",
+ "checks": 120,
+ "failures": 0,
+ "rows": [
+  {
+   "group": "constants",
+   "check": "H2 LHV kWh/kg",
+   "model": 33.33,
+   "independent": 33.333333333333336,
+   "rel_diff": -0.00010000000000012221,
+   "tolerance": 0.001,
+   "ok": true,
+   "note": ""
+  },
+  {
+   "group": "fuel LHV",
+   "check": "gasoline LHV GJ/t lies between GB/T 2589 and IPCC 2006",
+   "model": 43.416000000000004,
+   "independent": "[43.02, 44.349999999999994]",
+   "rel_diff": null,
+   "tolerance": null,
+   "ok": true,
+   "note": ""
+  },
+  {
+   "group": "fuel LHV",
+   "check": "diesel LHV GJ/t lies between GB/T 2589 and IPCC 2006",
+   "model": 42.804,
+   "independent": "[42.602000000000004, 43.05]",
+   "rel_diff": null,
+   "tolerance": null,
+   "ok": true,
+   "note": ""
+  },
+  {
+   "group": "fuel LHV",
+   "check": "jet LHV GJ/t lies between GB/T 2589 and IPCC 2006",
+   "model": 43.2,
+   "independent": "[43.02, 44.15]",
+   "rel_diff": null,
+   "tolerance": null,
+   "ok": true,
+   "note": ""
+  },
+  {
+   "group": "fuel LHV",
+   "check": "resid LHV GJ/t lies between GB/T 2589 and IPCC 2006",
+   "model": 40.392,
+   "independent": "[40.35, 41.866]",
+   "rel_diff": null,
+   "tolerance": null,
+   "ok": true,
+   "note": ""
+  },
+  {
+   "group": "gas",
+   "check": "pipeline gas LHV MJ/m3 (China pipeline gas 34-37)",
+   "model": 35.64,
+   "independent": "[34.0, 37.0]",
+   "rel_diff": null,
+   "tolerance": null,
+   "ok": true,
+   "note": ""
+  },
+  {
+   "group": "gas",
+   "check": "HHV/LHV ratio of methane",
+   "model": 1.109,
+   "independent": 1.11,
+   "rel_diff": -0.0009009009009010016,
+   "tolerance": 0.002,
+   "ok": true,
+   "note": ""
+  },
+  {
+   "group": "gas",
+   "check": "MMBtu (HHV) per bcm consistent with TWh (LHV) per bcm",
+   "model": 37462226.274000004,
+   "independent": 37496006.46000001,
+   "rel_diff": -0.0009009009009010183,
+   "tolerance": 0.002,
+   "ok": true,
+   "note": ""
+  },
+  {
+   "group": "gas",
+   "check": "TWh HHV per Mt CH4 (GPK)",
+   "model": 15.416666666666666,
+   "independent": 15.416666666666666,
+   "rel_diff": 0.0,
+   "tolerance": 1e-06,
+   "ok": true,
+   "note": ""
+  },
+  {
+   "group": "gas",
+   "check": "USD/MWh from USD/MMBtu",
+   "model": 31.732792447822874,
+   "independent": 31.732902000000003,
+   "rel_diff": -3.4523214148219535e-06,
+   "tolerance": 0.001,
+   "ok": true,
+   "note": ""
+  },
+  {
+   "group": "baseline",
+   "check": "2025 ldv TWh = Mt x LHV",
+   "model": 1877.9832000000001,
+   "independent": 1877.9832000000001,
+   "rel_diff": 0.0,
+   "tolerance": 1e-09,
+   "ok": true,
+   "note": ""
+  },
+  {
+   "group": "baseline",
+   "check": "2025 hdv TWh = Mt x LHV",
+   "model": 1862.5701999999999,
+   "independent": 1862.5701999999999,
+   "rel_diff": 0.0,
+   "tolerance": 1e-09,
+   "ok": true,
+   "note": ""
+  },
+  {
+   "group": "baseline",
+   "check": "2025 air TWh = Mt x LHV",
+   "model": 551.52,
+   "independent": 551.52,
+   "rel_diff": 0.0,
+   "tolerance": 1e-09,
+   "ok": true,
+   "note": ""
+  },
+  {
+   "group": "baseline",
+   "check": "2025 marine TWh = Mt x LHV",
+   "model": 454.797,
+   "independent": 454.797,
+   "rel_diff": 0.0,
+   "tolerance": 1e-09,
+   "ok": true,
+   "note": ""
+  },
+  {
+   "group": "baseline",
+   "check": "2025 total final energy TWh",
+   "model": 5469.3444,
+   "independent": 5469.3444,
+   "rel_diff": 0.0,
+   "tolerance": 1e-09,
+   "ok": true,
+   "note": ""
+  },
+  {
+   "group": "baseline",
+   "check": "2025 total energy with GB/T 2589 LHVs within 2.5% of the model",
+   "model": 0.9974816156921639,
+   "independent": "[0.975, 1.025]",
+   "rel_diff": null,
+   "tolerance": null,
+   "ok": true,
+   "note": ""
+  },
+  {
+   "group": "baseline",
+   "check": "2025 total energy with IPCC 2006 LHVs within 2.5% of the model",
+   "model": 1.0109954352522073,
+   "independent": "[0.975, 1.025]",
+   "rel_diff": null,
+   "tolerance": null,
+   "ok": true,
+   "note": ""
+  },
+  {
+   "group": "baseline",
+   "check": "2050 demand = 2025 x service growth",
+   "model": 6289.7460599999995,
+   "independent": 6289.7460599999995,
+   "rel_diff": 0.0,
+   "tolerance": 1e-09,
+   "ok": true,
+   "note": ""
+  },
+  {
+   "group": "baseline",
+   "check": "Taiwan gasoline Mt from 188 kb/d",
+   "model": 8.04044001178,
+   "independent": 8.04044001178,
+   "rel_diff": 0.0,
+   "tolerance": 1e-06,
+   "ok": true,
+   "note": ""
+  },
+  {
+   "group": "vehicles",
+   "check": "diesel LHV/HHV per gallon: model LHV vs 0.935 x EIA 144.9 MJ/gal",
+   "model": 135.2956258494,
+   "independent": 135.51759704762668,
+   "rel_diff": -0.0016379511079189118,
+   "tolerance": 0.005,
+   "ok": true,
+   "note": ""
+  },
+  {
+   "group": "vehicles",
+   "check": "heavy-truck BEV ratio = (kWh/mi) / (MJ_LHV/mi / 3.6)",
+   "model": 0.4379493154804182,
+   "independent": 0.4379493154804182,
+   "rel_diff": 0.0,
+   "tolerance": 1e-09,
+   "ok": true,
+   "note": ""
+  },
+  {
+   "group": "vehicles",
+   "check": "heavy-truck FCEV ratio (H2 LHV / diesel LHV)",
+   "model": 0.8102062336387738,
+   "independent": 0.8102062336387738,
+   "rel_diff": 0.0,
+   "tolerance": 1e-09,
+   "ok": true,
+   "note": ""
+  },
+  {
+   "group": "vehicles",
+   "check": "U.S. v8.4 error factor (ratio without /3.6, same HHV basis)",
+   "model": 3.6,
+   "independent": 3.6,
+   "rel_diff": 0.0,
+   "tolerance": 1e-09,
+   "ok": true,
+   "note": ""
+  },
+  {
+   "group": "vehicles",
+   "check": "implied BEV heavy truck kWh/km (Chinese 49-t BEV tractors 1.1-1.6)",
+   "model": 1.3913684788758127,
+   "independent": "[1.1, 1.6]",
+   "rel_diff": null,
+   "tolerance": null,
+   "ok": true,
+   "note": ""
+  },
+  {
+   "group": "vehicles",
+   "check": "implied FCEV heavy truck kg H2/100 km (6-12)",
+   "model": 7.722095057760761,
+   "independent": "[6.0, 12.0]",
+   "rel_diff": null,
+   "tolerance": null,
+   "ok": true,
+   "note": ""
+  },
+  {
+   "group": "vehicles",
+   "check": "implied BEV car kWh/100 km at the meter (12-18)",
+   "model": 14.56155191489362,
+   "independent": "[12.0, 18.0]",
+   "rel_diff": null,
+   "tolerance": null,
+   "ok": true,
+   "note": ""
+  },
+  {
+   "group": "vehicles",
+   "check": "hdv_bev TWh = demand x share x ratio x lightweighting",
+   "model": 410.73309382851096,
+   "independent": 410.73309382851096,
+   "rel_diff": 0.0,
+   "tolerance": 1e-09,
+   "ok": true,
+   "note": ""
+  },
+  {
+   "group": "vehicles",
+   "check": "ldv electricity TWh",
+   "model": 469.4370381054575,
+   "independent": 469.4370381054575,
+   "rel_diff": 0.0,
+   "tolerance": 1e-09,
+   "ok": true,
+   "note": ""
+  },
+  {
+   "group": "vehicles",
+   "check": "direct H2 Mt = TWh / 33.33",
+   "model": 6.468283920319865,
+   "independent": 6.467637091927832,
+   "rel_diff": 0.00010001000100024039,
+   "tolerance": 0.001,
+   "ok": true,
+   "note": ""
+  },
+  {
+   "group": "vehicles",
+   "check": "electricity end use total",
+   "model": 1494.1241430409173,
+   "independent": 1494.1241430409173,
+   "rel_diff": 0.0,
+   "tolerance": 1e-09,
+   "ok": true,
+   "note": ""
+  },
+  {
+   "group": "vehicles",
+   "check": "BEV car net USD/yr (four components)",
+   "model": -93.3,
+   "independent": -93.3248368243028,
+   "rel_diff": -0.00026613305897944914,
+   "tolerance": 0.002,
+   "ok": true,
+   "note": ""
+  },
+  {
+   "group": "vehicles",
+   "check": "vehicles and machines net, bn USD",
+   "model": 22.843300000000003,
+   "independent": 22.83339010710318,
+   "rel_diff": 0.0004340088287520177,
+   "tolerance": 0.002,
+   "ok": true,
+   "note": ""
+  },
+  {
+   "group": "petroleum",
+   "check": "pre-tax gasoline USD/t late 2025",
+   "model": 870.4449445098982,
+   "independent": 870.4449445098982,
+   "rel_diff": 0.0,
+   "tolerance": 1e-09,
+   "ok": true,
+   "note": ""
+  },
+  {
+   "group": "petroleum",
+   "check": "pre-tax diesel USD/t late 2025",
+   "model": 777.5060348778969,
+   "independent": 777.5060348778969,
+   "rel_diff": 0.0,
+   "tolerance": 1e-09,
+   "ok": true,
+   "note": ""
+  },
+  {
+   "group": "petroleum",
+   "check": "pre-tax jet USD/t late 2025",
+   "model": 699.9650017499126,
+   "independent": 699.9650017499126,
+   "rel_diff": 0.0,
+   "tolerance": 1e-09,
+   "ok": true,
+   "note": ""
+  },
+  {
+   "group": "petroleum",
+   "check": "pre-tax resid USD/t late 2025",
+   "model": 480.0,
+   "independent": 480.0,
+   "rel_diff": 0.0,
+   "tolerance": 1e-09,
+   "ok": true,
+   "note": ""
+  },
+  {
+   "group": "petroleum",
+   "check": "petroleum comparator late 2025, bn USD",
+   "model": 400.20140081826065,
+   "independent": 400.22141101814054,
+   "rel_diff": -4.999782452664533e-05,
+   "tolerance": 0.003,
+   "ok": true,
+   "note": ""
+  },
+  {
+   "group": "petroleum",
+   "check": "petroleum comparator Nov 2026, bn USD",
+   "model": 547.0325941476494,
+   "independent": 547.0575690214658,
+   "rel_diff": -4.5653099839341436e-05,
+   "tolerance": 0.003,
+   "ok": true,
+   "note": ""
+  },
+  {
+   "group": "emissions",
+   "check": "petroleum WTW 2025, Mt CO2e (text: about 1.8 Gt)",
+   "model": 1803.7806537600002,
+   "independent": 1803.7806537600002,
+   "rel_diff": 0.0,
+   "tolerance": 1e-09,
+   "ok": true,
+   "note": ""
+  },
+  {
+   "group": "emissions",
+   "check": "petroleum WTW 2050, Mt CO2e",
+   "model": 2074.3477518239997,
+   "independent": 2074.3477518239997,
+   "rel_diff": 0.0,
+   "tolerance": 1e-09,
+   "ok": true,
+   "note": ""
+  },
+  {
+   "group": "emissions",
+   "check": "2025 WTW per unit energy g/MJ (petroleum 85-95)",
+   "model": 91.61064744798298,
+   "independent": "[85, 95]",
+   "rel_diff": null,
+   "tolerance": null,
+   "ok": true,
+   "note": ""
+  },
+  {
+   "group": "emissions",
+   "check": "system emissions = sum of sources",
+   "model": 129.68302966620956,
+   "independent": 129.68302966620956,
+   "rel_diff": 0.0,
+   "tolerance": 1e-09,
+   "ok": true,
+   "note": ""
+  },
+  {
+   "group": "emissions",
+   "check": "reduction %",
+   "model": 93.74825028483397,
+   "independent": 93.74825028483397,
+   "rel_diff": 0.0,
+   "tolerance": 1e-09,
+   "ok": true,
+   "note": ""
+  },
+  {
+   "group": "cost",
+   "check": "total = sum of components + credits",
+   "model": 314.06145047182287,
+   "independent": 314.06145047182287,
+   "rel_diff": 0.0,
+   "tolerance": 1e-09,
+   "ok": true,
+   "note": ""
+  },
+  {
+   "group": "cost",
+   "check": "LP objective + fixed terms = total",
+   "model": 314.0614504718229,
+   "independent": 314.06145047182287,
+   "rel_diff": 1.8099457534635542e-16,
+   "tolerance": 1e-09,
+   "ok": true,
+   "note": ""
+  },
+  {
+   "group": "cost",
+   "check": "saving vs late-2025 petroleum %",
+   "model": 21.524150132986573,
+   "independent": 21.524150132986573,
+   "rel_diff": 0.0,
+   "tolerance": 1e-09,
+   "ok": true,
+   "note": ""
+  },
+  {
+   "group": "cost",
+   "check": "break-even multiple",
+   "model": 0.7847584986701343,
+   "independent": 0.7847584986701343,
+   "rel_diff": 0.0,
+   "tolerance": 1e-06,
+   "ok": true,
+   "note": ""
+  },
+  {
+   "group": "cost",
+   "check": "transmission and distribution = el x 22 USD/MWh",
+   "model": 32.87073114690018,
+   "independent": 32.87073114690018,
+   "rel_diff": 0.0,
+   "tolerance": 1e-09,
+   "ok": true,
+   "note": ""
+  },
+  {
+   "group": "cost",
+   "check": "electric highways = 60,000 km x 1.8 M$/km x (CRF40 + 2.5%)",
+   "model": 8.994041405931778,
+   "independent": 8.994041405931778,
+   "rel_diff": 0.0,
+   "tolerance": 1e-09,
+   "ok": true,
+   "note": ""
+  },
+  {
+   "group": "cost",
+   "check": "firmed solar USD/MWh quoted as 61",
+   "model": 61.0,
+   "independent": "[60.99, 61.01]",
+   "rel_diff": null,
+   "tolerance": null,
+   "ok": true,
+   "note": ""
+  },
+  {
+   "group": "hubs",
+   "check": "modules = 6 x hubs",
+   "model": 1326.0,
+   "independent": 1326.0,
+   "rel_diff": 0.0,
+   "tolerance": 1e-09,
+   "ok": true,
+   "note": ""
+  },
+  {
+   "group": "hubs",
+   "check": "GWt = 1.5 x hubs",
+   "model": 331.5,
+   "independent": 331.5,
+   "rel_diff": 0.0,
+   "tolerance": 1e-09,
+   "ok": true,
+   "note": ""
+  },
+  {
+   "group": "hubs",
+   "check": "FOAK USD/kWe quoted as 5,250",
+   "model": 5250.0,
+   "independent": 5250.0,
+   "rel_diff": 0.0,
+   "tolerance": 1e-09,
+   "ok": true,
+   "note": ""
+  },
+  {
+   "group": "hubs",
+   "check": "reactor hub cost bn/yr within 3% of a hand Wright's-law estimate (other cascade items excluded)",
+   "model": 1.0000000000000002,
+   "independent": "[0.97, 1.03]",
+   "rel_diff": null,
+   "tolerance": null,
+   "ok": true,
+   "note": ""
+  },
+  {
+   "group": "hydrogen",
+   "check": "pyrolysis gas bcm = Mt H2 x 4.08 / 0.72 kg/m3",
+   "model": 47.639301291418995,
+   "independent": 47.63930129141899,
+   "rel_diff": 1.4915053674141237e-16,
+   "tolerance": 0.002,
+   "ok": true,
+   "note": ""
+  },
+  {
+   "group": "hydrogen",
+   "check": "same gas on an energy basis, bcm (LHV 50 MJ/kg / 9.9 TWh/bcm), within 2%",
+   "model": 0.9900000000000003,
+   "independent": "[0.98, 1.02]",
+   "rel_diff": null,
+   "tolerance": null,
+   "ok": true,
+   "note": ""
+  },
+  {
+   "group": "hydrogen",
+   "check": "pyrolysis carbon = 3 kg C per kg H2",
+   "model": 25.21071824341893,
+   "independent": 25.21071824341893,
+   "rel_diff": 0.0,
+   "tolerance": 1e-06,
+   "ok": true,
+   "note": ""
+  },
+  {
+   "group": "hydrogen",
+   "check": "3 kg C/kg H2 vs stoichiometry (12/4.032 = 2.98)",
+   "model": 1.0070768462242945,
+   "independent": "[0.99, 1.02]",
+   "rel_diff": null,
+   "tolerance": null,
+   "ok": true,
+   "note": ""
+  },
+  {
+   "group": "nutrients",
+   "check": "N removed Mt within 5% of tiers x content (hand)",
+   "model": 1.0,
+   "independent": "[0.95, 1.05]",
+   "rel_diff": null,
+   "tolerance": null,
+   "ok": true,
+   "note": ""
+  },
+  {
+   "group": "nutrients",
+   "check": "N balance closes (removed = returned - sold)",
+   "model": 2.9313064,
+   "independent": 2.9313064,
+   "rel_diff": 0.0,
+   "tolerance": 1e-06,
+   "ok": true,
+   "note": ""
+  },
+  {
+   "group": "nutrients",
+   "check": "P removed Mt within 5% of tiers x content (hand)",
+   "model": 1.0,
+   "independent": "[0.95, 1.05]",
+   "rel_diff": null,
+   "tolerance": null,
+   "ok": true,
+   "note": ""
+  },
+  {
+   "group": "nutrients",
+   "check": "P balance closes (removed = returned - sold)",
+   "model": 0.6158751999999998,
+   "independent": 0.6158752,
+   "rel_diff": -1.8026753222489826e-16,
+   "tolerance": 1e-06,
+   "ok": true,
+   "note": ""
+  },
+  {
+   "group": "nutrients",
+   "check": "K removed Mt within 5% of tiers x content (hand)",
+   "model": 0.9999999999999998,
+   "independent": "[0.95, 1.05]",
+   "rel_diff": null,
+   "tolerance": null,
+   "ok": true,
+   "note": ""
+  },
+  {
+   "group": "nutrients",
+   "check": "K balance closes (removed = returned - sold)",
+   "model": 4.9845642,
+   "independent": 4.9845641999999994,
+   "rel_diff": 1.7818577192768934e-16,
+   "tolerance": 1e-06,
+   "ok": true,
+   "note": ""
+  },
+  {
+   "group": "nutrients",
+   "check": "residue C removed within 5% of hand",
+   "model": 0.979726451652804,
+   "independent": "[0.95, 1.05]",
+   "rel_diff": null,
+   "tolerance": null,
+   "ok": true,
+   "note": ""
+  },
+  {
+   "group": "nutrients",
+   "check": "stable SOC required within 5% of hand",
+   "model": 0.9999999999999999,
+   "independent": "[0.95, 1.05]",
+   "rel_diff": null,
+   "tolerance": null,
+   "ok": true,
+   "note": ""
+  },
+  {
+   "group": "nutrients",
+   "check": "SOC supplied >= required (or priced gap)",
+   "model": 0.0,
+   "independent": "[-1e-06, 1000000000.0]",
+   "rel_diff": null,
+   "tolerance": null,
+   "ok": true,
+   "note": ""
+  },
+  {
+   "group": "nutrients",
+   "check": "pyrolysis carbon to soil x 0.90 stable",
+   "model": 7.119646419077036,
+   "independent": 7.119646419077036,
+   "rel_diff": 0.0,
+   "tolerance": 1e-06,
+   "ok": true,
+   "note": ""
+  },
+  {
+   "group": "nutrients",
+   "check": "pyrolysis carbon: markets + soil = made",
+   "model": 25.210718243418928,
+   "independent": 25.21071824341893,
+   "rel_diff": -1.409207641169807e-16,
+   "tolerance": 1e-06,
+   "ok": true,
+   "note": ""
+  },
+  {
+   "group": "nutrients",
+   "check": "carbon to soil in allocation = soil balance",
+   "model": 7.910718243418929,
+   "independent": 7.910718243418929,
+   "rel_diff": 0.0,
+   "tolerance": 1e-06,
+   "ok": true,
+   "note": ""
+  },
+  {
+   "group": "cost",
+   "check": "carbon revenue = sum(Mt x value)",
+   "model": 23.65,
+   "independent": 23.65,
+   "rel_diff": 0.0,
+   "tolerance": 1e-06,
+   "ok": true,
+   "note": ""
+  },
+  {
+   "group": "nutrients",
+   "check": "straw N % DM (text 0.64-0.85)",
+   "model": 0.76,
+   "independent": "[0.64, 0.85]",
+   "rel_diff": null,
+   "tolerance": null,
+   "ok": true,
+   "note": ""
+  },
+  {
+   "group": "nutrients",
+   "check": "straw P as P2O5 % DM (text 0.27-0.53)",
+   "model": 0.412438496803771,
+   "independent": "[0.27, 0.53]",
+   "rel_diff": null,
+   "tolerance": null,
+   "ok": true,
+   "note": ""
+  },
+  {
+   "group": "nutrients",
+   "check": "straw K as K2O % DM (text 1.53-2.31)",
+   "model": 1.843039925315873,
+   "independent": "[1.53, 2.31]",
+   "rel_diff": null,
+   "tolerance": null,
+   "ok": true,
+   "note": ""
+  },
+  {
+   "group": "fertiliser",
+   "check": "N USD/t N from urea 2,000 CNY/t farm gate (46% N, 7.08): 560-720",
+   "model": 700.0,
+   "independent": "[560, 720]",
+   "rel_diff": null,
+   "tolerance": null,
+   "ok": true,
+   "note": ""
+  },
+  {
+   "group": "fertiliser",
+   "check": "P USD/t elemental P from MAP ~1,000-1,250 USD/t P2O5",
+   "model": 2600.0,
+   "independent": "[2291.3249822431717, 2864.1562278039646]",
+   "rel_diff": null,
+   "tolerance": null,
+   "ok": true,
+   "note": ""
+  },
+  {
+   "group": "fertiliser",
+   "check": "K USD/t elemental K from KCl 3,300-3,700 CNY/t (60% K2O)",
+   "model": 1000.0,
+   "independent": "[935.7778137104704, 1101.6656988682357]",
+   "rel_diff": null,
+   "tolerance": null,
+   "ok": true,
+   "note": ""
+  },
+  {
+   "group": "fertiliser",
+   "check": "mineral fertiliser cost = Mt x price",
+   "model": 1.5252893457984213,
+   "independent": 1.5252893457984216,
+   "rel_diff": -1.455753988819746e-16,
+   "tolerance": 1e-06,
+   "ok": true,
+   "note": ""
+  },
+  {
+   "group": "nutrients",
+   "check": "green manure t C/ha stable",
+   "model": 0.294,
+   "independent": 0.294,
+   "rel_diff": 0.0,
+   "tolerance": 1e-06,
+   "ok": true,
+   "note": ""
+  },
+  {
+   "group": "nutrients",
+   "check": "compost t C/t stable",
+   "model": 0.105,
+   "independent": 0.105,
+   "rel_diff": 0.0,
+   "tolerance": 1e-06,
+   "ok": true,
+   "note": ""
+  },
+  {
+   "group": "nutrients",
+   "check": "biomethane TWh = 0.35 MWh/t x digested feed",
+   "model": 143.67086567914654,
+   "independent": 143.67086567914654,
+   "rel_diff": 0.0,
+   "tolerance": 1e-06,
+   "ok": true,
+   "note": ""
+  },
+  {
+   "group": "emissions",
+   "check": "digester slip Mt CO2e = 1% x Mt CH4 x 29.8",
+   "model": 2.7771190036142057,
+   "independent": 2.7771190036142057,
+   "rel_diff": 0.0,
+   "tolerance": 1e-06,
+   "ok": true,
+   "note": ""
+  },
+  {
+   "group": "emissions",
+   "check": "fertiliser Mt CO2e = Mt x (8, 2, 0.5)",
+   "model": 11.368055222635519,
+   "independent": 11.368055222635519,
+   "rel_diff": 0.0,
+   "tolerance": 1e-06,
+   "ok": true,
+   "note": ""
+  },
+  {
+   "group": "monte carlo",
+   "check": "least_cost: draws in CSV",
+   "model": 1000,
+   "independent": 1000.0,
+   "rel_diff": 0.0,
+   "tolerance": 1e-09,
+   "ok": true,
+   "note": ""
+  },
+  {
+   "group": "monte carlo",
+   "check": "least_cost: cost p5 from raw draws",
+   "model": 273.00477064654433,
+   "independent": 273.00477064654433,
+   "rel_diff": 0.0,
+   "tolerance": 1e-06,
+   "ok": true,
+   "note": ""
+  },
+  {
+   "group": "monte carlo",
+   "check": "least_cost: saving p5 from raw draws",
+   "model": -33.43181913375203,
+   "independent": -33.43181913375203,
+   "rel_diff": -0.0,
+   "tolerance": 1e-06,
+   "ok": true,
+   "note": ""
+  },
+  {
+   "group": "monte carlo",
+   "check": "least_cost: cost p50 from raw draws",
+   "model": 400.3724187584787,
+   "independent": 400.3724187584787,
+   "rel_diff": 0.0,
+   "tolerance": 1e-06,
+   "ok": true,
+   "note": ""
+  },
+  {
+   "group": "monte carlo",
+   "check": "least_cost: saving p50 from raw draws",
+   "model": 3.2832246762716677,
+   "independent": 3.2832246762716677,
+   "rel_diff": 0.0,
+   "tolerance": 1e-06,
+   "ok": true,
+   "note": ""
+  },
+  {
+   "group": "monte carlo",
+   "check": "least_cost: cost p95 from raw draws",
+   "model": 557.589006993715,
+   "independent": 557.589006993715,
+   "rel_diff": 0.0,
+   "tolerance": 1e-06,
+   "ok": true,
+   "note": ""
+  },
+  {
+   "group": "monte carlo",
+   "check": "least_cost: saving p95 from raw draws",
+   "model": 32.170440066058546,
+   "independent": 32.170440066058546,
+   "rel_diff": 0.0,
+   "tolerance": 1e-06,
+   "ok": true,
+   "note": ""
+  },
+  {
+   "group": "monte carlo",
+   "check": "least_cost: share cheaper than late-2025 petroleum",
+   "model": 0.541,
+   "independent": 0.541,
+   "rel_diff": 0.0,
+   "tolerance": 0.002,
+   "ok": true,
+   "note": ""
+  },
+  {
+   "group": "monte carlo",
+   "check": "least_cost: share cheaper at Nov 2026 prices",
+   "model": 0.966,
+   "independent": 0.966,
+   "rel_diff": 0.0,
+   "tolerance": 0.002,
+   "ok": true,
+   "note": ""
+  },
+  {
+   "group": "monte carlo",
+   "check": "least_cost: saving column = 1 - cost/petroleum (median)",
+   "model": 3.2832246762716677,
+   "independent": 3.2832246762716677,
+   "rel_diff": 0.0,
+   "tolerance": 1e-06,
+   "ok": true,
+   "note": ""
+  },
+  {
+   "group": "monte carlo",
+   "check": "post_gas: draws in CSV",
+   "model": 1000,
+   "independent": 1000.0,
+   "rel_diff": 0.0,
+   "tolerance": 1e-09,
+   "ok": true,
+   "note": ""
+  },
+  {
+   "group": "monte carlo",
+   "check": "post_gas: cost p5 from raw draws",
+   "model": 284.60387757680667,
+   "independent": 284.60387757680667,
+   "rel_diff": 0.0,
+   "tolerance": 1e-06,
+   "ok": true,
+   "note": ""
+  },
+  {
+   "group": "monte carlo",
+   "check": "post_gas: saving p5 from raw draws",
+   "model": -37.249482112546126,
+   "independent": -37.249482112546126,
+   "rel_diff": -0.0,
+   "tolerance": 1e-06,
+   "ok": true,
+   "note": ""
+  },
+  {
+   "group": "monte carlo",
+   "check": "post_gas: cost p50 from raw draws",
+   "model": 413.96188015614166,
+   "independent": 413.96188015614166,
+   "rel_diff": 0.0,
+   "tolerance": 1e-06,
+   "ok": true,
+   "note": ""
+  },
+  {
+   "group": "monte carlo",
+   "check": "post_gas: saving p50 from raw draws",
+   "model": -0.5297099239743419,
+   "independent": -0.5297099239743419,
+   "rel_diff": -0.0,
+   "tolerance": 1e-06,
+   "ok": true,
+   "note": ""
+  },
+  {
+   "group": "monte carlo",
+   "check": "post_gas: cost p95 from raw draws",
+   "model": 584.6529397790905,
+   "independent": 584.6529397790905,
+   "rel_diff": 0.0,
+   "tolerance": 1e-06,
+   "ok": true,
+   "note": ""
+  },
+  {
+   "group": "monte carlo",
+   "check": "post_gas: saving p95 from raw draws",
+   "model": 28.613064839839996,
+   "independent": 28.613064839839996,
+   "rel_diff": 0.0,
+   "tolerance": 1e-06,
+   "ok": true,
+   "note": ""
+  },
+  {
+   "group": "monte carlo",
+   "check": "post_gas: share cheaper than late-2025 petroleum",
+   "model": 0.493,
+   "independent": 0.493,
+   "rel_diff": 0.0,
+   "tolerance": 0.002,
+   "ok": true,
+   "note": ""
+  },
+  {
+   "group": "monte carlo",
+   "check": "post_gas: share cheaper at Nov 2026 prices",
+   "model": 0.945,
+   "independent": 0.945,
+   "rel_diff": 0.0,
+   "tolerance": 0.002,
+   "ok": true,
+   "note": ""
+  },
+  {
+   "group": "monte carlo",
+   "check": "post_gas: saving column = 1 - cost/petroleum (median)",
+   "model": -0.5297099239743419,
+   "independent": -0.5297099239743419,
+   "rel_diff": -0.0,
+   "tolerance": 1e-06,
+   "ok": true,
+   "note": ""
+  },
+  {
+   "group": "monte carlo",
+   "check": "half_offshore: draws in CSV",
+   "model": 1000,
+   "independent": 1000.0,
+   "rel_diff": 0.0,
+   "tolerance": 1e-09,
+   "ok": true,
+   "note": ""
+  },
+  {
+   "group": "monte carlo",
+   "check": "half_offshore: cost p5 from raw draws",
+   "model": 303.7990033285713,
+   "independent": 303.7990033285713,
+   "rel_diff": 0.0,
+   "tolerance": 1e-06,
+   "ok": true,
+   "note": ""
+  },
+  {
+   "group": "monte carlo",
+   "check": "half_offshore: saving p5 from raw draws",
+   "model": -38.63615543104014,
+   "independent": -38.63615543104014,
+   "rel_diff": -0.0,
+   "tolerance": 1e-06,
+   "ok": true,
+   "note": ""
+  },
+  {
+   "group": "monte carlo",
+   "check": "half_offshore: cost p50 from raw draws",
+   "model": 425.10710344591325,
+   "independent": 425.10710344591325,
+   "rel_diff": 0.0,
+   "tolerance": 1e-06,
+   "ok": true,
+   "note": ""
+  },
+  {
+   "group": "monte carlo",
+   "check": "half_offshore: saving p50 from raw draws",
+   "model": -3.2300368638286447,
+   "independent": -3.2300368638286447,
+   "rel_diff": -0.0,
+   "tolerance": 1e-06,
+   "ok": true,
+   "note": ""
+  },
+  {
+   "group": "monte carlo",
+   "check": "half_offshore: cost p95 from raw draws",
+   "model": 585.4911897969743,
+   "independent": 585.4911897969743,
+   "rel_diff": 0.0,
+   "tolerance": 1e-06,
+   "ok": true,
+   "note": ""
+  },
+  {
+   "group": "monte carlo",
+   "check": "half_offshore: saving p95 from raw draws",
+   "model": 24.00747513957833,
+   "independent": 24.00747513957833,
+   "rel_diff": 0.0,
+   "tolerance": 1e-06,
+   "ok": true,
+   "note": ""
+  },
+  {
+   "group": "monte carlo",
+   "check": "half_offshore: share cheaper than late-2025 petroleum",
+   "model": 0.435,
+   "independent": 0.435,
+   "rel_diff": 0.0,
+   "tolerance": 0.002,
+   "ok": true,
+   "note": ""
+  },
+  {
+   "group": "monte carlo",
+   "check": "half_offshore: share cheaper at Nov 2026 prices",
+   "model": 0.936,
+   "independent": 0.936,
+   "rel_diff": 0.0,
+   "tolerance": 0.002,
+   "ok": true,
+   "note": ""
+  },
+  {
+   "group": "monte carlo",
+   "check": "half_offshore: saving column = 1 - cost/petroleum (median)",
+   "model": -3.2300368638286447,
+   "independent": -3.2300368638286447,
+   "rel_diff": -0.0,
+   "tolerance": 1e-06,
+   "ok": true,
+   "note": ""
+  },
+  {
+   "group": "text",
+   "check": "fossil CO2 share 32% of 38.1 Gt is 'about one-third'",
+   "model": 0.32,
+   "independent": "[0.3, 0.34]",
+   "rel_diff": null,
+   "tolerance": null,
+   "ok": true,
+   "note": ""
+  },
+  {
+   "group": "text",
+   "check": "on-road diesel 120 Mt is ~59% of 203 Mt",
+   "model": 0.5911330049261084,
+   "independent": "[0.585, 0.595]",
+   "rel_diff": null,
+   "tolerance": null,
+   "ok": true,
+   "note": ""
+  },
+  {
+   "group": "text",
+   "check": "USD 100 per car per year x 420 M x 95% BEV, bn",
+   "model": 39.9,
+   "independent": 39.9,
+   "rel_diff": 0.0,
+   "tolerance": 1e-09,
+   "ok": true,
+   "note": ""
+  },
+  {
+   "group": "text",
+   "check": "military Pu 2.9 t / 10 t per GWe = GWe",
+   "model": 0.29,
+   "independent": 0.29,
+   "rel_diff": 0.0,
+   "tolerance": 1e-09,
+   "ok": true,
+   "note": ""
+  },
+  {
+   "group": "text",
+   "check": "12 GWe of large LWRs approved a year in GWt at 36-38% efficiency (text: about 32)",
+   "model": 32.432432432432435,
+   "independent": "[31.0, 33.5]",
+   "rel_diff": null,
+   "tolerance": null,
+   "ok": true,
+   "note": ""
+  },
+  {
+   "group": "text",
+   "check": "gas price USD 9.3/MMBtu = 8.5 + 0.8",
+   "model": 9.3,
+   "independent": 9.3,
+   "rel_diff": 0.0,
+   "tolerance": 1e-09,
+   "ok": true,
+   "note": ""
+  },
+  {
+   "group": "text",
+   "check": "onshore wind tiers 30 and 45 USD/MWh",
+   "model": 45.0,
+   "independent": 45.0,
+   "rel_diff": 0.0,
+   "tolerance": 1e-09,
+   "ok": true,
+   "note": ""
+  }
+ ]
+}

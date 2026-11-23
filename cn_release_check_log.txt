@@ -1,0 +1,5 @@
+re-solve least_cost: 314.06 bn, 21.52% - matches the release
+re-solve post_gas_least_cost: 325.80 bn, 18.59% - matches the release
+re-solve design_half_offshore: 338.37 bn, 15.45% - matches the release
+re-solve least_cost_biological_soc: 315.69 bn, 21.12% - matches the release
+cn_release_check: PASS (0 problems)

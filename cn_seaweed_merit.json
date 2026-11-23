@@ -5,10 +5,10 @@
    "region": "Shandong peninsula (Rongcheng, Weihai)",
    "species": "Saccharina japonica (China's kelp centre)",
    "yield_t_ha": 13.0,
-   "net_biomass_t": 171.14445005525565,
-   "htl_usd_mwh": 195.33918423960827,
-   "pbtl_usd_mwh": 180.1841285872159,
-   "best_usd_mwh": 180.1841285872159,
+   "net_biomass_t": 149.54445005525565,
+   "htl_usd_mwh": 183.97076318697665,
+   "pbtl_usd_mwh": 174.01270001578732,
+   "best_usd_mwh": 174.01270001578732,
    "gw": 60.0
   },
   {
@@ -16,10 +16,10 @@
    "region": "Liaodong peninsula (Dalian, Yellow Sea)",
    "species": "Saccharina japonica + Undaria pinnatifida",
    "yield_t_ha": 12.0,
-   "net_biomass_t": 181.6459212932139,
-   "htl_usd_mwh": 200.8662743648494,
-   "pbtl_usd_mwh": 183.18454894091823,
-   "best_usd_mwh": 183.18454894091823,
+   "net_biomass_t": 160.0459212932139,
+   "htl_usd_mwh": 189.49785331221784,
+   "pbtl_usd_mwh": 177.0131203694897,
+   "best_usd_mwh": 177.0131203694897,
    "gw": 40.0
   },
   {
@@ -27,10 +27,10 @@
    "region": "Fujian, Taiwan Strait (Xiapu, Pingtan)",
    "species": "Winter Saccharina + summer Gracilaria lemaneiformis + Pyropia",
    "yield_t_ha": 12.0,
-   "net_biomass_t": 184.06231161201305,
-   "htl_usd_mwh": 202.13805874316478,
-   "pbtl_usd_mwh": 183.87494617486087,
-   "best_usd_mwh": 183.87494617486087,
+   "net_biomass_t": 162.46231161201305,
+   "htl_usd_mwh": 190.76963769053322,
+   "pbtl_usd_mwh": 177.70351760343232,
+   "best_usd_mwh": 177.70351760343232,
    "gw": 80.0
   },
   {
@@ -38,10 +38,10 @@
    "region": "Zhejiang (Zhoushan, Wenzhou)",
    "species": "Sargassum fusiforme + Pyropia haitanensis + winter Saccharina",
    "yield_t_ha": 8.0,
-   "net_biomass_t": 252.88976826540414,
-   "htl_usd_mwh": 238.36303592916008,
-   "pbtl_usd_mwh": 203.5399337901155,
-   "best_usd_mwh": 203.5399337901155,
+   "net_biomass_t": 231.28976826540412,
+   "htl_usd_mwh": 226.9946148765285,
+   "pbtl_usd_mwh": 197.36850521868686,
+   "best_usd_mwh": 197.36850521868686,
    "gw": 50.0
   },
   {
@@ -49,10 +49,10 @@
    "region": "Hainan (Wanning, Lingshui, Danzhou)",
    "species": "Kappaphycus alvarezii / Eucheuma + Gracilaria (tropical reds)",
    "yield_t_ha": 8.0,
-   "net_biomass_t": 255.18946671266698,
-   "htl_usd_mwh": 239.57340353298264,
-   "pbtl_usd_mwh": 204.19699048933344,
-   "best_usd_mwh": 204.19699048933344,
+   "net_biomass_t": 233.589466712667,
+   "htl_usd_mwh": 228.20498248035105,
+   "pbtl_usd_mwh": 198.02556191790487,
+   "best_usd_mwh": 198.02556191790487,
    "gw": 40.0
   },
   {
@@ -60,10 +60,10 @@
    "region": "Beibu Gulf (Guangxi: Beihai, Qinzhou, Fangchenggang)",
    "species": "Gracilaria + Ulva; Kappaphycus trials",
    "yield_t_ha": 6.0,
-   "net_biomass_t": 322.77752647153244,
-   "htl_usd_mwh": 275.14606656396444,
-   "pbtl_usd_mwh": 223.5078647061521,
-   "best_usd_mwh": 223.5078647061521,
+   "net_biomass_t": 301.1775264715324,
+   "htl_usd_mwh": 263.7776455113329,
+   "pbtl_usd_mwh": 217.33643613472356,
+   "best_usd_mwh": 217.33643613472356,
    "gw": 30.0
   },
   {
@@ -71,10 +71,10 @@
    "region": "Guangdong (Yangjiang, Shanwei, Zhanjiang)",
    "species": "Gracilaria lemaneiformis + Ulva + Sargassum",
    "yield_t_ha": 6.0,
-   "net_biomass_t": 323.3766218133209,
-   "htl_usd_mwh": 275.4613799017479,
-   "pbtl_usd_mwh": 223.679034803806,
-   "best_usd_mwh": 223.679034803806,
+   "net_biomass_t": 301.7766218133209,
+   "htl_usd_mwh": 264.09295884911626,
+   "pbtl_usd_mwh": 217.50760623237738,
+   "best_usd_mwh": 217.50760623237738,
    "gw": 90.0
   },
   {
@@ -82,10 +82,10 @@
    "region": "Jiangsu radial sand ridges (Rudong, Yancheng)",
    "species": "Pyropia yezoensis (nori) winter + Gracilaria summer",
    "yield_t_ha": 4.0,
-   "net_biomass_t": 452.2527413310518,
-   "htl_usd_mwh": 343.29091649002726,
-   "pbtl_usd_mwh": 260.5007832374434,
-   "best_usd_mwh": 260.5007832374434,
+   "net_biomass_t": 430.6527413310518,
+   "htl_usd_mwh": 331.92249543739575,
+   "pbtl_usd_mwh": 254.3293546660148,
+   "best_usd_mwh": 254.3293546660148,
    "gw": 70.0
   }
  ],
@@ -95,10 +95,10 @@
    "region": "Shandong peninsula (Rongcheng, Weihai)",
    "species": "Saccharina japonica (China's kelp centre)",
    "yield_t_ha": 19.0,
-   "net_biomass_t": 131.34940115351904,
-   "htl_usd_mwh": 174.39442165974685,
-   "pbtl_usd_mwh": 168.81411461529115,
-   "best_usd_mwh": 168.81411461529115,
+   "net_biomass_t": 109.74940115351903,
+   "htl_usd_mwh": 163.0260006071153,
+   "pbtl_usd_mwh": 162.6426860438626,
+   "best_usd_mwh": 162.6426860438626,
    "gw": 60.0
   },
   {
@@ -106,10 +106,10 @@
    "region": "Liaodong peninsula (Dalian, Yellow Sea)",
    "species": "Saccharina japonica + Undaria pinnatifida",
    "yield_t_ha": 18.0,
-   "net_biomass_t": 136.1395459287281,
-   "htl_usd_mwh": 176.91555048880429,
-   "pbtl_usd_mwh": 170.18272740820802,
-   "best_usd_mwh": 170.18272740820802,
+   "net_biomass_t": 114.53954592872809,
+   "htl_usd_mwh": 165.5471294361727,
+   "pbtl_usd_mwh": 164.01129883677945,
+   "best_usd_mwh": 164.01129883677945,
    "gw": 40.0
   },
   {
@@ -117,10 +117,10 @@
    "region": "Fujian, Taiwan Strait (Xiapu, Pingtan)",
    "species": "Winter Saccharina + summer Gracilaria lemaneiformis + Pyropia",
    "yield_t_ha": 18.0,
-   "net_biomass_t": 137.47047280792754,
-   "htl_usd_mwh": 177.61603831996186,
-   "pbtl_usd_mwh": 170.56299223083644,
-   "best_usd_mwh": 170.56299223083644,
+   "net_biomass_t": 115.87047280792754,
+   "htl_usd_mwh": 166.24761726733027,
+   "pbtl_usd_mwh": 164.39156365940786,
+   "best_usd_mwh": 164.39156365940786,
    "gw": 80.0
   },
   {
@@ -128,10 +128,10 @@
    "region": "Zhejiang (Zhoushan, Wenzhou)",
    "species": "Sargassum fusiforme + Pyropia haitanensis + winter Saccharina",
    "yield_t_ha": 12.0,
-   "net_biomass_t": 183.0020100592759,
-   "htl_usd_mwh": 201.58000529435574,
-   "pbtl_usd_mwh": 183.57200287407883,
-   "best_usd_mwh": 183.57200287407883,
+   "net_biomass_t": 161.40201005927588,
+   "htl_usd_mwh": 190.21158424172415,
+   "pbtl_usd_mwh": 177.40057430265026,
+   "best_usd_mwh": 177.40057430265026,
    "gw": 50.0
   },
   {
@@ -139,10 +139,10 @@
    "region": "Hainan (Wanning, Lingshui, Danzhou)",
    "species": "Kappaphycus alvarezii / Eucheuma + Gracilaria (tropical reds)",
    "yield_t_ha": 12.0,
-   "net_biomass_t": 185.30170850653872,
-   "htl_usd_mwh": 202.79037289817828,
-   "pbtl_usd_mwh": 184.22905957329678,
-   "best_usd_mwh": 184.22905957329678,
+   "net_biomass_t": 163.7017085065387,
+   "htl_usd_mwh": 191.4219518455467,
+   "pbtl_usd_mwh": 178.0576310018682,
+   "best_usd_mwh": 178.0576310018682,
    "gw": 40.0
   },
   {
@@ -150,10 +150,10 @@
    "region": "Beibu Gulf (Guangxi: Beihai, Qinzhou, Fangchenggang)",
    "species": "Gracilaria + Ulva; Kappaphycus trials",
    "yield_t_ha": 9.0,
-   "net_biomass_t": 229.59384886336142,
-   "htl_usd_mwh": 226.10202571755866,
-   "pbtl_usd_mwh": 196.8839568181033,
-   "best_usd_mwh": 196.8839568181033,
+   "net_biomass_t": 207.9938488633614,
+   "htl_usd_mwh": 214.73360466492707,
+   "pbtl_usd_mwh": 190.71252824667468,
+   "best_usd_mwh": 190.71252824667468,
    "gw": 30.0
   },
   {
@@ -161,10 +161,10 @@
    "region": "Guangdong (Yangjiang, Shanwei, Zhanjiang)",
    "species": "Gracilaria lemaneiformis + Ulva + Sargassum",
    "yield_t_ha": 9.0,
-   "net_biomass_t": 230.1929442051499,
-   "htl_usd_mwh": 226.41733905534207,
-   "pbtl_usd_mwh": 197.05512691575709,
-   "best_usd_mwh": 197.05512691575709,
+   "net_biomass_t": 208.59294420514988,
+   "htl_usd_mwh": 215.04891800271048,
+   "pbtl_usd_mwh": 190.88369834432856,
+   "best_usd_mwh": 190.88369834432856,
    "gw": 90.0
   },
   {
@@ -172,10 +172,10 @@
    "region": "Jiangsu radial sand ridges (Rudong, Yancheng)",
    "species": "Pyropia yezoensis (nori) winter + Gracilaria summer",
    "yield_t_ha": 6.0,
-   "net_biomass_t": 312.4772249187953,
-   "htl_usd_mwh": 269.7248552204186,
-   "pbtl_usd_mwh": 220.5649214053701,
-   "best_usd_mwh": 220.5649214053701,
+   "net_biomass_t": 290.87722491879526,
+   "htl_usd_mwh": 258.356434167787,
+   "pbtl_usd_mwh": 214.3934928339415,
+   "best_usd_mwh": 214.3934928339415,
    "gw": 70.0
   }
  ]

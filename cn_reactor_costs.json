@@ -1,42 +1,42 @@
 {
  "low": {
   "case": "low",
-  "n_units": 1434,
+  "n_units": 1326,
   "foak_kwe": 3250.0,
   "unit10_kwe": 2125.4886482493503,
   "unit100_kwe": 1390.0621519498002,
-  "last_kwe": 850.6249900557877,
-  "fleet_avg_kwe": 1042.9752539775457,
-  "fleet_avg_kwe_with_idc": 1126.4132742957495,
-  "fleet_avg_kwt_with_idc": 450.56530971829983,
+  "last_kwe": 862.9976452119871,
+  "fleet_avg_kwe": 1058.1457148795555,
+  "fleet_avg_kwe_with_idc": 1142.79737206992,
+  "fleet_avg_kwt_with_idc": 457.118948827968,
   "learning": 0.12,
-  "fleet_capex_bn": 161.52766353401046
+  "fleet_capex_bn": 151.53493153647136
  },
  "central": {
   "case": "central",
-  "n_units": 1434,
+  "n_units": 1326,
   "foak_kwe": 5250.0,
   "unit10_kwe": 3979.835024362363,
   "unit100_kwe": 3016.9689183126416,
-  "last_kwe": 2190.002658563723,
-  "fleet_avg_kwe": 2489.4717557881445,
-  "fleet_avg_kwe_with_idc": 2788.208366482722,
-  "fleet_avg_kwt_with_idc": 1115.2833465930887,
+  "last_kwe": 2210.7280564475236,
+  "fleet_avg_kwe": 2513.031221552918,
+  "fleet_avg_kwe_with_idc": 2814.5949681392685,
+  "fleet_avg_kwt_with_idc": 1125.8379872557075,
   "learning": 0.08,
-  "fleet_capex_bn": 399.8290797536223
+  "fleet_capex_bn": 373.215292775267
  },
  "high": {
   "case": "high",
-  "n_units": 1434,
+  "n_units": 1326,
   "foak_kwe": 10000.0,
   "unit10_kwe": 8731.850892070866,
   "unit100_kwe": 7624.5220001358775,
-  "last_kwe": 6517.772173800067,
-  "fleet_avg_kwe": 6925.6492045467385,
-  "fleet_avg_kwe_with_idc": 8172.266061365151,
-  "fleet_avg_kwt_with_idc": 3268.9064245460604,
+  "last_kwe": 6547.897805126216,
+  "fleet_avg_kwe": 6957.660074068857,
+  "fleet_avg_kwe_with_idc": 8210.038887401251,
+  "fleet_avg_kwt_with_idc": 3284.0155549605006,
   "learning": 0.04,
-  "fleet_capex_bn": 1171.9029531997628
+  "fleet_capex_bn": 1088.6511564694058
  },
  "anchors": {
   "Hualong One (HPR1000), Changjiang phase II, 2 x 1,200 MWe, CNY 40 bn (USD 5.9 bn)": {

@@ -1,4 +1,4 @@
-"""Cross-check of the U.S. model v8.4 heavy-truck efficiency ratios (documented in CN v1.2, CHANGELOG and SM S2).
+"""Cross-check of the U.S. model v8.4 heavy-truck efficiency ratios (documented in CN v1.4, CHANGELOG and SM S2).
 
 us2_inputs.py v8.4 sets r_hdv_elec = 2.40/21.1 and r_hdv_fcev = 4.44/21.1.  2.40 is kWh per mile for a battery-electric
 Class 8 truck; 21.1 is MJ per mile for a ~6.9 mpg diesel truck (144.9 MJ/gal / 6.87 mpg).  Dividing kWh by MJ makes an

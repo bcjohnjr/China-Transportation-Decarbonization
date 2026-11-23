@@ -1,0 +1,122 @@
+ok   constants    H2 LHV kWh/kg                                                                                    model        33.33  independent            33.33
+ok   fuel LHV     gasoline LHV GJ/t lies between GB/T 2589 and IPCC 2006                                           model        43.42  independent [43.02, 44.349999999999994]
+ok   fuel LHV     diesel LHV GJ/t lies between GB/T 2589 and IPCC 2006                                             model         42.8  independent [42.602000000000004, 43.05]
+ok   fuel LHV     jet LHV GJ/t lies between GB/T 2589 and IPCC 2006                                                model         43.2  independent   [43.02, 44.15]
+ok   fuel LHV     resid LHV GJ/t lies between GB/T 2589 and IPCC 2006                                              model        40.39  independent  [40.35, 41.866]
+ok   gas          pipeline gas LHV MJ/m3 (China pipeline gas 34-37)                                                model        35.64  independent     [34.0, 37.0]
+ok   gas          HHV/LHV ratio of methane                                                                         model        1.109  independent             1.11
+ok   gas          MMBtu (HHV) per bcm consistent with TWh (LHV) per bcm                                            model    3.746e+07  independent         3.75e+07
+ok   gas          TWh HHV per Mt CH4 (GPK)                                                                         model        15.42  independent            15.42
+ok   gas          USD/MWh from USD/MMBtu                                                                           model        31.73  independent            31.73
+ok   baseline     2025 ldv TWh = Mt x LHV                                                                          model        1,878  independent            1,878
+ok   baseline     2025 hdv TWh = Mt x LHV                                                                          model        1,863  independent            1,863
+ok   baseline     2025 air TWh = Mt x LHV                                                                          model        551.5  independent            551.5
+ok   baseline     2025 marine TWh = Mt x LHV                                                                       model        454.8  independent            454.8
+ok   baseline     2025 total final energy TWh                                                                      model        5,469  independent            5,469
+ok   baseline     2025 total energy with GB/T 2589 LHVs within 2.5% of the model                                   model       0.9975  independent   [0.975, 1.025]
+ok   baseline     2025 total energy with IPCC 2006 LHVs within 2.5% of the model                                   model        1.011  independent   [0.975, 1.025]
+ok   baseline     2050 demand = 2025 x service growth                                                              model        6,290  independent            6,290
+ok   baseline     Taiwan gasoline Mt from 188 kb/d                                                                 model         8.04  independent             8.04
+ok   vehicles     diesel LHV/HHV per gallon: model LHV vs 0.935 x EIA 144.9 MJ/gal                                 model        135.3  independent            135.5
+ok   vehicles     heavy-truck BEV ratio = (kWh/mi) / (MJ_LHV/mi / 3.6)                                             model       0.4379  independent           0.4379
+ok   vehicles     heavy-truck FCEV ratio (H2 LHV / diesel LHV)                                                     model       0.8102  independent           0.8102
+ok   vehicles     U.S. v8.4 error factor (ratio without /3.6, same HHV basis)                                      model          3.6  independent              3.6
+ok   vehicles     implied BEV heavy truck kWh/km (Chinese 49-t BEV tractors 1.1-1.6)                               model        1.391  independent       [1.1, 1.6]
+ok   vehicles     implied FCEV heavy truck kg H2/100 km (6-12)                                                     model        7.722  independent      [6.0, 12.0]
+ok   vehicles     implied BEV car kWh/100 km at the meter (12-18)                                                  model        14.56  independent     [12.0, 18.0]
+ok   vehicles     hdv_bev TWh = demand x share x ratio x lightweighting                                            model        410.7  independent            410.7
+ok   vehicles     ldv electricity TWh                                                                              model        469.4  independent            469.4
+ok   vehicles     direct H2 Mt = TWh / 33.33                                                                       model        6.468  independent            6.468
+ok   vehicles     electricity end use total                                                                        model        1,494  independent            1,494
+ok   vehicles     BEV car net USD/yr (four components)                                                             model        -93.3  independent           -93.32
+ok   vehicles     vehicles and machines net, bn USD                                                                model        22.84  independent            22.83
+ok   petroleum    pre-tax gasoline USD/t late 2025                                                                 model        870.4  independent            870.4
+ok   petroleum    pre-tax diesel USD/t late 2025                                                                   model        777.5  independent            777.5
+ok   petroleum    pre-tax jet USD/t late 2025                                                                      model          700  independent              700
+ok   petroleum    pre-tax resid USD/t late 2025                                                                    model          480  independent              480
+ok   petroleum    petroleum comparator late 2025, bn USD                                                           model        400.2  independent            400.2
+ok   petroleum    petroleum comparator Nov 2026, bn USD                                                            model          547  independent            547.1
+ok   emissions    petroleum WTW 2025, Mt CO2e (text: about 1.8 Gt)                                                 model        1,804  independent            1,804
+ok   emissions    petroleum WTW 2050, Mt CO2e                                                                      model        2,074  independent            2,074
+ok   emissions    2025 WTW per unit energy g/MJ (petroleum 85-95)                                                  model        91.61  independent         [85, 95]
+ok   emissions    system emissions = sum of sources                                                                model        129.7  independent            129.7
+ok   emissions    reduction %                                                                                      model        93.75  independent            93.75
+ok   cost         total = sum of components + credits                                                              model        314.1  independent            314.1
+ok   cost         LP objective + fixed terms = total                                                               model        314.1  independent            314.1
+ok   cost         saving vs late-2025 petroleum %                                                                  model        21.52  independent            21.52
+ok   cost         break-even multiple                                                                              model       0.7848  independent           0.7848
+ok   cost         transmission and distribution = el x 22 USD/MWh                                                  model        32.87  independent            32.87
+ok   cost         electric highways = 60,000 km x 1.8 M$/km x (CRF40 + 2.5%)                                       model        8.994  independent            8.994
+ok   cost         firmed solar USD/MWh quoted as 61                                                                model           61  independent   [60.99, 61.01]
+ok   hubs         modules = 6 x hubs                                                                               model        1,326  independent            1,326
+ok   hubs         GWt = 1.5 x hubs                                                                                 model        331.5  independent            331.5
+ok   hubs         FOAK USD/kWe quoted as 5,250                                                                     model        5,250  independent            5,250
+ok   hubs         reactor hub cost bn/yr within 3% of a hand Wright's-law estimate (other cascade items excluded)  model            1  independent     [0.97, 1.03]
+ok   hydrogen     pyrolysis gas bcm = Mt H2 x 4.08 / 0.72 kg/m3                                                    model        47.64  independent            47.64
+ok   hydrogen     same gas on an energy basis, bcm (LHV 50 MJ/kg / 9.9 TWh/bcm), within 2%                         model         0.99  independent     [0.98, 1.02]
+ok   hydrogen     pyrolysis carbon = 3 kg C per kg H2                                                              model        25.21  independent            25.21
+ok   hydrogen     3 kg C/kg H2 vs stoichiometry (12/4.032 = 2.98)                                                  model        1.007  independent     [0.99, 1.02]
+ok   nutrients    N removed Mt within 5% of tiers x content (hand)                                                 model            1  independent     [0.95, 1.05]
+ok   nutrients    N balance closes (removed = returned - sold)                                                     model        2.931  independent            2.931
+ok   nutrients    P removed Mt within 5% of tiers x content (hand)                                                 model            1  independent     [0.95, 1.05]
+ok   nutrients    P balance closes (removed = returned - sold)                                                     model       0.6159  independent           0.6159
+ok   nutrients    K removed Mt within 5% of tiers x content (hand)                                                 model            1  independent     [0.95, 1.05]
+ok   nutrients    K balance closes (removed = returned - sold)                                                     model        4.985  independent            4.985
+ok   nutrients    residue C removed within 5% of hand                                                              model       0.9797  independent     [0.95, 1.05]
+ok   nutrients    stable SOC required within 5% of hand                                                            model            1  independent     [0.95, 1.05]
+ok   nutrients    SOC supplied >= required (or priced gap)                                                         model            0  independent [-1e-06, 1000000000.0]
+ok   nutrients    pyrolysis carbon to soil x 0.90 stable                                                           model         7.12  independent             7.12
+ok   nutrients    pyrolysis carbon: markets + soil = made                                                          model        25.21  independent            25.21
+ok   nutrients    carbon to soil in allocation = soil balance                                                      model        7.911  independent            7.911
+ok   cost         carbon revenue = sum(Mt x value)                                                                 model        23.65  independent            23.65
+ok   nutrients    straw N % DM (text 0.64-0.85)                                                                    model         0.76  independent     [0.64, 0.85]
+ok   nutrients    straw P as P2O5 % DM (text 0.27-0.53)                                                            model       0.4124  independent     [0.27, 0.53]
+ok   nutrients    straw K as K2O % DM (text 1.53-2.31)                                                             model        1.843  independent     [1.53, 2.31]
+ok   fertiliser   N USD/t N from urea 2,000 CNY/t farm gate (46% N, 7.08): 560-720                                 model          700  independent       [560, 720]
+ok   fertiliser   P USD/t elemental P from MAP ~1,000-1,250 USD/t P2O5                                             model        2,600  independent [2291.3249822431717, 2864.1562278039646]
+ok   fertiliser   K USD/t elemental K from KCl 3,300-3,700 CNY/t (60% K2O)                                         model        1,000  independent [935.7778137104704, 1101.6656988682357]
+ok   fertiliser   mineral fertiliser cost = Mt x price                                                             model        1.525  independent            1.525
+ok   nutrients    green manure t C/ha stable                                                                       model        0.294  independent            0.294
+ok   nutrients    compost t C/t stable                                                                             model        0.105  independent            0.105
+ok   nutrients    biomethane TWh = 0.35 MWh/t x digested feed                                                      model        143.7  independent            143.7
+ok   emissions    digester slip Mt CO2e = 1% x Mt CH4 x 29.8                                                       model        2.777  independent            2.777
+ok   emissions    fertiliser Mt CO2e = Mt x (8, 2, 0.5)                                                            model        11.37  independent            11.37
+ok   monte carlo  least_cost: draws in CSV                                                                         model        1,000  independent            1,000
+ok   monte carlo  least_cost: cost p5 from raw draws                                                               model          273  independent              273
+ok   monte carlo  least_cost: saving p5 from raw draws                                                             model       -33.43  independent           -33.43
+ok   monte carlo  least_cost: cost p50 from raw draws                                                              model        400.4  independent            400.4
+ok   monte carlo  least_cost: saving p50 from raw draws                                                            model        3.283  independent            3.283
+ok   monte carlo  least_cost: cost p95 from raw draws                                                              model        557.6  independent            557.6
+ok   monte carlo  least_cost: saving p95 from raw draws                                                            model        32.17  independent            32.17
+ok   monte carlo  least_cost: share cheaper than late-2025 petroleum                                               model        0.541  independent            0.541
+ok   monte carlo  least_cost: share cheaper at Nov 2026 prices                                                     model        0.966  independent            0.966
+ok   monte carlo  least_cost: saving column = 1 - cost/petroleum (median)                                          model        3.283  independent            3.283
+ok   monte carlo  post_gas: draws in CSV                                                                           model        1,000  independent            1,000
+ok   monte carlo  post_gas: cost p5 from raw draws                                                                 model        284.6  independent            284.6
+ok   monte carlo  post_gas: saving p5 from raw draws                                                               model       -37.25  independent           -37.25
+ok   monte carlo  post_gas: cost p50 from raw draws                                                                model          414  independent              414
+ok   monte carlo  post_gas: saving p50 from raw draws                                                              model      -0.5297  independent          -0.5297
+ok   monte carlo  post_gas: cost p95 from raw draws                                                                model        584.7  independent            584.7
+ok   monte carlo  post_gas: saving p95 from raw draws                                                              model        28.61  independent            28.61
+ok   monte carlo  post_gas: share cheaper than late-2025 petroleum                                                 model        0.493  independent            0.493
+ok   monte carlo  post_gas: share cheaper at Nov 2026 prices                                                       model        0.945  independent            0.945
+ok   monte carlo  post_gas: saving column = 1 - cost/petroleum (median)                                            model      -0.5297  independent          -0.5297
+ok   monte carlo  half_offshore: draws in CSV                                                                      model        1,000  independent            1,000
+ok   monte carlo  half_offshore: cost p5 from raw draws                                                            model        303.8  independent            303.8
+ok   monte carlo  half_offshore: saving p5 from raw draws                                                          model       -38.64  independent           -38.64
+ok   monte carlo  half_offshore: cost p50 from raw draws                                                           model        425.1  independent            425.1
+ok   monte carlo  half_offshore: saving p50 from raw draws                                                         model        -3.23  independent            -3.23
+ok   monte carlo  half_offshore: cost p95 from raw draws                                                           model        585.5  independent            585.5
+ok   monte carlo  half_offshore: saving p95 from raw draws                                                         model        24.01  independent            24.01
+ok   monte carlo  half_offshore: share cheaper than late-2025 petroleum                                            model        0.435  independent            0.435
+ok   monte carlo  half_offshore: share cheaper at Nov 2026 prices                                                  model        0.936  independent            0.936
+ok   monte carlo  half_offshore: saving column = 1 - cost/petroleum (median)                                       model        -3.23  independent            -3.23
+ok   text         fossil CO2 share 32% of 38.1 Gt is 'about one-third'                                             model         0.32  independent      [0.3, 0.34]
+ok   text         on-road diesel 120 Mt is ~59% of 203 Mt                                                          model       0.5911  independent   [0.585, 0.595]
+ok   text         USD 100 per car per year x 420 M x 95% BEV, bn                                                   model         39.9  independent             39.9
+ok   text         military Pu 2.9 t / 10 t per GWe = GWe                                                           model         0.29  independent             0.29
+ok   text         12 GWe of large LWRs approved a year in GWt at 36-38% efficiency (text: about 32)                model        32.43  independent     [31.0, 33.5]
+ok   text         gas price USD 9.3/MMBtu = 8.5 + 0.8                                                              model          9.3  independent              9.3
+ok   text         onshore wind tiers 30 and 45 USD/MWh                                                             model           45  independent               45
+
+CN v1.6.2 number audit: 120/120 checks passed
