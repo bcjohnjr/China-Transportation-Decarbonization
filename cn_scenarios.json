@@ -972,7 +972,8 @@
    "hefa_oils": 5.806,
    "sugar_starch_ethanol": 7.957214160214573,
    "imported_renewable_fuel": 0.0,
-   "vehicles_and_machines_net": 22.843300000000003,
+   "vehicles_and_machines_net": 20.843300000000003,
+   "farm_charging": 2.0,
    "process_heat_equipment": 0.0,
    "residual_pipeline_gas": 0.80131702000086
   },
@@ -989,6 +990,8 @@
   "blend_share_of_h2": 0.0,
   "blending_cost_bn": 0.0,
   "transport_cost_bn": 314.06145047182287,
+  "consumer_vehicle_cost_bn": 20.843300000000003,
+  "energy_system_cost_bn": 293.21815047182287,
   "objective_reconciliation": {
    "lp_objective_bn": 208.51591436911824,
    "fixed_terms_total_bn": 105.54553610270466,
@@ -1099,6 +1102,8 @@
   },
   "saving_vs_late_2025_pct": 21.524150132986573,
   "breakeven_multiple": 0.7847584986701343,
+  "saving_energy_system_pct": 26.732352792293447,
+  "breakeven_energy_system": 0.7326764720770655,
   "regional_supply": {
    "rest": {
     "residues_mt": 325.0,
@@ -2473,7 +2478,8 @@
    "hefa_oils": 5.806,
    "sugar_starch_ethanol": 7.957214160214573,
    "imported_renewable_fuel": 0.0,
-   "vehicles_and_machines_net": 22.843300000000003,
+   "vehicles_and_machines_net": 20.843300000000003,
+   "farm_charging": 2.0,
    "process_heat_equipment": 0.0,
    "residual_pipeline_gas": 0.80131702000086
   },
@@ -2490,6 +2496,8 @@
   "blend_share_of_h2": 0.12122695503005743,
   "blending_cost_bn": 7.249959846102712,
   "transport_cost_bn": 313.45312403312823,
+  "consumer_vehicle_cost_bn": 20.843300000000003,
+  "energy_system_cost_bn": 292.60982403312823,
   "objective_reconciliation": {
    "lp_objective_bn": 214.47013617822367,
    "fixed_terms_total_bn": 106.23294770100735,
@@ -2600,6 +2608,8 @@
   },
   "saving_vs_late_2025_pct": 21.676155207794125,
   "breakeven_multiple": 0.7832384479220588,
+  "saving_energy_system_pct": 26.884357867100984,
+  "breakeven_energy_system": 0.7311564213289902,
   "regional_supply": {
    "rest": {
     "residues_mt": 325.0,
@@ -3974,7 +3984,8 @@
    "hefa_oils": 5.806,
    "sugar_starch_ethanol": 7.957214160214573,
    "imported_renewable_fuel": 0.0,
-   "vehicles_and_machines_net": 22.843300000000003,
+   "vehicles_and_machines_net": 20.843300000000003,
+   "farm_charging": 2.0,
    "process_heat_equipment": 0.0,
    "residual_pipeline_gas": 0.80131702000086
   },
@@ -3991,6 +4002,8 @@
   "blend_share_of_h2": 0.0,
   "blending_cost_bn": 0.0,
   "transport_cost_bn": 314.06145047182287,
+  "consumer_vehicle_cost_bn": 20.843300000000003,
+  "energy_system_cost_bn": 293.21815047182287,
   "objective_reconciliation": {
    "lp_objective_bn": 208.51591436911824,
    "fixed_terms_total_bn": 105.54553610270466,
@@ -4101,6 +4114,8 @@
   },
   "saving_vs_late_2025_pct": 21.524150132986573,
   "breakeven_multiple": 0.7847584986701343,
+  "saving_energy_system_pct": 26.732352792293447,
+  "breakeven_energy_system": 0.7326764720770655,
   "regional_supply": {
    "rest": {
     "residues_mt": 325.0,
@@ -5475,7 +5490,8 @@
    "hefa_oils": 5.806,
    "sugar_starch_ethanol": 7.957214160214573,
    "imported_renewable_fuel": 0.0,
-   "vehicles_and_machines_net": 22.843300000000003,
+   "vehicles_and_machines_net": 20.843300000000003,
+   "farm_charging": 2.0,
    "process_heat_equipment": 0.0,
    "residual_pipeline_gas": 0.80131702000086
   },
@@ -5492,6 +5508,8 @@
   "blend_share_of_h2": 0.0,
   "blending_cost_bn": 0.0,
   "transport_cost_bn": 338.37058827939836,
+  "consumer_vehicle_cost_bn": 20.843300000000003,
+  "energy_system_cost_bn": 317.52728827939836,
   "objective_reconciliation": {
    "lp_objective_bn": 232.82505217669367,
    "fixed_terms_total_bn": 105.54553610270466,
@@ -5602,6 +5620,8 @@
   },
   "saving_vs_late_2025_pct": 15.449924066343002,
   "breakeven_multiple": 0.84550075933657,
+  "saving_energy_system_pct": 20.658126725649872,
+  "breakeven_energy_system": 0.7934187327435013,
   "regional_supply": {
    "rest": {
     "residues_mt": 325.0,
@@ -6976,7 +6996,8 @@
    "hefa_oils": 5.806,
    "sugar_starch_ethanol": 5.2540134555937525,
    "imported_renewable_fuel": 0.0,
-   "vehicles_and_machines_net": 22.843300000000003,
+   "vehicles_and_machines_net": 20.843300000000003,
+   "farm_charging": 2.0,
    "process_heat_equipment": 0.2509477930419004,
    "residual_pipeline_gas": 0.80131702000086
   },
@@ -6993,6 +7014,8 @@
   "blend_share_of_h2": 0.0,
   "blending_cost_bn": 0.0,
   "transport_cost_bn": 368.98999165005347,
+  "consumer_vehicle_cost_bn": 20.843300000000003,
+  "energy_system_cost_bn": 348.14669165005347,
   "objective_reconciliation": {
    "lp_objective_bn": 263.4444555473487,
    "fixed_terms_total_bn": 105.54553610270466,
@@ -7103,6 +7126,8 @@
   },
   "saving_vs_late_2025_pct": 7.798925517100052,
   "breakeven_multiple": 0.9220107448289995,
+  "saving_energy_system_pct": 13.007128176406923,
+  "breakeven_energy_system": 0.8699287182359308,
   "regional_supply": {
    "rest": {
     "residues_mt": 325.0,
@@ -8465,7 +8490,8 @@
    "hefa_oils": 5.806,
    "sugar_starch_ethanol": 7.957214160214573,
    "imported_renewable_fuel": 0.0,
-   "vehicles_and_machines_net": 22.843300000000003,
+   "vehicles_and_machines_net": 20.843300000000003,
+   "farm_charging": 2.0,
    "process_heat_equipment": 0.0,
    "residual_pipeline_gas": 0.80131702000086
   },
@@ -8482,6 +8508,8 @@
   "blend_share_of_h2": 0.0,
   "blending_cost_bn": 0.0,
   "transport_cost_bn": 293.57429436969846,
+  "consumer_vehicle_cost_bn": 20.843300000000003,
+  "energy_system_cost_bn": 272.73099436969846,
   "objective_reconciliation": {
    "lp_objective_bn": 188.02875826699392,
    "fixed_terms_total_bn": 105.54553610270466,
@@ -8592,6 +8620,8 @@
   },
   "saving_vs_late_2025_pct": 26.643361625059292,
   "breakeven_multiple": 0.7335663837494071,
+  "saving_energy_system_pct": 31.851564284366162,
+  "breakeven_energy_system": 0.6814843571563384,
   "regional_supply": {
    "rest": {
     "residues_mt": 325.0,
@@ -9966,7 +9996,8 @@
    "hefa_oils": 5.806,
    "sugar_starch_ethanol": 7.957214160214573,
    "imported_renewable_fuel": 0.0,
-   "vehicles_and_machines_net": 22.843300000000003,
+   "vehicles_and_machines_net": 20.843300000000003,
+   "farm_charging": 2.0,
    "process_heat_equipment": 0.275866705467646,
    "residual_pipeline_gas": 0.80131702000086
   },
@@ -9983,6 +10014,8 @@
   "blend_share_of_h2": 0.0,
   "blending_cost_bn": 0.0,
   "transport_cost_bn": 328.3064521690923,
+  "consumer_vehicle_cost_bn": 20.843300000000003,
+  "energy_system_cost_bn": 307.4631521690923,
   "objective_reconciliation": {
    "lp_objective_bn": 222.76091606638772,
    "fixed_terms_total_bn": 105.54553610270466,
@@ -10093,6 +10126,8 @@
   },
   "saving_vs_late_2025_pct": 17.96469190316934,
   "breakeven_multiple": 0.8203530809683066,
+  "saving_energy_system_pct": 23.17289456247621,
+  "breakeven_energy_system": 0.7682710543752379,
   "regional_supply": {
    "rest": {
     "residues_mt": 325.0,
@@ -11467,7 +11502,8 @@
    "hefa_oils": 5.806,
    "sugar_starch_ethanol": 7.957214160214573,
    "imported_renewable_fuel": 0.0,
-   "vehicles_and_machines_net": 22.843300000000003,
+   "vehicles_and_machines_net": 20.843300000000003,
+   "farm_charging": 2.0,
    "process_heat_equipment": 0.5313556630607285,
    "residual_pipeline_gas": 0.80131702000086
   },
@@ -11484,6 +11520,8 @@
   "blend_share_of_h2": 0.0,
   "blending_cost_bn": 0.0,
   "transport_cost_bn": 367.49378024305963,
+  "consumer_vehicle_cost_bn": 20.843300000000003,
+  "energy_system_cost_bn": 346.65048024305963,
   "objective_reconciliation": {
    "lp_objective_bn": 261.9482441403549,
    "fixed_terms_total_bn": 105.54553610270466,
@@ -11594,6 +11632,8 @@
   },
   "saving_vs_late_2025_pct": 8.172790127252505,
   "breakeven_multiple": 0.918272098727475,
+  "saving_energy_system_pct": 13.380992786559375,
+  "breakeven_energy_system": 0.8661900721344062,
   "regional_supply": {
    "rest": {
     "residues_mt": 325.0,
@@ -12694,7 +12734,8 @@
    "hefa_oils": 5.806,
    "sugar_starch_ethanol": 7.957214160214573,
    "imported_renewable_fuel": 0.0,
-   "vehicles_and_machines_net": 22.843300000000003,
+   "vehicles_and_machines_net": 20.843300000000003,
+   "farm_charging": 2.0,
    "process_heat_equipment": 0.0,
    "residual_pipeline_gas": 0.80131702000086
   },
@@ -12711,6 +12752,8 @@
   "blend_share_of_h2": 0.0,
   "blending_cost_bn": 0.0,
   "transport_cost_bn": 323.73233462269945,
+  "consumer_vehicle_cost_bn": 20.843300000000003,
+  "energy_system_cost_bn": 302.88903462269946,
   "objective_reconciliation": {
    "lp_objective_bn": 216.15584839950998,
    "fixed_terms_total_bn": 107.5764862231895,
@@ -12821,6 +12864,8 @@
   },
   "saving_vs_late_2025_pct": 19.107645810137306,
   "breakeven_multiple": 0.8089235418986269,
+  "saving_energy_system_pct": 24.31584846944418,
+  "breakeven_energy_system": 0.7568415153055582,
   "regional_supply": {
    "rest": {
     "residues_mt": 325.0,
@@ -14183,7 +14228,8 @@
    "hefa_oils": 5.806,
    "sugar_starch_ethanol": 7.957214160214573,
    "imported_renewable_fuel": 0.0,
-   "vehicles_and_machines_net": 22.843300000000003,
+   "vehicles_and_machines_net": 20.843300000000003,
+   "farm_charging": 2.0,
    "process_heat_equipment": 0.0,
    "residual_pipeline_gas": 0.80131702000086
   },
@@ -14200,6 +14246,8 @@
   "blend_share_of_h2": 0.0,
   "blending_cost_bn": 0.0,
   "transport_cost_bn": 319.2064008730667,
+  "consumer_vehicle_cost_bn": 20.843300000000003,
+  "energy_system_cost_bn": 298.3631008730667,
   "objective_reconciliation": {
    "lp_objective_bn": 213.66086477036205,
    "fixed_terms_total_bn": 105.54553610270466,
@@ -14310,6 +14358,8 @@
   },
   "saving_vs_late_2025_pct": 20.23855983002303,
   "breakeven_multiple": 0.7976144016997697,
+  "saving_energy_system_pct": 25.4467624893299,
+  "breakeven_energy_system": 0.745532375106701,
   "regional_supply": {
    "rest": {
     "residues_mt": 325.0,
@@ -15684,7 +15734,8 @@
    "hefa_oils": 5.806,
    "sugar_starch_ethanol": 7.957214160214573,
    "imported_renewable_fuel": 0.0,
-   "vehicles_and_machines_net": 22.843300000000003,
+   "vehicles_and_machines_net": 20.843300000000003,
+   "farm_charging": 2.0,
    "process_heat_equipment": 0.0,
    "residual_pipeline_gas": 0.80131702000086
   },
@@ -15701,6 +15752,8 @@
   "blend_share_of_h2": 0.0,
   "blending_cost_bn": 0.0,
   "transport_cost_bn": 251.35939686201414,
+  "consumer_vehicle_cost_bn": 20.843300000000003,
+  "energy_system_cost_bn": 230.51609686201414,
   "objective_reconciliation": {
    "lp_objective_bn": 171.6526006370406,
    "fixed_terms_total_bn": 79.70679622497357,
@@ -15811,6 +15864,8 @@
   },
   "saving_vs_late_2025_pct": 37.191774854341055,
   "breakeven_multiple": 0.6280822514565895,
+  "saving_energy_system_pct": 42.399977513647926,
+  "breakeven_energy_system": 0.5760002248635208,
   "regional_supply": {
    "rest": {
     "residues_mt": 325.0,
@@ -17185,7 +17240,8 @@
    "hefa_oils": 5.806,
    "sugar_starch_ethanol": 7.957214160214573,
    "imported_renewable_fuel": 0.0,
-   "vehicles_and_machines_net": 22.843300000000003,
+   "vehicles_and_machines_net": 20.843300000000003,
+   "farm_charging": 2.0,
    "process_heat_equipment": 0.0,
    "residual_pipeline_gas": 0.0
   },
@@ -17202,6 +17258,8 @@
   "blend_share_of_h2": 0.0,
   "blending_cost_bn": 0.0,
   "transport_cost_bn": 325.8016931333657,
+  "consumer_vehicle_cost_bn": 20.843300000000003,
+  "energy_system_cost_bn": 304.9583931333657,
   "objective_reconciliation": {
    "lp_objective_bn": 218.8511949301771,
    "fixed_terms_total_bn": 106.95049820318863,
@@ -17312,6 +17370,8 @@
   },
   "saving_vs_late_2025_pct": 18.590566532944585,
   "breakeven_multiple": 0.8140943346705541,
+  "saving_energy_system_pct": 23.798769192251456,
+  "breakeven_energy_system": 0.7620123080774854,
   "regional_supply": {
    "rest": {
     "residues_mt": 325.0,
@@ -18686,7 +18746,8 @@
    "hefa_oils": 5.806,
    "sugar_starch_ethanol": 7.957214160214573,
    "imported_renewable_fuel": 0.0,
-   "vehicles_and_machines_net": 22.843300000000003,
+   "vehicles_and_machines_net": 20.843300000000003,
+   "farm_charging": 2.0,
    "process_heat_equipment": 0.0,
    "residual_pipeline_gas": 0.0
   },
@@ -18703,6 +18764,8 @@
   "blend_share_of_h2": 0.0,
   "blending_cost_bn": 0.0,
   "transport_cost_bn": 349.01696056601634,
+  "consumer_vehicle_cost_bn": 20.843300000000003,
+  "energy_system_cost_bn": 328.17366056601634,
   "objective_reconciliation": {
    "lp_objective_bn": 242.06646236282768,
    "fixed_terms_total_bn": 106.95049820318863,
@@ -18813,6 +18876,8 @@
   },
   "saving_vs_late_2025_pct": 12.789670437832424,
   "breakeven_multiple": 0.8721032956216758,
+  "saving_energy_system_pct": 17.997873097139294,
+  "breakeven_energy_system": 0.8200212690286071,
   "regional_supply": {
    "rest": {
     "residues_mt": 325.0,
@@ -20187,7 +20252,8 @@
    "hefa_oils": 5.806,
    "sugar_starch_ethanol": 7.957214160214573,
    "imported_renewable_fuel": 0.0,
-   "vehicles_and_machines_net": 22.843300000000003,
+   "vehicles_and_machines_net": 20.843300000000003,
+   "farm_charging": 2.0,
    "process_heat_equipment": 0.0,
    "residual_pipeline_gas": 0.0
   },
@@ -20204,6 +20270,8 @@
   "blend_share_of_h2": 0.0,
   "blending_cost_bn": 0.0,
   "transport_cost_bn": 302.8012443973953,
+  "consumer_vehicle_cost_bn": 20.843300000000003,
+  "energy_system_cost_bn": 281.9579443973953,
   "objective_reconciliation": {
    "lp_objective_bn": 195.85074619420666,
    "fixed_terms_total_bn": 106.95049820318863,
@@ -20314,6 +20382,8 @@
   },
   "saving_vs_late_2025_pct": 24.337784980691936,
   "breakeven_multiple": 0.7566221501930807,
+  "saving_energy_system_pct": 29.545987639998806,
+  "breakeven_energy_system": 0.704540123600012,
   "regional_supply": {
    "rest": {
     "residues_mt": 325.0,
@@ -21688,7 +21758,8 @@
    "hefa_oils": 5.806,
    "sugar_starch_ethanol": 7.957214160214573,
    "imported_renewable_fuel": 0.0,
-   "vehicles_and_machines_net": 22.843300000000003,
+   "vehicles_and_machines_net": 20.843300000000003,
+   "farm_charging": 2.0,
    "process_heat_equipment": 0.496873291246578,
    "residual_pipeline_gas": 0.0
   },
@@ -21705,6 +21776,8 @@
   "blend_share_of_h2": 0.0,
   "blending_cost_bn": 0.0,
   "transport_cost_bn": 348.12716250492736,
+  "consumer_vehicle_cost_bn": 20.843300000000003,
+  "energy_system_cost_bn": 327.28386250492736,
   "objective_reconciliation": {
    "lp_objective_bn": 241.17666430173873,
    "fixed_terms_total_bn": 106.95049820318863,
@@ -21815,6 +21888,8 @@
   },
   "saving_vs_late_2025_pct": 13.012008005684429,
   "breakeven_multiple": 0.8698799199431557,
+  "saving_energy_system_pct": 18.2202106649913,
+  "breakeven_energy_system": 0.817797893350087,
   "regional_supply": {
    "rest": {
     "residues_mt": 325.0,
@@ -23189,7 +23264,8 @@
    "hefa_oils": 5.806,
    "sugar_starch_ethanol": 7.957214160214573,
    "imported_renewable_fuel": 0.0,
-   "vehicles_and_machines_net": 22.843300000000003,
+   "vehicles_and_machines_net": 20.843300000000003,
+   "farm_charging": 2.0,
    "process_heat_equipment": 0.533091455702258,
    "residual_pipeline_gas": 0.0
   },
@@ -23206,6 +23282,8 @@
   "blend_share_of_h2": 0.0,
   "blending_cost_bn": 0.0,
   "transport_cost_bn": 372.85077256841527,
+  "consumer_vehicle_cost_bn": 20.843300000000003,
+  "energy_system_cost_bn": 352.00747256841527,
   "objective_reconciliation": {
    "lp_objective_bn": 265.9002743652266,
    "fixed_terms_total_bn": 106.95049820318863,
@@ -23316,6 +23394,8 @@
   },
   "saving_vs_late_2025_pct": 6.834216020714489,
   "breakeven_multiple": 0.9316578397928551,
+  "saving_energy_system_pct": 12.04241868002136,
+  "breakeven_energy_system": 0.8795758131997864,
   "regional_supply": {
    "rest": {
     "residues_mt": 325.0,
@@ -24422,7 +24502,8 @@
    "hefa_oils": 5.806,
    "sugar_starch_ethanol": 7.957214160214573,
    "imported_renewable_fuel": 0.0,
-   "vehicles_and_machines_net": 22.843300000000003,
+   "vehicles_and_machines_net": 20.843300000000003,
+   "farm_charging": 2.0,
    "process_heat_equipment": 0.0,
    "residual_pipeline_gas": 0.0
   },
@@ -24439,6 +24520,8 @@
   "blend_share_of_h2": 0.0,
   "blending_cost_bn": 0.0,
   "transport_cost_bn": 333.64423216624937,
+  "consumer_vehicle_cost_bn": 20.843300000000003,
+  "energy_system_cost_bn": 312.80093216624937,
   "objective_reconciliation": {
    "lp_objective_bn": 226.69373396306074,
    "fixed_terms_total_bn": 106.95049820318863,
@@ -24549,6 +24632,8 @@
   },
   "saving_vs_late_2025_pct": 16.63091846153637,
   "breakeven_multiple": 0.8336908153846363,
+  "saving_energy_system_pct": 21.83912112084324,
+  "breakeven_energy_system": 0.7816087887915676,
   "regional_supply": {
    "rest": {
     "residues_mt": 325.0,
@@ -25923,7 +26008,8 @@
    "hefa_oils": 5.806,
    "sugar_starch_ethanol": 7.957214160214573,
    "imported_renewable_fuel": 0.0,
-   "vehicles_and_machines_net": 22.843300000000003,
+   "vehicles_and_machines_net": 20.843300000000003,
+   "farm_charging": 2.0,
    "process_heat_equipment": 0.0,
    "residual_pipeline_gas": 0.0
   },
@@ -25940,6 +26026,8 @@
   "blend_share_of_h2": 0.0,
   "blending_cost_bn": 0.0,
   "transport_cost_bn": 322.007282936278,
+  "consumer_vehicle_cost_bn": 20.843300000000003,
+  "energy_system_cost_bn": 301.163982936278,
   "objective_reconciliation": {
    "lp_objective_bn": 215.05678473308933,
    "fixed_terms_total_bn": 106.95049820318863,
@@ -26050,6 +26138,8 @@
   },
   "saving_vs_late_2025_pct": 19.53869169925574,
   "breakeven_multiple": 0.8046130830074426,
+  "saving_energy_system_pct": 24.74689435856261,
+  "breakeven_energy_system": 0.7525310564143739,
   "regional_supply": {
    "rest": {
     "residues_mt": 325.0,
@@ -27424,7 +27514,8 @@
    "hefa_oils": 5.806,
    "sugar_starch_ethanol": 7.957214160214573,
    "imported_renewable_fuel": 0.0,
-   "vehicles_and_machines_net": 60.07,
+   "vehicles_and_machines_net": 58.07,
+   "farm_charging": 2.0,
    "process_heat_equipment": 0.0,
    "residual_pipeline_gas": 0.80131702000086
   },
@@ -27441,6 +27532,8 @@
   "blend_share_of_h2": 0.0,
   "blending_cost_bn": 0.0,
   "transport_cost_bn": 351.28815047182286,
+  "consumer_vehicle_cost_bn": 58.07,
+  "energy_system_cost_bn": 293.21815047182287,
   "objective_reconciliation": {
    "lp_objective_bn": 208.51591436911824,
    "fixed_terms_total_bn": 142.77223610270465,
@@ -27551,6 +27644,8 @@
   },
   "saving_vs_late_2025_pct": 12.222158704699348,
   "breakeven_multiple": 0.8777784129530065,
+  "saving_energy_system_pct": 26.732352792293447,
+  "breakeven_energy_system": 0.7326764720770655,
   "regional_supply": {
    "rest": {
     "residues_mt": 325.0,
@@ -28925,7 +29020,8 @@
    "hefa_oils": 5.806,
    "sugar_starch_ethanol": 7.957214160214573,
    "imported_renewable_fuel": 0.0,
-   "vehicles_and_machines_net": 99.97,
+   "vehicles_and_machines_net": 97.97,
+   "farm_charging": 2.0,
    "process_heat_equipment": 0.0,
    "residual_pipeline_gas": 0.80131702000086
   },
@@ -28942,6 +29038,8 @@
   "blend_share_of_h2": 0.0,
   "blending_cost_bn": 0.0,
   "transport_cost_bn": 391.18815047182284,
+  "consumer_vehicle_cost_bn": 97.97,
+  "energy_system_cost_bn": 293.2181504718228,
   "objective_reconciliation": {
    "lp_objective_bn": 208.51591436911824,
    "fixed_terms_total_bn": 182.67223610270466,
@@ -29052,6 +29150,8 @@
   },
   "saving_vs_late_2025_pct": 2.2521786100721086,
   "breakeven_multiple": 0.9774782138992789,
+  "saving_energy_system_pct": 26.732352792293458,
+  "breakeven_energy_system": 0.7326764720770654,
   "regional_supply": {
    "rest": {
     "residues_mt": 325.0,
@@ -30426,7 +30526,8 @@
    "hefa_oils": 5.806,
    "sugar_starch_ethanol": 7.957214160214573,
    "imported_renewable_fuel": 0.0,
-   "vehicles_and_machines_net": 261.13225837252645,
+   "vehicles_and_machines_net": 259.13225837252645,
+   "farm_charging": 2.0,
    "process_heat_equipment": 0.0,
    "residual_pipeline_gas": 0.80131702000086
   },
@@ -30443,6 +30544,8 @@
   "blend_share_of_h2": 0.0,
   "blending_cost_bn": 0.0,
   "transport_cost_bn": 552.3504088443493,
+  "consumer_vehicle_cost_bn": 259.13225837252645,
+  "energy_system_cost_bn": 293.21815047182287,
   "objective_reconciliation": {
    "lp_objective_bn": 208.51591436911824,
    "fixed_terms_total_bn": 343.8344944752311,
@@ -30553,6 +30656,8 @@
   },
   "saving_vs_late_2025_pct": -38.018109810460786,
   "breakeven_multiple": 1.3801810981046079,
+  "saving_energy_system_pct": 26.732352792293447,
+  "breakeven_energy_system": 0.7326764720770655,
   "regional_supply": {
    "rest": {
     "residues_mt": 325.0,
@@ -31927,7 +32032,8 @@
    "hefa_oils": 5.806,
    "sugar_starch_ethanol": 7.957214160214573,
    "imported_renewable_fuel": 0.0,
-   "vehicles_and_machines_net": -95.36579204209461,
+   "vehicles_and_machines_net": -97.36579204209461,
+   "farm_charging": 2.0,
    "process_heat_equipment": 0.0,
    "residual_pipeline_gas": 0.80131702000086
   },
@@ -31944,6 +32050,8 @@
   "blend_share_of_h2": 0.0,
   "blending_cost_bn": 0.0,
   "transport_cost_bn": 195.85235842972824,
+  "consumer_vehicle_cost_bn": -97.36579204209461,
+  "energy_system_cost_bn": 293.21815047182287,
   "objective_reconciliation": {
    "lp_objective_bn": 208.51591436911824,
    "fixed_terms_total_bn": -12.66355593938995,
@@ -32054,6 +32162,8 @@
   },
   "saving_vs_late_2025_pct": 51.061551001749585,
   "breakeven_multiple": 0.4893844899825042,
+  "saving_energy_system_pct": 26.732352792293447,
+  "breakeven_energy_system": 0.7326764720770655,
   "regional_supply": {
    "rest": {
     "residues_mt": 325.0,
@@ -33428,7 +33538,8 @@
    "hefa_oils": 5.806,
    "sugar_starch_ethanol": 7.957214160214573,
    "imported_renewable_fuel": 0.0,
-   "vehicles_and_machines_net": 28.242750000000004,
+   "vehicles_and_machines_net": 26.242750000000004,
+   "farm_charging": 2.0,
    "process_heat_equipment": 0.0,
    "residual_pipeline_gas": 0.80131702000086
   },
@@ -33445,6 +33556,8 @@
   "blend_share_of_h2": 0.0,
   "blending_cost_bn": 0.0,
   "transport_cost_bn": 319.46090047182287,
+  "consumer_vehicle_cost_bn": 26.242750000000004,
+  "energy_system_cost_bn": 293.21815047182287,
   "objective_reconciliation": {
    "lp_objective_bn": 208.51591436911824,
    "fixed_terms_total_bn": 110.94498610270466,
@@ -33555,6 +33668,8 @@
   },
   "saving_vs_late_2025_pct": 20.174966949479433,
   "breakeven_multiple": 0.7982503305052057,
+  "saving_energy_system_pct": 26.732352792293447,
+  "breakeven_energy_system": 0.7326764720770655,
   "regional_supply": {
    "rest": {
     "residues_mt": 325.0,
@@ -34929,7 +35044,8 @@
    "hefa_oils": 5.806,
    "sugar_starch_ethanol": 7.957214160214573,
    "imported_renewable_fuel": 0.0,
-   "vehicles_and_machines_net": 16.672500000000007,
+   "vehicles_and_machines_net": 14.672500000000008,
+   "farm_charging": 2.0,
    "process_heat_equipment": 0.0,
    "residual_pipeline_gas": 0.80131702000086
   },
@@ -34946,6 +35062,8 @@
   "blend_share_of_h2": 0.0,
   "blending_cost_bn": 0.0,
   "transport_cost_bn": 307.8906504718229,
+  "consumer_vehicle_cost_bn": 14.672500000000008,
+  "energy_system_cost_bn": 293.21815047182287,
   "objective_reconciliation": {
    "lp_objective_bn": 208.51591436911824,
    "fixed_terms_total_bn": 99.37473610270467,
@@ -35056,6 +35174,8 @@
   },
   "saving_vs_late_2025_pct": 23.06607377128045,
   "breakeven_multiple": 0.7693392622871955,
+  "saving_energy_system_pct": 26.732352792293447,
+  "breakeven_energy_system": 0.7326764720770655,
   "regional_supply": {
    "rest": {
     "residues_mt": 325.0,
@@ -36430,7 +36550,8 @@
    "hefa_oils": 5.806,
    "sugar_starch_ethanol": 7.957214160214573,
    "imported_renewable_fuel": 0.0,
-   "vehicles_and_machines_net": 22.843300000000003,
+   "vehicles_and_machines_net": 20.843300000000003,
+   "farm_charging": 2.0,
    "process_heat_equipment": 0.0,
    "residual_pipeline_gas": 0.80131702000086
   },
@@ -36447,6 +36568,8 @@
   "blend_share_of_h2": 0.0,
   "blending_cost_bn": 0.0,
   "transport_cost_bn": 340.71689180173394,
+  "consumer_vehicle_cost_bn": 20.843300000000003,
+  "energy_system_cost_bn": 319.87359180173394,
   "objective_reconciliation": {
    "lp_objective_bn": 233.1404055785444,
    "fixed_terms_total_bn": 107.5764862231895,
@@ -36557,6 +36680,8 @@
   },
   "saving_vs_late_2025_pct": 14.863643379284374,
   "breakeven_multiple": 0.8513635662071563,
+  "saving_energy_system_pct": 20.071846038591246,
+  "breakeven_energy_system": 0.7992815396140875,
   "regional_supply": {
    "rest": {
     "residues_mt": 325.0,
@@ -37905,7 +38030,8 @@
    "hefa_oils": 5.806,
    "sugar_starch_ethanol": 7.957214160214573,
    "imported_renewable_fuel": 0.0,
-   "vehicles_and_machines_net": 22.843300000000003,
+   "vehicles_and_machines_net": 20.843300000000003,
+   "farm_charging": 2.0,
    "process_heat_equipment": 0.0,
    "residual_pipeline_gas": 0.80131702000086
   },
@@ -37922,6 +38048,8 @@
   "blend_share_of_h2": 0.0,
   "blending_cost_bn": 0.0,
   "transport_cost_bn": 335.752120570409,
+  "consumer_vehicle_cost_bn": 20.843300000000003,
+  "energy_system_cost_bn": 314.908820570409,
   "objective_reconciliation": {
    "lp_objective_bn": 228.1756343472195,
    "fixed_terms_total_bn": 107.5764862231895,
@@ -38032,6 +38160,8 @@
   },
   "saving_vs_late_2025_pct": 16.104211558499603,
   "breakeven_multiple": 0.838957884415004,
+  "saving_energy_system_pct": 21.312414217806474,
+  "breakeven_energy_system": 0.7868758578219353,
   "regional_supply": {
    "rest": {
     "residues_mt": 325.0,
@@ -39406,7 +39536,8 @@
    "hefa_oils": 5.806,
    "sugar_starch_ethanol": 7.957214160214573,
    "imported_renewable_fuel": 0.0,
-   "vehicles_and_machines_net": 22.843300000000003,
+   "vehicles_and_machines_net": 20.843300000000003,
+   "farm_charging": 2.0,
    "process_heat_equipment": 0.0,
    "residual_pipeline_gas": 0.80131702000086
   },
@@ -39423,6 +39554,8 @@
   "blend_share_of_h2": 0.0,
   "blending_cost_bn": 0.0,
   "transport_cost_bn": 344.3791258363646,
+  "consumer_vehicle_cost_bn": 20.843300000000003,
+  "energy_system_cost_bn": 323.5358258363646,
   "objective_reconciliation": {
    "lp_objective_bn": 238.83358973365998,
    "fixed_terms_total_bn": 105.54553610270466,
@@ -39533,6 +39666,8 @@
   },
   "saving_vs_late_2025_pct": 13.948545624218356,
   "breakeven_multiple": 0.8605145437578164,
+  "saving_energy_system_pct": 19.156748283525225,
+  "breakeven_energy_system": 0.8084325171647477,
   "regional_supply": {
    "rest": {
     "residues_mt": 243.75,
@@ -40907,7 +41042,8 @@
    "hefa_oils": 5.806,
    "sugar_starch_ethanol": 7.957214160214573,
    "imported_renewable_fuel": 0.0,
-   "vehicles_and_machines_net": 22.843300000000003,
+   "vehicles_and_machines_net": 20.843300000000003,
+   "farm_charging": 2.0,
    "process_heat_equipment": 0.0,
    "residual_pipeline_gas": 0.80131702000086
   },
@@ -40924,6 +41060,8 @@
   "blend_share_of_h2": 0.0,
   "blending_cost_bn": 0.0,
   "transport_cost_bn": 389.04038238377206,
+  "consumer_vehicle_cost_bn": 20.843300000000003,
+  "energy_system_cost_bn": 368.19708238377206,
   "objective_reconciliation": {
    "lp_objective_bn": 283.4948462810673,
    "fixed_terms_total_bn": 105.54553610270466,
@@ -41034,6 +41172,8 @@
   },
   "saving_vs_late_2025_pct": 2.7888504167323025,
   "breakeven_multiple": 0.972111495832677,
+  "saving_energy_system_pct": 7.997053076039173,
+  "breakeven_energy_system": 0.9200294692396083,
   "regional_supply": {
    "rest": {
     "residues_mt": 162.5,
@@ -42408,7 +42548,8 @@
    "hefa_oils": 5.806,
    "sugar_starch_ethanol": 7.957214160214573,
    "imported_renewable_fuel": 0.0,
-   "vehicles_and_machines_net": 22.843300000000003,
+   "vehicles_and_machines_net": 20.843300000000003,
+   "farm_charging": 2.0,
    "process_heat_equipment": 0.1860856442431562,
    "residual_pipeline_gas": 0.80131702000086
   },
@@ -42425,6 +42566,8 @@
   "blend_share_of_h2": 0.0,
   "blending_cost_bn": 0.0,
   "transport_cost_bn": 321.75051143893415,
+  "consumer_vehicle_cost_bn": 20.843300000000003,
+  "energy_system_cost_bn": 300.90721143893416,
   "objective_reconciliation": {
    "lp_objective_bn": 216.20497533622952,
    "fixed_terms_total_bn": 105.54553610270466,
@@ -42535,6 +42678,8 @@
   },
   "saving_vs_late_2025_pct": 19.60285226861377,
   "breakeven_multiple": 0.8039714773138623,
+  "saving_energy_system_pct": 24.81105492792064,
+  "breakeven_energy_system": 0.7518894507207936,
   "regional_supply": {
    "rest": {
     "residues_mt": 325.0,
@@ -43677,7 +43822,8 @@
    "hefa_oils": 5.806,
    "sugar_starch_ethanol": 7.957214160214573,
    "imported_renewable_fuel": 0.0,
-   "vehicles_and_machines_net": 22.843300000000003,
+   "vehicles_and_machines_net": 20.843300000000003,
+   "farm_charging": 2.0,
    "process_heat_equipment": 0.24219880750846234,
    "residual_pipeline_gas": 0.80131702000086
   },
@@ -43694,6 +43840,8 @@
   "blend_share_of_h2": 0.0,
   "blending_cost_bn": 0.0,
   "transport_cost_bn": 324.54856087579196,
+  "consumer_vehicle_cost_bn": 20.843300000000003,
+  "energy_system_cost_bn": 303.70526087579196,
   "objective_reconciliation": {
    "lp_objective_bn": 219.00302477308733,
    "fixed_terms_total_bn": 105.54553610270466,
@@ -43804,6 +43952,8 @@
   },
   "saving_vs_late_2025_pct": 18.90369193805599,
   "breakeven_multiple": 0.8109630806194401,
+  "saving_energy_system_pct": 24.11189459736286,
+  "breakeven_energy_system": 0.7588810540263714,
   "regional_supply": {
    "rest": {
     "residues_mt": 325.0,
@@ -44942,7 +45092,8 @@
    "hefa_oils": 5.806,
    "sugar_starch_ethanol": 7.957214160214573,
    "imported_renewable_fuel": 0.0,
-   "vehicles_and_machines_net": 22.843300000000003,
+   "vehicles_and_machines_net": 20.843300000000003,
+   "farm_charging": 2.0,
    "process_heat_equipment": 0.0,
    "residual_pipeline_gas": 0.80131702000086
   },
@@ -44959,6 +45110,8 @@
   "blend_share_of_h2": 0.0,
   "blending_cost_bn": 0.0,
   "transport_cost_bn": 335.36433916364996,
+  "consumer_vehicle_cost_bn": 20.843300000000003,
+  "energy_system_cost_bn": 314.52103916364996,
   "objective_reconciliation": {
    "lp_objective_bn": 210.39518920141347,
    "fixed_terms_total_bn": 124.9691499622366,
@@ -45069,6 +45222,8 @@
   },
   "saving_vs_late_2025_pct": 16.20110812257114,
   "breakeven_multiple": 0.8379889187742886,
+  "saving_energy_system_pct": 21.40931078187801,
+  "breakeven_energy_system": 0.7859068921812199,
   "regional_supply": {
    "rest": {
     "residues_mt": 325.0,
@@ -46443,7 +46598,8 @@
    "hefa_oils": 5.806,
    "sugar_starch_ethanol": 7.957214160214573,
    "imported_renewable_fuel": 0.0,
-   "vehicles_and_machines_net": 99.97,
+   "vehicles_and_machines_net": 97.97,
+   "farm_charging": 2.0,
    "process_heat_equipment": 0.0,
    "residual_pipeline_gas": 0.80131702000086
   },
@@ -46460,6 +46616,8 @@
   "blend_share_of_h2": 0.0,
   "blending_cost_bn": 0.0,
   "transport_cost_bn": 417.8435918017339,
+  "consumer_vehicle_cost_bn": 97.97,
+  "energy_system_cost_bn": 319.87359180173394,
   "objective_reconciliation": {
    "lp_objective_bn": 233.1404055785444,
    "fixed_terms_total_bn": 184.7031862231895,
@@ -46570,6 +46728,8 @@
   },
   "saving_vs_late_2025_pct": -4.4083281436301025,
   "breakeven_multiple": 1.044083281436301,
+  "saving_energy_system_pct": 20.071846038591246,
+  "breakeven_energy_system": 0.7992815396140875,
   "regional_supply": {
    "rest": {
     "residues_mt": 325.0,
@@ -47918,7 +48078,8 @@
    "hefa_oils": 5.806,
    "sugar_starch_ethanol": 7.957214160214573,
    "imported_renewable_fuel": 0.0,
-   "vehicles_and_machines_net": 60.07,
+   "vehicles_and_machines_net": 58.07,
+   "farm_charging": 2.0,
    "process_heat_equipment": 0.098701320818134,
    "residual_pipeline_gas": 0.80131702000086
   },
@@ -47935,6 +48096,8 @@
   "blend_share_of_h2": 0.0,
   "blending_cost_bn": 0.0,
   "transport_cost_bn": 459.8611375541325,
+  "consumer_vehicle_cost_bn": 58.07,
+  "energy_system_cost_bn": 401.7911375541325,
   "objective_reconciliation": {
    "lp_objective_bn": 295.06361134296424,
    "fixed_terms_total_bn": 164.7975262111682,
@@ -48045,6 +48208,8 @@
   },
   "saving_vs_late_2025_pct": -14.90742826334197,
   "breakeven_multiple": 1.1490742826334197,
+  "saving_energy_system_pct": -0.3972341757478626,
+  "breakeven_energy_system": 1.0039723417574786,
   "regional_supply": {
    "rest": {
     "residues_mt": 243.75,
@@ -49393,7 +49558,8 @@
    "hefa_oils": 5.806,
    "sugar_starch_ethanol": 7.957214160214573,
    "imported_renewable_fuel": 0.0,
-   "vehicles_and_machines_net": 60.07,
+   "vehicles_and_machines_net": 58.07,
+   "farm_charging": 2.0,
    "process_heat_equipment": 0.5991737637683823,
    "residual_pipeline_gas": 0.0
   },
@@ -49410,6 +49576,8 @@
   "blend_share_of_h2": 0.0,
   "blending_cost_bn": 0.0,
   "transport_cost_bn": 486.47525179594766,
+  "consumer_vehicle_cost_bn": 58.07,
+  "energy_system_cost_bn": 428.40525179594766,
   "objective_reconciliation": {
    "lp_objective_bn": 322.2001101047803,
    "fixed_terms_total_bn": 164.27514169116733,
@@ -49520,6 +49688,8 @@
   },
   "saving_vs_late_2025_pct": -21.55760844447061,
   "breakeven_multiple": 1.215576084444706,
+  "saving_energy_system_pct": -7.047414356876502,
+  "breakeven_energy_system": 1.070474143568765,
   "regional_supply": {
    "rest": {
     "residues_mt": 243.75,
@@ -50894,7 +51064,8 @@
    "hefa_oils": 5.806,
    "sugar_starch_ethanol": 7.957214160214573,
    "imported_renewable_fuel": 0.0,
-   "vehicles_and_machines_net": 261.13225837252645,
+   "vehicles_and_machines_net": 259.13225837252645,
+   "farm_charging": 2.0,
    "process_heat_equipment": 0.098701320818134,
    "residual_pipeline_gas": 0.80131702000086
   },
@@ -50911,6 +51082,8 @@
   "blend_share_of_h2": 0.0,
   "blending_cost_bn": 0.0,
   "transport_cost_bn": 667.723395926659,
+  "consumer_vehicle_cost_bn": 259.13225837252645,
+  "energy_system_cost_bn": 408.59113755413256,
   "objective_reconciliation": {
    "lp_objective_bn": 301.86361134296425,
    "fixed_terms_total_bn": 365.85978458369465,
@@ -51021,6 +51194,8 @@
   },
   "saving_vs_late_2025_pct": -66.84684125578195,
   "breakeven_multiple": 1.6684684125578195,
+  "saving_energy_system_pct": -2.0963786530277195,
+  "breakeven_energy_system": 1.0209637865302772,
   "regional_supply": {
    "rest": {
     "residues_mt": 243.75,
@@ -52395,7 +52570,8 @@
    "hefa_oils": 5.806,
    "sugar_starch_ethanol": 7.957214160214573,
    "imported_renewable_fuel": 0.0,
-   "vehicles_and_machines_net": 22.843300000000003,
+   "vehicles_and_machines_net": 20.843300000000003,
+   "farm_charging": 2.0,
    "process_heat_equipment": 0.0,
    "residual_pipeline_gas": 0.80131702000086
   },
@@ -52412,6 +52588,8 @@
   "blend_share_of_h2": 0.0,
   "blending_cost_bn": 0.0,
   "transport_cost_bn": 314.70193967305664,
+  "consumer_vehicle_cost_bn": 20.843300000000003,
+  "energy_system_cost_bn": 293.85863967305664,
   "objective_reconciliation": {
    "lp_objective_bn": 209.15640357035198,
    "fixed_terms_total_bn": 105.54553610270466,
@@ -52522,6 +52700,8 @@
   },
   "saving_vs_late_2025_pct": 21.364108414011028,
   "breakeven_multiple": 0.7863589158598897,
+  "saving_energy_system_pct": 26.5723110733179,
+  "breakeven_energy_system": 0.734276889266821,
   "regional_supply": {
    "rest": {
     "residues_mt": 325.0,
@@ -53896,7 +54076,8 @@
    "hefa_oils": 5.806,
    "sugar_starch_ethanol": 7.957214160214573,
    "imported_renewable_fuel": 0.0,
-   "vehicles_and_machines_net": 22.843300000000003,
+   "vehicles_and_machines_net": 20.843300000000003,
+   "farm_charging": 2.0,
    "process_heat_equipment": 0.3047371260532717,
    "residual_pipeline_gas": 0.80131702000086
   },
@@ -53913,6 +54094,8 @@
   "blend_share_of_h2": 0.0,
   "blending_cost_bn": 0.0,
   "transport_cost_bn": 374.36469340214995,
+  "consumer_vehicle_cost_bn": 20.843300000000003,
+  "energy_system_cost_bn": 353.52139340214995,
   "objective_reconciliation": {
    "lp_objective_bn": 268.81915729944535,
    "fixed_terms_total_bn": 105.54553610270466,
@@ -54023,6 +54206,8 @@
   },
   "saving_vs_late_2025_pct": 6.45592628193814,
   "breakeven_multiple": 0.9354407371806186,
+  "saving_energy_system_pct": 11.66412894124501,
+  "breakeven_energy_system": 0.8833587105875499,
   "regional_supply": {
    "rest": {
     "residues_mt": 325.0,
@@ -55129,7 +55314,8 @@
    "hefa_oils": 5.806,
    "sugar_starch_ethanol": 7.957214160214573,
    "imported_renewable_fuel": 0.0,
-   "vehicles_and_machines_net": 22.843300000000003,
+   "vehicles_and_machines_net": 20.843300000000003,
+   "farm_charging": 2.0,
    "process_heat_equipment": 0.0,
    "residual_pipeline_gas": 0.80131702000086
   },
@@ -55146,6 +55332,8 @@
   "blend_share_of_h2": 0.0,
   "blending_cost_bn": 0.0,
   "transport_cost_bn": 312.51604247182286,
+  "consumer_vehicle_cost_bn": 20.843300000000003,
+  "energy_system_cost_bn": 291.67274247182286,
   "objective_reconciliation": {
    "lp_objective_bn": 206.97050636911823,
    "fixed_terms_total_bn": 105.54553610270466,
@@ -55256,6 +55444,8 @@
   },
   "saving_vs_late_2025_pct": 21.91030770186071,
   "breakeven_multiple": 0.7808969229813929,
+  "saving_energy_system_pct": 27.11851036116758,
+  "breakeven_energy_system": 0.7288148963883242,
   "regional_supply": {
    "rest": {
     "residues_mt": 325.0,
@@ -56630,7 +56820,8 @@
    "hefa_oils": 5.806,
    "sugar_starch_ethanol": 7.957214160214573,
    "imported_renewable_fuel": 0.0,
-   "vehicles_and_machines_net": 22.843300000000003,
+   "vehicles_and_machines_net": 20.843300000000003,
+   "farm_charging": 2.0,
    "process_heat_equipment": 0.0,
    "residual_pipeline_gas": 0.80131702000086
   },
@@ -56647,6 +56838,8 @@
   "blend_share_of_h2": 0.0,
   "blending_cost_bn": 0.0,
   "transport_cost_bn": 314.69832788921747,
+  "consumer_vehicle_cost_bn": 20.843300000000003,
+  "energy_system_cost_bn": 293.85502788921747,
   "objective_reconciliation": {
    "lp_objective_bn": 209.15279178651286,
    "fixed_terms_total_bn": 105.54553610270466,
@@ -56757,6 +56950,8 @@
   },
   "saving_vs_late_2025_pct": 21.365010905564475,
   "breakeven_multiple": 0.7863498909443553,
+  "saving_energy_system_pct": 26.573213564871345,
+  "breakeven_energy_system": 0.7342678643512865,
   "regional_supply": {
    "rest": {
     "residues_mt": 325.0,
@@ -58131,7 +58326,8 @@
    "hefa_oils": 5.806,
    "sugar_starch_ethanol": 7.957214160214573,
    "imported_renewable_fuel": 0.0,
-   "vehicles_and_machines_net": 22.843300000000003,
+   "vehicles_and_machines_net": 20.843300000000003,
+   "farm_charging": 2.0,
    "process_heat_equipment": 0.0,
    "residual_pipeline_gas": 0.80131702000086
   },
@@ -58148,6 +58344,8 @@
   "blend_share_of_h2": 0.0,
   "blending_cost_bn": 0.0,
   "transport_cost_bn": 314.21145493191864,
+  "consumer_vehicle_cost_bn": 20.843300000000003,
+  "energy_system_cost_bn": 293.36815493191864,
   "objective_reconciliation": {
    "lp_objective_bn": 208.66591882921398,
    "fixed_terms_total_bn": 105.54553610270466,
@@ -58258,6 +58456,8 @@
   },
   "saving_vs_late_2025_pct": 21.48666789034848,
   "breakeven_multiple": 0.7851333210965152,
+  "saving_energy_system_pct": 26.69487054965535,
+  "breakeven_energy_system": 0.7330512945034465,
   "regional_supply": {
    "rest": {
     "residues_mt": 325.0,
@@ -59620,7 +59820,8 @@
    "hefa_oils": 5.806,
    "sugar_starch_ethanol": 7.957214160214573,
    "imported_renewable_fuel": 0.0,
-   "vehicles_and_machines_net": 22.843300000000003,
+   "vehicles_and_machines_net": 20.843300000000003,
+   "farm_charging": 2.0,
    "process_heat_equipment": 0.0,
    "residual_pipeline_gas": 0.80131702000086
   },
@@ -59637,6 +59838,8 @@
   "blend_share_of_h2": 0.0,
   "blending_cost_bn": 0.0,
   "transport_cost_bn": 308.95313633201584,
+  "consumer_vehicle_cost_bn": 20.843300000000003,
+  "energy_system_cost_bn": 288.10983633201585,
   "objective_reconciliation": {
    "lp_objective_bn": 203.40760022931119,
    "fixed_terms_total_bn": 105.54553610270466,
@@ -59747,6 +59950,8 @@
   },
   "saving_vs_late_2025_pct": 22.800585979878274,
   "breakeven_multiple": 0.7719941402012173,
+  "saving_energy_system_pct": 28.008788639185145,
+  "breakeven_energy_system": 0.7199121136081486,
   "regional_supply": {
    "rest": {
     "residues_mt": 325.0,
@@ -61121,7 +61326,8 @@
    "hefa_oils": 5.806,
    "sugar_starch_ethanol": 7.957214160214573,
    "imported_renewable_fuel": 0.0,
-   "vehicles_and_machines_net": 22.843300000000003,
+   "vehicles_and_machines_net": 20.843300000000003,
+   "farm_charging": 2.0,
    "process_heat_equipment": 0.0,
    "residual_pipeline_gas": 0.80131702000086
   },
@@ -61138,6 +61344,8 @@
   "blend_share_of_h2": 0.0,
   "blending_cost_bn": 0.0,
   "transport_cost_bn": 312.62695877500386,
+  "consumer_vehicle_cost_bn": 20.843300000000003,
+  "energy_system_cost_bn": 291.78365877500386,
   "objective_reconciliation": {
    "lp_objective_bn": 207.08142267229925,
    "fixed_terms_total_bn": 105.54553610270466,
@@ -61248,6 +61456,8 @@
   },
   "saving_vs_late_2025_pct": 21.882592580685667,
   "breakeven_multiple": 0.7811740741931433,
+  "saving_energy_system_pct": 27.090795239992538,
+  "breakeven_energy_system": 0.7290920476000746,
   "regional_supply": {
    "rest": {
     "residues_mt": 325.0,
@@ -62622,7 +62832,8 @@
    "hefa_oils": 5.806,
    "sugar_starch_ethanol": 7.957214160214573,
    "imported_renewable_fuel": 0.0,
-   "vehicles_and_machines_net": 22.843300000000003,
+   "vehicles_and_machines_net": 20.843300000000003,
+   "farm_charging": 2.0,
    "process_heat_equipment": 0.0,
    "residual_pipeline_gas": 0.80131702000086
   },
@@ -62639,6 +62850,8 @@
   "blend_share_of_h2": 0.0,
   "blending_cost_bn": 0.0,
   "transport_cost_bn": 315.6889693844206,
+  "consumer_vehicle_cost_bn": 20.843300000000003,
+  "energy_system_cost_bn": 294.8456693844206,
   "objective_reconciliation": {
    "lp_objective_bn": 210.14343328171603,
    "fixed_terms_total_bn": 105.54553610270466,
@@ -62749,6 +62962,8 @@
   },
   "saving_vs_late_2025_pct": 21.117475166514676,
   "breakeven_multiple": 0.7888252483348532,
+  "saving_energy_system_pct": 26.325677825821547,
+  "breakeven_energy_system": 0.7367432217417845,
   "regional_supply": {
    "rest": {
     "residues_mt": 325.0,
@@ -64123,7 +64338,8 @@
    "hefa_oils": 5.806,
    "sugar_starch_ethanol": 7.957214160214573,
    "imported_renewable_fuel": 0.0,
-   "vehicles_and_machines_net": 22.843300000000003,
+   "vehicles_and_machines_net": 20.843300000000003,
+   "farm_charging": 2.0,
    "process_heat_equipment": 0.0,
    "residual_pipeline_gas": 0.80131702000086
   },
@@ -64140,6 +64356,8 @@
   "blend_share_of_h2": 0.0,
   "blending_cost_bn": 0.0,
   "transport_cost_bn": 315.3835729888641,
+  "consumer_vehicle_cost_bn": 20.843300000000003,
+  "energy_system_cost_bn": 294.5402729888641,
   "objective_reconciliation": {
    "lp_objective_bn": 209.83803688615953,
    "fixed_terms_total_bn": 105.54553610270466,
@@ -64250,6 +64468,8 @@
   },
   "saving_vs_late_2025_pct": 21.193785842822177,
   "breakeven_multiple": 0.7880621415717782,
+  "saving_energy_system_pct": 26.401988502129047,
+  "breakeven_energy_system": 0.7359801149787095,
   "regional_supply": {
    "rest": {
     "residues_mt": 325.0,
@@ -65624,7 +65844,8 @@
    "hefa_oils": 5.806,
    "sugar_starch_ethanol": 7.957214160214573,
    "imported_renewable_fuel": 0.0,
-   "vehicles_and_machines_net": 22.843300000000003,
+   "vehicles_and_machines_net": 20.843300000000003,
+   "farm_charging": 2.0,
    "process_heat_equipment": 0.0,
    "residual_pipeline_gas": 0.80131702000086
   },
@@ -65641,6 +65862,8 @@
   "blend_share_of_h2": 0.0,
   "blending_cost_bn": 0.0,
   "transport_cost_bn": 314.6294087486456,
+  "consumer_vehicle_cost_bn": 20.843300000000003,
+  "energy_system_cost_bn": 293.7861087486456,
   "objective_reconciliation": {
    "lp_objective_bn": 209.08387264594097,
    "fixed_terms_total_bn": 105.54553610270466,
@@ -65751,6 +65974,8 @@
   },
   "saving_vs_late_2025_pct": 21.382232019841187,
   "breakeven_multiple": 0.7861776798015881,
+  "saving_energy_system_pct": 26.590434679148057,
+  "breakeven_energy_system": 0.7340956532085194,
   "regional_supply": {
    "rest": {
     "residues_mt": 325.0,
@@ -67125,7 +67350,8 @@
    "hefa_oils": 5.806,
    "sugar_starch_ethanol": 7.957214160214573,
    "imported_renewable_fuel": 0.0,
-   "vehicles_and_machines_net": 22.843300000000003,
+   "vehicles_and_machines_net": 20.843300000000003,
+   "farm_charging": 2.0,
    "process_heat_equipment": 0.0,
    "residual_pipeline_gas": 0.80131702000086
   },
@@ -67142,6 +67368,8 @@
   "blend_share_of_h2": 0.0,
   "blending_cost_bn": 0.0,
   "transport_cost_bn": 314.74803325282807,
+  "consumer_vehicle_cost_bn": 20.843300000000003,
+  "energy_system_cost_bn": 293.90473325282807,
   "objective_reconciliation": {
    "lp_objective_bn": 209.20249715012343,
    "fixed_terms_total_bn": 105.54553610270466,
@@ -67252,6 +67480,8 @@
   },
   "saving_vs_late_2025_pct": 21.35259081820122,
   "breakeven_multiple": 0.7864740918179878,
+  "saving_energy_system_pct": 26.560793477508092,
+  "breakeven_energy_system": 0.7343920652249191,
   "regional_supply": {
    "rest": {
     "residues_mt": 325.0,
@@ -68626,7 +68856,8 @@
    "hefa_oils": 5.806,
    "sugar_starch_ethanol": 7.957214160214573,
    "imported_renewable_fuel": 0.0,
-   "vehicles_and_machines_net": 22.843300000000003,
+   "vehicles_and_machines_net": 20.843300000000003,
+   "farm_charging": 2.0,
    "process_heat_equipment": 0.0,
    "residual_pipeline_gas": 0.80131702000086
   },
@@ -68643,6 +68874,8 @@
   "blend_share_of_h2": 0.0,
   "blending_cost_bn": 0.0,
   "transport_cost_bn": 314.1687003391901,
+  "consumer_vehicle_cost_bn": 20.843300000000003,
+  "energy_system_cost_bn": 293.3254003391901,
   "objective_reconciliation": {
    "lp_objective_bn": 208.62316423648545,
    "fixed_terms_total_bn": 105.54553610270466,
@@ -68753,6 +68986,8 @@
   },
   "saving_vs_late_2025_pct": 21.497351159482747,
   "breakeven_multiple": 0.7850264884051725,
+  "saving_energy_system_pct": 26.705553818789618,
+  "breakeven_energy_system": 0.7329444618121038,
   "regional_supply": {
    "rest": {
     "residues_mt": 325.0,
@@ -70127,7 +70362,8 @@
    "hefa_oils": 5.806,
    "sugar_starch_ethanol": 7.957214160214573,
    "imported_renewable_fuel": 0.0,
-   "vehicles_and_machines_net": 22.843300000000003,
+   "vehicles_and_machines_net": 20.843300000000003,
+   "farm_charging": 2.0,
    "process_heat_equipment": 0.0,
    "residual_pipeline_gas": 0.80131702000086
   },
@@ -70144,6 +70380,8 @@
   "blend_share_of_h2": 0.0,
   "blending_cost_bn": 0.0,
   "transport_cost_bn": 311.5806003391901,
+  "consumer_vehicle_cost_bn": 20.843300000000003,
+  "energy_system_cost_bn": 290.7373003391901,
   "objective_reconciliation": {
    "lp_objective_bn": 206.03506423648545,
    "fixed_terms_total_bn": 105.54553610270466,
@@ -70254,6 +70492,8 @@
   },
   "saving_vs_late_2025_pct": 22.144050545019212,
   "breakeven_multiple": 0.7785594945498079,
+  "saving_energy_system_pct": 27.352253204326082,
+  "breakeven_energy_system": 0.7264774679567392,
   "regional_supply": {
    "rest": {
     "residues_mt": 325.0,
@@ -71628,7 +71868,8 @@
    "hefa_oils": 5.806,
    "sugar_starch_ethanol": 7.957214160214573,
    "imported_renewable_fuel": 0.0,
-   "vehicles_and_machines_net": 22.843300000000003,
+   "vehicles_and_machines_net": 20.843300000000003,
+   "farm_charging": 2.0,
    "process_heat_equipment": 0.0,
    "residual_pipeline_gas": 0.80131702000086
   },
@@ -71645,6 +71886,8 @@
   "blend_share_of_h2": 0.0,
   "blending_cost_bn": 0.0,
   "transport_cost_bn": 306.4044003391901,
+  "consumer_vehicle_cost_bn": 20.843300000000003,
+  "energy_system_cost_bn": 285.5611003391901,
   "objective_reconciliation": {
    "lp_objective_bn": 200.85886423648546,
    "fixed_terms_total_bn": 105.54553610270466,
@@ -71755,6 +71998,8 @@
   },
   "saving_vs_late_2025_pct": 23.437449316092128,
   "breakeven_multiple": 0.7656255068390787,
+  "saving_energy_system_pct": 28.645651975399,
+  "breakeven_energy_system": 0.71354348024601,
   "regional_supply": {
    "rest": {
     "residues_mt": 325.0,
@@ -73129,7 +73374,8 @@
    "hefa_oils": 5.806,
    "sugar_starch_ethanol": 7.957214160214573,
    "imported_renewable_fuel": 0.0,
-   "vehicles_and_machines_net": 22.843300000000003,
+   "vehicles_and_machines_net": 20.843300000000003,
+   "farm_charging": 2.0,
    "process_heat_equipment": 0.0,
    "residual_pipeline_gas": 0.0
   },
@@ -73146,6 +73392,8 @@
   "blend_share_of_h2": 0.0,
   "blending_cost_bn": 0.0,
   "transport_cost_bn": 342.0808602785833,
+  "consumer_vehicle_cost_bn": 20.843300000000003,
+  "energy_system_cost_bn": 321.2375602785833,
   "objective_reconciliation": {
    "lp_objective_bn": 235.13036207539466,
    "fixed_terms_total_bn": 106.95049820318863,
@@ -73256,6 +73504,8 @@
   },
   "saving_vs_late_2025_pct": 14.522822863898721,
   "breakeven_multiple": 0.8547717713610128,
+  "saving_energy_system_pct": 19.73102552320559,
+  "breakeven_energy_system": 0.8026897447679441,
   "regional_supply": {
    "rest": {
     "residues_mt": 325.0,
@@ -74630,7 +74880,8 @@
    "hefa_oils": 5.806,
    "sugar_starch_ethanol": 7.957214160214573,
    "imported_renewable_fuel": 0.0,
-   "vehicles_and_machines_net": 22.843300000000003,
+   "vehicles_and_machines_net": 20.843300000000003,
+   "farm_charging": 2.0,
    "process_heat_equipment": 0.0,
    "residual_pipeline_gas": 0.80131702000086
   },
@@ -74647,6 +74898,8 @@
   "blend_share_of_h2": 0.0,
   "blending_cost_bn": 0.0,
   "transport_cost_bn": 315.6889693844206,
+  "consumer_vehicle_cost_bn": 20.843300000000003,
+  "energy_system_cost_bn": 294.8456693844206,
   "objective_reconciliation": {
    "lp_objective_bn": 210.14343328171603,
    "fixed_terms_total_bn": 105.54553610270466,
@@ -74757,6 +75010,8 @@
   },
   "saving_vs_late_2025_pct": 21.117475166514676,
   "breakeven_multiple": 0.7888252483348532,
+  "saving_energy_system_pct": 26.325677825821547,
+  "breakeven_energy_system": 0.7367432217417845,
   "regional_supply": {
    "rest": {
     "residues_mt": 325.0,
@@ -76131,7 +76386,8 @@
    "hefa_oils": 5.806,
    "sugar_starch_ethanol": 7.957214160214573,
    "imported_renewable_fuel": 0.0,
-   "vehicles_and_machines_net": 22.843300000000003,
+   "vehicles_and_machines_net": 20.843300000000003,
+   "farm_charging": 2.0,
    "process_heat_equipment": 0.0,
    "residual_pipeline_gas": 0.0
   },
@@ -76148,6 +76404,8 @@
   "blend_share_of_h2": 0.0,
   "blending_cost_bn": 0.0,
   "transport_cost_bn": 325.8016931333657,
+  "consumer_vehicle_cost_bn": 20.843300000000003,
+  "energy_system_cost_bn": 304.9583931333657,
   "objective_reconciliation": {
    "lp_objective_bn": 218.8511949301771,
    "fixed_terms_total_bn": 106.95049820318863,
@@ -76258,6 +76516,8 @@
   },
   "saving_vs_late_2025_pct": 18.590566532944585,
   "breakeven_multiple": 0.8140943346705541,
+  "saving_energy_system_pct": 23.798769192251456,
+  "breakeven_energy_system": 0.7620123080774854,
   "regional_supply": {
    "rest": {
     "residues_mt": 325.0,
@@ -77632,7 +77892,8 @@
    "hefa_oils": 5.806,
    "sugar_starch_ethanol": 7.957214160214573,
    "imported_renewable_fuel": 0.0,
-   "vehicles_and_machines_net": 22.843300000000003,
+   "vehicles_and_machines_net": 20.843300000000003,
+   "farm_charging": 2.0,
    "process_heat_equipment": 0.0,
    "residual_pipeline_gas": 0.80131702000086
   },
@@ -77649,6 +77910,8 @@
   "blend_share_of_h2": 0.0,
   "blending_cost_bn": 0.0,
   "transport_cost_bn": 314.06145047182287,
+  "consumer_vehicle_cost_bn": 20.843300000000003,
+  "energy_system_cost_bn": 293.21815047182287,
   "objective_reconciliation": {
    "lp_objective_bn": 208.51591436911824,
    "fixed_terms_total_bn": 105.54553610270466,
@@ -77759,6 +78022,8 @@
   },
   "saving_vs_late_2025_pct": 21.524150132986573,
   "breakeven_multiple": 0.7847584986701343,
+  "saving_energy_system_pct": 26.732352792293447,
+  "breakeven_energy_system": 0.7326764720770655,
   "regional_supply": {
    "rest": {
     "residues_mt": 325.0,
@@ -79133,7 +79398,8 @@
    "hefa_oils": 5.806,
    "sugar_starch_ethanol": 7.957214160214573,
    "imported_renewable_fuel": 154.19906450347023,
-   "vehicles_and_machines_net": 22.843300000000003,
+   "vehicles_and_machines_net": 20.843300000000003,
+   "farm_charging": 2.0,
    "process_heat_equipment": 0.0,
    "residual_pipeline_gas": 0.80131702000086
   },
@@ -79150,6 +79416,8 @@
   "blend_share_of_h2": 0.0,
   "blending_cost_bn": 0.0,
   "transport_cost_bn": 455.8541626009146,
+  "consumer_vehicle_cost_bn": 20.843300000000003,
+  "energy_system_cost_bn": 435.0108626009146,
   "objective_reconciliation": {
    "lp_objective_bn": 350.30862649821006,
    "fixed_terms_total_bn": 105.54553610270466,
@@ -79260,6 +79528,8 @@
   },
   "saving_vs_late_2025_pct": -13.906188651230366,
   "breakeven_multiple": 1.1390618865123037,
+  "saving_energy_system_pct": -8.697985991923506,
+  "breakeven_energy_system": 1.086979859919235,
   "regional_supply": {
    "rest": {
     "residues_mt": 210.0,
@@ -80634,7 +80904,8 @@
    "hefa_oils": 5.806,
    "sugar_starch_ethanol": 7.957214160214573,
    "imported_renewable_fuel": 0.0,
-   "vehicles_and_machines_net": 22.843300000000003,
+   "vehicles_and_machines_net": 20.843300000000003,
+   "farm_charging": 2.0,
    "process_heat_equipment": 0.0,
    "residual_pipeline_gas": 0.80131702000086
   },
@@ -80651,6 +80922,8 @@
   "blend_share_of_h2": 0.0,
   "blending_cost_bn": 0.0,
   "transport_cost_bn": 319.8418577661627,
+  "consumer_vehicle_cost_bn": 20.843300000000003,
+  "energy_system_cost_bn": 298.9985577661627,
   "objective_reconciliation": {
    "lp_objective_bn": 214.2963216634581,
    "fixed_terms_total_bn": 105.54553610270466,
@@ -80761,6 +81034,8 @@
   },
   "saving_vs_late_2025_pct": 20.079775554956335,
   "breakeven_multiple": 0.7992022444504366,
+  "saving_energy_system_pct": 25.287978214263205,
+  "breakeven_energy_system": 0.7471202178573679,
   "regional_supply": {
    "rest": {
     "residues_mt": 325.0,
@@ -82135,7 +82410,8 @@
    "hefa_oils": 5.806,
    "sugar_starch_ethanol": 7.957214160214573,
    "imported_renewable_fuel": 0.0,
-   "vehicles_and_machines_net": 22.843300000000003,
+   "vehicles_and_machines_net": 20.843300000000003,
+   "farm_charging": 2.0,
    "process_heat_equipment": 0.0,
    "residual_pipeline_gas": 0.80131702000086
   },
@@ -82152,6 +82428,8 @@
   "blend_share_of_h2": 0.0,
   "blending_cost_bn": 0.0,
   "transport_cost_bn": 314.06145047182287,
+  "consumer_vehicle_cost_bn": 20.843300000000003,
+  "energy_system_cost_bn": 293.21815047182287,
   "objective_reconciliation": {
    "lp_objective_bn": 208.51591436911824,
    "fixed_terms_total_bn": 105.54553610270466,
@@ -82262,6 +82540,8 @@
   },
   "saving_vs_late_2025_pct": 21.524150132986573,
   "breakeven_multiple": 0.7847584986701343,
+  "saving_energy_system_pct": 26.732352792293447,
+  "breakeven_energy_system": 0.7326764720770655,
   "regional_supply": {
    "rest": {
     "residues_mt": 325.0,
@@ -83636,7 +83916,8 @@
    "hefa_oils": 5.806,
    "sugar_starch_ethanol": 7.957214160214573,
    "imported_renewable_fuel": 0.0,
-   "vehicles_and_machines_net": 22.843300000000003,
+   "vehicles_and_machines_net": 20.843300000000003,
+   "farm_charging": 2.0,
    "process_heat_equipment": 0.0,
    "residual_pipeline_gas": 0.80131702000086
   },
@@ -83653,6 +83934,8 @@
   "blend_share_of_h2": 0.0,
   "blending_cost_bn": 0.0,
   "transport_cost_bn": 314.06145047182287,
+  "consumer_vehicle_cost_bn": 20.843300000000003,
+  "energy_system_cost_bn": 293.21815047182287,
   "objective_reconciliation": {
    "lp_objective_bn": 208.51591436911824,
    "fixed_terms_total_bn": 105.54553610270466,
@@ -83763,6 +84046,8 @@
   },
   "saving_vs_late_2025_pct": 21.524150132986573,
   "breakeven_multiple": 0.7847584986701343,
+  "saving_energy_system_pct": 26.732352792293447,
+  "breakeven_energy_system": 0.7326764720770655,
   "regional_supply": {
    "rest": {
     "residues_mt": 325.0,
@@ -85137,7 +85422,8 @@
    "hefa_oils": 5.806,
    "sugar_starch_ethanol": 7.957214160214573,
    "imported_renewable_fuel": 0.0,
-   "vehicles_and_machines_net": 22.843300000000003,
+   "vehicles_and_machines_net": 20.843300000000003,
+   "farm_charging": 2.0,
    "process_heat_equipment": 0.0,
    "residual_pipeline_gas": 0.0
   },
@@ -85154,6 +85440,8 @@
   "blend_share_of_h2": 0.0,
   "blending_cost_bn": 0.0,
   "transport_cost_bn": 325.8016931333657,
+  "consumer_vehicle_cost_bn": 20.843300000000003,
+  "energy_system_cost_bn": 304.9583931333657,
   "objective_reconciliation": {
    "lp_objective_bn": 218.8511949301771,
    "fixed_terms_total_bn": 106.95049820318863,
@@ -85264,6 +85552,8 @@
   },
   "saving_vs_late_2025_pct": 18.590566532944585,
   "breakeven_multiple": 0.8140943346705541,
+  "saving_energy_system_pct": 23.798769192251456,
+  "breakeven_energy_system": 0.7620123080774854,
   "regional_supply": {
    "rest": {
     "residues_mt": 325.0,
@@ -86638,7 +86928,8 @@
    "hefa_oils": 5.806,
    "sugar_starch_ethanol": 7.957214160214573,
    "imported_renewable_fuel": 0.0,
-   "vehicles_and_machines_net": 22.843300000000003,
+   "vehicles_and_machines_net": 20.843300000000003,
+   "farm_charging": 2.0,
    "process_heat_equipment": 0.0,
    "residual_pipeline_gas": 0.80131702000086
   },
@@ -86655,6 +86946,8 @@
   "blend_share_of_h2": 0.0,
   "blending_cost_bn": 0.0,
   "transport_cost_bn": 309.9768063270951,
+  "consumer_vehicle_cost_bn": 20.843300000000003,
+  "energy_system_cost_bn": 289.1335063270951,
   "objective_reconciliation": {
    "lp_objective_bn": 204.4312702243905,
    "fixed_terms_total_bn": 105.54553610270466,
@@ -86765,6 +87058,8 @@
   },
   "saving_vs_late_2025_pct": 22.54479727124651,
   "breakeven_multiple": 0.7745520272875349,
+  "saving_energy_system_pct": 27.75299993055338,
+  "breakeven_energy_system": 0.7224700006944662,
   "regional_supply": {
    "rest": {
     "residues_mt": 325.0,
@@ -88139,7 +88434,8 @@
    "hefa_oils": 5.806,
    "sugar_starch_ethanol": 7.957214160214573,
    "imported_renewable_fuel": 0.0,
-   "vehicles_and_machines_net": 22.843300000000003,
+   "vehicles_and_machines_net": 20.843300000000003,
+   "farm_charging": 2.0,
    "process_heat_equipment": 0.0,
    "residual_pipeline_gas": 0.0
   },
@@ -88156,6 +88452,8 @@
   "blend_share_of_h2": 0.0,
   "blending_cost_bn": 0.0,
   "transport_cost_bn": 322.007282936278,
+  "consumer_vehicle_cost_bn": 20.843300000000003,
+  "energy_system_cost_bn": 301.163982936278,
   "objective_reconciliation": {
    "lp_objective_bn": 215.05678473308933,
    "fixed_terms_total_bn": 106.95049820318863,
@@ -88266,6 +88564,8 @@
   },
   "saving_vs_late_2025_pct": 19.53869169925574,
   "breakeven_multiple": 0.8046130830074426,
+  "saving_energy_system_pct": 24.74689435856261,
+  "breakeven_energy_system": 0.7525310564143739,
   "regional_supply": {
    "rest": {
     "residues_mt": 325.0,
@@ -89628,7 +89928,8 @@
    "hefa_oils": 5.806,
    "sugar_starch_ethanol": 7.957214160214573,
    "imported_renewable_fuel": 0.0,
-   "vehicles_and_machines_net": 22.843300000000003,
+   "vehicles_and_machines_net": 20.843300000000003,
+   "farm_charging": 2.0,
    "process_heat_equipment": 0.0,
    "residual_pipeline_gas": 0.80131702000086
   },
@@ -89645,6 +89946,8 @@
   "blend_share_of_h2": 0.0,
   "blending_cost_bn": 0.0,
   "transport_cost_bn": 297.8884415327993,
+  "consumer_vehicle_cost_bn": 20.843300000000003,
+  "energy_system_cost_bn": 277.0451415327993,
   "objective_reconciliation": {
    "lp_objective_bn": 192.34290543009462,
    "fixed_terms_total_bn": 105.54553610270466,
@@ -89755,6 +90058,8 @@
   },
   "saving_vs_late_2025_pct": 25.56536760647765,
   "breakeven_multiple": 0.7443463239352235,
+  "saving_energy_system_pct": 30.77357026578452,
+  "breakeven_energy_system": 0.6922642973421548,
   "regional_supply": {
    "rest": {
     "residues_mt": 325.0,
@@ -91129,7 +91434,8 @@
    "hefa_oils": 5.806,
    "sugar_starch_ethanol": 7.957214160214573,
    "imported_renewable_fuel": 0.0,
-   "vehicles_and_machines_net": 22.843300000000003,
+   "vehicles_and_machines_net": 20.843300000000003,
+   "farm_charging": 2.0,
    "process_heat_equipment": 0.0,
    "residual_pipeline_gas": 0.0
   },
@@ -91146,6 +91452,8 @@
   "blend_share_of_h2": 0.0,
   "blending_cost_bn": 0.0,
   "transport_cost_bn": 307.271507068089,
+  "consumer_vehicle_cost_bn": 20.843300000000003,
+  "energy_system_cost_bn": 286.428207068089,
   "objective_reconciliation": {
    "lp_objective_bn": 200.32100886490036,
    "fixed_terms_total_bn": 106.95049820318863,
@@ -91256,6 +91564,8 @@
   },
   "saving_vs_late_2025_pct": 23.22078172644202,
   "breakeven_multiple": 0.7677921827355798,
+  "saving_energy_system_pct": 28.42898438574888,
+  "breakeven_energy_system": 0.7157101561425112,
   "regional_supply": {
    "rest": {
     "residues_mt": 325.0,
@@ -92630,7 +92940,8 @@
    "hefa_oils": 5.806,
    "sugar_starch_ethanol": 7.957214160214573,
    "imported_renewable_fuel": 0.0,
-   "vehicles_and_machines_net": 22.843300000000003,
+   "vehicles_and_machines_net": 20.843300000000003,
+   "farm_charging": 2.0,
    "process_heat_equipment": 0.053284491181931785,
    "residual_pipeline_gas": 0.80131702000086
   },
@@ -92647,6 +92958,8 @@
   "blend_share_of_h2": 0.0,
   "blending_cost_bn": 0.0,
   "transport_cost_bn": 323.97831856512914,
+  "consumer_vehicle_cost_bn": 20.843300000000003,
+  "energy_system_cost_bn": 303.13501856512914,
   "objective_reconciliation": {
    "lp_objective_bn": 218.4327824624245,
    "fixed_terms_total_bn": 105.54553610270466,
@@ -92757,6 +93070,8 @@
   },
   "saving_vs_late_2025_pct": 19.04618077230217,
   "breakeven_multiple": 0.8095381922769783,
+  "saving_energy_system_pct": 24.25438343160904,
+  "breakeven_energy_system": 0.7574561656839096,
   "regional_supply": {
    "rest": {
     "residues_mt": 325.0,
@@ -94131,7 +94446,8 @@
    "hefa_oils": 5.806,
    "sugar_starch_ethanol": 7.957214160214573,
    "imported_renewable_fuel": 0.0,
-   "vehicles_and_machines_net": 22.843300000000003,
+   "vehicles_and_machines_net": 20.843300000000003,
+   "farm_charging": 2.0,
    "process_heat_equipment": 0.07053408466170379,
    "residual_pipeline_gas": 0.0
   },
@@ -94148,6 +94464,8 @@
   "blend_share_of_h2": 0.0,
   "blending_cost_bn": 0.0,
   "transport_cost_bn": 340.81618248598284,
+  "consumer_vehicle_cost_bn": 20.843300000000003,
+  "energy_system_cost_bn": 319.97288248598284,
   "objective_reconciliation": {
    "lp_objective_bn": 233.86568428279426,
    "fixed_terms_total_bn": 106.95049820318863,
@@ -94258,6 +94576,8 @@
   },
   "saving_vs_late_2025_pct": 14.838833200198076,
   "breakeven_multiple": 0.8516116679980192,
+  "saving_energy_system_pct": 20.04703585950495,
+  "breakeven_energy_system": 0.7995296414049505,
   "regional_supply": {
    "rest": {
     "residues_mt": 325.0,
@@ -95632,7 +95952,8 @@
    "hefa_oils": 5.806,
    "sugar_starch_ethanol": 7.957214160214573,
    "imported_renewable_fuel": 0.0,
-   "vehicles_and_machines_net": 22.843300000000003,
+   "vehicles_and_machines_net": 20.843300000000003,
+   "farm_charging": 2.0,
    "process_heat_equipment": 0.0,
    "residual_pipeline_gas": 0.80131702000086
   },
@@ -95649,6 +95970,8 @@
   "blend_share_of_h2": 0.0,
   "blending_cost_bn": 0.0,
   "transport_cost_bn": 315.56914839438855,
+  "consumer_vehicle_cost_bn": 20.843300000000003,
+  "energy_system_cost_bn": 294.72584839438855,
   "objective_reconciliation": {
    "lp_objective_bn": 210.0236122916839,
    "fixed_terms_total_bn": 105.54553610270466,
@@ -95759,6 +96082,8 @@
   },
   "saving_vs_late_2025_pct": 21.147415339084553,
   "breakeven_multiple": 0.7885258466091545,
+  "saving_energy_system_pct": 26.355617998391423,
+  "breakeven_energy_system": 0.7364438200160858,
   "regional_supply": {
    "rest": {
     "residues_mt": 325.0,
@@ -97133,7 +97458,8 @@
    "hefa_oils": 5.806,
    "sugar_starch_ethanol": 7.957214160214573,
    "imported_renewable_fuel": 0.0,
-   "vehicles_and_machines_net": 22.843300000000003,
+   "vehicles_and_machines_net": 20.843300000000003,
+   "farm_charging": 2.0,
    "process_heat_equipment": 0.0,
    "residual_pipeline_gas": 0.0
   },
@@ -97150,6 +97476,8 @@
   "blend_share_of_h2": 0.0,
   "blending_cost_bn": 0.0,
   "transport_cost_bn": 327.4462392170283,
+  "consumer_vehicle_cost_bn": 20.843300000000003,
+  "energy_system_cost_bn": 306.6029392170283,
   "objective_reconciliation": {
    "lp_objective_bn": 220.49574101383968,
    "fixed_terms_total_bn": 106.95049820318863,
@@ -97260,6 +97588,8 @@
   },
   "saving_vs_late_2025_pct": 18.179636915931717,
   "breakeven_multiple": 0.8182036308406828,
+  "saving_energy_system_pct": 23.38783957523859,
+  "breakeven_energy_system": 0.7661216042476141,
   "regional_supply": {
    "rest": {
     "residues_mt": 325.0,
@@ -98033,7 +98363,8 @@
    "hefa_oils": 0.094,
    "sugar_starch_ethanol": 0.02,
    "imported_renewable_fuel": 10.141638702514403,
-   "vehicles_and_machines_net": 1.0098525,
+   "vehicles_and_machines_net": 0.9898525000000001,
+   "farm_charging": 0.02,
    "process_heat_equipment": 0.0,
    "residual_pipeline_gas": 0.020679148903248006
   },
@@ -98050,9 +98381,11 @@
   "blend_share_of_h2": 0.0,
   "blending_cost_bn": 0.0,
   "transport_cost_bn": 17.87269622080322,
+  "consumer_vehicle_cost_bn": 0.9898525000000001,
+  "energy_system_cost_bn": 16.88284372080322,
   "objective_reconciliation": {
    "lp_objective_bn": 14.096477233869148,
-   "fixed_terms_total_bn": 3.776218986934078,
+   "fixed_terms_total_bn": 3.7762189869340785,
    "heat_credit_adjustment_bn": 0.0,
    "reported_total_bn": 17.87269622080322,
    "residual_bn": -7.105427357601002e-15
@@ -98160,6 +98493,8 @@
   },
   "saving_vs_late_2025_pct": -14.331002608488653,
   "breakeven_multiple": 1.1433100260848865,
+  "saving_energy_system_pct": -7.998951340936067,
+  "breakeven_energy_system": 1.0799895134093607,
   "regional_supply": {
    "taiwan": {
     "residues_mt": 2.5,
@@ -98898,7 +99233,8 @@
    "hefa_oils": 0.094,
    "sugar_starch_ethanol": 0.02,
    "imported_renewable_fuel": 10.141638702514403,
-   "vehicles_and_machines_net": 1.0098525,
+   "vehicles_and_machines_net": 0.9898525000000001,
+   "farm_charging": 0.02,
    "process_heat_equipment": 0.006039335807822385,
    "residual_pipeline_gas": 0.020679148903248006
   },
@@ -98915,9 +99251,11 @@
   "blend_share_of_h2": 0.0,
   "blending_cost_bn": 0.0,
   "transport_cost_bn": 20.53931444733525,
+  "consumer_vehicle_cost_bn": 0.9898525000000001,
+  "energy_system_cost_bn": 19.54946194733525,
   "objective_reconciliation": {
    "lp_objective_bn": 16.76309546040118,
-   "fixed_terms_total_bn": 3.776218986934078,
+   "fixed_terms_total_bn": 3.7762189869340785,
    "heat_credit_adjustment_bn": 0.0,
    "reported_total_bn": 20.53931444733525,
    "residual_bn": -7.105427357601002e-15
@@ -99025,6 +99363,8 @@
   },
   "saving_vs_late_2025_pct": -31.38926464388374,
   "breakeven_multiple": 1.3138926464388374,
+  "saving_energy_system_pct": -25.057213376331156,
+  "breakeven_energy_system": 1.2505721337633116,
   "regional_supply": {
    "taiwan": {
     "residues_mt": 2.5,
@@ -99495,7 +99835,8 @@
    "hefa_oils": 0.094,
    "sugar_starch_ethanol": 0.02,
    "imported_renewable_fuel": 10.141638702514403,
-   "vehicles_and_machines_net": 1.0098525,
+   "vehicles_and_machines_net": 0.9898525000000001,
+   "farm_charging": 0.02,
    "process_heat_equipment": 0.0,
    "residual_pipeline_gas": 0.0
   },
@@ -99512,6 +99853,8 @@
   "blend_share_of_h2": 0.0,
   "blending_cost_bn": 0.0,
   "transport_cost_bn": 18.953171889815195,
+  "consumer_vehicle_cost_bn": 0.9898525000000001,
+  "energy_system_cost_bn": 17.963319389815194,
   "objective_reconciliation": {
    "lp_objective_bn": 15.113106693850028,
    "fixed_terms_total_bn": 3.8400651959651717,
@@ -99622,6 +99965,8 @@
   },
   "saving_vs_late_2025_pct": -21.242767067867184,
   "breakeven_multiple": 1.2124276706786719,
+  "saving_energy_system_pct": -14.9107158003146,
+  "breakeven_energy_system": 1.149107158003146,
   "regional_supply": {
    "taiwan": {
     "residues_mt": 2.5,
@@ -100360,7 +100705,8 @@
    "hefa_oils": 0.094,
    "sugar_starch_ethanol": 0.02,
    "imported_renewable_fuel": 10.141638702514403,
-   "vehicles_and_machines_net": 1.0098525,
+   "vehicles_and_machines_net": 0.9898525000000001,
+   "farm_charging": 0.02,
    "process_heat_equipment": 0.006081504690639918,
    "residual_pipeline_gas": 0.0
   },
@@ -100377,6 +100723,8 @@
   "blend_share_of_h2": 0.0,
   "blending_cost_bn": 0.0,
   "transport_cost_bn": 20.805078205792192,
+  "consumer_vehicle_cost_bn": 0.9898525000000001,
+  "energy_system_cost_bn": 19.81522570579219,
   "objective_reconciliation": {
    "lp_objective_bn": 16.965013009827025,
    "fixed_terms_total_bn": 3.8400651959651717,
@@ -100487,6 +100835,8 @@
   },
   "saving_vs_late_2025_pct": -33.089345962672965,
   "breakeven_multiple": 1.3308934596267297,
+  "saving_energy_system_pct": -26.757294695120382,
+  "breakeven_energy_system": 1.2675729469512038,
   "regional_supply": {
    "taiwan": {
     "residues_mt": 2.5,
@@ -100968,7 +101318,8 @@
    "hefa_oils": 0.094,
    "sugar_starch_ethanol": 0.02,
    "imported_renewable_fuel": 8.29628440302095,
-   "vehicles_and_machines_net": 1.0098525,
+   "vehicles_and_machines_net": 0.9898525000000001,
+   "farm_charging": 0.02,
    "process_heat_equipment": 0.008556923705493439,
    "residual_pipeline_gas": 0.020679148903248006
   },
@@ -100985,9 +101336,11 @@
   "blend_share_of_h2": 0.0,
   "blending_cost_bn": 0.0,
   "transport_cost_bn": 22.622965684496023,
+  "consumer_vehicle_cost_bn": 0.9898525000000001,
+  "energy_system_cost_bn": 21.633113184496022,
   "objective_reconciliation": {
    "lp_objective_bn": 18.846746697561947,
-   "fixed_terms_total_bn": 3.776218986934078,
+   "fixed_terms_total_bn": 3.7762189869340785,
    "heat_credit_adjustment_bn": 0.0,
    "reported_total_bn": 22.622965684496023,
    "residual_bn": -3.552713678800501e-15
@@ -101095,6 +101448,8 @@
   },
   "saving_vs_late_2025_pct": -44.71830756432023,
   "breakeven_multiple": 1.4471830756432023,
+  "saving_energy_system_pct": -38.38625629676764,
+  "breakeven_energy_system": 1.3838625629676764,
   "regional_supply": {
    "taiwan": {
     "residues_mt": 2.5,
@@ -102434,7 +102789,8 @@
    "hefa_oils": 5.806,
    "sugar_starch_ethanol": 7.957214160214573,
    "imported_renewable_fuel": 0.0,
-   "vehicles_and_machines_net": 22.843300000000003,
+   "vehicles_and_machines_net": 20.843300000000003,
+   "farm_charging": 2.0,
    "process_heat_equipment": 0.0,
    "residual_pipeline_gas": 0.0
   },
@@ -102451,6 +102807,8 @@
   "blend_share_of_h2": 0.0,
   "blending_cost_bn": 0.0,
   "transport_cost_bn": 302.26543847281636,
+  "consumer_vehicle_cost_bn": 20.843300000000003,
+  "energy_system_cost_bn": 281.42213847281636,
   "objective_reconciliation": {
    "lp_objective_bn": 195.31494026962775,
    "fixed_terms_total_bn": 106.95049820318863,
@@ -102561,6 +102919,8 @@
   },
   "saving_vs_late_2025_pct": 24.47166905093342,
   "breakeven_multiple": 0.7552833094906658,
+  "saving_energy_system_pct": 29.679871710240292,
+  "breakeven_energy_system": 0.7032012828975971,
   "regional_supply": {
    "rest": {
     "residues_mt": 325.0,
@@ -103935,7 +104295,8 @@
    "hefa_oils": 5.806,
    "sugar_starch_ethanol": 7.957214160214573,
    "imported_renewable_fuel": 0.0,
-   "vehicles_and_machines_net": 22.843300000000003,
+   "vehicles_and_machines_net": 20.843300000000003,
+   "farm_charging": 2.0,
    "process_heat_equipment": 0.0854839455959907,
    "residual_pipeline_gas": 0.0
   },
@@ -103952,6 +104313,8 @@
   "blend_share_of_h2": 0.0,
   "blending_cost_bn": 0.0,
   "transport_cost_bn": 338.6319995097976,
+  "consumer_vehicle_cost_bn": 20.843300000000003,
+  "energy_system_cost_bn": 317.7886995097976,
   "objective_reconciliation": {
    "lp_objective_bn": 231.68150130660896,
    "fixed_terms_total_bn": 106.95049820318863,
@@ -104062,6 +104425,8 @@
   },
   "saving_vs_late_2025_pct": 15.384604147455983,
   "breakeven_multiple": 0.8461539585254402,
+  "saving_energy_system_pct": 20.59280680676285,
+  "breakeven_energy_system": 0.7940719319323715,
   "regional_supply": {
    "rest": {
     "residues_mt": 325.0,
@@ -105436,7 +105801,8 @@
    "hefa_oils": 5.806,
    "sugar_starch_ethanol": 7.957214160214573,
    "imported_renewable_fuel": 0.0,
-   "vehicles_and_machines_net": 22.843300000000003,
+   "vehicles_and_machines_net": 20.843300000000003,
+   "farm_charging": 2.0,
    "process_heat_equipment": 0.0,
    "residual_pipeline_gas": 0.0
   },
@@ -105453,6 +105819,8 @@
   "blend_share_of_h2": 0.0,
   "blending_cost_bn": 0.0,
   "transport_cost_bn": 302.26543847281636,
+  "consumer_vehicle_cost_bn": 20.843300000000003,
+  "energy_system_cost_bn": 281.42213847281636,
   "objective_reconciliation": {
    "lp_objective_bn": 195.31494026962775,
    "fixed_terms_total_bn": 106.95049820318863,
@@ -105563,6 +105931,8 @@
   },
   "saving_vs_late_2025_pct": 24.47166905093342,
   "breakeven_multiple": 0.7552833094906658,
+  "saving_energy_system_pct": 29.679871710240292,
+  "breakeven_energy_system": 0.7032012828975971,
   "regional_supply": {
    "rest": {
     "residues_mt": 325.0,
@@ -106869,7 +107239,8 @@
    "hefa_oils": 5.806,
    "sugar_starch_ethanol": 7.957214160214573,
    "imported_renewable_fuel": 0.0,
-   "vehicles_and_machines_net": 22.843300000000003,
+   "vehicles_and_machines_net": 20.843300000000003,
+   "farm_charging": 2.0,
    "process_heat_equipment": 0.0,
    "residual_pipeline_gas": 0.0
   },
@@ -106886,6 +107257,8 @@
   "blend_share_of_h2": 0.0,
   "blending_cost_bn": 0.0,
   "transport_cost_bn": 328.1729801004401,
+  "consumer_vehicle_cost_bn": 20.843300000000003,
+  "energy_system_cost_bn": 307.3296801004401,
   "objective_reconciliation": {
    "lp_objective_bn": 221.22248189725153,
    "fixed_terms_total_bn": 106.95049820318863,
@@ -106996,6 +107369,8 @@
   },
   "saving_vs_late_2025_pct": 17.998043127922504,
   "breakeven_multiple": 0.820019568720775,
+  "saving_energy_system_pct": 23.206245787229374,
+  "breakeven_energy_system": 0.7679375421277063,
   "regional_supply": {
    "rest": {
     "residues_mt": 325.0,

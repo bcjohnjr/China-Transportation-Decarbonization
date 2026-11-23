@@ -1,5 +1,6 @@
 {
 "least_cost": {
+"project": 293.2,
 "cost": 314.1,
 "petro": 400.2,
 "save": 21.5,
@@ -9,6 +10,7 @@
 "red": 93.7
 },
 "least_cost_blend20": {
+"project": 292.6,
 "cost": 313.5,
 "petro": 400.2,
 "save": 21.7,
@@ -18,6 +20,7 @@
 "red": 93.9
 },
 "least_cost_flex_heat": {
+"project": 293.2,
 "cost": 314.1,
 "petro": 400.2,
 "save": 21.5,
@@ -27,6 +30,7 @@
 "red": 93.7
 },
 "design_half_offshore": {
+"project": 317.5,
 "cost": 338.4,
 "petro": 400.2,
 "save": 15.4,
@@ -36,6 +40,7 @@
 "red": 94.0
 },
 "design": {
+"project": 348.1,
 "cost": 369.0,
 "petro": 400.2,
 "save": 7.8,
@@ -45,6 +50,7 @@
 "red": 93.7
 },
 "least_cost_reactor_low": {
+"project": 272.7,
 "cost": 293.6,
 "petro": 400.2,
 "save": 26.6,
@@ -54,6 +60,7 @@
 "red": 93.8
 },
 "least_cost_reactor_high": {
+"project": 307.5,
 "cost": 328.3,
 "petro": 400.2,
 "save": 18.0,
@@ -63,6 +70,7 @@
 "red": 92.8
 },
 "least_cost_no_nuclear": {
+"project": 346.7,
 "cost": 367.5,
 "petro": 400.2,
 "save": 8.2,
@@ -72,6 +80,7 @@
 "red": 94.9
 },
 "least_cost_no_vehicle_carbon": {
+"project": 302.9,
 "cost": 323.7,
 "petro": 400.2,
 "save": 19.1,
@@ -81,6 +90,7 @@
 "red": 93.8
 },
 "least_cost_demonstrated_yields": {
+"project": 298.4,
 "cost": 319.2,
 "petro": 400.2,
 "save": 20.2,
@@ -90,6 +100,7 @@
 "red": 93.6
 },
 "least_cost_us_truck_ratios": {
+"project": 230.5,
 "cost": 251.4,
 "petro": 400.2,
 "save": 37.2,
@@ -99,6 +110,7 @@
 "red": 94.1
 },
 "post_gas_least_cost": {
+"project": 305.0,
 "cost": 325.8,
 "petro": 400.2,
 "save": 18.6,
@@ -108,6 +120,7 @@
 "red": 95.2
 },
 "post_gas_half_offshore": {
+"project": 328.2,
 "cost": 349.0,
 "petro": 400.2,
 "save": 12.8,
@@ -117,6 +130,7 @@
 "red": 95.2
 },
 "post_gas_reactor_low": {
+"project": 282.0,
 "cost": 302.8,
 "petro": 400.2,
 "save": 24.3,
@@ -126,6 +140,7 @@
 "red": 95.2
 },
 "post_gas_reactor_high": {
+"project": 327.3,
 "cost": 348.1,
 "petro": 400.2,
 "save": 13.0,
@@ -135,6 +150,7 @@
 "red": 95.2
 },
 "post_gas_no_nuclear": {
+"project": 352.0,
 "cost": 372.9,
 "petro": 400.2,
 "save": 6.8,
@@ -144,6 +160,7 @@
 "red": 95.1
 },
 "post_gas_htse_48kwh": {
+"project": 312.8,
 "cost": 333.6,
 "petro": 400.2,
 "save": 16.6,
@@ -153,6 +170,7 @@
 "red": 95.1
 },
 "post_gas_vhtr_si": {
+"project": 301.2,
 "cost": 322.0,
 "petro": 400.2,
 "save": 19.5,
@@ -162,6 +180,7 @@
 "red": 95.2
 },
 "least_cost_bev_net_zero": {
+"project": 293.2,
 "cost": 351.3,
 "petro": 400.2,
 "save": 12.2,
@@ -171,6 +190,7 @@
 "red": 93.7
 },
 "least_cost_bev_plus100": {
+"project": 293.2,
 "cost": 391.2,
 "petro": 400.2,
 "save": 2.3,
@@ -180,6 +200,7 @@
 "red": 93.7
 },
 "least_cost_bev_tco_high": {
+"project": 293.2,
 "cost": 552.4,
 "petro": 400.2,
 "save": -38.0,
@@ -189,6 +210,7 @@
 "red": 93.7
 },
 "least_cost_bev_tco_low": {
+"project": 293.2,
 "cost": 195.9,
 "petro": 400.2,
 "save": 51.1,
@@ -198,6 +220,7 @@
 "red": 93.7
 },
 "least_cost_fleet_350": {
+"project": 293.2,
 "cost": 319.5,
 "petro": 400.2,
 "save": 20.2,
@@ -207,6 +230,7 @@
 "red": 93.7
 },
 "least_cost_fleet_500": {
+"project": 293.2,
 "cost": 307.9,
 "petro": 400.2,
 "save": 23.1,
@@ -216,6 +240,7 @@
 "red": 93.7
 },
 "least_cost_no_carbon_revenue": {
+"project": 319.9,
 "cost": 340.7,
 "petro": 400.2,
 "save": 14.9,
@@ -225,6 +250,7 @@
 "red": 94.4
 },
 "least_cost_carbon_commodity": {
+"project": 314.9,
 "cost": 335.8,
 "petro": 400.2,
 "save": 16.1,
@@ -234,6 +260,7 @@
 "red": 94.1
 },
 "least_cost_residues_75": {
+"project": 323.5,
 "cost": 344.4,
 "petro": 400.2,
 "save": 13.9,
@@ -243,6 +270,7 @@
 "red": 93.3
 },
 "least_cost_residues_50": {
+"project": 368.2,
 "cost": 389.0,
 "petro": 400.2,
 "save": 2.8,
@@ -252,6 +280,7 @@
 "red": 93.3
 },
 "least_cost_hub_cap_60": {
+"project": 300.9,
 "cost": 321.8,
 "petro": 400.2,
 "save": 19.6,
@@ -261,6 +290,7 @@
 "red": 92.8
 },
 "least_cost_hub_cap_30": {
+"project": 303.7,
 "cost": 324.5,
 "petro": 400.2,
 "save": 18.9,
@@ -270,6 +300,7 @@
 "red": 92.8
 },
 "least_cost_grid_tight": {
+"project": 314.5,
 "cost": 335.4,
 "petro": 400.2,
 "save": 16.2,
@@ -279,6 +310,7 @@
 "red": 93.8
 },
 "least_cost_bev_plus100_no_carbon": {
+"project": 319.9,
 "cost": 417.8,
 "petro": 400.2,
 "save": -4.4,
@@ -288,6 +320,7 @@
 "red": 94.4
 },
 "least_cost_stress_moderate": {
+"project": 401.8,
 "cost": 459.9,
 "petro": 400.2,
 "save": -14.9,
@@ -297,6 +330,7 @@
 "red": 91.1
 },
 "post_gas_stress_moderate": {
+"project": 428.4,
 "cost": 486.5,
 "petro": 400.2,
 "save": -21.6,
@@ -306,6 +340,7 @@
 "red": 94.9
 },
 "least_cost_stress_severe": {
+"project": 408.6,
 "cost": 667.7,
 "petro": 400.2,
 "save": -66.8,
@@ -315,6 +350,7 @@
 "red": 91.1
 },
 "least_cost_us_v84_htse_rule": {
+"project": 293.9,
 "cost": 314.7,
 "petro": 400.2,
 "save": 21.4,
@@ -324,6 +360,7 @@
 "red": 92.8
 },
 "least_cost_no_nuclear_alkaline": {
+"project": 353.5,
 "cost": 374.4,
 "petro": 400.2,
 "save": 6.5,
@@ -333,6 +370,7 @@
 "red": 94.8
 },
 "least_cost_food_credit": {
+"project": 291.7,
 "cost": 312.5,
 "petro": 400.2,
 "save": 21.9,
@@ -342,6 +380,7 @@
 "red": 93.7
 },
 "least_cost_htse_topping_3": {
+"project": 293.9,
 "cost": 314.7,
 "petro": 400.2,
 "save": 21.4,
@@ -351,6 +390,7 @@
 "red": 92.8
 },
 "least_cost_htse_no_lowT_recovery": {
+"project": 293.4,
 "cost": 314.2,
 "petro": 400.2,
 "save": 21.5,
@@ -360,6 +400,7 @@
 "red": 93.7
 },
 "least_cost_no_nutrient_balance": {
+"project": 288.1,
 "cost": 309.0,
 "petro": 400.2,
 "save": 22.8,
@@ -369,6 +410,7 @@
 "red": 94.7
 },
 "least_cost_no_soc_balance": {
+"project": 291.8,
 "cost": 312.6,
 "petro": 400.2,
 "save": 21.9,
@@ -378,6 +420,7 @@
 "red": 93.9
 },
 "least_cost_soc_no_pyro_carbon": {
+"project": 294.8,
 "cost": 315.7,
 "petro": 400.2,
 "save": 21.1,
@@ -387,6 +430,7 @@
 "red": 94.3
 },
 "least_cost_humification_high": {
+"project": 294.5,
 "cost": 315.4,
 "petro": 400.2,
 "save": 21.2,
@@ -396,6 +440,7 @@
 "red": 93.2
 },
 "least_cost_hydrochar_stability_low": {
+"project": 293.8,
 "cost": 314.6,
 "petro": 400.2,
 "save": 21.4,
@@ -405,6 +450,7 @@
 "red": 93.5
 },
 "least_cost_fertiliser_price_high": {
+"project": 293.9,
 "cost": 314.7,
 "petro": 400.2,
 "save": 21.4,
@@ -414,6 +460,7 @@
 "red": 94.0
 },
 "least_cost_bioextraction_full": {
+"project": 293.3,
 "cost": 314.2,
 "petro": 400.2,
 "save": 21.5,
@@ -423,6 +470,7 @@
 "red": 93.8
 },
 "least_cost_bioextraction_n_credit_10": {
+"project": 290.7,
 "cost": 311.6,
 "petro": 400.2,
 "save": 22.1,
@@ -432,6 +480,7 @@
 "red": 93.8
 },
 "least_cost_bioextraction_n_credit_30": {
+"project": 285.6,
 "cost": 306.4,
 "petro": 400.2,
 "save": 23.4,
@@ -441,6 +490,7 @@
 "red": 93.8
 },
 "post_gas_no_biomethane_pyrolysis": {
+"project": 321.2,
 "cost": 342.1,
 "petro": 400.2,
 "save": 14.5,
@@ -450,6 +500,7 @@
 "red": 95.2
 },
 "least_cost_biological_soc": {
+"project": 294.8,
 "cost": 315.7,
 "petro": 400.2,
 "save": 21.1,
@@ -459,6 +510,7 @@
 "red": 94.3
 },
 "post_gas_biological_soc": {
+"project": 305.0,
 "cost": 325.8,
 "petro": 400.2,
 "save": 18.6,
@@ -468,6 +520,7 @@
 "red": 95.2
 },
 "least_cost_no_green_manure_compost": {
+"project": 293.2,
 "cost": 314.1,
 "petro": 400.2,
 "save": 21.5,
@@ -477,6 +530,7 @@
 "red": 93.7
 },
 "least_cost_biological_soc_no_compost": {
+"project": 435.0,
 "cost": 455.9,
 "petro": 400.2,
 "save": -13.9,
@@ -486,6 +540,7 @@
 "red": 93.5
 },
 "least_cost_biological_soc_compost_cost_high": {
+"project": 299.0,
 "cost": 319.8,
 "petro": 400.2,
 "save": 20.1,
@@ -495,6 +550,7 @@
 "red": 94.3
 },
 "least_cost_soc_deficit_price_1000": {
+"project": 293.2,
 "cost": 314.1,
 "petro": 400.2,
 "save": 21.5,
@@ -504,6 +560,7 @@
 "red": 93.7
 },
 "type_htr_pm": {
+"project": 293.2,
 "cost": 314.1,
 "petro": 400.2,
 "save": 21.5,
@@ -513,6 +570,7 @@
 "red": 93.7
 },
 "post_gas_type_htr_pm": {
+"project": 305.0,
 "cost": 325.8,
 "petro": 400.2,
 "save": 18.6,
@@ -522,6 +580,7 @@
 "red": 95.2
 },
 "type_vhtr": {
+"project": 289.1,
 "cost": 310.0,
 "petro": 400.2,
 "save": 22.5,
@@ -531,6 +590,7 @@
 "red": 93.8
 },
 "post_gas_type_vhtr": {
+"project": 301.2,
 "cost": 322.0,
 "petro": 400.2,
 "save": 19.5,
@@ -540,6 +600,7 @@
 "red": 95.2
 },
 "type_tmsr": {
+"project": 277.0,
 "cost": 297.9,
 "petro": 400.2,
 "save": 25.6,
@@ -549,6 +610,7 @@
 "red": 93.8
 },
 "post_gas_type_tmsr": {
+"project": 286.4,
 "cost": 307.3,
 "petro": 400.2,
 "save": 23.2,
@@ -558,6 +620,7 @@
 "red": 95.2
 },
 "type_cfr": {
+"project": 303.1,
 "cost": 324.0,
 "petro": 400.2,
 "save": 19.0,
@@ -567,6 +630,7 @@
 "red": 92.8
 },
 "post_gas_type_cfr": {
+"project": 320.0,
 "cost": 340.8,
 "petro": 400.2,
 "save": 14.8,
@@ -576,6 +640,7 @@
 "red": 95.2
 },
 "type_acp100": {
+"project": 294.7,
 "cost": 315.6,
 "petro": 400.2,
 "save": 21.1,
@@ -585,6 +650,7 @@
 "red": 93.7
 },
 "post_gas_type_acp100": {
+"project": 306.6,
 "cost": 327.4,
 "petro": 400.2,
 "save": 18.2,
@@ -594,6 +660,7 @@
 "red": 95.2
 },
 "tw_least_cost": {
+"project": 16.9,
 "cost": 17.9,
 "petro": 15.6,
 "save": -14.3,
@@ -603,6 +670,7 @@
 "red": 89.6
 },
 "tw_no_nuclear": {
+"project": 19.5,
 "cost": 20.5,
 "petro": 15.6,
 "save": -31.4,
@@ -612,6 +680,7 @@
 "red": 90.3
 },
 "tw_post_gas": {
+"project": 18.0,
 "cost": 19.0,
 "petro": 15.6,
 "save": -21.2,
@@ -621,6 +690,7 @@
 "red": 90.5
 },
 "tw_post_gas_no_nuclear": {
+"project": 19.8,
 "cost": 20.8,
 "petro": 15.6,
 "save": -33.1,
@@ -630,6 +700,7 @@
 "red": 90.5
 },
 "tw_offshore_25gw": {
+"project": 21.6,
 "cost": 22.6,
 "petro": 15.6,
 "save": -44.7,
@@ -639,6 +710,7 @@
 "red": 90.2
 },
 "sustainable_fission_tmsr": {
+"project": 281.4,
 "cost": 302.3,
 "petro": 400.2,
 "save": 24.5,
@@ -648,6 +720,7 @@
 "red": 95.2
 },
 "sustainable_fission_cfr": {
+"project": 317.8,
 "cost": 338.6,
 "petro": 400.2,
 "save": 15.4,
@@ -657,6 +730,7 @@
 "red": 95.2
 },
 "sustainable_fission_tmsr_nuclear_only": {
+"project": 281.4,
 "cost": 302.3,
 "petro": 400.2,
 "save": 24.5,
@@ -666,6 +740,7 @@
 "red": 95.2
 },
 "sustainable_fission_tmsr_premium": {
+"project": 307.3,
 "cost": 328.2,
 "petro": 400.2,
 "save": 18.0,

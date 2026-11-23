@@ -1,7 +1,7 @@
 cff-version: 1.2.0
 message: "If you use this model, please cite it as below."
 title: "China transport decarbonisation model (petroleum-free transport with reactor heat, electrification and regional biofuels)"
-version: "CN v1.6.2"
+version: "CN v1.6.3"
 date-released: 2026-11-23
 authors:
   - family-names: Bily

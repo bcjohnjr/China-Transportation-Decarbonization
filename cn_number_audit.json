@@ -1,6 +1,6 @@
 {
- "release": "CN v1.6.2",
- "checks": 120,
+ "release": "CN v1.6.3",
+ "checks": 138,
  "failures": 0,
  "rows": [
   {
@@ -315,11 +315,41 @@
   },
   {
    "group": "vehicles",
-   "check": "vehicles and machines net, bn USD",
-   "model": 22.843300000000003,
-   "independent": 22.83339010710318,
-   "rel_diff": 0.0004340088287520177,
+   "check": "vehicles and machines net (consumer cost), bn USD",
+   "model": 20.843300000000003,
+   "independent": 20.83339010710318,
+   "rel_diff": 0.0004756735627699384,
    "tolerance": 0.002,
+   "ok": true,
+   "note": ""
+  },
+  {
+   "group": "vehicles",
+   "check": "farm charging (project), bn USD",
+   "model": 2.0,
+   "independent": 2.0,
+   "rel_diff": 0.0,
+   "tolerance": 1e-09,
+   "ok": true,
+   "note": ""
+  },
+  {
+   "group": "cost",
+   "check": "energy-system (project) cost = total - consumer vehicle cost",
+   "model": 293.21815047182287,
+   "independent": 293.2280603647197,
+   "rel_diff": -3.379585461394329e-05,
+   "tolerance": 0.0002,
+   "ok": true,
+   "note": ""
+  },
+  {
+   "group": "cost",
+   "check": "energy-system saving %",
+   "model": 26.732352792293447,
+   "independent": 26.732352792293447,
+   "rel_diff": 0.0,
+   "tolerance": 1e-09,
    "ok": true,
    "note": ""
   },
@@ -935,6 +965,56 @@
   },
   {
    "group": "monte carlo",
+   "check": "least_cost: energy-system + vehicle cost = total in every draw",
+   "model": 5.684341886080802e-14,
+   "independent": 0.0,
+   "rel_diff": 5.684341886080802e-14,
+   "tolerance": 0.0,
+   "ok": true,
+   "note": ""
+  },
+  {
+   "group": "monte carlo",
+   "check": "least_cost: energy-system saving p5 from raw draws",
+   "model": 9.099598691739816,
+   "independent": 9.099598691739816,
+   "rel_diff": 0.0,
+   "tolerance": 1e-06,
+   "ok": true,
+   "note": ""
+  },
+  {
+   "group": "monte carlo",
+   "check": "least_cost: energy-system saving p50 from raw draws",
+   "model": 19.669329546776797,
+   "independent": 19.669329546776797,
+   "rel_diff": 0.0,
+   "tolerance": 1e-06,
+   "ok": true,
+   "note": ""
+  },
+  {
+   "group": "monte carlo",
+   "check": "least_cost: energy-system saving p95 from raw draws",
+   "model": 29.726291960562104,
+   "independent": 29.726291960562104,
+   "rel_diff": 0.0,
+   "tolerance": 1e-06,
+   "ok": true,
+   "note": ""
+  },
+  {
+   "group": "monte carlo",
+   "check": "least_cost: energy system cheaper than late-2025 petroleum",
+   "model": 0.998,
+   "independent": 0.998,
+   "rel_diff": 0.0,
+   "tolerance": 0.002,
+   "ok": true,
+   "note": ""
+  },
+  {
+   "group": "monte carlo",
    "check": "post_gas: draws in CSV",
    "model": 1000,
    "independent": 1000.0,
@@ -1035,6 +1115,56 @@
   },
   {
    "group": "monte carlo",
+   "check": "post_gas: energy-system + vehicle cost = total in every draw",
+   "model": 1.1368683772161603e-13,
+   "independent": 0.0,
+   "rel_diff": 1.1368683772161603e-13,
+   "tolerance": 0.0,
+   "ok": true,
+   "note": ""
+  },
+  {
+   "group": "monte carlo",
+   "check": "post_gas: energy-system saving p5 from raw draws",
+   "model": 0.7493349017601288,
+   "independent": 0.7493349017601288,
+   "rel_diff": 0.0,
+   "tolerance": 1e-06,
+   "ok": true,
+   "note": ""
+  },
+  {
+   "group": "monte carlo",
+   "check": "post_gas: energy-system saving p50 from raw draws",
+   "model": 15.832971080067264,
+   "independent": 15.832971080067264,
+   "rel_diff": 0.0,
+   "tolerance": 1e-06,
+   "ok": true,
+   "note": ""
+  },
+  {
+   "group": "monte carlo",
+   "check": "post_gas: energy-system saving p95 from raw draws",
+   "model": 27.131099704663594,
+   "independent": 27.131099704663594,
+   "rel_diff": 0.0,
+   "tolerance": 1e-06,
+   "ok": true,
+   "note": ""
+  },
+  {
+   "group": "monte carlo",
+   "check": "post_gas: energy system cheaper than late-2025 petroleum",
+   "model": 0.956,
+   "independent": 0.956,
+   "rel_diff": 0.0,
+   "tolerance": 0.002,
+   "ok": true,
+   "note": ""
+  },
+  {
+   "group": "monte carlo",
    "check": "half_offshore: draws in CSV",
    "model": 1000,
    "independent": 1000.0,
@@ -1130,6 +1260,56 @@
    "independent": -3.2300368638286447,
    "rel_diff": -0.0,
    "tolerance": 1e-06,
+   "ok": true,
+   "note": ""
+  },
+  {
+   "group": "monte carlo",
+   "check": "half_offshore: energy-system + vehicle cost = total in every draw",
+   "model": 5.684341886080802e-14,
+   "independent": 0.0,
+   "rel_diff": 5.684341886080802e-14,
+   "tolerance": 0.0,
+   "ok": true,
+   "note": ""
+  },
+  {
+   "group": "monte carlo",
+   "check": "half_offshore: energy-system saving p5 from raw draws",
+   "model": 2.264410022182687,
+   "independent": 2.264410022182687,
+   "rel_diff": 0.0,
+   "tolerance": 1e-06,
+   "ok": true,
+   "note": ""
+  },
+  {
+   "group": "monte carlo",
+   "check": "half_offshore: energy-system saving p50 from raw draws",
+   "model": 11.734114231483655,
+   "independent": 11.734114231483655,
+   "rel_diff": 0.0,
+   "tolerance": 1e-06,
+   "ok": true,
+   "note": ""
+  },
+  {
+   "group": "monte carlo",
+   "check": "half_offshore: energy-system saving p95 from raw draws",
+   "model": 19.344691155435207,
+   "independent": 19.344691155435207,
+   "rel_diff": 0.0,
+   "tolerance": 1e-06,
+   "ok": true,
+   "note": ""
+  },
+  {
+   "group": "monte carlo",
+   "check": "half_offshore: energy system cheaper than late-2025 petroleum",
+   "model": 0.981,
+   "independent": 0.981,
+   "rel_diff": 0.0,
+   "tolerance": 0.002,
    "ok": true,
    "note": ""
   },

@@ -1,4 +1,4 @@
-"""Figures for CN v1.6 (Clean Energy format: 177 mm wide, 300 dpi; PNG for the manuscript, TIFF for submission).
+"""Figures for CN v1.6.3 (Clean Energy format: 177 mm wide, 300 dpi; PNG for the manuscript, TIFF for submission).
 Reads the stored outputs in this folder.  Colours: validated categorical palette, fixed slot order."""
 import csv, json
 from pathlib import Path
@@ -20,8 +20,14 @@ plt.rcParams.update({"font.family": "DejaVu Sans", "font.size": 8, "axes.edgecol
                      "grid.linewidth": 0.6, "axes.axisbelow": True, "legend.frameon": False, "savefig.dpi": 300})
 
 
-def save(fig, name):
-    fig.savefig(H / f"{name}.png", bbox_inches="tight"); fig.savefig(H / f"{name}.tif", bbox_inches="tight", pil_kwargs={"compression": "tiff_lzw"})
+LAYOUT = {}   # CN v1.6.3: every figure is checked for text on graphics and overlapping text before it is saved
+
+
+def save(fig, name, tight=True):
+    from cn_layout_check import check
+    LAYOUT[name] = check(fig, name)
+    kw = dict(bbox_inches="tight") if tight else {}
+    fig.savefig(H / f"{name}.png", **kw); fig.savefig(H / f"{name}.tif", pil_kwargs={"compression": "tiff_lzw"}, **kw)
     plt.close(fig)
 
 
@@ -46,10 +52,10 @@ def fig1():
     for i, (nm, v) in enumerate(carriers):
         a.bar(1, v, 0.6, bottom=bottom, color=cc[i], edgecolor="white", linewidth=1.0, label=nm); bottom += v
     a.text(0, tot25 + 80, f"{tot25:,.0f} TWh", ha="center", color=INK); a.text(1, bottom + 80, f"{bottom:,.0f} TWh", ha="center", color=INK)
-    a.set_xticks([0, 1], ["2025 fuel use", "2050 least cost\n(+15% services)"], fontsize=6.8); a.set_ylabel("Final energy (TWh/yr)"); a.set_xlim(-0.5, 3.4)
+    a.set_xticks([0, 1], ["2025\nfuel use", "2050 least cost\n(+15% services)"], fontsize=6.8); a.set_ylabel("Final energy (TWh/yr)"); a.set_xlim(-0.5, 3.3)
     hh, ll = a.get_legend_handles_labels()
-    l1 = a.legend(hh[:5], ll[:5], loc="upper right", fontsize=6.2, title="2025", title_fontsize=6.5, alignment="left"); a.add_artist(l1)
-    a.legend(hh[5:], ll[5:], loc="center right", fontsize=6.2, title="2050", title_fontsize=6.5, alignment="left", bbox_to_anchor=(1.0, 0.33))
+    l1 = a.legend(hh[:5], ll[:5], loc="upper left", fontsize=6.2, title="2025", title_fontsize=6.5, alignment="left", bbox_to_anchor=(0.53, 1.0)); a.add_artist(l1)
+    a.legend(hh[5:], ll[5:], loc="upper left", fontsize=6.2, title="2050", title_fontsize=6.5, alignment="left", bbox_to_anchor=(0.53, 0.52))
     a.grid(axis="x", visible=False); panel(a, "A")
     vals = [("All China\nfossil CO$_2$\n2025", 0.32 * 38.1), ("Transport\nWTW\n2025", lc["emissions"]["baseline_2025_wtw_mt"] / 1e3),
             ("Petroleum\nbaseline\n2050", lc["emissions"]["baseline_wtw_mt"] / 1e3), ("System,\ngas era\n2050", lc["emissions"]["total_mt"] / 1e3),
@@ -62,37 +68,67 @@ def fig1():
 
 
 # ------------------------------------------------------------------ Fig 2: schematic map
-def fig2():
+# CN v1.6.3: every label sits in clear space (checked by cn_layout_check); labels that cannot sit inside their area are
+# joined to it by a thin leader.  (text, x, y, ha, kind, leader-to (lon, lat) or None)
+MAP_LABELS = [
+    ('Xinjiang\nUyghur AR', 86.15, 45.14, 'center', 'region', None),
+    ('Xizang\n(Tibet) AR', 89.50, 32.80, 'center', 'region', None),
+    ('Inner Mongolia AR', 101.50, 44.40, 'center', 'region', (103.00, 41.60)),
+    ('Ningxia Hui AR', 99.00, 35.40, 'center', 'region', (105.90, 36.60)),
+    ('Guangxi Zhuang AR', 101.87, 20.73, 'center', 'region', (107.60, 23.90)),
+    ('sweet sorghum,\nsweet potato', 99.24, 33.92, 'center', 'biomass', None),
+    ('cassava, sugarcane,\njatropha, bamboo', 101.97, 19.30, 'center', 'biomass', None),
+    ('cotton stalks,\nsweet sorghum,\noilseed residues', 84.00, 39.00, 'center', 'biomass', None),
+    ('grassland and forestry\nresidues, yak-dung biogas', 85.20, 26.80, 'center', 'biomass', (86.50, 31.50)),
+    ('sweet sorghum,\nmaize stover,\nJerusalem artichoke,\nhemp', 110.72, 47.84, 'center', 'biomass', (111.00, 41.60)),
+    ('crop straw\n(maize, wheat)', 126.02, 34.69, 'center', 'biomass', (116.00, 35.50)),
+    ('rice straw,\nbamboo', 116.00, 27.30, 'center', 'biomass', None),
+    ('hemp, maize stover', 127.50, 47.50, 'center', 'biomass', None),
+    ('Beijing', 115.50, 39.50, 'right', 'city', None),
+    ('Shanghai', 121.95, 31.20, 'left', 'city', None),
+    ('Taipei', 121.95, 25.05, 'left', 'city', None),
+    ('Hohhot', 110.69, 41.58, 'right', 'city', None),
+    ('Lhasa', 91.55, 29.65, 'left', 'city', None),
+    ('Urumqi', 90.20, 43.80, 'left', 'city', (87.60, 43.80)),
+    ('Chengdu', 103.78, 30.45, 'right', 'city', None),
+    ('Wuhan', 114.57, 29.83, 'left', 'city', None),
+    ('Yinchuan', 104.90, 40.23, 'right', 'city', (106.20, 38.50)),
+    ('Nanning', 107.70, 24.20, 'left', 'city', None),
+    ('Hong Kong', 114.91, 21.73, 'left', 'city', None),
+    ('Macau', 113.40, 21.10, 'center', 'city', (113.55, 22.20)),
+]
+
+
+MAP_BOX = {"guangdong": (111.5, 19.7, 4.0, 0.9)}   # schematic zone box drawn a little offshore to leave room for the Pearl River Delta labels
+
+
+def map_label_style(kind):
+    return dict(region=dict(fontsize=6.5, color=INK, style="italic"), city=dict(fontsize=6, color=INK),
+                biomass=dict(fontsize=5.6, color=C[5]))[kind]
+
+
+def fig2(labels=True):
     fig, ax = plt.subplots(figsize=(W, W * 0.86)); ax.grid(False)
     ax.add_patch(Polygon(BM.OUTLINE, closed=True, fc="#f4f3ef", ec=INK2, lw=0.6))
     for poly in (BM.HAINAN, BM.TAIWAN): ax.add_patch(Polygon(poly, closed=True, fc="#f4f3ef", ec=INK2, lw=0.6))
-    lab_xy = dict(xinjiang=(85.0, 45.3), xizang=(93.5, 34.0), inner_mongolia=(103.6, 40.6), ningxia=(112.6, 38.5), guangxi=(106.2, 25.0))
     for k, poly in BM.AUTONOMOUS_REGIONS.items():
-        ax.add_patch(Polygon(poly, closed=True, fc=C[3], alpha=0.18, ec=C[3], lw=0.8))
-        x, y = lab_xy[k]; txt = I.REGIONS[k]["name"].replace(" AR", "\nAR")
-        if k == "ningxia":
-            ax.annotate(txt, (105.8, 37.4), (x, y), fontsize=6.5, style="italic", color=INK, ha="center", va="center",
-                        arrowprops=dict(arrowstyle="-", color=INK2, lw=0.6))
-        else:
-            ax.text(x, y, txt, ha="center", fontsize=6.5, color=INK, style="italic", zorder=7)
+        ax.add_patch(Polygon(poly, closed=True, fc=C[3], alpha=0.18, ec=C[3], lw=0.8, gid="bg"))
     for a_, b_ in BM.ERS_CORRIDORS:
         p, q = BM.CITIES[a_], BM.CITIES[b_]; ax.plot([p[0], q[0]], [p[1], q[1]], color=C[0], lw=1.4, solid_capstyle="round", zorder=3)
     for nm, (x, y) in BM.HUBS.items(): ax.plot(x, y, "o", ms=6, mfc=C[7], mec="white", mew=1.0, zorder=5)
     for x, y in BM.SOLAR_BASES: ax.plot(x, y, "*", ms=10, mfc=C[1], mec="white", mew=0.6, zorder=4)
     colmap = {"cold_kelp": C[2], "kelp_red_rotation": C[6], "red_green": C[5], "tropical_red": C[4]}
     for z in I.SEAWEED + I.SEAWEED_TAIWAN:
-        x0, y0, w, h = z[11]; ax.add_patch(Rectangle((x0, y0), w, h, fc=colmap[z[12]], alpha=0.75, ec="white", lw=0.6, zorder=4))
+        x0, y0, w, h = MAP_BOX.get(z[0], z[11]); ax.add_patch(Rectangle((x0, y0), w, h, fc=colmap[z[12]], alpha=0.75, ec="white", lw=0.6, zorder=4))
     for z in I.BIOEXTRACT:   # CN v1.5 nearshore farms in nutrient-polluted bays
         ax.plot(z[10], z[11], "^", ms=6.5, mfc=C[5], mec=INK, mew=0.6, zorder=6)
-    import matplotlib.patheffects as pe
-    halo = [pe.withStroke(linewidth=2.2, foreground="white")]
-    for x, y, t in BM.BIOMASS_LABELS: ax.text(x, y, t, fontsize=5.6, color=C[5], ha="center", va="center", zorder=7, path_effects=halo)
-    for nm in ("Beijing", "Shanghai", "Guangzhou", "Hong Kong", "Macau", "Taipei", "Nanning", "Hohhot", "Yinchuan", "Lhasa", "Urumqi", "Chengdu", "Wuhan"):
+    for nm in ("Beijing", "Shanghai", "Hong Kong", "Macau", "Taipei", "Nanning", "Hohhot", "Yinchuan", "Lhasa", "Urumqi", "Chengdu", "Wuhan"):
         x, y = BM.CITIES[nm]; ax.plot(x, y, "s", ms=2.5, color=INK, zorder=6)
-        dx, dy = {"Macau": (-0.5, -0.35), "Hong Kong": (0.8, -0.6), "Guangzhou": (0.2, 0.55), "Taipei": (0.6, -0.9), "Nanning": (-0.4, -1.1),
-                  "Yinchuan": (-0.5, 0.4), "Lhasa": (0.5, -0.9)}.get(nm, (0.4, 0.25))
-        ha = "right" if nm in ("Nanning", "Yinchuan", "Macau") else "left"
-        ax.text(x + dx, y + dy, nm, fontsize=6, color=INK, ha=ha, zorder=8, path_effects=halo)
+    if labels:
+        for txt, x, y, ha, kind, lead in MAP_LABELS:
+            st = map_label_style(kind)
+            if lead is None: ax.text(x, y, txt, ha=ha, va="center", zorder=8, **st)
+            else: ax.annotate(txt, lead, (x, y), ha=ha, va="center", zorder=8, arrowprops=dict(arrowstyle="-", color=INK2, lw=0.5, shrinkA=1.5, shrinkB=1.5), **st)
     from matplotlib.lines import Line2D
     from matplotlib.patches import Patch
     hl = [Line2D([], [], color=C[0], lw=1.4, label="Electric expressway corridors"),
@@ -106,76 +142,92 @@ def fig2():
     ax.set_xlim(72, 136); ax.set_ylim(15.5, 54.5); ax.set_aspect(1.15); ax.set_xticks([]); ax.set_yticks([])
     for s in ax.spines.values(): s.set_visible(False)
     ax.text(72.5, 15.8, "Schematic; boundaries generalised and not authoritative.", ha="left", fontsize=5.5, color=INK2)
+    if not labels: return fig, ax
     save(fig, "Fig2_system_map")
 
 
 # ------------------------------------------------------------------ Fig 3: cost versus petroleum
-GROUPS = [("Electricity, grids, charging, electric roads", ("electricity_generation", "transmission_distribution", "charging", "electric_highways", "rail_electrification")),
+GROUPS = [("Electricity, grids, charging, electric roads", ("electricity_generation", "transmission_distribution", "charging", "electric_highways", "rail_electrification", "farm_charging")),
           ("Reactor hubs and hydrogen", ("reactor_hubs", "pyrolysis_plants", "natural_gas", "electrolysis", "h2_delivery")),
           ("Land biofuels", ("land_biomass", "hemp_net_of_meal", "biorefineries", "hefa_oils", "sugar_starch_ethanol")),
           ("Offshore seaweed", ("seaweed_farms_harvest_haul", "seaweed_refining")),
-          ("Vehicles and machines (net)", ("vehicles_and_machines_net",)),
           ("Other (heat equipment, residual gas, imports)", ("process_heat_equipment", "residual_pipeline_gas", "imported_renewable_fuel")),
           ("Nutrient and soil-carbon return, fertiliser, nearshore farms", ("nutrient_and_carbon_return", "mineral_fertiliser", "nearshore_seaweed_farms", "seaweed_to_soil_handling", "soil_carbon_deficit",
                                                                             "green_manure_and_compost"))]
+GROUP_COL = [C[0], C[1], C[2], C[3], C[5], C[6]]
 
 
 def fig3():
+    """CN v1.6.3: panel A is the energy-system (project) cost; the net extra cost of owning electric vehicles and machines
+    is paid by their owners and is shown separately in panel B."""
     cases = [("least_cost", "Least\ncost"), ("design_half_offshore", "230 GW\noffshore"), ("post_gas_least_cost", "After\ngas"),
-             ("least_cost_no_nuclear", "No\nnuclear"), ("sustainable_fission_tmsr", "Thorium\nMSR")]
-    fig, (a, b) = plt.subplots(1, 2, figsize=(W, 3.7), gridspec_kw=dict(width_ratios=[1.45, 1]))
+             ("least_cost_no_nuclear", "No\nnuclear"), ("sustainable_fission_tmsr", "Closed\nthorium\ncycle")]
+    fig, (a, b) = plt.subplots(1, 2, figsize=(W, 3.9), gridspec_kw=dict(width_ratios=[1.55, 1]))
     pet = S["least_cost"]["petroleum"]
     a.bar(0, pet["late_2025_bn"], 0.62, color=GREY, edgecolor="white"); a.bar(1, pet["nov_2026_bn"], 0.62, color="#b5b4ae", edgecolor="white")
-    a.text(0, pet["late_2025_bn"] + 8, f"{pet['late_2025_bn']:.0f}", ha="center"); a.text(1, pet["nov_2026_bn"] + 8, f"{pet['nov_2026_bn']:.0f}", ha="center")
+    a.text(0, pet["late_2025_bn"] + 10, f"{pet['late_2025_bn']:.0f}", ha="center", fontsize=7); a.text(1, pet["nov_2026_bn"] + 10, f"{pet['nov_2026_bn']:.0f}", ha="center", fontsize=7)
     for i, (k, lab) in enumerate(cases):
         r = S[k]; bot = 0; x = i + 2
         for j, (gn, keys) in enumerate(GROUPS):
             v = sum(r["costs_bn"].get(kk, 0.0) for kk in keys)
-            if v > 0: a.bar(x, v, 0.62, bottom=bot, color=C[j], edgecolor="white", linewidth=1.0); bot += v
+            if v > 0: a.bar(x, v, 0.62, bottom=bot, color=GROUP_COL[j], edgecolor="white", linewidth=1.0); bot += v
         cr = sum(r["credits_bn"].values()); a.bar(x, cr, 0.62, color=C[7], edgecolor="white")
-        a.plot([x - 0.31, x + 0.31], [r["transport_cost_bn"]] * 2, color=INK, lw=1.2)
-        a.text(x, bot + 8, f"{r['transport_cost_bn']:.0f}", ha="center")
+        a.plot([x - 0.36, x + 0.36], [r["energy_system_cost_bn"]] * 2, color=INK, lw=1.4)
+        a.text(x, bot + 10, f"{r['energy_system_cost_bn']:.0f}", ha="center", fontsize=7)
     a.axhline(0, color=INK2, lw=0.6)
     a.set_xticks(range(len(cases) + 2), ["Petrol.\nlate\n2025", "Petrol.\nNov\n2026"] + [l for _, l in cases], fontsize=5.6)
-    a.set_ylabel("2050 annual cost (US\\$ bn, 2026)"); a.grid(axis="x", visible=False)
-    from matplotlib.patches import Patch   # CN v1.6: every cost group in the legend, whether or not the first bar uses it
-    hd = [Patch(fc=C[j], label=gn) for j, (gn, _) in enumerate(GROUPS)] + [Patch(fc=C[7], label="Credits (carbon, biomethane, nutrients, power)")]
-    a.legend(handles=hd, fontsize=5.6, loc="upper center", ncol=2, bbox_to_anchor=(0.5, -0.24))
-    a.set_ylim(-45, 600); panel(a, "A")
-    sv = [("China, least cost", S["least_cost"]["saving_vs_late_2025_pct"], C[0]), ("China, 230 GW offshore", S["design_half_offshore"]["saving_vs_late_2025_pct"], C[0]),
-          ("China, after gas", S["post_gas_least_cost"]["saving_vs_late_2025_pct"], C[2]), ("China, no nuclear", S["least_cost_no_nuclear"]["saving_vs_late_2025_pct"], C[2]),
-          ("Taiwan, least cost", S["tw_least_cost"]["saving_vs_late_2025_pct"], C[1]), ("U.S. v8.4 as submitted", 23.2, GREY),
-          ("U.S. v8.4, corrected truck ratios", 12.0, GREY)]
-    y = np.arange(len(sv))[::-1]
-    b.barh(y, [v for _, v, _ in sv], 0.6, color=[c for *_, c in sv], edgecolor="white")
-    for yy, (_, v, _) in zip(y, sv): b.text(v + (1 if v >= 0 else -1), yy, f"{v:.1f}%", va="center", ha="left" if v >= 0 else "right", fontsize=6.5)
-    b.axvline(23.2, color=INK2, ls="--", lw=0.8); b.text(23.6, len(sv) - 0.45, "U.S. 23%", fontsize=6, color=INK2)
+    a.set_ylabel("2050 energy-system cost (US\\$ bn/yr, 2026)"); a.grid(axis="x", visible=False)
+    from matplotlib.patches import Patch
+    from matplotlib.lines import Line2D
+    hd = [Patch(fc=GROUP_COL[j], label=gn) for j, (gn, _) in enumerate(GROUPS)] + [Patch(fc=C[7], label="Credits (carbon, biomethane, nutrients, power)"),
+          Line2D([], [], color=INK, lw=1.4, label="Net energy-system cost")]
+    a.legend(handles=hd, fontsize=5.6, loc="upper left", ncol=2, bbox_to_anchor=(-0.18, -0.25))
+    a.set_ylim(-45, 620); a.set_xlim(-0.6, len(cases) + 1.6); panel(a, "A")
+    rows = [("China, least cost", "least_cost"), ("China, 230 GW offshore", "design_half_offshore"), ("China, after gas", "post_gas_least_cost"),
+            ("China, no nuclear", "least_cost_no_nuclear"), ("China, closed thorium cycle", "sustainable_fission_tmsr"), ("Taiwan, least cost", "tw_least_cost")]
+    y = np.arange(len(rows))[::-1] * 1.0; h = 0.36
+    pv = [S[k]["saving_energy_system_pct"] for _, k in rows]; tv = [S[k]["saving_vs_late_2025_pct"] for _, k in rows]
+    b.barh(y + h / 2, pv, h, color=C[0], edgecolor="white", label="Energy system (project cost)")
+    b.barh(y - h / 2, tv, h, color="#b5b4ae", edgecolor="white", label="Including vehicle costs paid by owners")
+    for yy, v in list(zip(y + h / 2, pv)) + list(zip(y - h / 2, tv)):
+        b.text(v + (1.2 if v >= 0 else -1.2), yy, f"{v:.1f}%", va="center", ha="left" if v >= 0 else "right", fontsize=6)
     b.axvline(0, color=INK2, lw=0.6)
-    b.set_yticks(y, [n for n, *_ in sv], fontsize=6.5); b.set_xlabel("Saving vs late-2025 pre-tax petroleum (%)"); b.set_xlim(-32, 36)
+    b.set_yticks(y, [n for n, _ in rows], fontsize=6.3); b.set_xlabel("Saving vs late-2025 pre-tax petroleum (%)")
+    lo = min(pv + tv); hi = max(pv + tv); b.set_xlim(min(-10, lo - 16), hi + 14)
+    b.set_ylim(-0.75, len(rows) - 0.35)
+    b.legend(fontsize=5.8, loc="upper left", bbox_to_anchor=(-0.05, -0.2), ncol=1)
     b.grid(axis="y", visible=False); panel(b, "B")
     fig.tight_layout(); save(fig, "Fig3_cost_vs_petroleum")
 
 
 # ------------------------------------------------------------------ Fig 4: Monte Carlo and break-even
 def fig4():
-    fig, (a, b) = plt.subplots(1, 2, figsize=(W, 2.7))
+    """CN v1.6.3: energy-system (project) saving; the least-cost case including owners' vehicle costs is shown for comparison."""
+    fig, (a, b) = plt.subplots(1, 2, figsize=(W, 3.4))
     files = [("cn_monte_carlo_least_cost.csv", "Least cost", C[0]), ("cn_monte_carlo_half_offshore.csv", "230 GW offshore", C[1]),
              ("cn_monte_carlo_post_gas.csv", "After gas", C[2])]
-    bins = np.arange(-40, 61, 2.5)
+    bins = np.arange(-40, 71, 2.5); top = 0
     for fn, lab, col in files:
-        sv = [float(r["saving_pct"]) for r in csv.DictReader(open(H / fn))]
-        a.hist(sv, bins=bins, histtype="step", lw=1.6, color=col, label=f"{lab} (median {np.median(sv):.0f}%)")
-    a.axvline(0, color=INK2, lw=0.6); a.axvline(23.2, color=INK2, ls="--", lw=0.8)
-    a.set_xlabel("Saving vs late-2025 petroleum (%)"); a.set_ylabel("Draws"); a.set_ylim(0, a.get_ylim()[1] * 1.45); a.legend(fontsize=6, loc="upper left"); panel(a, "A")
+        sv = [float(r["saving_energy_system_pct"]) for r in csv.DictReader(open(H / fn))]
+        n_, _, _ = a.hist(sv, bins=bins, histtype="step", lw=1.5, color=col, label=f"{lab} (median {np.median(sv):.0f}%)"); top = max(top, n_.max())
+    sv = [float(r["saving_pct"]) for r in csv.DictReader(open(H / files[0][0]))]
+    n_, _, _ = a.hist(sv, bins=bins, histtype="step", lw=1.0, ls="--", color=GREY, label=f"Least cost incl. owners' vehicle costs (median {np.median(sv):.0f}%)"); top = max(top, n_.max())
+    a.axvline(0, color=INK2, lw=0.6)
+    a.set_xlabel("Saving vs late-2025 petroleum (%)"); a.set_ylabel("Draws"); a.set_ylim(0, top * 1.1); a.set_xlim(-42, 72)
+    a.legend(fontsize=5.6, loc="upper center", bbox_to_anchor=(0.5, -0.2), ncol=1, handlelength=1.6); panel(a, "A")
     be = list(csv.DictReader(open(H / "cn_breakeven.csv")))
-    for (case, lab, col) in (("least_cost", "Least cost", C[0]), ("half_offshore_230gw", "230 GW offshore", C[1]), ("post_gas", "After gas", C[2])):
-        rr = [r for r in be if r["case"] == case]
-        b.plot([float(r["petroleum_price_multiple"]) for r in rr], [100 * float(r["share_cheaper"]) for r in rr], color=col, lw=2, label=lab)
+    for (case, lab, col, basis, ls) in (("least_cost", "Least cost", C[0], "energy_system", "-"), ("half_offshore_230gw", "230 GW offshore", C[1], "energy_system", "-"),
+                                        ("post_gas", "After gas", C[2], "energy_system", "-"),
+                                        ("least_cost", "Least cost incl. owners' vehicle costs", GREY, "with_vehicles", "--")):
+        rr = [r for r in be if r["case"] == case and r["basis"] == basis]
+        b.plot([float(r["petroleum_price_multiple"]) for r in rr], [100 * float(r["share_cheaper"]) for r in rr], color=col, lw=1.8 if ls == "-" else 1.2, ls=ls, label=lab)
     nov = S["least_cost"]["petroleum"]["nov_2026_bn"] / S["least_cost"]["petroleum"]["late_2025_bn"]
     b.axvline(1.0, color=INK2, lw=0.6); b.axvline(nov, color=INK2, ls=":", lw=0.9)
-    b.text(1.02, 8, "late 2025", fontsize=6, color=INK2); b.text(nov + 0.02, 8, "Nov 2026", fontsize=6, color=INK2)
-    b.set_xlabel("Petroleum price (× late-2025 pre-tax)"); b.set_ylabel("Draws cheaper than petroleum (%)"); b.legend(fontsize=6, loc="upper left"); panel(b, "B")
-    a.text(24, a.get_ylim()[1] * 0.62, "U.S. 23%", fontsize=6, color=INK2)
+    b.text(1.0, 101.5, "late 2025", fontsize=5.8, color=INK2, ha="center", va="bottom"); b.text(nov, 101.5, "Nov 2026", fontsize=5.8, color=INK2, ha="center", va="bottom")
+    b.set_ylim(0, 100); b.set_xlim(0.5, 2.0)
+    b.set_xlabel("Petroleum price (× late-2025 pre-tax)"); b.set_ylabel("Draws cheaper than petroleum (%)")
+    b.legend(fontsize=5.6, loc="upper center", bbox_to_anchor=(0.5, -0.2), ncol=2, handlelength=1.8)
+    panel(b, "B")
     fig.tight_layout(); save(fig, "Fig4_uncertainty_breakeven")
 
 
@@ -185,12 +237,14 @@ def fig5():
     lab = {"htr_pm": "HTR-PM\nHTGR", "vhtr": "950 °C\nVHTR", "tmsr": "Thorium\nMSR", "cfr": "Sodium fast\n(CFR)", "acp100": "LW SMR\n(ACP100)"}
     fig, (a, b) = plt.subplots(1, 2, figsize=(W, 2.8), gridspec_kw=dict(width_ratios=[1.25, 1]))
     x = np.arange(len(types)); w = 0.38
-    g = [S[f"type_{t}"]["transport_cost_bn"] for t in types]; pg = [S[f"post_gas_type_{t}"]["transport_cost_bn"] for t in types]
+    g = [S[f"type_{t}"]["energy_system_cost_bn"] for t in types]; pg = [S[f"post_gas_type_{t}"]["energy_system_cost_bn"] for t in types]
     a.bar(x - w / 2, g, w, color=C[0], edgecolor="white", label="Gas era (steam electrolysis + pyrolysis)"); a.bar(x + w / 2, pg, w, color=C[2], edgecolor="white", label="After gas (steam electrolysis only)")
     for i in range(len(types)):
         a.text(x[i] - w / 2, g[i] + 4, f"{g[i]:.0f}", ha="center", fontsize=6); a.text(x[i] + w / 2, pg[i] + 4, f"{pg[i]:.0f}", ha="center", fontsize=6)
-    a.axhline(S["least_cost"]["petroleum"]["late_2025_bn"], color=GREY, ls="--", lw=0.9); a.text(-0.5, S["least_cost"]["petroleum"]["late_2025_bn"] + 5, "petroleum, late 2025", fontsize=6, color=INK2)
-    a.set_xticks(x, [lab[t] for t in types], fontsize=6.5); a.set_ylabel("2050 annual cost (US\\$ bn)"); a.set_ylim(0, 600); a.legend(fontsize=5.8, loc="upper right", ncol=1)
+    pet = S["least_cost"]["petroleum"]["late_2025_bn"]
+    a.axhline(pet, color=GREY, ls="--", lw=0.9); a.text(-0.35, pet + 14, "petroleum, late 2025", fontsize=6, color=INK2, va="bottom")
+    a.set_xticks(x, [lab[t] for t in types], fontsize=6.5); a.set_ylabel("2050 energy-system cost (US\\$ bn)"); a.set_ylim(0, 640); a.set_xlim(-0.55, len(types) - 0.45)
+    a.legend(fontsize=5.8, loc="upper right", ncol=1)
     a.grid(axis="x", visible=False); panel(a, "A")
     fs_t = S["sustainable_fission_tmsr"]["fuel_supply"]; fs_c = S["sustainable_fission_cfr"]["fuel_supply"]
     bars = [("Sodium-fast fleet:\nPu to start", fs_c["startup_fast_pu_t"], C[7]), ("Thorium MSR fleet:\nfissile to start", fs_t["startup_msr_fissile_t"], C[3]),
@@ -208,13 +262,15 @@ def fig5():
 def fig6():
     g = json.load(open(H / "cn_gas_depletion.json")); rows = [r for r in g["rows"]["programme"] if r["year"] <= 2160]
     yrs = [r["year"] for r in rows]
-    fig, (a, b) = plt.subplots(1, 2, figsize=(W, 2.7), gridspec_kw=dict(width_ratios=[1.4, 1]))
+    fig, (a, b) = plt.subplots(1, 2, figsize=(W, 3.1), gridspec_kw=dict(width_ratios=[1.4, 1]))
     a.stackplot(yrs, [r["domestic_bcm"] for r in rows], [r["pipeline_bcm"] for r in rows], [r["lng_bcm"] for r in rows],
                 colors=[C[0], C[2], C[3]], labels=["Domestic production", "Pipeline imports", "LNG imports"], edgecolor="white", linewidth=0.5)
     a.plot(yrs, [r["demand_bcm"] for r in rows], color=INK, lw=1.4, label="Demand with pyrolysis programme")
     r0 = [r for r in g["rows"]["no_programme"] if r["year"] <= 2160]; a.plot([r["year"] for r in r0], [r["demand_bcm"] for r in r0], color=INK, ls="--", lw=1.0, label="Demand without programme")
-    sy = g["summary"]["programme"]["first_shortfall_year"]; a.axvline(sy, color=C[7], lw=1.0); a.text(sy - 1, 30, f"first shortfall {sy}", rotation=90, ha="right", fontsize=6, color=C[7])
-    a.set_ylabel("Natural gas (bcm/yr)"); a.set_xlim(2026, 2160); a.set_ylim(0, 760); a.legend(fontsize=5.6, loc="upper left", ncol=2); panel(a, "A")
+    sy = g["summary"]["programme"]["first_shortfall_year"]; a.axvline(sy, color=C[7], lw=1.0)
+    a.text(sy, 1.015, f"first shortfall {sy}", transform=a.get_xaxis_transform(), ha="center", va="bottom", fontsize=6, color=C[7])
+    a.set_ylabel("Natural gas (bcm/yr)"); a.set_xlim(2026, 2160); a.set_ylim(0, 600)
+    a.legend(fontsize=5.6, loc="upper center", bbox_to_anchor=(0.5, -0.2), ncol=2); panel(a, "A")
     keys = [("programme_rec40", "40% recovery"), ("programme_pipe_pool10", "Pipeline pool 10 tcm"), ("programme_no_lng_growth", "LNG held at 2025"),
             ("programme", "Central"), ("programme_lng_200", "LNG ceiling 200 bcm"), ("programme_heat_pumps", "+ building heat pumps"),
             ("programme_heat_pumps_biogas_high", "+ heat pumps, high biogas"), ("programme_rec80", "80% recovery")]
@@ -269,9 +325,10 @@ def figS():
     fig, a = plt.subplots(figsize=(W * 0.62, 2.6))
     for (yl, pg, lab, col) in (("1", "False", "Design yields, gas era", C[0]), ("2", "False", "Learning yields, gas era", C[1]), ("1", "True", "Design yields, after gas", C[2])):
         rr = [r for r in sm if r["yield_level"] == yl and r["post_gas"] == pg]
-        a.plot([float(r["osw_gw"]) for r in rr], [float(r["cost_bn"]) for r in rr], "-o", ms=3.5, color=col, lw=1.6, label=lab)
+        veh = S["least_cost"]["consumer_vehicle_cost_bn"]   # CN v1.6.3: owners' vehicle costs (the same in every sweep case) excluded
+        a.plot([float(r["osw_gw"]) for r in rr], [float(r["cost_bn"]) - veh for r in rr], "-o", ms=3.5, color=col, lw=1.6, label=lab)
     a.axhline(S["least_cost"]["petroleum"]["late_2025_bn"], color=GREY, ls="--", lw=0.9); a.text(5, S["least_cost"]["petroleum"]["late_2025_bn"] + 4, "petroleum, late 2025", fontsize=6, color=INK2)
-    a.set_xlabel("Offshore wind with seaweed (GW), zones added in merit order"); a.set_ylabel("2050 cost (US\\$ bn)"); a.legend(fontsize=6)
+    a.set_xlabel("Offshore wind with seaweed (GW), zones added in merit order"); a.set_ylabel("2050 energy-system cost (US\\$ bn)"); a.legend(fontsize=6)
     fig.tight_layout(); save(fig, "FigS1_offshore_merit")
     t = json.load(open(H / "cn_transition.json"))["rows"]
     fig, a = plt.subplots(figsize=(W * 0.62, 2.4))
@@ -279,18 +336,18 @@ def figS():
     a.plot([r["year"] for r in t], [r["case_mt"] / 1e3 for r in t], color=C[0], lw=1.6, label="Phased transition")
     a.fill_between([r["year"] for r in t], [r["case_mt"] / 1e3 for r in t], [r["baseline_mt"] / 1e3 for r in t], color=C[0], alpha=0.12)
     a.set_ylabel("Gt CO$_2$e/yr (WTW)"); a.legend(fontsize=6); fig.tight_layout(); save(fig, "FigS2_transition")
-    sens = json.load(open(H / "cn_monte_carlo_summary.json"))["sensitivity_least_cost"]
+    sens = json.load(open(H / "cn_monte_carlo_summary.json"))["sensitivity_least_cost_energy_system"]
     top = sorted(sens.items(), key=lambda kv: -abs(kv[1]))[:12]
     fig, a = plt.subplots(figsize=(W * 0.62, 2.8)); y = np.arange(len(top))[::-1]
     a.barh(y, [v for _, v in top], 0.6, color=[C[7] if v > 0 else C[0] for _, v in top], edgecolor="white")
-    a.set_yticks(y, [k.replace("/", ": ") for k, _ in top], fontsize=6); a.axvline(0, color=INK2, lw=0.6); a.set_xlabel("Spearman ρ with least-cost system cost")
+    a.set_yticks(y, [k.replace("/", ": ") for k, _ in top], fontsize=6); a.axvline(0, color=INK2, lw=0.6); a.set_xlabel("Spearman ρ with least-cost energy-system cost")
     a.grid(axis="y", visible=False); fig.tight_layout(); save(fig, "FigS3_sensitivity")
     import cn_model as M
     n = np.arange(1, 4001); fig, a = plt.subplots(figsize=(W * 0.62, 2.4))
     for case, col in (("low", C[2]), ("central", C[0]), ("high", C[7])):
         c = I.REACTOR_COST[case]; foak = c["boak_kwe"] * c["foak_mult"]; bb = np.log2(1 - c["learning"])
         a.plot(n, foak * n ** bb * (1 + c["idc"]), color=col, lw=1.6, label=f"{case}: FOAK {foak:,.0f} $/kWe, learning {100*c['learning']:.0f}%")
-    a.axvline(S["least_cost"]["reactors"], color=INK2, ls=":", lw=0.9); a.text(S["least_cost"]["reactors"] * 1.05, 6800, "least-cost fleet", fontsize=6, color=INK2)
+    a.axvline(S["least_cost"]["reactors"], color=INK2, ls=":", lw=0.9); a.text(S["least_cost"]["reactors"] * 1.08, 5000, "least-cost\nfleet", fontsize=6, color=INK2, va="center")
     a.set_xscale("log"); a.set_xlabel("Cumulative 250-MWt modules"); a.set_ylabel("Unit cost incl. interest (US$/kWe)"); a.legend(fontsize=5.8)
     fig.tight_layout(); save(fig, "FigS4_reactor_learning")
 
@@ -311,15 +368,27 @@ def figS5():
                  least_cost_bioextraction_n_credit_30="Bays farmed, N paid 30 USD/kg",
                  least_cost_soc_no_pyro_carbon="Pyrolysis carbon not soil carbon", post_gas_no_biomethane_pyrolysis="After gas, no biomethane pyrolysis",
                  least_cost_biological_soc="Biological soil carbon only", least_cost_biological_soc_no_compost="Biological soil C, no compost")
-    rows = [("Central case", S["least_cost"]["transport_cost_bn"])] + sorted(((short[k], v["transport_cost_bn"]) for k, v in RB.items() if k in short), key=lambda t: t[1])
+    # CN v1.6.3: bars are energy-system (project) costs; diamonds add the net cost of vehicles and machines paid by owners
+    rows = [("Central case", S["least_cost"]["energy_system_cost_bn"], S["least_cost"]["transport_cost_bn"])] + sorted(
+        ((short[k], v["energy_system_cost_bn"], v["transport_cost_bn"]) for k, v in RB.items() if k in short), key=lambda t: (t[1], t[2]))
     pet, pet26 = S["least_cost"]["petroleum"]["late_2025_bn"], S["least_cost"]["petroleum"]["nov_2026_bn"]
-    fig, a = plt.subplots(figsize=(W * 0.75, 4.4)); y = np.arange(len(rows))[::-1]
-    a.barh(y, [v for _, v in rows], 0.62, color=[C[0] if v < pet else C[7] for _, v in rows], edgecolor="white")
-    for yy, (_, v) in zip(y, rows): a.text(v + 6, yy, f"{v:.0f}", va="center", fontsize=6)
+    fig, a = plt.subplots(figsize=(W * 0.8, 4.9)); y = np.arange(len(rows))[::-1]
+    a.barh(y, [v for _, v, _ in rows], 0.62, color=[C[0] if v < pet else C[7] for _, v, _ in rows], edgecolor="white", label="Energy-system (project) cost; red if above late-2025 petroleum")
+    a.plot([t for _, _, t in rows], y, "D", ms=3.2, mfc="white", mec=INK, mew=0.8, ls="", label="Including vehicle costs paid by owners")
     a.axvline(pet, color=GREY, ls="--", lw=0.9); a.axvline(pet26, color=GREY, ls=":", lw=0.9)
-    a.text(pet + 4, len(rows) - 0.4, "petroleum,\nlate 2025", fontsize=5.8, color=INK2, va="top"); a.text(pet26 + 4, len(rows) - 0.4, "petroleum,\nNov 2026", fontsize=5.8, color=INK2, va="top")
+    for yy, (_, v, t) in zip(y, rows):   # value of the bar, just right of it (moved past a diamond or reference line in the way)
+        x = v + 7
+        for _ in range(3):
+            if x - 9 < t < x + 32: x = t + 11
+            for line in (pet, pet26):
+                if x - 4 < line < x + 32: x = line + 7
+        a.text(x, yy, f"{v:.0f}", va="center", fontsize=6)
+    a.text(pet, len(rows) - 0.3, "petroleum,\nlate 2025", fontsize=5.8, color=INK2, va="bottom", ha="center")
+    a.text(pet26, len(rows) - 0.3, "petroleum,\nNov 2026", fontsize=5.8, color=INK2, va="bottom", ha="center")
     a.set_yticks(y, [r[0] for r in rows], fontsize=6.3); a.set_xlabel("2050 annual cost (US\\$ bn)"); a.grid(axis="y", visible=False)
-    a.set_xlim(0, max(v for _, v in rows) * 1.12); fig.tight_layout(); save(fig, "FigS5_robustness")
+    a.set_ylim(-0.7, len(rows) - 0.4); a.set_xlim(0, max(max(v, t) for _, v, t in rows) * 1.12)
+    a.legend(fontsize=6, loc="upper center", bbox_to_anchor=(0.4, -0.12), ncol=2)
+    fig.tight_layout(); save(fig, "FigS5_robustness")
 
 
 # ------------------------------------------------------------------ Fig 9: nutrient and soil-carbon balance (CN v1.5)
@@ -350,8 +419,8 @@ def fig9():
     a.axhline(100, color=INK, lw=0.7, ls="--")
     top = max(100 * sum(e["returned_mt"].values()) / e["removed_mt"] for _, e in bars)
     a.set_xticks(xs, [el for el, _ in bars]); a.set_ylabel("Returned, % of nutrient removed"); a.set_ylim(0, max(125, top + 18)); a.grid(axis="x", visible=False)
-    a.text(1, -0.17, "Least cost", ha="center", fontsize=6.5, transform=a.get_xaxis_transform()); a.text(4.6, -0.17, "After gas", ha="center", fontsize=6.5, transform=a.get_xaxis_transform())
-    a.legend(seen.values(), seen.keys(), fontsize=5.4, loc="upper center", bbox_to_anchor=(0.55, -0.26), ncol=2, handlelength=1.0, columnspacing=0.8)
+    a.text(1, -0.2, "Least cost", ha="center", va="top", fontsize=6.5, transform=a.get_xaxis_transform()); a.text(4.6, -0.2, "After gas", ha="center", va="top", fontsize=6.5, transform=a.get_xaxis_transform())
+    a.legend(seen.values(), seen.keys(), fontsize=5.4, loc="upper center", bbox_to_anchor=(0.55, -0.31), ncol=2, handlelength=1.0, columnspacing=0.8)
     panel(a, "A")
     cases = [("least_cost", "Least\ncost"), ("post_gas_least_cost", "After\ngas"), ("least_cost_biological_soc", "Biol.\nonly"),
              ("least_cost_biological_soc_no_compost", "Biol., no\ncompost")]
@@ -396,23 +465,30 @@ def graphical_abstract():
     fig.text(0.03, 0.90, "A petroleum-free transport system for China in 2050: annual least-cost planning model", fontsize=13, fontweight="bold", color=INK)
     fig.text(0.03, 0.82, "Electric vehicles and roads  ·  reactor heat hubs  ·  residue, bamboo, hemp and seaweed fuels  ·  nutrients and soil carbon returned to fields",
              fontsize=8.5, color=INK2)
-    tiles = [(f"{lc['saving_vs_late_2025_pct']:.1f}%", "cheaper than petroleum\n(central case, late-2025 prices)", C[0]),
-             (f"{MC['least_cost']['saving_pct']['p50']:.1f}%", f"median saving across\n{MC['least_cost']['n']:,} uncertainty draws", C[1]),
-             (f"{br['plausible']['saving_pct']:.1f}%", "saving after plausible\nwind-lull backup costs", C[2]),
+    tiles = [(f"{lc['saving_energy_system_pct']:.1f}%", "lower energy-system cost than\npetroleum (late-2025 prices)", C[0]),
+             (f"{MC['least_cost']['saving_energy_system_pct']['p50']:.1f}%", f"median across {MC['least_cost']['n']:,}\nuncertainty draws", C[1]),
+             (f"{lc['saving_vs_late_2025_pct']:.1f}%", "including the vehicle costs\npaid by their owners", C[2]),
              (f"{lc['emissions']['reduction_pct']:.0f}%", "lower well-to-wheel\nemissions", C[5])]
     for i, (big, small, col) in enumerate(tiles):
         x0 = 0.03 + i * 0.24
         ax = fig.add_axes([x0, 0.22, 0.215, 0.5]); ax.set_xticks([]); ax.set_yticks([])
         for s_ in ax.spines.values(): s_.set_visible(False)
-        ax.add_patch(plt.Rectangle((0, 0), 1, 1, transform=ax.transAxes, color=col, alpha=0.10, lw=0))
+        ax.add_patch(plt.Rectangle((0, 0), 1, 1, transform=ax.transAxes, color=col, alpha=0.10, lw=0, gid="bg"))
         ax.add_patch(plt.Rectangle((0, 0), 0.025, 1, transform=ax.transAxes, color=col, lw=0))
         ax.text(0.09, 0.62, big, fontsize=30, fontweight="bold", color=INK, transform=ax.transAxes, va="center")
         ax.text(0.09, 0.22, small, fontsize=8.2, color=INK2, transform=ax.transAxes, va="center")
-    fig.text(0.03, 0.08, "Conditional on battery-electric cars costing no more to own than petrol cars; annual resource adequacy, not hourly operation.",
+    fig.text(0.03, 0.08, "Central 2050 case; energy-system cost excludes vehicle purchases, which owners pay. Annual resource adequacy, not hourly operation.",
              fontsize=8, color=INK2, style="italic")
-    fig.savefig(H / "graphical_abstract.png"); fig.savefig(H / "graphical_abstract.tif", pil_kwargs={"compression": "tiff_lzw"}); plt.close(fig)
+    save(fig, "graphical_abstract", tight=False)
 
 
 if __name__ == "__main__":
+    import sys
     for f in (fig1, fig2, fig3, fig4, fig5, fig6, fig7, fig8, fig9, figS, figS5, graphical_abstract): f()
-    print("figures written")
+    import cn_htse_heat as HT
+    LAYOUT["FigS7_htse_heat"] = HT.figure(json.load(open(H / "cn_htse_heat.json")))
+    probs = [p for v in LAYOUT.values() for p in v]
+    json.dump(dict(figures=sorted(LAYOUT), problems=probs), open(H / "cn_figure_layout_check.json", "w"), indent=1)
+    for p in probs: print("LAYOUT FAIL:", p)
+    print(f"figures written; layout check: {len(LAYOUT)} figures, {len(probs)} problems")
+    sys.exit(1 if probs else 0)

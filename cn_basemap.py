@@ -57,8 +57,9 @@ ERS_CORRIDORS = [   # main freight corridors electrified with overhead catenary 
 HUBS = {  # representative reactor-hub sites: existing coastal nuclear sites and inland biomass/industrial clusters (schematic)
     "Shidaowan": (122.4, 36.9), "Tianwan": (119.4, 34.7), "Sanmen": (121.6, 29.1), "Xiapu": (120.2, 26.8), "Daya Bay": (114.6, 22.6),
     "Fangchenggang": (108.4, 21.6), "Changjiang": (108.9, 19.4), "Wuwei (TMSR)": (102.6, 37.9), "Baotou": (110.0, 40.6),
-    "Yinchuan": (106.2, 38.5), "Hami": (93.5, 42.8), "Korla": (86.1, 41.7), "Hulunbuir": (119.7, 49.2), "Zhengzhou": (113.6, 34.7),
-    "Wuhan": (114.3, 30.6), "Chengdu": (104.1, 30.7), "Harbin": (126.6, 45.8), "Nanning": (108.3, 22.8)}
+    "Yinchuan": (106.6, 37.6), "Hami": (93.5, 42.8), "Korla": (86.1, 41.7), "Hulunbuir": (119.7, 49.2), "Zhengzhou": (113.6, 34.7),
+    "Wuhan": (113.4, 31.3), "Chengdu": (103.2, 31.3), "Harbin": (126.6, 45.8), "Nanning": (107.3, 22.35)}
+# CN v1.6.3: hubs near Yinchuan, Wuhan, Chengdu and Nanning are drawn beside the city squares, not on top of them
 BIOMASS_LABELS = [  # (lon, lat, text)
     (103.0, 19.6, "Guangxi: cassava, sugarcane,\njatropha, bamboo"), (114.5, 43.4, "sweet sorghum, maize stover,\nJerusalem artichoke, hemp"),
     (84.0, 39.6, "cotton stalks, sweet sorghum,\noilseed residues"), (112.6, 36.2, "sweet sorghum,\nsweet potato"),

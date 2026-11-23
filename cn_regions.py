@@ -35,7 +35,8 @@ def split(case, rk):
     w = dem2050 / tot_d if tot_d else 0
     return dict(demand_2050_twh=dem2050, electricity_twh=el, hydrogen_twh=h2, liquids_twh=liq, share_of_mainland_demand=w,
                 baseline_wtw_mt=case["emissions"]["baseline_wtw_mt"] * w, system_emissions_mt=case["emissions"]["total_mt"] * w,
-                petroleum_late_2025_bn=case["petroleum"]["late_2025_bn"] * w, system_cost_bn=case["transport_cost_bn"] * w)
+                petroleum_late_2025_bn=case["petroleum"]["late_2025_bn"] * w, system_cost_bn=case["transport_cost_bn"] * w,
+                energy_system_cost_bn=case["energy_system_cost_bn"] * w)
 
 
 def main():
@@ -57,7 +58,7 @@ def main():
         rest[k] = {"demand_2050_twh": sum(eu["demand"].values()), "electricity_twh": eu["el_total"], "hydrogen_twh": sum(eu["h2_twh"].values()),
                    "liquids_twh": eu["liq_total"], "share_of_mainland_demand": 1.0, "baseline_wtw_mt": lc["emissions"]["baseline_wtw_mt"],
                    "system_emissions_mt": lc["emissions"]["total_mt"], "petroleum_late_2025_bn": lc["petroleum"]["late_2025_bn"],
-                   "system_cost_bn": lc["transport_cost_bn"]}[k] - sum(r[k] for r in rows)
+                   "system_cost_bn": lc["transport_cost_bn"], "energy_system_cost_bn": lc["energy_system_cost_bn"]}[k] - sum(r[k] for r in rows)
     sup = reg_supply.get("rest", {})
     rows.append(dict(region="rest_of_mainland", name="Rest of mainland (27 provinces and municipalities)", capital="", population_m=1408.3 - sum(R["pop_m"] for k, R in I.REGIONS.items() if k not in ("hong_kong", "macau")),
                      **rest, **{f"supply_{k}": v for k, v in sup.items()},
@@ -68,6 +69,7 @@ def main():
                          electricity_twh=eu["el_total"], hydrogen_twh=sum(eu["h2_twh"].values()), liquids_twh=eu["liq_total"],
                          baseline_wtw_mt=t["emissions"]["baseline_wtw_mt"], system_emissions_mt=t["emissions"]["total_mt"],
                          petroleum_late_2025_bn=t["petroleum"]["late_2025_bn"], system_cost_bn=t["transport_cost_bn"],
+                         energy_system_cost_bn=t["energy_system_cost_bn"], saving_energy_system_pct=t["saving_energy_system_pct"],
                          saving_vs_late_2025_pct=t["saving_vs_late_2025_pct"], imported_liquids_twh=t["liq_import_twh"],
                          local_liquids_over_liquid_demand=1 - t["liq_import_twh"] / eu["liq_total"]))
     json.dump(dict(case="least_cost", rows=rows, note="reporting split of a national LP; Taiwan from its own LP"), open(HERE / "cn_regional_screen.json", "w"), indent=1)

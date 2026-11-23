@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# Run the CN v1.6.2 China transport model: LP cases and bounded hub search, Monte Carlo, gas supply, regional screen,
+# Run the CN v1.6.3 China transport model: LP cases and bounded hub search, Monte Carlo, gas supply, regional screen,
 # seafood cross-feed, petroleum break-even, nutrient and soil-carbon balance, tests and figures.
 # Flat layout: everything is read from and written to this folder.
 # Usage: bash run_all.sh [monte_carlo_draws] [--no-figures]   (default 1000 draws, figures on; ~25 min on one core)
@@ -27,4 +27,4 @@ if [ "$FIGS" = "1" ]; then
 fi
 # compare this run with the submitted release (file hashes, fresh re-solves, saved numbers; needs the full 1000 draws)
 if [ "$N" = "1000" ]; then python3 cn_release_check.py | tee cn_release_check_log.txt; fi
-echo "Done: CN v1.6.2 model run, tests and figures in $(pwd)"
+echo "Done: CN v1.6.3 model run, tests and figures in $(pwd)"

@@ -63,8 +63,9 @@ t("Table S2b. Net annual ownership cost of a battery-electric car relative to a 
   # CN v1.6 reconciliation from the per-car figure to the system cost
   [["Cars in 2050 (million) x battery-electric share", f"{I.VEH['ldv_stock_m']:.0f} x {I.ENDUSE['ldv']['bev']:.2f}", "", ""],
    ["Fleet net ownership cost (USD bn/yr)"] + [f(I.VEH["ldv_stock_m"] * I.ENDUSE["ldv"]["bev"] * RB["ldv_tco"][c]["net_usd_yr"] / 1e3, 1) for c in ("low", "central", "high")],
-   ["System saving vs late-2025 petroleum (%)", "", f(S["least_cost"]["saving_vs_late_2025_pct"], 1), f(S["least_cost_bev_tco_high"]["saving_vs_late_2025_pct"], 1)],
-   ["Each USD 100 per car per year changes system cost by (USD bn)", f(I.VEH["ldv_stock_m"] * I.ENDUSE["ldv"]["bev"] * 100 / 1e3, 1), "", ""]])
+   ["Energy-system (project) saving vs late-2025 petroleum (%); vehicles excluded", f(S["least_cost_bev_tco_low"]["saving_energy_system_pct"], 1), f(S["least_cost"]["saving_energy_system_pct"], 1), f(S["least_cost_bev_tco_high"]["saving_energy_system_pct"], 1)],
+   ["Saving including vehicle costs paid by owners (%)", f(S["least_cost_bev_tco_low"]["saving_vs_late_2025_pct"], 1), f(S["least_cost"]["saving_vs_late_2025_pct"], 1), f(S["least_cost_bev_tco_high"]["saving_vs_late_2025_pct"], 1)],
+   ["Each USD 100 per car per year changes owners' costs by (USD bn)", f(I.VEH["ldv_stock_m"] * I.ENDUSE["ldv"]["bev"] * 100 / 1e3, 1), "", ""]])
 t("Table S3. Electricity and hydrogen parameters (central values; Monte Carlo ranges in table S10).", ["Parameter", "Value"], [
     ["Onshore wind, best sites / remoter sites (USD/MWh)", f"{El['onshore_wind']:.0f} / {El['onshore_wind'] + El['onw2_adder']:.0f}, capped at {El['cap_onw_twh']:,.0f} / {El['cap_onw2_twh']:,.0f} TWh"],
     ["Solar PV (USD/MWh)", f"{El['solar']:.0f} (+1.25 x firming)"], ["Firming adder (USD/MWh)", f"{El['vre_firming']:.0f}"],
@@ -82,8 +83,8 @@ t("Table S4a. Reactor cost cases (per 250-MWt module; Wright learning).", ["Case
 rows = []
 for k, v in I.REACTOR_TYPES.items():
     rows.append([v["label"], v["outlet_c"], v["eta"], v["cost_mult"], v["fuel_mwhth"], v["f_pyro"], v["fissile"],
-                 f(S[f'type_{k}']['transport_cost_bn']), f(S[f'post_gas_type_{k}']['transport_cost_bn'])])
-t("Table S4b. Reactor technologies tested as hub designs, with 2050 transport cost (USD bn).", ["Technology", "Outlet °C", "Turbine efficiency", "Cost multiplier", "Fuel USD/MWh_th", "Top-tier heat share", "Start-up fissile", "Gas era", "After gas"], rows)
+                 f(S[f'type_{k}']['energy_system_cost_bn']), f(S[f'post_gas_type_{k}']['energy_system_cost_bn'])])
+t("Table S4b. Reactor technologies tested as hub designs, with 2050 energy-system (project) cost (USD bn; vehicle costs paid by owners, USD 20.8 bn, excluded).", ["Technology", "Outlet °C", "Turbine efficiency", "Cost multiplier", "Fuel USD/MWh_th", "Top-tier heat share", "Start-up fissile", "Gas era", "After gas"], rows)
 lc = S["least_cost"]
 t("Table S5. Residue tiers and use in the least-cost case.", ["Resource", "Region", "Cap (Mt dry/yr)", "USD/t", "Used (Mt)"],
   [[r["name"], r["region"], f(r["cap"]), f(r["usd_t"], 0), f(r["used"])] for r in lc["tiers_mt"]])
@@ -109,11 +110,12 @@ t("Table S10. Monte Carlo parameters (triangular low/mode/high).", ["Parameter",
    ["Hydrochar carbon stability", 0.3, 0.5, 0.7], ["Mineral fertiliser price scale", 0.8, 1.0, 1.5], ["Green manure and compost cost scale", 0.7, 1.0, 2.0]])
 rows = []
 for k, v in S.items():
-    rows.append([k, f(v["transport_cost_bn"]), f(v["petroleum"]["late_2025_bn"]), f(v["saving_vs_late_2025_pct"]), f(v["breakeven_multiple"], 2),
+    rows.append([k, f(v["energy_system_cost_bn"]), f(v["petroleum"]["late_2025_bn"]), f(v["saving_energy_system_pct"]), f(v["breakeven_energy_system"], 2),
                  f(v["hubs"], 0), f(v["gw"]["onshore_wind"], 0), f(v["gw"]["solar"], 0), f(v["gw"]["csp"], 0), f(v["gw"]["offshore_wind"], 0),
                  f(max(v["h2_mt"]["pyrolysis"], 0.0) + 0.0), f(v["h2_mt"]["steam_electrolysis"] + v["h2_mt"]["electrolysis"]), f(v["emissions"]["total_mt"], 0), f(v["emissions"]["reduction_pct"])])
 rows = [[r[0], r[1], r[3], r[5], r[6], r[7], r[8], r[9], r[10], r[11], r[12]] for r in rows]
-t("Table S11. All deterministic cases (2050). Cost in USD bn per year; saving against late-2025 petroleum (USD 399.3 bn for mainland cases); capacities in GW; hydrogen in Mt; CO2e in Mt per year.",
+_vm = S["least_cost"]["consumer_vehicle_cost_bn"]; _vt = S["tw_least_cost"]["consumer_vehicle_cost_bn"]
+t(f"Table S11. All deterministic cases (2050). Cost = energy-system (project) cost in USD bn per year; saving against late-2025 petroleum (USD {S['least_cost']['petroleum']['late_2025_bn']:.1f} bn for mainland cases, {S['tw_least_cost']['petroleum']['late_2025_bn']:.1f} bn for Taiwan). The net cost of electric and fuel-cell vehicles and machines, paid by their owners, adds USD {_vm:.1f} bn to every mainland case except the vehicle-cost cases (table S15) and USD {_vt:.1f} bn to Taiwan. Capacities in GW; hydrogen in Mt; CO2e in Mt per year.",
   ["Case", "Cost", "Save %", "Hubs", "Wind", "PV", "CSP", "Offsh.", "Pyro H2", "Elec. H2", "CO2e"], rows)
 EB = RB["emissions_boundary"]
 _eb = dict(central="Central boundary", elec_ci_25g="Electricity 25 g CO2e/kWh (vs 10)", methane_leak_3pct="Upstream methane leakage 3% (vs 1.5%)",
@@ -133,8 +135,10 @@ t("Table S14. Build-rate and system-structure screen (reactor modules built 2032
   ["Case", "Hubs", "Modules", "Per yr", "GWt/yr", "Wind GW", "Wind/yr", "Solar GW", "Firm %", "Variable %"],
   [[_fe[k], f(v["modules"] / 6, 0), f(v["modules"], 0), f(v["modules_per_yr"], 0), f(v["gwt_per_yr"], 1), f(v["wind_gw"], 0), f(v["wind_gw_per_yr"], 0),
     f(v["solar_gw"], 0), f(100 * v["firm_share"], 0), f(100 * v["vre_share"], 0)] for k, v in RB["feasibility"].items()])
-t("Table S15. Stress-test cases (2050; USD bn per year; each re-optimised).", ["Case", "Cost", "Saving %", "Hubs", "Pyrolysis H2 Mt", "Emissions Mt"],
-  [[v["label"].replace("BEV net cost", "Electric-car net cost").replace("BEV", "electric-car").replace(" (v1.1 accounting)", " (USD 8/MWh)"), f(v["transport_cost_bn"]), f(v["saving_pct"]), f(v["hubs"], 0), f(max(v["h2_pyro_mt"], 0.0) + 0.0), f(v["emissions_mt"], 0)] for v in RB["cases"].values()])
+t("Table S15. Stress-test cases (2050; USD bn per year; each re-optimised). Project = energy-system cost; With vehicles adds the net cost of electric and fuel-cell vehicles and machines paid by their owners.",
+  ["Case", "Project cost", "Saving %", "With vehicles", "Saving %", "Hubs", "Pyrolysis H2 Mt", "Emissions Mt"],
+  [[v["label"].replace("BEV net cost", "Electric-car net cost").replace("BEV", "electric-car").replace(" (v1.1 accounting)", " (USD 8/MWh)"), f(v["energy_system_cost_bn"]), f(v["saving_energy_system_pct"]),
+    f(v["transport_cost_bn"]), f(v["saving_pct"]), f(v["hubs"], 0), f(max(v["h2_pyro_mt"], 0.0) + 0.0), f(v["emissions_mt"], 0)] for v in RB["cases"].values()])
 HBJ = json.load(open(H / "cn_htse_heat.json")); dd = HBJ["duties_kwh_kg"]
 t("Table S16. Steam-electrolysis heat balance per kg of hydrogen (800 C stack, 0.5 MPa, 80% steam utilisation, no sweep gas).",
   ["Item", "kWh/kg", "Temperature range (C)", "Supplied by"],
@@ -153,16 +157,16 @@ t("Table S16. Steam-electrolysis heat balance per kg of hydrogen (800 C stack, 0
 _ls = dict(least_cost="Central least cost", post_gas_least_cost="After gas", least_cost_no_nuclear="No nuclear", least_cost_hub_cap_30="At most 30 hubs",
            least_cost_reactor_high="High reactor cost")
 LSJ = RB["lull_screen"]
-t("Table S17. Stylised wind-lull adequacy screen: a windless, overcast 7-day winter period with all flexible loads stopped. Load = inflexible transport load (GW); Firm = hubs with all heat to turbines plus light-water reactors (GW); Lull VRE = wind, solar and CSP output in the lull (GW); Short = shortfall (GW, and TWh over the week); Backup = indicative annual cost of hydrogen-fired backup (USD bn and % of system cost); H2 lost = electrolytic hydrogen not produced during the week (Mt).",
+t("Table S17. Stylised wind-lull adequacy screen: a windless, overcast 7-day winter period with all flexible loads stopped. Load = inflexible transport load (GW); Firm = hubs with all heat to turbines plus light-water reactors (GW); Lull VRE = wind, solar and CSP output in the lull (GW); Short = shortfall (GW, and TWh over the week); Backup = indicative annual cost of hydrogen-fired backup (USD bn and % of energy-system cost); H2 lost = electrolytic hydrogen not produced during the week (Mt).",
   ["Case", "Load", "Firm", "Lull VRE", "Short GW", "Short TWh", "Backup bn", "% cost", "H2 lost"],
   [[_ls[k], f(v["inflexible_gw"], 0), f(v["hub_firm_gw"] + v["lwr_gw"], 0), f(v["variable_in_lull_gw"], 0), f(v["shortfall_gw"], 0), f(v["shortfall_twh"], 1),
-    f(v["indicative_cost_bn"], 1), f(v["indicative_cost_pct"], 1), f(v["h2_production_lost_mt"], 2)] for k, v in LSJ.items()])
+    f(v["indicative_cost_bn"], 1), f(100 * v["indicative_cost_bn"] / S[k]["energy_system_cost_bn"], 1), f(v["h2_production_lost_mt"], 2)] for k, v in LSJ.items()])
 _lv = dict(submitted="As in table S17", zero_wind="No wind", zero_wind_availability_80="No wind, reactor availability 80%",
            zero_wind_turbines_60pct="No wind, turbines for 60% of reactor heat", zero_wind_14_days="No wind, 14-day lull")
 _lc = dict(least_cost="Central", post_gas_least_cost="After gas", least_cost_no_nuclear="No nuclear")
-t("Table S18. Wind-lull screen sensitivities. Short = shortfall (GW, and TWh over the lull); Backup = indicative annual cost of hydrogen-fired backup (USD bn and % of system cost), a lower bound that excludes hydrogen storage, replacement electrolyser capacity and delivery.",
+t("Table S18. Wind-lull screen sensitivities. Short = shortfall (GW, and TWh over the lull); Backup = indicative annual cost of hydrogen-fired backup (USD bn and % of energy-system cost), a lower bound that excludes hydrogen storage, replacement electrolyser capacity and delivery.",
   ["Case", "Variant", "Short GW", "Short TWh", "Backup bn", "% cost"],
-  [[_lc[c], _lv[k], f(v["shortfall_gw"], 0), f(v["shortfall_twh"], 1), f(v["indicative_cost_bn"], 1), f(v["indicative_cost_pct"], 1)]
+  [[_lc[c], _lv[k], f(v["shortfall_gw"], 0), f(v["shortfall_twh"], 1), f(v["indicative_cost_bn"], 1), f(100 * v["indicative_cost_bn"] / S[c]["energy_system_cost_bn"], 1)]
    for c, d in RB["lull_sensitivity"].items() for k, v in d.items()])
 # ---------------------------------------------------------------- CN v1.5 nutrient and soil-carbon balance, bioextraction
 NU = I.NUTRIENTS; NB = RB["nutrients"]
@@ -207,11 +211,11 @@ for k, lab in _sc.items():
     d = NB[k]; sc = d["nutrients"]["soil_carbon"]; ss = sc["stable_soc_supplied_mt"]
     rows.append([lab, f(sc["stable_soc_required_mt"], 1), f(ss["hydrochar"], 1), f(ss["digestate"], 1),
                  f(ss.get("green_manure", 0.0), 1), f(ss.get("compost", 0.0), 1), f(ss["pyrolysis_carbon"], 1),
-                 f(100 * sc["biogenic_share"], 0), f(S[k]["transport_cost_bn"], 0)])
+                 f(100 * sc["biogenic_share"], 0), f(S[k]["energy_system_cost_bn"], 0)])
 _maxsw = max(NB[k]["nutrients"]["soil_carbon"]["stable_soc_supplied_mt"]["seaweed"] for k in _sc)
 _maxgap = max(NB[k]["nutrients"]["soil_carbon"].get("deficit_mt", 0.0) for k in _sc)
 _res = sorted({round(NB[k]["residues_mt"]) for k in _sc})
-t(f"Table S23. Soil-carbon balance (Mt C per year) and system cost (USD bn per year). Req. = required: residue carbon that would have become stable soil carbon; the sources are the stable fractions of what is returned or added (hydrochar, digestate, green manure, compost, pyrolysis carbon); Bio. % = share from biological sources. Every case harvests {', '.join(str(r) for r in _res)} Mt of residues; seaweed sent to soil supplies at most {_maxsw:.2f} Mt C; and the priced gap (soil carbon not replaced, an accounting entry rather than material returned to soil) is {_maxgap:.1f} Mt in every case. In the unconstrained case the requirement is reported but not enforced. Gas use for pyrolysis is in table S15 and Fig. 6.",
+t(f"Table S23. Soil-carbon balance (Mt C per year) and energy-system cost (USD bn per year). Req. = required: residue carbon that would have become stable soil carbon; the sources are the stable fractions of what is returned or added (hydrochar, digestate, green manure, compost, pyrolysis carbon); Bio. % = share from biological sources. Every case harvests {', '.join(str(r) for r in _res)} Mt of residues; seaweed sent to soil supplies at most {_maxsw:.2f} Mt C; and the priced gap (soil carbon not replaced, an accounting entry rather than material returned to soil) is {_maxgap:.1f} Mt in every case. In the unconstrained case the requirement is reported but not enforced. Gas use for pyrolysis is in table S15 and Fig. 6.",
   ["Case", "Req.", "Hydro-char", "Digest-ate", "Green man.", "Com-post", "Pyro. C", "Bio. %", "Cost"], rows)
 bx = S["design_half_offshore"]["bioextraction"]
 _zn = {"liaodong_bay": "Liaodong Bay", "haizhou_bay": "Haizhou Bay", "yangtze_plume": "Yangtze plume", "fujian_bays": "Fujian bays",
@@ -238,8 +242,8 @@ BRK = RB["lull_bracket"]; _bn = dict(least_cost="Least cost", post_gas_least_cos
 rows = []
 for k, v in BRK.items():
     rows.append([_bn.get(k, k), f(v["lower_bound"]["cost_bn"], 1), f(v["plausible"]["cost_bn"], 1), f(v["high"]["cost_bn"], 1),
-                 f(v["lower_bound"]["saving_pct"], 1), f(v["plausible"]["saving_pct"], 1), f(v["high"]["saving_pct"], 1)])
-t("Table S26. Backup cost for the wind lull (USD bn per year) and the saving against late-2025 petroleum once it is included (%). Lower bound: backup plant and the hydrogen it burns. Plausible: adds a 15% reserve margin, hydrogen storage at USD 25/kg for one lull's backup fuel and the vehicles' hydrogen during the lull, extra hydrogen-production capacity to make up output lost in lulls, and USD 150/kW of transmission. High: a 14-day lull with no wind, 20% reserve, storage at USD 100/kg and USD 300/kW of transmission. Components in table S27. Not an hourly dispatch or reliability study.",
+                 f(v["lower_bound"]["saving_energy_system_pct"], 1), f(v["plausible"]["saving_energy_system_pct"], 1), f(v["high"]["saving_energy_system_pct"], 1)])
+t(f"Table S26. Backup cost for the wind lull (USD bn per year) and the energy-system saving against late-2025 petroleum once it is included (%); including the vehicle costs paid by owners lowers each mainland saving by {100 * _vm / S['least_cost']['petroleum']['late_2025_bn']:.1f} points. Lower bound: backup plant and the hydrogen it burns. Plausible: adds a 15% reserve margin, hydrogen storage at USD 25/kg for one lull's backup fuel and the vehicles' hydrogen during the lull, extra hydrogen-production capacity to make up output lost in lulls, and USD 150/kW of transmission. High: a 14-day lull with no wind, 20% reserve, storage at USD 100/kg and USD 300/kW of transmission. Components in table S27. Not an hourly dispatch or reliability study.",
   ["Case", "Cost: lower", "Cost: plausible", "Cost: high", "Saving: lower", "Saving: plausible", "Saving: high"], rows)
 _cp = dict(capacity_bn="Backup plant (incl. reserve margin)", fuel_bn="Hydrogen burned", storage_bn="Hydrogen storage", production_makeup_bn="Make-up hydrogen production",
            transmission_bn="Transmission", cost_bn="Total")

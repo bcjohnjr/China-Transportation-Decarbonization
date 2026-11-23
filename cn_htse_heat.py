@@ -133,7 +133,7 @@ def figure(b):
     C = ["#2a78d6", "#eb6834", "#1baf7a", "#eda100"]; INK = "#1a1a1a"
     p = b["inputs"]; d = b["duties_kwh_kg"]; Ts, Tst, dT = p["t_sat_c"], p["stack_c"], p["dT_min"]
     q0 = 0.0; q1 = q0 + d["feed_water_preheat"]; q2 = q1 + d["evaporation"]; q3 = q2 + d["superheat_total"]
-    fig, a = plt.subplots(figsize=(3.35, 2.6))
+    fig, a = plt.subplots(figsize=(3.35, 3.4))
     a.plot([q0, q1, q2, q3], [p["feed_c"], Ts, Ts, Tst], color=C[0], lw=2, label="Feed water to stack inlet (cold)")
     qa = q2; qb = q2 + d["superheat_by_recuperator"]
     a.plot([qa, qb], [b["hot_outlet_after_recuperator_c"], Tst], color=C[1], lw=2, label="H$_2$/steam and O$_2$ from stack (hot)")
@@ -141,10 +141,15 @@ def figure(b):
     a.axvspan(q0 + d["preheat_recovered_condensing"] + d["preheat_recovered_sensible"], q2, color=C[3], alpha=0.18, lw=0, label="External heat (reactor steam or boiler)")
     a.axvspan(qb, q3, color="#e34948", alpha=0.25, lw=0, label="Electric topping")
     a.set_xlabel("Heat per kg of hydrogen (kWh)", fontsize=7); a.set_ylabel("Temperature (°C)", fontsize=7)
-    a.tick_params(labelsize=6.5); a.set_ylim(0, 880); a.legend(fontsize=5.3, loc="upper left", frameon=False)
+    a.tick_params(labelsize=6.5); a.set_ylim(0, 880)
+    a.legend(fontsize=5.3, loc="upper center", bbox_to_anchor=(0.45, -0.2), ncol=1, frameon=False)   # below the plot, clear of the curves
     for s in ("top", "right"): a.spines[s].set_visible(False)
     fig.tight_layout()
+    from cn_layout_check import check   # CN v1.6.3: no text on graphics or on other text
+    problems = check(fig, "FigS7_htse_heat")
     for ext in ("png", "tif"): fig.savefig(H / f"FigS7_htse_heat.{ext}", dpi=300)
+    plt.close(fig)
+    return problems
 
 
 if __name__ == "__main__":

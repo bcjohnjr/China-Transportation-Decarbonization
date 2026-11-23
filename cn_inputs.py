@@ -1,4 +1,4 @@
-"""Inputs, China transport-energy model CN v1.6.2 (USD 2026).  Tags: [S] sourced, [A] modeller assumption (varied in the
+"""Inputs, China transport-energy model CN v1.6.3 (USD 2026).  Tags: [S] sourced, [A] modeller assumption (varied in the
 Monte Carlo where it matters), [U] carried over unchanged from the U.S. model v8.4 (bcjohnjr/United-States-...).
 Not forecasts.
 
@@ -9,7 +9,7 @@ so modelled inside the mainland system) and Taiwan (a separate island grid, mode
 Scope (same as the U.S. model): all aviation and on-road transport, rail, domestic and bunkered marine fuel, farm
 machinery, construction and mining machinery, industrial trucks and pipeline compression.  2026 U.S. dollars.
 
-Sources used for the 2025 baseline (see SUPPLEMENTARY_MATERIALS_CN_V1.6.2.md, table S1):
+Sources used for the 2025 baseline (see SUPPLEMENTARY_MATERIALS_CN_V1.6.3.md, table S1):
   CAPE/SunSirs 2025 review: gasoline 155 Mt, diesel 203 Mt, kerosene/jet 40.21 Mt; gas 426.6 bcm, import share 41.3%.
   ICIS: transport gas 44.14 bcm in 2026, +3.5% y/y -> 42.6 bcm in 2025.  Zhoushan/customs: ~20 Mt bonded bunkers.
   EIA Taiwan brief (2026): gasoline 188 kb/d, diesel 116 kb/d, jet 68.8 kb/d (2024).

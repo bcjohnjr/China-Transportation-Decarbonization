@@ -1,4 +1,4 @@
-"""Regression and consistency tests for CN v1.6.2.  Run after cn_model.py, cn_gas.py, cn_regions.py, cn_crossfeed.py and
+"""Regression and consistency tests for CN v1.6.3.  Run after cn_model.py, cn_gas.py, cn_regions.py, cn_crossfeed.py and
 cn_breakeven.py.  Exits non-zero on failure."""
 import csv, json, math
 from pathlib import Path
@@ -16,6 +16,10 @@ def check(name, cond):
 
 for k, r in S.items():
     eu = r["enduse"]
+    # CN v1.6.3: project (energy-system) cost + consumer vehicle cost = cost including vehicles
+    check(f"{k}: energy-system + consumer vehicle cost = total", abs(r["energy_system_cost_bn"] + r["consumer_vehicle_cost_bn"] - r["transport_cost_bn"]) < 1e-9)
+    check(f"{k}: consumer vehicle cost is the vehicles-and-machines line", abs(r["consumer_vehicle_cost_bn"] - r["costs_bn"]["vehicles_and_machines_net"]) < 1e-12)
+    check(f"{k}: energy-system saving consistent", abs(r["saving_energy_system_pct"] - 100 * (1 - r["energy_system_cost_bn"] / r["petroleum"]["late_2025_bn"])) < 1e-9)
     check(f"{k}: objective reconciliation residual < 1e-6 bn", abs(r["objective_reconciliation"]["residual_bn"]) < 1e-6)
     liq = sum(r["liquids_twh"].values())
     check(f"{k}: liquids supplied >= demand", liq >= eu["liq_total"] - 1e-3)
@@ -76,6 +80,10 @@ check("cross-feed shares within [0,1]", 0 <= cf["marine_protein_need_met_interna
 # break-even
 be = json.load(open(H / "cn_breakeven.json"))
 check("break-even saving consistent", abs(be["deterministic"]["least_cost"]["saving_pct"] - S["least_cost"]["saving_vs_late_2025_pct"]) < 1e-9)
+check("break-even energy-system saving consistent", abs(be["deterministic"]["least_cost"]["saving_energy_system_pct"] - S["least_cost"]["saving_energy_system_pct"]) < 1e-9)
+check("vehicle-cost cases change only the consumer cost, not the energy system",
+      all(abs(S[n]["energy_system_cost_bn"] - S["least_cost"]["energy_system_cost_bn"]) < 1e-6 for n in
+          ("least_cost_bev_net_zero", "least_cost_bev_plus100", "least_cost_bev_tco_high", "least_cost_bev_tco_low", "least_cost_fleet_350", "least_cost_fleet_500")))
 # CN v1.1 robustness file
 RB = json.load(open(H / "cn_robustness.json")); C = RB["cases"]; lc = S["least_cost"]["transport_cost_bn"]
 check("BEV derivation: central value used in the model", abs(I.VEH["ldv_bev_net_usd_yr"] - round(RB["ldv_tco"]["central"]["net_usd_yr"], 1)) < 1e-9)
@@ -101,7 +109,8 @@ pc = M.default_params(); V = pc["VEH"]; E_ = pc["ENDUSE"]
 veh_expected = (V["ldv_stock_m"] * 1e6 * (E_["ldv"]["bev"] * V["ldv_bev_net_usd_yr"] + E_["ldv"]["re"] * V["ldv_re_net_usd_yr"] + E_["ldv"]["fcev"] * V["ldv_fcev_net_usd_yr"])
                 + V["ers_trucks_m"] * 1e6 * V["ers_truck_net_usd_yr"] + V["fcev_trucks_m"] * 1e6 * V["fcev_truck_net_usd_yr"] + V["bev_trucks_m"] * 1e6 * V["bev_truck_net_usd_yr"]
                 + V["re_trucks_m"] * 1e6 * V["re_truck_net_usd_yr"] + V["tractors_m"] * 1e6 * 0.8 * V["tractor_net_usd_yr"] + V["constr_m"] * 1e6 * 0.85 * V["constr_net_usd_yr"]
-                + V["forklifts_m"] * 1e6 * V["forklift_net_usd_yr"]) / 1e9 + V["farm_charging_bn_yr"]
+                + V["forklifts_m"] * 1e6 * V["forklift_net_usd_yr"]) / 1e9
+check("farm charging is a project (infrastructure) cost line", abs(S["least_cost"]["costs_bn"]["farm_charging"] - V["farm_charging_bn_yr"]) < 1e-12)
 check("2050 vehicle stocks are not multiplied by service growth (central case)", abs(S["least_cost"]["costs_bn"]["vehicles_and_machines_net"] - veh_expected) < 1e-6)
 import inspect
 src = inspect.getsource(M.solve)

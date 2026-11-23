@@ -1,3 +1,32 @@
+# CN v1.6.3 — 23 November 2026 (project and owner costs separated; figures rebuilt from code with a layout check)
+
+**Cost boundary.** Vehicles and machines are bought and run by households, fleets, farms and contractors, not by the
+energy project, and China's fleet is already electrifying. Their net extra cost (USD 20.8 bn/yr in the central case: cars
+-32.4 bn, trucks, tractors, construction machines and forklifts +53.2 bn) is now reported as a cost to owners, separate
+from the energy-system (project) cost, which is the headline. Every solution and Monte Carlo draw carries
+`energy_system_cost_bn`, `consumer_vehicle_cost_bn` and `saving_energy_system_pct`; `transport_cost_bn` keeps the total
+including owners' costs. Farm charging infrastructure (USD 2.0 bn) moves from the vehicle line to the project. The LP
+solution is unchanged (vehicle costs are fixed by the end-use mix); break-even, robustness, backup bracket, regional and
+SM tables report both bases. New tests (2,765) and audit checks (138) confirm the split in every case and draw.
+
+**Headline (energy system).** Least cost USD 293.2 bn, 26.7% saving (break-even 0.73; 46.4% at November 2026 prices);
+Monte Carlo median 19.7% (9.1-29.7), cheaper than late-2025 petroleum in 99.8% of draws; after gas 23.8%; 230 GW
+offshore 20.7%; plausible wind-lull backup 25.0%; moderate stress combination level with petroleum (-0.4%). Including
+owners' vehicle costs the numbers of v1.6.2 are unchanged (USD 314.1 bn, 21.5%; Monte Carlo median 3.3%).
+
+**Figures.** `cn_layout_check.py` renders each figure with all text hidden and fails the build if any text or legend
+lies on bars, lines, markers, outlines or other text, or two labels overlap (16 figures, 0 problems). Fig. 2: labels
+placed in clear space, leaders where a label cannot sit in its area, hub markers moved off the city squares, the
+Guangzhou label dropped (no clear space in the Pearl River Delta). Fig. 3: energy-system costs; panel B shows savings
+with and without owners' vehicle costs; the U.S. bars and the uncorrected 23% line are removed. Fig. 4: energy-system
+distributions, with the total including vehicle costs dashed; no U.S. line. Fig. 6: the shortfall label sits above the
+panel at the shortfall year. Figs. 1, 5, 9, S1, S3, S4, S5, S7 and the graphical abstract: labels and legends moved
+off the data; Figs. 5, S1, S3 and S5 on the energy-system basis.
+
+**Documents.** Manuscript, supplement, cover letter and title page updated to the new basis (main text 7,955 words);
+table S11 caption states the correct comparator (USD 400.2 bn, v1.6.2 said 399.3); Fig. S6 caption describes its four
+panels; author name removed from the properties of the anonymised files.
+
 # CN v1.6.2 — 23 November 2026 (referee round 7: independent number audit; three input corrections, all results re-run)
 
 **Number audit.** New `cn_number_audit.py` (120 checks, run by `run_all.sh`) recomputes, from reference values typed into

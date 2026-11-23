@@ -1,4 +1,4 @@
-"""CN v1.6.2 independent number audit.
+"""CN v1.6.3 independent number audit.
 
 Recomputes the headline quantities of the China transport model from first principles, with physical constants and
 reference values typed in here (not imported from cn_inputs), and compares them with the saved model outputs.  It exists
@@ -97,8 +97,11 @@ c = I.LDV_TCO["central"]
 parts = dict(purchase=-1000 * crf(0.05, 12), battery=0.15 * 55 * 70 / 1.05 ** 9 * crf(0.05, 12), maint=-0.35 * 350, ins=100)
 check("vehicles", "BEV car net USD/yr (four components)", I.VEH["ldv_bev_net_usd_yr"], sum(parts.values()), 2e-3)
 veh = (420e6 * (0.95 * sum(parts.values()) + 0.03 * 150 + 0.01 * 700) + 2.5e6 * 2500 + 0.6e6 * 8000 + 18e6 * 1200 + 2e6 * 2500
-       + 8e6 * 0.8 * 600 + 10e6 * 0.85 * 1500 + 5e6 * -200) / 1e9 + 2.0
-check("vehicles", "vehicles and machines net, bn USD", LC["costs_bn"]["vehicles_and_machines_net"], veh, 2e-3)
+       + 8e6 * 0.8 * 600 + 10e6 * 0.85 * 1500 + 5e6 * -200) / 1e9
+check("vehicles", "vehicles and machines net (consumer cost), bn USD", LC["costs_bn"]["vehicles_and_machines_net"], veh, 2e-3)
+check("vehicles", "farm charging (project), bn USD", LC["costs_bn"]["farm_charging"], 2.0, 1e-9)
+check("cost", "energy-system (project) cost = total - consumer vehicle cost", LC["energy_system_cost_bn"], LC["total_cost_bn"] - veh, 2e-4)
+check("cost", "energy-system saving %", LC["saving_energy_system_pct"], 100 * (1 - LC["energy_system_cost_bn"] / LC["petroleum"]["late_2025_bn"]), 1e-9)
 
 # --------------------------------------------------------------------------------- 5. petroleum comparator
 def pretax(retail, tax, dens, fx): return (retail / 1.13 - tax) / dens * 1000 / fx
@@ -221,6 +224,11 @@ for case, fn in (("least_cost", "cn_monte_carlo_least_cost.csv"), ("post_gas", "
     check("monte carlo", f"{case}: share cheaper at Nov 2026 prices", summ["p_cheaper_2026"], sum(c < p for c, p in zip(cost, p26)) / len(cost), 2e-3)
     sv2 = [100 * (1 - c / p) for c, p in zip(cost, p25)]
     check("monte carlo", f"{case}: saving column = 1 - cost/petroleum (median)", pct(sv, 50), pct(sv2, 50), 1e-6)
+    ce = col(fn, "energy_system_cost_bn"); se = col(fn, "saving_energy_system_pct"); cv = col(fn, "consumer_vehicle_cost_bn")
+    check("monte carlo", f"{case}: energy-system + vehicle cost = total in every draw", max(abs(a + b - c) for a, b, c in zip(ce, cv, cost)), 0.0, 0.0)
+    for q in (5, 50, 95):
+        check("monte carlo", f"{case}: energy-system saving p{q} from raw draws", summ["saving_energy_system_pct"][f"p{q}"], pct(se, q), 1e-6)
+    check("monte carlo", f"{case}: energy system cheaper than late-2025 petroleum", summ["p_energy_system_cheaper_2025"], sum(c < p for c, p in zip(ce, p25)) / len(ce), 2e-3)
 
 # --------------------------------------------------------------------------------- 10. text constants quoted in the manuscript
 within("text", "fossil CO2 share 32% of 38.1 Gt is 'about one-third'", 0.32, 0.30, 0.34)
@@ -232,11 +240,11 @@ check("text", "gas price USD 9.3/MMBtu = 8.5 + 0.8", I.GAS["price_mmbtu"] + I.GA
 check("text", "onshore wind tiers 30 and 45 USD/MWh", E["onshore_wind"] + E["onw2_adder"], 45.0, 1e-9)
 
 fails = [r for r in rows if not r["ok"]]
-json.dump(dict(release="CN v1.6.2", checks=len(rows), failures=len(fails), rows=rows), open(HERE / "cn_number_audit.json", "w"), indent=1, default=str)
+json.dump(dict(release="CN v1.6.3", checks=len(rows), failures=len(fails), rows=rows), open(HERE / "cn_number_audit.json", "w"), indent=1, default=str)
 w = max(len(r["check"]) for r in rows)
 for r in rows:
     m = r["model"]; ref = r["independent"]
     ms = f"{m:,.4g}" if isinstance(m, (int, float)) else str(m); rs = f"{ref:,.4g}" if isinstance(ref, (int, float)) else str(ref)
     print(f"{'ok  ' if r['ok'] else 'FAIL'} {r['group']:<12} {r['check']:<{w}}  model {ms:>12}  independent {rs:>16}")
-print(f"\nCN v1.6.2 number audit: {len(rows) - len(fails)}/{len(rows)} checks passed")
+print(f"\nCN v1.6.3 number audit: {len(rows) - len(fails)}/{len(rows)} checks passed")
 sys.exit(1 if fails else 0)

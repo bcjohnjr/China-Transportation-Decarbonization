@@ -5,6 +5,16 @@
    "p50": 400.3724187584787,
    "p95": 557.589006993715
   },
+  "energy_system_cost_bn": {
+   "p5": 272.6120512489636,
+   "p50": 328.35290384987,
+   "p95": 402.4886575327258
+  },
+  "consumer_vehicle_cost_bn": {
+   "p5": -42.96659711627147,
+   "p50": 67.39001903467911,
+   "p95": 207.87105383577853
+  },
   "hubs": {
    "p5": 8.0,
    "p50": 386.0,
@@ -40,16 +50,33 @@
    "p50": 3.2832246762716677,
    "p95": 32.170440066058546
   },
+  "saving_energy_system_pct": {
+   "p5": 9.099598691739816,
+   "p50": 19.669329546776797,
+   "p95": 29.726291960562104
+  },
   "p_cheaper_2025": 0.541,
   "p_cheaper_2026": 0.966,
   "p_saving_ge_23pct": 0.138,
-  "n": 1000
+  "n": 1000,
+  "p_energy_system_cheaper_2025": 0.998,
+  "p_energy_system_cheaper_2026": 1.0
  },
  "half_offshore": {
   "transport_cost_bn": {
    "p5": 303.7990033285713,
    "p50": 425.10710344591325,
    "p95": 585.4911897969743
+  },
+  "energy_system_cost_bn": {
+   "p5": 309.095501653272,
+   "p50": 361.0554865234275,
+   "p95": 432.5791132069362
+  },
+  "consumer_vehicle_cost_bn": {
+   "p5": -43.335837324887585,
+   "p50": 60.561512522984174,
+   "p95": 204.17990108809505
   },
   "hubs": {
    "p5": 6.0,
@@ -86,16 +113,33 @@
    "p50": -3.2300368638286447,
    "p95": 24.00747513957833
   },
+  "saving_energy_system_pct": {
+   "p5": 2.264410022182687,
+   "p50": 11.734114231483655,
+   "p95": 19.344691155435207
+  },
   "p_cheaper_2025": 0.435,
   "p_cheaper_2026": 0.936,
   "p_saving_ge_23pct": 0.059,
-  "n": 1000
+  "n": 1000,
+  "p_energy_system_cheaper_2025": 0.981,
+  "p_energy_system_cheaper_2026": 1.0
  },
  "post_gas": {
   "transport_cost_bn": {
    "p5": 284.60387757680667,
    "p50": 413.96188015614166,
    "p95": 584.6529397790905
+  },
+  "energy_system_cost_bn": {
+   "p5": 281.45680349872623,
+   "p50": 345.5764035169898,
+   "p95": 439.1290771639227
+  },
+  "consumer_vehicle_cost_bn": {
+   "p5": -51.48975014941257,
+   "p50": 62.56976933649746,
+   "p95": 208.1480351315699
   },
   "hubs": {
    "p5": 2.0,
@@ -132,10 +176,17 @@
    "p50": -0.5297099239743419,
    "p95": 28.613064839839996
   },
+  "saving_energy_system_pct": {
+   "p5": 0.7493349017601288,
+   "p50": 15.832971080067264,
+   "p95": 27.131099704663594
+  },
   "p_cheaper_2025": 0.493,
   "p_cheaper_2026": 0.945,
   "p_saving_ge_23pct": 0.107,
-  "n": 1000
+  "n": 1000,
+  "p_energy_system_cheaper_2025": 0.956,
+  "p_energy_system_cheaper_2026": 1.0
  },
  "sensitivity_least_cost": {
   "ELEC/onshore_wind": 0.09422993822993823,
@@ -172,5 +223,41 @@
   "hydrochar_stability": -0.011623139623139624,
   "fertiliser_price_scale": -0.028025296025296027,
   "biological_soil_cost_scale": -0.027595383595383598
+ },
+ "sensitivity_least_cost_energy_system": {
+  "ELEC/onshore_wind": 0.08841625641625642,
+  "ELEC/solar": -0.021380865380865383,
+  "ELEC/osw_fixed": 0.02856126456126456,
+  "ELEC/osw_floating": -0.020802704802704807,
+  "ELEC/lwr": 0.026741138741138742,
+  "ELEC/csp": 0.05636541236541237,
+  "ELEC/vre_firming": 0.12202809802809803,
+  "ELEC/td_adder": 0.1462978342978343,
+  "ELEC/charge_ldv": 0.06520908520908521,
+  "ELEC/export_value": 0.045672189672189674,
+  "PYRO/capex_kw_h2": 0.029405669405669407,
+  "GAS/price_mmbtu": 0.0994979314979315,
+  "PYRO/leak_upstream": 0.053144813144813154,
+  "ROUTES/htl/cost_t": 0.20881522081522086,
+  "ROUTES/pbtl/cost_t": 0.06854069654069654,
+  "SEAWEED_PROCESS/farm_cost_ref_t": -0.04587852987852988,
+  "VEH/ldv_bev_net_usd_yr": -8.508008508008509e-05,
+  "VEH/bev_truck_net_usd_yr": 0.01773851373851374,
+  "VEH/ers_capex_m_per_km": 0.09770890970890972,
+  "H2_DELIVERY/vehicle": 0.05542054342054342,
+  "ENDUSE/service_growth_2050": 0.8012391812391814,
+  "HEMP/cost_usd_ha": -0.002826866826866827,
+  "BAMBOO/establish_usd_ha": -0.025940773940773945,
+  "WACC": 0.026906510906510906,
+  "biomass_price_scale": 0.0301954741954742,
+  "ethanol_cost_scale": 0.03292388092388093,
+  "yield_level": -0.12671786662018536,
+  "reactor_case": 0.3970652972988889,
+  "carbon_market_scale": -0.09032253032253032,
+  "carbon_value_scale": -0.08541888141888143,
+  "humification_scale": 0.04307775107775108,
+  "hydrochar_stability": -0.010513858513858516,
+  "fertiliser_price_scale": 0.021134505134505138,
+  "biological_soil_cost_scale": -0.027359691359691362
  }
 }

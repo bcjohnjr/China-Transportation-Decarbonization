@@ -1,0 +1,21 @@
+{
+ "figures": [
+  "Fig1_energy_and_emissions",
+  "Fig2_system_map",
+  "Fig3_cost_vs_petroleum",
+  "Fig4_uncertainty_breakeven",
+  "Fig5_reactor_types_fissile",
+  "Fig6_gas_supply",
+  "Fig7_regions",
+  "Fig8_food_crossfeed",
+  "Fig9_nutrient_soil_carbon",
+  "FigS1_offshore_merit",
+  "FigS2_transition",
+  "FigS3_sensitivity",
+  "FigS4_reactor_learning",
+  "FigS5_robustness",
+  "FigS7_htse_heat",
+  "graphical_abstract"
+ ],
+ "problems": []
+}

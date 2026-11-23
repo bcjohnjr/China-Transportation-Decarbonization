@@ -29,7 +29,10 @@ ok   vehicles     ldv electricity TWh                                           
 ok   vehicles     direct H2 Mt = TWh / 33.33                                                                       model        6.468  independent            6.468
 ok   vehicles     electricity end use total                                                                        model        1,494  independent            1,494
 ok   vehicles     BEV car net USD/yr (four components)                                                             model        -93.3  independent           -93.32
-ok   vehicles     vehicles and machines net, bn USD                                                                model        22.84  independent            22.83
+ok   vehicles     vehicles and machines net (consumer cost), bn USD                                                model        20.84  independent            20.83
+ok   vehicles     farm charging (project), bn USD                                                                  model            2  independent                2
+ok   cost         energy-system (project) cost = total - consumer vehicle cost                                     model        293.2  independent            293.2
+ok   cost         energy-system saving %                                                                           model        26.73  independent            26.73
 ok   petroleum    pre-tax gasoline USD/t late 2025                                                                 model        870.4  independent            870.4
 ok   petroleum    pre-tax diesel USD/t late 2025                                                                   model        777.5  independent            777.5
 ok   petroleum    pre-tax jet USD/t late 2025                                                                      model          700  independent              700
@@ -91,6 +94,11 @@ ok   monte carlo  least_cost: saving p95 from raw draws                         
 ok   monte carlo  least_cost: share cheaper than late-2025 petroleum                                               model        0.541  independent            0.541
 ok   monte carlo  least_cost: share cheaper at Nov 2026 prices                                                     model        0.966  independent            0.966
 ok   monte carlo  least_cost: saving column = 1 - cost/petroleum (median)                                          model        3.283  independent            3.283
+ok   monte carlo  least_cost: energy-system + vehicle cost = total in every draw                                   model    5.684e-14  independent                0
+ok   monte carlo  least_cost: energy-system saving p5 from raw draws                                               model          9.1  independent              9.1
+ok   monte carlo  least_cost: energy-system saving p50 from raw draws                                              model        19.67  independent            19.67
+ok   monte carlo  least_cost: energy-system saving p95 from raw draws                                              model        29.73  independent            29.73
+ok   monte carlo  least_cost: energy system cheaper than late-2025 petroleum                                       model        0.998  independent            0.998
 ok   monte carlo  post_gas: draws in CSV                                                                           model        1,000  independent            1,000
 ok   monte carlo  post_gas: cost p5 from raw draws                                                                 model        284.6  independent            284.6
 ok   monte carlo  post_gas: saving p5 from raw draws                                                               model       -37.25  independent           -37.25
@@ -101,6 +109,11 @@ ok   monte carlo  post_gas: saving p95 from raw draws                           
 ok   monte carlo  post_gas: share cheaper than late-2025 petroleum                                                 model        0.493  independent            0.493
 ok   monte carlo  post_gas: share cheaper at Nov 2026 prices                                                       model        0.945  independent            0.945
 ok   monte carlo  post_gas: saving column = 1 - cost/petroleum (median)                                            model      -0.5297  independent          -0.5297
+ok   monte carlo  post_gas: energy-system + vehicle cost = total in every draw                                     model    1.137e-13  independent                0
+ok   monte carlo  post_gas: energy-system saving p5 from raw draws                                                 model       0.7493  independent           0.7493
+ok   monte carlo  post_gas: energy-system saving p50 from raw draws                                                model        15.83  independent            15.83
+ok   monte carlo  post_gas: energy-system saving p95 from raw draws                                                model        27.13  independent            27.13
+ok   monte carlo  post_gas: energy system cheaper than late-2025 petroleum                                         model        0.956  independent            0.956
 ok   monte carlo  half_offshore: draws in CSV                                                                      model        1,000  independent            1,000
 ok   monte carlo  half_offshore: cost p5 from raw draws                                                            model        303.8  independent            303.8
 ok   monte carlo  half_offshore: saving p5 from raw draws                                                          model       -38.64  independent           -38.64
@@ -111,6 +124,11 @@ ok   monte carlo  half_offshore: saving p95 from raw draws                      
 ok   monte carlo  half_offshore: share cheaper than late-2025 petroleum                                            model        0.435  independent            0.435
 ok   monte carlo  half_offshore: share cheaper at Nov 2026 prices                                                  model        0.936  independent            0.936
 ok   monte carlo  half_offshore: saving column = 1 - cost/petroleum (median)                                       model        -3.23  independent            -3.23
+ok   monte carlo  half_offshore: energy-system + vehicle cost = total in every draw                                model    5.684e-14  independent                0
+ok   monte carlo  half_offshore: energy-system saving p5 from raw draws                                            model        2.264  independent            2.264
+ok   monte carlo  half_offshore: energy-system saving p50 from raw draws                                           model        11.73  independent            11.73
+ok   monte carlo  half_offshore: energy-system saving p95 from raw draws                                           model        19.34  independent            19.34
+ok   monte carlo  half_offshore: energy system cheaper than late-2025 petroleum                                    model        0.981  independent            0.981
 ok   text         fossil CO2 share 32% of 38.1 Gt is 'about one-third'                                             model         0.32  independent      [0.3, 0.34]
 ok   text         on-road diesel 120 Mt is ~59% of 203 Mt                                                          model       0.5911  independent   [0.585, 0.595]
 ok   text         USD 100 per car per year x 420 M x 95% BEV, bn                                                   model         39.9  independent             39.9
@@ -119,4 +137,4 @@ ok   text         12 GWe of large LWRs approved a year in GWt at 36-38% efficien
 ok   text         gas price USD 9.3/MMBtu = 8.5 + 0.8                                                              model          9.3  independent              9.3
 ok   text         onshore wind tiers 30 and 45 USD/MWh                                                             model           45  independent               45
 
-CN v1.6.2 number audit: 120/120 checks passed
+CN v1.6.3 number audit: 138/138 checks passed

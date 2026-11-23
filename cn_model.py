@@ -1,4 +1,4 @@
-"""China transport-energy system, CN v1.6.2: reactor heat cascade (HTR-PM-class hubs, with thorium molten-salt, sodium-fast,
+"""China transport-energy system, CN v1.6.3: reactor heat cascade (HTR-PM-class hubs, with thorium molten-salt, sodium-fast,
 very-high-temperature and light-water SMR alternatives) + methane pyrolysis while gas lasts, steam electrolysis after it
 + electric expressways and battery-electric vehicles + wind, solar, concentrated solar and offshore wind with region-
 specific seaweeds harvested by Grid Harvesters + crop residues, bamboo, hemp and the autonomous regions' energy crops
@@ -615,7 +615,7 @@ def post(p, x, lp_cost, eu, bl, hb, zec, scenario, blend_vol, osw_scale, res, la
         hefa_oils=sum(x[f"oil_{f[0]}"] * (f[4] + R["hefa"]["conv_t"]) for f in OF) / 1e3,
         sugar_starch_ethanol=sum(x[f"eth_{f[0]}"] * f[4] for f in EF) + x["atj"] * R["atj"]["conv_per_bgal"] / 1e9,
         imported_renewable_fuel=x["liq_import"] * E["liq_import_usd_mwh"] / 1e3,
-        vehicles_and_machines_net=veh + V["farm_charging_bn_yr"],
+        vehicles_and_machines_net=veh, farm_charging=V["farm_charging_bn_yr"],   # CN v1.6.3: vehicles are consumer costs; farm charging is infrastructure
         process_heat_equipment=(x["e_heat"] * 2.0 + x["e_dry"] * 8.0 + (x["t2mid"] + x["t2dry"] + x["m2dry"]) * HX_COST) / 1e3,
         residual_pipeline_gas=eu["gas_resid_twh"] / I.BCM_TWH * MMBTU_PER_BCM * (p["GAS"]["price_mmbtu"] + p["GAS"]["delivery_mmbtu"]) / 1e9)
     fd = food(p, out); heat_used = fd["low_grade_twh"] - fd["unused_low_grade_twh"]; out["low_grade_heat_used_twh"] = heat_used
@@ -630,8 +630,14 @@ def post(p, x, lp_cost, eu, bl, hb, zec, scenario, blend_vol, osw_scale, res, la
     sb = bl["h2_mt"] / max(x["h_pyro"] + x["h_ely"] + x["h_htse"] + x["h_si"], 1e-9); out["blend_share_of_h2"] = sb
     hub_blend = sb * (costs["reactor_hubs"] + costs["pyrolysis_plants"] + costs["natural_gas"] + credits["carbon_products"]) + bl["h2_mt"] * p["H2_DELIVERY"]["blend"]
     out["blending_cost_bn"] = hub_blend; out["transport_cost_bn"] = out["total_cost_bn"] - hub_blend
+    # CN v1.6.3: the net extra cost of owning electric and fuel-cell vehicles and machines is paid by their owners (households,
+    # fleets, farms, contractors), not by the energy project.  The project (energy-system) cost is everything else: energy
+    # supply, grids, charging, electric expressways, rail electrification, hydrogen delivery, fuels, nutrients and credits.
+    # transport_cost_bn keeps the full cost including consumer vehicle costs.
+    out["consumer_vehicle_cost_bn"] = costs["vehicles_and_machines_net"]
+    out["energy_system_cost_bn"] = out["transport_cost_bn"] - out["consumer_vehicle_cost_bn"]
     const = dict(transmission_distribution=costs["transmission_distribution"], charging=costs["charging"], electric_highways=ers,
-                 rail_electrification=costs["rail_electrification"], vehicles_and_machines_net=costs["vehicles_and_machines_net"],
+                 rail_electrification=costs["rail_electrification"], vehicles_and_machines_net=costs["vehicles_and_machines_net"], farm_charging=costs["farm_charging"],
                  residual_pipeline_gas=costs["residual_pipeline_gas"],
                  h2_delivery_vehicles_and_blend=eu["h2_mt_direct"] * p["H2_DELIVERY"]["vehicle"] + bl["h2_mt"] * p["H2_DELIVERY"]["blend"])
     heat_adj = credits["low_grade_heat_to_food"] - (-x["heat_sold"] * (8.0 if p.get("food_credit_in_transport", False) else 0.0) / 1e3)
@@ -647,6 +653,8 @@ def post(p, x, lp_cost, eu, bl, hb, zec, scenario, blend_vol, osw_scale, res, la
     pet = out["petroleum"]["late_2025_bn"]
     out["saving_vs_late_2025_pct"] = 100 * (1 - out["transport_cost_bn"] / pet)
     out["breakeven_multiple"] = out["transport_cost_bn"] / pet
+    out["saving_energy_system_pct"] = 100 * (1 - out["energy_system_cost_bn"] / pet)
+    out["breakeven_energy_system"] = out["energy_system_cost_bn"] / pet
     out["regional_supply"] = regional_supply(p, out)
     return out
 
@@ -1004,10 +1012,12 @@ def monte_carlo(n=1000, seed=7, scenario="least_cost", osw_scale=None, post_gas=
         try: r = solve_fleet(p, mc=True, scenario=scenario, post_gas=post_gas)
         except (RuntimeError, ValueError): continue
         pet = r["petroleum"]
-        rows.append(dict(**dr, transport_cost_bn=r["transport_cost_bn"], hubs=r["hubs"], capex_kwt=r["capex_kwt_used"], h2_pyro_mt=r["h2_mt"]["pyrolysis"],
+        rows.append(dict(**dr, transport_cost_bn=r["transport_cost_bn"], energy_system_cost_bn=r["energy_system_cost_bn"],
+                         consumer_vehicle_cost_bn=r["consumer_vehicle_cost_bn"], hubs=r["hubs"], capex_kwt=r["capex_kwt_used"], h2_pyro_mt=r["h2_mt"]["pyrolysis"],
                          seaweed_mt=r["biomass_mt"]["seaweed"], bamboo_mt=r["biomass_mt"]["bamboo"], hemp_mha=r["hemp"]["mha"],
                          emissions_mt=r["emissions"]["total_mt"], reduction_pct=r["emissions"]["reduction_pct"],
-                         petro_2025=pet["late_2025_bn"], petro_2026=pet["nov_2026_bn"], saving_pct=100 * (1 - r["transport_cost_bn"] / pet["late_2025_bn"])))
+                         petro_2025=pet["late_2025_bn"], petro_2026=pet["nov_2026_bn"], saving_pct=100 * (1 - r["transport_cost_bn"] / pet["late_2025_bn"]),
+                         saving_energy_system_pct=100 * (1 - r["energy_system_cost_bn"] / pet["late_2025_bn"])))
     return rows
 
 
@@ -1223,6 +1233,8 @@ def lull_bracket(r, p):
     for k, v in out.items():
         c = r["transport_cost_bn"] + v["cost_bn"]; v["system_cost_bn"] = c
         v["saving_pct"] = 100 * (1 - c / r["petroleum"]["late_2025_bn"])
+        v["energy_system_cost_bn"] = r["energy_system_cost_bn"] + v["cost_bn"]
+        v["saving_energy_system_pct"] = 100 * (1 - v["energy_system_cost_bn"] / r["petroleum"]["late_2025_bn"])
     return out
 
 
@@ -1258,6 +1270,8 @@ def main(n_mc=1000):
     lc_p = case_params("least_cost")
     rob = dict(ldv_tco={c: dict(net_usd_yr=I.ldv_bev_net(c), parts=I.ldv_bev_net(c, parts=True), inputs=I.LDV_TCO[c]) for c in ("low", "central", "high")},
                cases={n: dict(label=lab, transport_cost_bn=res[n]["transport_cost_bn"], saving_pct=res[n]["saving_vs_late_2025_pct"],
+                              energy_system_cost_bn=res[n]["energy_system_cost_bn"], saving_energy_system_pct=res[n]["saving_energy_system_pct"],
+                              consumer_vehicle_cost_bn=res[n]["consumer_vehicle_cost_bn"],
                               breakeven=res[n]["breakeven_multiple"], hubs=res[n]["hubs"], emissions_mt=res[n]["emissions"]["total_mt"],
                               petroleum_2025_bn=res[n]["petroleum"]["late_2025_bn"], petroleum_2026_bn=res[n]["petroleum"]["nov_2026_bn"],
                               h2_pyro_mt=res[n]["h2_mt"]["pyrolysis"], solar_gw=res[n]["gw"]["solar"], wind_gw=res[n]["gw"]["onshore_wind"])
@@ -1298,17 +1312,22 @@ def main(n_mc=1000):
     q = lambda rows, k: {f"p{pp}": float(np.percentile([r[k] for r in rows], pp)) for pp in (5, 50, 95)}
     summ = {}
     for nm, rows in (("least_cost", mcl), ("half_offshore", mch), ("post_gas", mcp)):
-        summ[nm] = {k: q(rows, k) for k in ("transport_cost_bn", "hubs", "capex_kwt", "h2_pyro_mt", "seaweed_mt", "emissions_mt", "reduction_pct", "saving_pct")}
+        summ[nm] = {k: q(rows, k) for k in ("transport_cost_bn", "energy_system_cost_bn", "consumer_vehicle_cost_bn", "hubs", "capex_kwt", "h2_pyro_mt",
+                                            "seaweed_mt", "emissions_mt", "reduction_pct", "saving_pct", "saving_energy_system_pct")}
         summ[nm]["p_cheaper_2025"] = float(np.mean([r["transport_cost_bn"] < r["petro_2025"] for r in rows]))
         summ[nm]["p_cheaper_2026"] = float(np.mean([r["transport_cost_bn"] < r["petro_2026"] for r in rows]))
         summ[nm]["p_saving_ge_23pct"] = float(np.mean([r["saving_pct"] >= 23.0 for r in rows])); summ[nm]["n"] = len(rows)
+        summ[nm]["p_energy_system_cheaper_2025"] = float(np.mean([r["energy_system_cost_bn"] < r["petro_2025"] for r in rows]))
+        summ[nm]["p_energy_system_cheaper_2026"] = float(np.mean([r["energy_system_cost_bn"] < r["petro_2026"] for r in rows]))
     from scipy.stats import spearmanr
     keys = [k for k in mcl[0] if "/" in k or k in ("WACC", "yield_level", "reactor_case", "carbon_market_scale", "carbon_value_scale", "biomass_price_scale", "ethanol_cost_scale",
                                           "humification_scale", "hydrochar_stability", "fertiliser_price_scale", "biological_soil_cost_scale")]
     y = [r["transport_cost_bn"] for r in mcl]
     summ["sensitivity_least_cost"] = {k: float(spearmanr([r[k] for r in mcl], y)[0]) for k in keys}
+    ye = [r["energy_system_cost_bn"] for r in mcl]
+    summ["sensitivity_least_cost_energy_system"] = {k: float(spearmanr([r[k] for r in mcl], ye)[0]) for k in keys}
     json.dump(summ, open(OUT / "cn_monte_carlo_summary.json", "w"), indent=1)
-    print(json.dumps({k: dict(cost=round(v["transport_cost_bn"], 1), petro=round(v["petroleum"]["late_2025_bn"], 1), save=round(v["saving_vs_late_2025_pct"], 1),
+    print(json.dumps({k: dict(project=round(v["energy_system_cost_bn"], 1), cost=round(v["transport_cost_bn"], 1), petro=round(v["petroleum"]["late_2025_bn"], 1), save=round(v["saving_vs_late_2025_pct"], 1),
                               hubs=round(v["hubs"], 1), h2pyro=round(v["h2_mt"]["pyrolysis"], 1), osw=round(v["gw"]["offshore_wind"]),
                               red=round(v["emissions"]["reduction_pct"], 1)) for k, v in res.items()}, indent=0))
     return res
