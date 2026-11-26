@@ -3,7 +3,7 @@ setlocal
 cd /d "%~dp0"
 set OPENBLAS_NUM_THREADS=1
 set OMP_NUM_THREADS=1
-python cn17_validate.py --inputs
+python cn17_validate.py --preflight
 if errorlevel 1 goto failed
 python cn17_prepare.py
 if errorlevel 1 goto failed
