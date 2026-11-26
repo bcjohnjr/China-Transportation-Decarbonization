@@ -1,0 +1,21 @@
+{
+  "wastewater_records": [
+    {
+      "sheet": "U-WWTP",
+      "facilities": 201,
+      "reported_numeric_scale": 201,
+      "numeric_COD_samples": 0
+    },
+    {
+      "sheet": "A-WWTP",
+      "facilities": 2464,
+      "reported_numeric_scale": 2457,
+      "numeric_COD_samples": 2195
+    }
+  ],
+  "municipal_waste_2020_food_share_pct": 48.52637661396311,
+  "municipal_waste_to_energy_2020_processed_mt": 163.2254757799999,
+  "municipal_waste_to_energy_2020_power_twh": 53.71412742724554,
+  "municipal_waste_food_share_times_processed_mt": 79.20740910693588,
+  "interpretation": "The food-share product is a composition proxy for already treated waste, not a recoverable supply estimate. Wastewater scale units and treatment throughput not used; no new food waste or sewage gas or avoided emissions credited."
+}

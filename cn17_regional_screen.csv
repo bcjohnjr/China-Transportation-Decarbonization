@@ -1,0 +1,32 @@
+province_code,province,region,eligible_dry_mt
+11,Beijing City,rest,0.23810956850305975
+12,Tianjin City,rest,1.1895443896505418
+13,Hebei Province,rest,18.712780166672154
+14,Shanxi Province,rest,7.540832220575078
+15,Inner Mongolia Autonomous Region,inner_mongolia,21.117533695791668
+21,Liaoning Province,rest,13.638764791716959
+22,Jilin Province,rest,21.540457733587512
+23,Heilongjiang Province,rest,36.36114928554249
+31,Shanghai City,rest,0.32842749742968746
+32,Jiangsu Province,rest,13.628641313859598
+33,Zhejiang Province,rest,2.278098865695302
+34,Anhui Province,rest,17.313245027622187
+35,Fujian Province,rest,1.8127674431355432
+36,Jiangxi Province,rest,8.124719669726263
+37,Shandong Province,rest,27.62347137086952
+41,Henan Province,rest,33.192383296790204
+42,Hubei Province,rest,12.636140056026381
+43,Hunan Province,rest,12.603382016717505
+44,Guangdong Province,rest,4.332007263938999
+45,Guangxi Zhuang Autonomous Region,guangxi,5.390084028538462
+46,Hainan Province,rest,0.46637531470257815
+50,Chongqing City,rest,3.9833396642857006
+51,Sichuan Province,rest,15.660205816220122
+52,Guizhou Province,rest,4.423240910489955
+53,Yunnan Province,rest,8.940105377643947
+54,Tibet Autonomous Region,xizang,0
+61,Shaanxi Province,rest,5.774190259013441
+62,Gansu Province,rest,5.774825752510847
+63,Qinghai Province,rest,0.6405342505604167
+64,Ningxia Hui Autonomous Region,ningxia,1.8926861766840835
+65,Xinjiang Uygur Autonomous Region,xinjiang,15.558484698991622

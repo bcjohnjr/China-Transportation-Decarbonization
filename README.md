@@ -1,3 +1,15 @@
+# CN v1.7 — Evidence-constrained agricultural extension (26 November 2026)
+
+Apply this delta to the existing flat CN v1.6.4 repository root. Do not delete the reference files. Only README.md replaces an existing file; new filenames are versioned. Python 3.13 recommended. Install `python -m pip install -r requirements-cn17.txt`, then run `RUN_CN17.bat` on Windows or `sh RUN_CN17.sh` on Linux. All data needed for this extension are included. No network access needed after dependency installation. The runner regenerates the province inputs, inventory, seven cases, 128 conditional draws, figures and verifies against a fixed release regression. Native Windows execution not independently tested. The old `run_all.sh` regenerates only the reference model, not the new extension.
+
+Main result (annual 2050 screen, 2026 USD): energy system $301.44bn; including vehicle owners $322.28bn; transport emissions 131.17 Mt CO2e (93.68% reduction). Incremental agricultural account $7.77bn, 22.41 Mt avoided; combined $330.06bn and 1.966 Gt avoided. Continued petroleum comparator $400.20bn at inherited late-2025 prices. The incremental methane screen is not a joint optimization or a credit within the original transport LP. At 1% fugitive methane leakage, manure digestion alone has negative net mitigation without displacement credit. No incremental sewage or municipal waste supply credited. See CN17_DATA_AND_METHODS.md. The reference 1,000-draw study is not rerun; 128 new draws fix transport technology and ownership assumptions. No hourly reliability or partially electrified future reference is established. Xizang is not a net liquid supplier in the revised regional reporting screen.
+
+The original solver and source reference outputs remain intact. Original reference figures are explicitly identified as such in the editorial materials; the new Fig10, FigS8 and graphical abstract carry the updated numbers. CN17_Fig2_corrected_routes.tif preserves the user-corrected route artwork at native resolution. Do not confuse the original v1.6.4 figures with the new headline case.
+
+---
+
+## Archived CN v1.6.4 reference instructions (unchanged)
+
 # China transport decarbonisation model — CN v1.6.4
 
 Repository: https://github.com/bcjohnjr/China-Transportation-Decarbonization
